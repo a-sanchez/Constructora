@@ -90,7 +90,6 @@
             .h3{
                 font-size:20px;
             }
-
         </style>
     </head>
     <body>
@@ -126,7 +125,7 @@
                 <h3 class="h3">CONTRASEÑA</h3>
                 <input type="password" class="form-control" id="txtcontraseña" name="txtcontraseña"/>
                 <h3> </h3>
-                <button type="button" class="btn">Iniciar sesión</button>
+                <a href="/opciones"> INICIAR SESION</a>
                 </div>
             </div>
         </div>
