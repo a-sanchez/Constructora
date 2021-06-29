@@ -23,7 +23,5 @@
 <body>
     @yield("body")
 </body>
-<script>
     @yield("scripts")
-</script>
 </html>
