@@ -17,11 +17,29 @@
     <script src="{{ asset('lib/bootstrap/js/bootstrap.min.js') }}" defer></script>
     <script src="{{ asset('js/app.js')}}" defer></script>
     <script src="{{ asset('js/modernizr-2.js')}}" defer></script>
-    
     @yield('styles')
 </head>
 <body>
-    @yield("body")
+    @yield("menu")
+    <main>
+    <div id="colorlib-main">
+			<div class="colorlib-contact">
+				<div class="container-fluid">
+					<!-- titulo -->
+                    <div class="row">
+						<div class="col-md-12">
+							<h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
+                                @yield('title')
+                            </h1>
+						</div>
+					</div>
+                    <!-- body -->
+                    @yield("body")
+				</div>
+			</div>
+		</div>
+	</div>
+    </main>
 </body>
     @yield("scripts")
 </html>
