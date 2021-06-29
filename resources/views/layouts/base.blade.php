@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ asset('css/icon.css')}}">
     <link rel="stylesheet" href="{{ asset('css/animate.css')}}">
     <!-- LINKS JAVASCRIPTS -->
-    <script src="{{ asset('lib/bootstrap/js/bootstrap.min.js') }}">
+    <script src="{{ asset('lib/bootstrap/js/bootstrap.min.js') }}" defer></script>
     <script src="{{ asset('js/app.js')}}" defer></script>
     <script src="{{ asset('js/modernizr-2.js')}}" defer></script>
     
