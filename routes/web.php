@@ -16,5 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('/opciones', function () {
-    return view('opciones');
+    return view('opciones',);
 });

@@ -1,162 +1,53 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.base')
 
-        <title>CONABE-construcciones</title>
+@section('title')
+    Login 
+@endsection
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+@section('styles')
+<style>
+    body{
+        background-color: #F7F7F7;
+    }
+</style>
+    
+@endsection
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-
-            .form-control{
-                width:550px;
-                height:40px;
-            }
-            .img-fluid{
-                align-self: start;
-                max-width: 100%;
-                height: auto; 
-                width: 300px;
-                height: 150px;
-                padding-left:30px;
-            }
-            .btn{
-                background:blue;
-                color:white;
-                border-color:blue;
-                height:40px;
-                width: 150px;
-                font-size:15px;
-            }
-            .h1{
-                font-size:40px;
-                font-weight:bold;
-            }
-            .h3{
-                font-size:20px;
-            }
-        </style>
-    </head>
-    <body>
+@section('body')
+<div style="height: 100vh;" class="d-flex align-items-center">
+    <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <img class="img-fluid img-thumbnail" id="img" src="{{asset('images/constructura2.jpg')}}"/>
+            <div class="col-md-6">
+                <div class="col-md-10">
+                    <img src="{{ asset('images/constructura2.jpg') }}"  class="img-fluid" height="150" alt="ConbeLogo">
+                </div>
             </div>
-        </div>
-        <div class=”container-fluid”>
-            <div class="row vh-100 justify-content-center align-items-center">
-                <div class="col-auto bg-light p-5">
-                    <form action="">
-                        <div class="input-group p-2">
-
-                    </form>
-
+            <div class="col-md-6">
+                <div class="row d-flex justify-content-center align-self-center">
+                    <span class="heading-meta">Sistema la administracion CONBE</span>
+                    <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">Acceso</h1>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="row">
+                        <div class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
+                            <form id="login-form" enctype="multipart/form-data" onsubmit="submitForm();">
+                                <div class="form-group mt-3">
+                                    <input autocomplete="off" id="email" name="email" type="text" class="form-control" placeholder="Usuario">
+                                </div>
+                                <div class="form-group mt-3">
+                                    <input autocomplete="off" id="contrasena" name="contrasena" type="password" class="form-control" placeholder="Contraseña">
+                                </div>
+                                <div class="form-group mt-5">
+                                    <a href="/opciones" class="btn btn-primary">Entrar</a>
+                                    <!-- <button id="submit" type="submit" class="btn btn-primary btn-send-message">Entrar</button> -->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-            
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="h1">ACCESO<h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                <h3 class="h3">USUARIO<h3>
-                <input type="text" class="form-control" id="txtusuario" name="txtusuario"/>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                <h3 class="h3">CONTRASEÑA</h3>
-                <input type="password" class="form-control" id="txtcontraseña" name="txtcontraseña"/>
-                <h3> </h3>
-                <a href="/opciones"> INICIAR SESION</a>
-                </div>
-            </div>
-        </div>
-
-   
-
-        <!--<div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>!-->
-    </body>
-</html>
+    </div>
+</div>
+    
+@endsection
