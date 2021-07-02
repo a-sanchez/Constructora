@@ -22,14 +22,13 @@ body {
       font-size: 16px; } }
 
 a {
-  color: #F16433;
+    color: #F16433;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s; }
   a:hover, a:active, a:focus {
-    color: #F16433;
-    outline: none;
-    text-decoration: none !important; }
+    color: black;
+    outline: none; }
 
 p {
   margin-bottom: 1.5em; }
@@ -390,7 +389,7 @@ body.offcanvas {
 .colorlib-about,
 .colorlib-services,
 .colorlib-contact {
-  padding-top: 4em;
+  padding-top: 2em;
   padding-bottom: 9em;
   clear: both;
   width: 100%;

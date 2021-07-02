@@ -9,13 +9,32 @@
             </div>
             <ul>
                 <li class="colorlib-active">
-                <li><a href="configuracion.php">Configuracion</a></li>
-                <li><a href="contrato.php">Contrato</a></li>
-                <li><a href="facturas.php">Facturas</a></li>
-                <li><a href="pagos.php">Pagos</a></li>
-                <li><a href="proveedores.php">Proveedores</a></li>
+                <li><a href="/configuracion">Configuracion</a></li>
+                <li><a href="/contrato">Contrato</a></li>
+                <li><a href="/facturas">Facturas</a></li>
+                <li><a href="/pagos">Pagos</a></li>
+                <li><a href="/proveedores">Proveedores</a></li>
                 <li><a href="/">Salir</a></li>
             </ul>
         </nav>
     </aside>
+    <main>
+    <div id="colorlib-main">
+			<div class="colorlib-contact">
+				<div class="container-fluid">
+					<!-- titulo -->
+                    <div class="row">
+						<div class="col-md-12">
+							<h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
+                                @yield('title')
+                            </h1>
+						</div>
+					</div>
+                    <!-- body -->
+                    @yield("body")
+				</div>
+			</div>
+		</div>
+	</div>
+    </main>
 @endsection

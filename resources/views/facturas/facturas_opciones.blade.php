@@ -1,0 +1,89 @@
+@extends('layouts.base_html')
+
+@section ('tittle')FACTURAS @endsection
+
+@section('styles')
+<style>
+ul.feat{
+	list-style:none;
+	margin: 0 0 20px 0;
+	padding:0;
+}
+ul.feat li{
+	padding-left:70px;
+	position:relative;
+}
+ul.feat li img{
+	position:absolute;
+	left:0;
+	top:0;
+}
+
+ul.feat#about li i {
+    font-size: 40px;
+    color: #FF3333;
+}
+ul.feat#about li {
+    margin-bottom: 20px;
+    padding: 20px 25px 10px 85px;
+    border: 1px solid #ddd;
+    background-color: #f3f3f3;
+}
+
+i{
+    margin-right:15px;
+}
+
+a{
+    position:absolute;
+    top:26px;
+    text-decoration:none;
+}
+</style>
+@endsection
+
+@section('body')
+
+<script src="https://kit.fontawesome.com/b4cf0d1143.js" crossorigin="anonymous"></script>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
+            FACTURAS
+        </h1>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h4>-Opciones</h4>
+        <hr>
+        <p>
+            
+        </p>
+
+<div class="row">
+      <div class="col-md-3" >
+        <h1></h1> 
+      </div>
+      <div class="col-md-5" >
+        <ul class="feat" id="about">	
+            <li>
+            <i class="fas fa-file-alt"></i>	
+                <a  href="/addfacturas" style="font-size:20px;">Agregar Factura</a>
+            </li>		    
+        </ul>
+        <ul class="feat" id="about">	
+            <li>
+            <i class="fas fa-list"></i>	
+                <a  href="/cat_facturas" style="font-size:20px;">Catalogo de Facturas</a>
+            </li>		    
+        </ul>
+      </div>
+      <div class="col-md-4" >
+        <h1></h1> 
+      </div>
+</div>
+
+@endsection
