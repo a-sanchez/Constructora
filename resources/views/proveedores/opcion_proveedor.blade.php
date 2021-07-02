@@ -70,13 +70,13 @@ i{
         <ul class="feat" id="about">	
             <li>
             <i class="fas fa-user-friends"></i>	
-                <a  href="/addproveedor" style="font-size:20px;">Agregar Proveedor</a>
+                <a  href="proveedores/addproveedor" style="font-size:20px;">Agregar Proveedor</a>
             </li>		    
         </ul>
         <ul class="feat" id="about">	
             <li>
             <i class="fas fa-list"></i>	
-                <a  href="/cat_proveedores" style="font-size:20px;">Catalogo de Proveedores</a>
+                <a  href="proveedores/cat_proveedores" style="font-size:20px;">Catalogo de Proveedores</a>
             </li>		    
         </ul>
       </div>

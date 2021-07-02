@@ -69,13 +69,13 @@ i{
         <ul class="feat" id="about">	
             <li>
             <i class="fas fa-dollar-sign"></i>
-                <a  href="/realizapago" style="font-size:20px">Realizar Pago</a>
+                <a  href="pagos/realizapago" style="font-size:20px">Realizar Pago</a>
             </li>		    
         </ul>
         <ul class="feat" id="about">	
             <li>
             <i class="fas fa-list"></i>	
-                <a  href="/historial_pagos" style="font-size:20px">Historial de Pagos</a>
+                <a  href="pagos/historial_pagos" style="font-size:20px">Historial de Pagos</a>
             </li>		    
         </ul>
       </div>

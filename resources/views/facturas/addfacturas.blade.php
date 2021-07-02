@@ -9,7 +9,7 @@
 
 
 @section('body')
-
+<div class="container">
 <div class="row">
     <div class="col-md-12">
         <h4 style="color:gray;font-size:20px;">-Crear Factura</h4>
@@ -28,19 +28,19 @@
     <h7>Direccion</h7>
     <div class="col-auto">
     <label for="inputcalle" >Calle</label>
-    <input type="password" class="form-control" id="inputcalle" placeholder="Calle">
+    <input type="text" class="form-control" id="inputcalle" placeholder="Calle">
   </div>
   <div class="col-auto">
     <label for="inputnumero" >Numero</label>
-    <input type="password" class="form-control" id="inputnumero" placeholder="Numero">
+    <input type="text" class="form-control" id="inputnumero" placeholder="Numero">
   </div>
   <div class="col-auto">
     <label for="inputcolonia" >Colonia</label>
-    <input type="password" class="form-control" id="inputcolonia" placeholder="Colonia">
+    <input type="text" class="form-control" id="inputcolonia" placeholder="Colonia">
   </div>
   <div class="col-auto">
     <label for="inputcp" >CP</label>
-    <input type="password" class="form-control" id="inputcp" placeholder="CP">
+    <input type="text" class="form-control" id="inputcp" placeholder="CP">
   </div>
 
 
@@ -124,5 +124,6 @@
   </div>
 
 </form>
+</div>
 
 @endsection
