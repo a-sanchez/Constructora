@@ -2,7 +2,7 @@
 
 namespace Illuminate\Mail;
 
-use Illuminate\Contracts\Mail\Mailer as MailerContract;
+use Illuminate\Contracts\Mail\Factory as MailFactory;
 use Illuminate\Contracts\Mail\Mailable as MailableContract;
 
 class SendQueuedMailable
@@ -10,7 +10,7 @@ class SendQueuedMailable
     /**
      * The mailable message instance.
      *
-     * @var Mailable
+     * @var \Illuminate\Contracts\Mail\Mailable
      */
     public $mailable;
 
@@ -44,12 +44,12 @@ class SendQueuedMailable
     /**
      * Handle the queued job.
      *
-     * @param  \Illuminate\Contracts\Mail\Mailer  $mailer
+     * @param  \Illuminate\Contracts\Mail\Factory  $factory
      * @return void
      */
-    public function handle(MailerContract $mailer)
+    public function handle(MailFactory $factory)
     {
-        $this->mailable->send($mailer);
+        $this->mailable->send($factory);
     }
 
     /**
@@ -60,5 +60,42 @@ class SendQueuedMailable
     public function displayName()
     {
         return get_class($this->mailable);
+    }
+
+    /**
+     * Call the failed method on the mailable instance.
+     *
+     * @param  \Throwable  $e
+     * @return void
+     */
+    public function failed($e)
+    {
+        if (method_exists($this->mailable, 'failed')) {
+            $this->mailable->failed($e);
+        }
+    }
+
+    /**
+     * Get number of seconds before a released mailable will be available.
+     *
+     * @return mixed
+     */
+    public function backoff()
+    {
+        if (! method_exists($this->mailable, 'backoff') && ! isset($this->mailable->backoff)) {
+            return;
+        }
+
+        return $this->mailable->backoff ?? $this->mailable->backoff();
+    }
+
+    /**
+     * Prepare the instance for cloning.
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        $this->mailable = clone $this->mailable;
     }
 }
