@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'v8.0.0',
-        'version' => '8.0.0.0',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => 'b3fe6bbacc96f521a14ba839b65e560e84cc8db3',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -394,13 +394,22 @@
             'reference' => '0c80950806cd1bc6d9a7068585a12c2bfa23bdf3',
             'dev_requirement' => false,
         ),
+        'laravel/installer' => array(
+            'pretty_version' => 'v4.2.7',
+            'version' => '4.2.7.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/installer',
+            'aliases' => array(),
+            'reference' => '81a82f05803d6be1221bd471d241801c393e72b4',
+            'dev_requirement' => false,
+        ),
         'laravel/laravel' => array(
-            'pretty_version' => 'v8.0.0',
-            'version' => '8.0.0.0',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => 'b3fe6bbacc96f521a14ba839b65e560e84cc8db3',
             'dev_requirement' => false,
         ),
         'laravel/tinker' => array(
@@ -440,12 +449,12 @@
             'dev_requirement' => true,
         ),
         'monolog/monolog' => array(
-            'pretty_version' => '2.2.0',
-            'version' => '2.2.0.0',
+            'pretty_version' => '2.3.0',
+            'version' => '2.3.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../monolog/monolog',
             'aliases' => array(),
-            'reference' => '1cb1cde8e8dd0f70cc0fe51354a59acad9302084',
+            'reference' => 'df991fd88693ab703aa403413d83e15f688dae33',
             'dev_requirement' => false,
         ),
         'mtdowling/cron-expression' => array(
@@ -476,12 +485,12 @@
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
-            'pretty_version' => 'v4.10.5',
-            'version' => '4.10.5.0',
+            'pretty_version' => 'v4.11.0',
+            'version' => '4.11.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
-            'reference' => '4432ba399e47c66624bc73c8c0f811e5c109576f',
+            'reference' => 'fe14cf3672a149364fb66dfe11bf6549af899f94',
             'dev_requirement' => false,
         ),
         'nunomaduro/collision' => array(
@@ -706,8 +715,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0',
-                1 => '1.0.0',
+                0 => '1.0.0',
+                1 => '1.0',
             ),
         ),
         'psr/simple-cache' => array(
