@@ -2,10 +2,10 @@
 class Xcrud_config
 {
     // default connection
-    public static $dbname = 'xcrud'; // Your database name
+    public static $dbname = 'constructora'; // Your database name
     public static $dbuser = 'root'; // Your database username
-    public static $dbpass = 'root'; // // Your database password
-    public static $dbhost = 'localhost:3307'; // Your database host, 'localhost' is default.
+    public static $dbpass = ''; // // Your database password
+    public static $dbhost = '127.0.0.1:3306'; // Your database host, 'localhost' is default.
 	//public static $dbport = '3307'; // Your database host, 'localhost' is default.
     
     

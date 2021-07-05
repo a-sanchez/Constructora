@@ -13,7 +13,7 @@ class CreateProveedorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('proveedors', function (Blueprint $table) {
+        Schema::create('proveedores', function (Blueprint $table) {
             $table->id('id_proveedor');
             $table->string('nombre_empresa');
             $table->string('alias');
@@ -24,7 +24,6 @@ class CreateProveedorsTable extends Migration
             $table->integer('cp');
             $table->bigInteger('numero_factura')->unsigned();
             $table->foreign('numero_factura')->references('numero_factura')->on('facturas');
-            $table->timestamps();
         });
     }
 
@@ -35,6 +34,6 @@ class CreateProveedorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proveedors');
+        Schema::dropIfExists('proveedores');
     }
 }

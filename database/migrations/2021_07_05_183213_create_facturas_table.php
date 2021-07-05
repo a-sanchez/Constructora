@@ -35,7 +35,6 @@ class CreateFacturasTable extends Migration
             $table->integer('cp_construccion');
             $table->integer('pago_construccion'); //se lo trae del contrato
             $table->integer('importe_construccion');
-            $table->timestamps();
         });
     }
 

@@ -22,8 +22,6 @@ class CreateContratosTable extends Migration
             $table->string('colonia');
             $table->integer('cp');
             $table->integer('pago');
-            $table->timestamps();
-
         });
     }
 
