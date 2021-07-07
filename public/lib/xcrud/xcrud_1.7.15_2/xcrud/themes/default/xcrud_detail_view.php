@@ -12,10 +12,10 @@
  }
  ?>
   
-    <?php echo $this->render_button('save_new','save','create','xcrud-button xcrud-blue','','create,edit') ?>
-    <?php echo $this->render_button('save_edit','save','edit','xcrud-button xcrud-green','','create,edit') ?>
+    <!--?php echo $this->render_button('save_new','save','create','xcrud-button xcrud-blue','','create,edit') ?> -->
+    <!--?php echo $this->render_button('save_edit','save','edit','xcrud-button xcrud-green','','create,edit') ?-->
     <?php echo $this->render_button('save_return','save','list','xcrud-button xcrud-purple','','create,edit') ?>
-    <?php echo $this->render_button('return','list','','xcrud-button xcrud-orange') ?>
+    <!--?php echo $this->render_button('return','list','','xcrud-button xcrud-orange') ?-->
     
     <!--<a class="xcrud-action xcrud-button xcrud-orange" title="Edit" href="javascript:;" data-primary="2" data-task="edit" data-next="true">Next</a>-->
 </div>
