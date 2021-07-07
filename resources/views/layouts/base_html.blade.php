@@ -14,6 +14,7 @@
                 <li><a href="/facturas">Facturas</a></li>
                 <li><a href="/pagos">Pagos</a></li>
                 <li><a href="/opcion_proveedores">Proveedores</a></li>
+                <li><a href="#">Cliente</a></li>
                 <li><a href="/">Salir</a></li>
             </ul>
         </nav>
