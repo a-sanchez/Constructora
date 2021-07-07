@@ -30,7 +30,8 @@ class proveedores_request extends FormRequest
             'calle'=>'required|string',
             'numero'=>'required|integer',
             'colonia'=>'required|string',
-            'cp'=>'required|integer'
+            'cp'=>'required|integer',
+            'rfc'=>'required|string'
         ];
     }
 }

@@ -25,17 +25,21 @@
 <form id="form-proveedor" class="row g-3" onSubmit='insert_proveedor();'>
 @csrf
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
     <label for="nombre_empresa" >Nombre/Empresa</label>
     <input type="text" class="form-control" id="nombre_empresa" name='nombre_empresa'placeholder="Nombre/Empresa" required>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <label for="alias" >Alias</label>
     <input type="text" class="form-control" id="alias" placeholder="Alias" name="alias" required>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <label for="razon_social" >Razon social</label>
     <input type="text" class="form-control" id="razon_social" placeholder="Razon Social" name="razon_social" required>
+  </div>
+  <div class="col-md-3">
+    <label for="rfc" >R.F.C.</label>
+    <input type="text" class="form-control" id="rfc" placeholder="Razon Social" name="rfc" required>
   </div>
 </div>
 <div class="row">

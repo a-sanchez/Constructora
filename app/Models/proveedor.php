@@ -20,6 +20,7 @@ class proveedor extends Model
         "calle",
         "numero",
         "colonia",
-        "cp"
+        "cp",
+        "rfc"
     ];
 }
