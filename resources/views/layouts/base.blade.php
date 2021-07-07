@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/icomoon.css')}}">
     <link rel="stylesheet" href="{{ asset('css/icon.css')}}">
     <link rel="stylesheet" href="{{ asset('css/animate.css')}}">
+
     <!-- LINKS JAVASCRIPTS -->
     <!-- IMPORTACION JQUERY -->
     <script src="{{ asset('lib/jquery/jquery.min.js') }}" defer></script>

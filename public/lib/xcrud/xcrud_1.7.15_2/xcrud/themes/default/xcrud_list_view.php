@@ -85,9 +85,9 @@
         }
         ?>      
                     
-            <?php echo $this->add_button('xcrud-button xcrud-green','icon-plus'); ?>
-            <?php echo $this->csv_button('xcrud-button xcrud-purple','icon-file'); ?>
-            <?php echo $this->print_button('xcrud-button xcrud-pink','icon-print'); ?>
+            <?php echo $this->add_button('xcrud-button xcrud-green'); ?>
+            <?php echo $this->csv_button('xcrud-button xcrud-purple'); ?>
+            <?php echo $this->print_button('xcrud-button xcrud-pink'); ?>
             <?php echo $this->render_benchmark(); ?>
             <?php echo $this->render_limitlist(true); ?>
             <?php echo $this->render_pagination(); ?>

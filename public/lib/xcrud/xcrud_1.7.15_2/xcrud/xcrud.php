@@ -9745,7 +9745,8 @@ class Xcrud
             $out .= $this->open_tag($tag, $this->theme_config('grid_view'));
             if ($this->theme_config('grid_view_icon'))
             {
-                $out .= $this->open_tag('i', $this->theme_config('grid_view_icon')) . $this->close_tag('i');
+                //$out .= $this->open_tag('i', $this->theme_config('grid_view_icon')) . $this->close_tag('i');
+                $out.='Detalles';
             }
             if (Xcrud_config::$button_labels)
             {
@@ -9791,7 +9792,8 @@ class Xcrud
             $out .= $this->open_tag($tag, $this->theme_config('grid_edit'));
             if ($this->theme_config('grid_edit_icon'))
             {
-                $out .= $this->open_tag('i', $this->theme_config('grid_edit_icon')) . $this->close_tag('i');
+                //$out .= $this->open_tag('i', $this->theme_config('grid_edit_icon')) . $this->close_tag('i');
+                $out.='Editar';
             }
             if (Xcrud_config::$button_labels)
             {
@@ -9844,7 +9846,8 @@ class Xcrud
             $out .= $this->open_tag($tag, $this->theme_config('grid_remove'));
             if ($this->theme_config('grid_remove_icon'))
             {
-                $out .= $this->open_tag('i', $this->theme_config('grid_remove_icon')) . $this->close_tag('i');
+               // $out .= $this->open_tag('i', $this->theme_config('grid_remove_icon')) . $this->close_tag('i');
+               $out.='Eliminar';
             }
             if (Xcrud_config::$button_labels)
             {
