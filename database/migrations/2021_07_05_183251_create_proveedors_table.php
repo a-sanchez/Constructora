@@ -14,7 +14,7 @@ class CreateProveedorsTable extends Migration
     public function up()
     {
         Schema::create('proveedores', function (Blueprint $table) {
-            $table->id('id_proveedor');
+            $table->id();
             $table->string('nombre_empresa');
             $table->string('alias');
             $table->string('razon_social');
@@ -22,8 +22,6 @@ class CreateProveedorsTable extends Migration
             $table->integer('numero');
             $table->string('colonia');
             $table->integer('cp');
-            $table->bigInteger('numero_factura')->unsigned();
-            $table->foreign('numero_factura')->references('numero_factura')->on('facturas');
         });
     }
 

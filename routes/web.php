@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\proveedores;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -31,17 +33,18 @@ Route::get('contrato/cat_contratos',function(){
     return view('contrato.cat_contratos');
 });
 #-----------------PROVEEDORES---------------------------------#
-Route::get('/proveedores',function(){
+Route::get('/opcion_proveedores',function(){
     return view('proveedores.opcion_proveedor');
 });
-
+/*
 Route::get('proveedores/addproveedor',function(){
     return view('proveedores.addproveedor');
 });
 
 Route::get('proveedores/cat_proveedores',function(){
     return view('proveedores.cat_proveedores');
-});
+});*/
+Route::resource('proveedores',proveedores::class);
 #----------------FACTURAS------------------------------#
 
 Route::get('/facturas',function(){

@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class proveedor extends Model
 {
     use HasFactory;
+
+    $fillable = [
+        "nombre_empresa",
+        "alias",
+        "razon_social",
+        "calle",
+        "numero",
+        "colonia",
+        "cp"
+    ];
 }

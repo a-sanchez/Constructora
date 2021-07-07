@@ -22,52 +22,68 @@
     </div>
 </div>
 
-<form class="row g-3">
+<form id="form-proveedor" class="row g-3" onSubmit='insert_proveedor();'>
+@csrf
 <div class="row">
     <div class="col-md-4">
-    <label for="inputempresa" >Nombre/Empresa</label>
-    <input type="text" class="form-control" id="inputempresa" placeholder="Nombre/Empresa">
+    <label for="nombre_empresa" >Nombre/Empresa</label>
+    <input type="text" class="form-control" id="nombre_empresa" name='nombre_empresa'placeholder="Nombre/Empresa">
   </div>
   <div class="col-md-4">
-    <label for="inputalias" >Alias</label>
-    <input type="text" class="form-control" id="inputalias" placeholder="Alias">
+    <label for="alias" >Alias</label>
+    <input type="text" class="form-control" id="alias" placeholder="Alias" name="alias">
   </div>
   <div class="col-md-4">
-    <label for="inputrazon" >Razon social</label>
-    <input type="text" class="form-control" id="inputrazon" placeholder="Razon Social">
+    <label for="razon_social" >Razon social</label>
+    <input type="text" class="form-control" id="razon_social" placeholder="Razon Social" name="razon_social">
   </div>
 </div>
 <div class="row">
 <h7 style="font-weight:bold;">Direccion</h7>
   <div class="col-auto">
-        <label for="inputcalle2" >Calle</label>
-    <input type="text" class="form-control" id="inputcalle2" placeholder="Calle">
+        <label for="calle" >Calle</label>
+    <input type="text" class="form-control" id="calle" placeholder="Calle" name="calle">
   </div>
       <div class="col-auto">
-        <label for="inputnumero2" >Numero</label>
-        <input type="text" class="form-control" id="inputnumero2" placeholder="Numero">
+        <label for="numero" >Numero</label>
+        <input type="text" class="form-control" id="numero" placeholder="Numero" name="numero">
       </div>
       <div class="col-auto">
-        <label for="inputcolonia2" >Colonia</label>
-        <input type="text" class="form-control" id="inputcolonia2" placeholder="Colonia">
+        <label for="colonia" >Colonia</label>
+        <input type="text" class="form-control" id="colonia" placeholder="Colonia" name="colonia">
       </div>
       <div class="col-auto">
-        <label for="inputcp2" >CP</label>
-        <input type="text" class="form-control" id="inputcp2" placeholder="CP">
+        <label for="cp" >CP</label>
+        <input type="text" class="form-control" id="cp" placeholder="CP" name="cp">
     </div>
 </div>
 <div class="form-row">
         <div class="form-group">
-            <a type="button" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
+            <button type="submit" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
             <a type="button" class="btn" id="btnCancelar" href="/proveedores" style="background:red;color:white;" >Cancelar</a>
         </div>
   </div>
 </form>
 
+@endsection
+@section("scripts")
+<script>
+async function insert_proveedor(){
+  event.preventDefault();
+  let form = new FormData(document.getElementById("form-proveedor"));
+  let url = "{{ url("/proveedores") }}";
+  let init = {
+    headers:{
+      "Accept":"application/json",
+      "Content-Type":"application/json"
+    },
+    method:"POST",
+    body:form
+  }
+  let req = await fetch(url, init);
+  console.log(await req);
 
+}
 
-
-  
-
-
+</script>
 @endsection
