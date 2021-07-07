@@ -17,6 +17,7 @@
     <script src="{{ asset('lib/bootstrap/js/bootstrap.min.js') }}" defer></script>
     <script src="{{ asset('js/app.js')}}" defer></script>
     <script src="{{ asset('js/modernizr-2.js')}}" defer></script>
+    <script src="{{ asset('lib/sweetalert/sweetalert2.all.min.js')}}" defer></script>
     @yield('styles')
 </head>
 <body>

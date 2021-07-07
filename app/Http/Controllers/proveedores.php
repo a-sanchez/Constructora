@@ -34,9 +34,9 @@ class proveedores extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(proveedores_request $request)
     {
-        $validation=$request->except("_token");
+        $validation=$request->validated();
         proveedor::create($validation);
         return response()->json("Proveedor creado con exito",201);
         
