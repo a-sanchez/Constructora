@@ -1,5 +1,6 @@
 @extends('layouts.base')
 @section('menu')
+    <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
     <aside id="colorlib-aside" role="complementary" class="border js-fullheight" style="height: 982px;">
         <nav id="colorlib-main-menu" role="navigation">
             <div class="row">
