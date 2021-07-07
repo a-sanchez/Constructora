@@ -22,6 +22,7 @@ class CreateProveedorsTable extends Migration
             $table->integer('numero');
             $table->string('colonia');
             $table->integer('cp');
+            $table->string('rfc');
         });
     }
 

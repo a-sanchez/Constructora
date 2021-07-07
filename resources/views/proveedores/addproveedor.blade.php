@@ -25,36 +25,40 @@
 <form id="form-proveedor" class="row g-3" onSubmit='insert_proveedor();'>
 @csrf
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
     <label for="nombre_empresa" >Nombre/Empresa</label>
-    <input type="text" class="form-control" id="nombre_empresa" name='nombre_empresa'placeholder="Nombre/Empresa">
+    <input type="text" class="form-control" id="nombre_empresa" name='nombre_empresa'placeholder="Nombre/Empresa" required>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <label for="alias" >Alias</label>
-    <input type="text" class="form-control" id="alias" placeholder="Alias" name="alias">
+    <input type="text" class="form-control" id="alias" placeholder="Alias" name="alias" required>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <label for="razon_social" >Razon social</label>
-    <input type="text" class="form-control" id="razon_social" placeholder="Razon Social" name="razon_social">
+    <input type="text" class="form-control" id="razon_social" placeholder="Razon Social" name="razon_social" required>
+  </div>
+  <div class="col-md-3">
+    <label for="rfc" >R.F.C.</label>
+    <input type="text" class="form-control" id="rfc" placeholder="Razon Social" name="rfc" required>
   </div>
 </div>
 <div class="row">
 <h7 style="font-weight:bold;">Direccion</h7>
   <div class="col-auto">
         <label for="calle" >Calle</label>
-    <input type="text" class="form-control" id="calle" placeholder="Calle" name="calle">
+    <input type="text" class="form-control" id="calle" placeholder="Calle" name="calle" required>
   </div>
       <div class="col-auto">
         <label for="numero" >Numero</label>
-        <input type="text" class="form-control" id="numero" placeholder="Numero" name="numero">
+        <input type="text" class="form-control" id="numero" placeholder="Numero" name="numero" required pattern="[0-9\.]+">
       </div>
       <div class="col-auto">
         <label for="colonia" >Colonia</label>
-        <input type="text" class="form-control" id="colonia" placeholder="Colonia" name="colonia">
+        <input type="text" class="form-control" id="colonia" placeholder="Colonia" name="colonia" required>
       </div>
       <div class="col-auto">
         <label for="cp" >CP</label>
-        <input type="text" class="form-control" id="cp" placeholder="CP" name="cp">
+        <input type="text" class="form-control" id="cp" placeholder="CP" name="cp" required pattern="[0-9\.]+">
     </div>
 </div>
 <div class="form-row">
@@ -71,14 +75,22 @@
   async function insert_proveedor(){
     event.preventDefault();
     let form = new FormData(document.getElementById("form-proveedor"));
-    let url = "{{ url("/proveedores") }}";
+    let url = "{{ url('/proveedores') }}";
     let init = {
       method:"POST",
       body:form
     }
     let req = await fetch(url, init);
-    console.log(await req.json());
-
+    if (req.ok) {
+      window.location.href = "{{ url('/proveedores') }}";
+    }
+    else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: "Error al registrar proveedor"
+      });
+    }
   }
 </script>
 @endsection
