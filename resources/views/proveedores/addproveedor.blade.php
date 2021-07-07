@@ -68,22 +68,17 @@
 @endsection
 @section("scripts")
 <script>
-async function insert_proveedor(){
-  event.preventDefault();
-  let form = new FormData(document.getElementById("form-proveedor"));
-  let url = "{{ url("/proveedores") }}";
-  let init = {
-    headers:{
-      "Accept":"application/json",
-      "Content-Type":"application/json"
-    },
-    method:"POST",
-    body:form
+  async function insert_proveedor(){
+    event.preventDefault();
+    let form = new FormData(document.getElementById("form-proveedor"));
+    let url = "{{ url("/proveedores") }}";
+    let init = {
+      method:"POST",
+      body:form
+    }
+    let req = await fetch(url, init);
+    console.log(await req.json());
+
   }
-  let req = await fetch(url, init);
-  console.log(await req);
-
-}
-
 </script>
 @endsection

@@ -9,7 +9,11 @@ class proveedor extends Model
 {
     use HasFactory;
 
-    $fillable = [
+    protected $table ="proveedores";
+
+    public $timestamps = false;
+    
+    protected $fillable = [
         "nombre_empresa",
         "alias",
         "razon_social",
