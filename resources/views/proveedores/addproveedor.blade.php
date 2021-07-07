@@ -68,25 +68,6 @@
 @endsection
 @section("scripts")
 <script>
-<<<<<<< HEAD
-async function insert_proveedor(){
-  event.preventDefault();
-  let form = new FormData(document.getElementById("form-proveedor"));
-  let url = "{{ url("/proveedores") }}";
-  let init = {
-    headers:{
-      "Accept":"application/json",
-      "Content-Type":"application/json",
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
-    method:"POST",
-    body:form
-  }
-  let req = await fetch(url, init);
-  console.log(await req);
-
-}
-=======
   async function insert_proveedor(){
     event.preventDefault();
     let form = new FormData(document.getElementById("form-proveedor"));
@@ -97,7 +78,6 @@ async function insert_proveedor(){
     }
     let req = await fetch(url, init);
     console.log(await req.json());
->>>>>>> 65641694dc88af6e1e9d51e31c7e48724b04c4e8
 
   }
 </script>
