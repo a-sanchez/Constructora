@@ -66,13 +66,13 @@ i{
         <ul class="feat" id="about">	
             <li>
             <i class="fas fa-file-alt"></i>	
-                <a  href="/contrato_agregar" style="font-size:20px;">Agregar Contrato</a>
+                <a  href="contrato/contrato_agregar" style="font-size:20px;">Agregar Contrato</a>
             </li>		    
         </ul>
         <ul class="feat" id="about">	
             <li>
             <i class="fas fa-list"></i>	
-                <a  href="/cat_contratos" style="font-size:20px;">Catalogo de Contrato</a>
+                <a  href="contrato/cat_contratos" style="font-size:20px;">Catalogo de Contrato</a>
             </li>		    
         </ul>
       </div>

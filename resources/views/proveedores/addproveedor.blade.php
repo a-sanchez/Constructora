@@ -6,76 +6,91 @@
 @endsection
 
 @section('body')
+
+<div class="container">
+<div class="col-md-12">
+                <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
+                    PROVEEDORES
+                </h1>
+            </div>
 <div class="row">
     <div class="col-md-12">
-        <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
-            PROVEEDORES
-        </h1>
-
+        <h4 style="color:gray;font-size:20px;">-Agregar</h4>
+        <hr style="color: orange;">
+        <p>  
+        </p>
     </div>
 </div>
+
+<form id="form-proveedor" class="row g-3" onSubmit='insert_proveedor();'>
+@csrf
 <div class="row">
-    <div class="col-md-12">
-        <h4>-Agregar</h4>
-        <hr style="color:orange;">
-</div> 
-
-<form>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputnombre">Nombre/Empresa</label>
-      <input type="text" class="form-control" id="nombre" placeholder="Nombre/Empresa">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputalias">Alias</label>
-      <input type="text" class="form-control" id="alias" placeholder="Alias">
-    </div>
+    <div class="col-md-3">
+    <label for="nombre_empresa" >Nombre/Empresa</label>
+    <input type="text" class="form-control" id="nombre_empresa" name='nombre_empresa'placeholder="Nombre/Empresa" required>
   </div>
-  <div class="form-group col-md-6">
-    <label for="inputsocial">Razon social</label>
-    <input type="text" class="form-control" id="inputsocial" placeholder="Razon Social">
+  <div class="col-md-3">
+    <label for="alias" >Alias</label>
+    <input type="text" class="form-control" id="alias" placeholder="Alias" name="alias" required>
   </div>
-  <div class="form-row">
-    <div class="form-group col-md-3">
-      <label for="inputCalle">Calle</label>
-      <input type="text" class="form-control" id="inputCalle" placeholder="Calle">
-    </div>
-    <div class="form-group col-md-3">
-      <label for="inputnumero">Numero</label>
-      <input type="text" class="form-control" id="inputnumero" placeholder="Numero" >
-    </div>
-    <div class="form-group col-md-3">
-      <label for="inputcolonia">Colonia</label>
-      <input type="text" class="form-control" id="inputcolonia" placeholder="Colonia" >
-    </div>
-    <div class="form-group col-md-3">
-      <label for="inputCP">CP</label>
-      <input type="text" class="form-control" id="inputCP" placeholder="CP" >
-    </div>
+  <div class="col-md-3">
+    <label for="razon_social" >Razon social</label>
+    <input type="text" class="form-control" id="razon_social" placeholder="Razon Social" name="razon_social" required>
   </div>
-
-     <div class="form-row">
-        <div class="form-group col-md-2">
-          <label for="inputstatus">Estatus</label>
-          <select name="select" class="form-control">
-            <option value="value1" selected>Activo</option>
-            <option value="value2">Cancelado</option>
-            </select>
-        </div>
+  <div class="col-md-3">
+    <label for="rfc" >R.F.C.</label>
+    <input type="text" class="form-control" id="rfc" placeholder="Razon Social" name="rfc" required>
+  </div>
+</div>
+<div class="row">
+<h7 style="font-weight:bold;">Direccion</h7>
+  <div class="col-auto">
+        <label for="calle" >Calle</label>
+    <input type="text" class="form-control" id="calle" placeholder="Calle" name="calle" required>
+  </div>
+      <div class="col-auto">
+        <label for="numero" >Numero</label>
+        <input type="text" class="form-control" id="numero" placeholder="Numero" name="numero" required pattern="[0-9\.]+">
+      </div>
+      <div class="col-auto">
+        <label for="colonia" >Colonia</label>
+        <input type="text" class="form-control" id="colonia" placeholder="Colonia" name="colonia" required>
+      </div>
+      <div class="col-auto">
+        <label for="cp" >CP</label>
+        <input type="text" class="form-control" id="cp" placeholder="CP" name="cp" required pattern="[0-9\.]+">
     </div>
-    <div class="form-row">
-        <div class="col-md-12">
-            <p>         </p>
-        </div>
-    </div>
-    <div class="form-row">
+</div>
+<div class="form-row">
         <div class="form-group">
-            <a type="button" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
+            <button type="submit" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
             <a type="button" class="btn" id="btnCancelar" href="/proveedores" style="background:red;color:white;" >Cancelar</a>
         </div>
   </div>
 </form>
 
-
-
+@endsection
+@section("scripts")
+<script>
+  async function insert_proveedor(){
+    event.preventDefault();
+    let form = new FormData(document.getElementById("form-proveedor"));
+    let url = "{{ url('/proveedores') }}";
+    let init = {
+      method:"POST",
+      body:form
+    }
+    let req = await fetch(url, init);
+    if (req.ok) {
+      window.location.href = "{{ url('/proveedores') }}";
+    }
+    else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: "Error al registrar proveedor"
+      });
+    }
+  }
+</script>
 @endsection

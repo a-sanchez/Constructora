@@ -71,13 +71,13 @@ a{
         <ul class="feat" id="about">	
             <li>
             <i class="fas fa-file-alt"></i>	
-                <a  href="/addfacturas" style="font-size:20px;">Agregar Factura</a>
+                <a  href="facturas/addfacturas" style="font-size:20px;">Agregar Factura</a>
             </li>		    
         </ul>
         <ul class="feat" id="about">	
             <li>
             <i class="fas fa-list"></i>	
-                <a  href="/cat_facturas" style="font-size:20px;">Catalogo de Facturas</a>
+                <a  href="facturas/cat_facturas" style="font-size:20px;">Catalogo de Facturas</a>
             </li>		    
         </ul>
       </div>
