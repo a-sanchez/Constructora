@@ -29,15 +29,11 @@ ul.feat#about li {
     border: 1px solid #ddd;
     background-color: #f3f3f3;
 }
-
-a{
-    position:absolute;
-    top:25px;
-    text-decoration:none;
-}
-i{
-    margin-right:15px;
-}
+a{ 
+    /* position:absolute; 
+    top:25px; */
+     text-decoration:none; 
+ } 
 </style>
 @endsection
 
@@ -65,13 +61,13 @@ i{
       <div class="col-md-5" >
         <ul class="feat" id="about">	
             <li>
-            <i class="fas fa-file-alt"></i>	
-                <a  href="contrato/contrato_agregar" style="font-size:20px;">Agregar Contrato</a>
+            <i class="fas fa-file-alt fa-2x" style="margin-right: 10px"></i>	
+                <a  href="contrato/contrato_agregar"  style="font-size:20px;" >Agregar Contrato</a>
             </li>		    
         </ul>
         <ul class="feat" id="about">	
             <li>
-            <i class="fas fa-list"></i>	
+            <i class="fas fa-list fa-2x" style="margin-right: 10px"></i>	
                 <a  href="contrato/cat_contratos" style="font-size:20px;">Catalogo de Contrato</a>
             </li>		    
         </ul>

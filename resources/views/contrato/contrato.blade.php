@@ -21,8 +21,8 @@
 
     <div class="form-row" >
             <div class="form-group col-md-6">
-                <label for="inputhora">Fecha y hora emision</label>
-                <input type="datetime-local" class="form-control" id="inputhora" >
+                <label for="inputhora">Fecha</label>
+                <input type="date" class="form-control" id="inputhora">
             </div>
     </div>
 
