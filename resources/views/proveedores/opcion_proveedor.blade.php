@@ -29,14 +29,12 @@ ul.feat#about li {
     border: 1px solid #ddd;
     background-color: #f3f3f3;
 }
-a{
-    position:absolute;
-    top:25px;
-    text-decoration:none;
-}
-i{
-    margin-right:15px;
-}
+ a{ 
+    /* position:absolute; 
+    top:25px; */
+     text-decoration:none; 
+ } 
+
 
 </style>
 @endsection
@@ -69,13 +67,13 @@ i{
       <div class="col-md-5" >
         <ul class="feat" id="about">	
             <li>
-            <i class="fas fa-user-friends"></i>	
+            <i class="fas fa-user-friends fa-2x" style="margin-right: 10px"></i>	
                 <a  href="/proveedores/create" style="font-size:20px;">Agregar Proveedor</a>
             </li>		    
         </ul>
         <ul class="feat" id="about">	
             <li>
-            <i class="fas fa-list"></i>	
+            <i class="fas fa-list fa-2x" style="margin-right: 10px"></i>	
                 <a  href="proveedores/" style="font-size:20px;">Catalogo de Proveedores</a>
             </li>		    
         </ul>
