@@ -9678,6 +9678,10 @@ class Xcrud
                     {
                         $out .= $this->open_tag('i', $this->theme_config('grid_default_icon')) . $this->close_tag('i');
                     }
+                    else{
+                        $out.=$this->open_tag('p').$button["name"].$this->close_tag('p');
+
+                    }
                     if (Xcrud_config::$button_labels)
                     {
                         $out .= ' ' . $this->html_safe($button['name']);
