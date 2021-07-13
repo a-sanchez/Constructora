@@ -13,7 +13,7 @@ $xcrud->change_type('fecha','date');
 
 $xcrud->relation("id_cliente","clientes","id","cliente");
 $xcrud->columns("id_cliente,nombre_contraparte,folio,descripcion");
-$xcrud->button('http://example.com','PDF',false,"P",array('target'=>'_blank'));
+$xcrud->button('http://example.com','PDF',false,"",array('target'=>'_blank'));
 
 echo $xcrud->render(); //magic
 ?>
