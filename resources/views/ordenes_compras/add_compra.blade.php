@@ -31,12 +31,20 @@
   </div>
   <div class="col-md-4">
     <label for="folio_contrato" >Folio de Contrato</label>
-    <input type="text" class="form-control" id="folio_contrato" placeholder="Folio del Contrato" name="folio_contrato" required>
+    <!--input type="text" class="form-control" id="folio_contrato" placeholder="Folio del Contrato" name="folio_contrato" required-->
+    <select class="form-control" id="id_contrato" name="id_contrato">
+      <option selected disabled value="0" >Seleccione:</option> 
+      <option value="1">Prueba</option>
+    </select>
+
   </div>
   <div class="col-md-4">
     <label for="solicitado" >Solicitado Por:</label>
     <input type="text" class="form-control" id="solicitado" placeholder="Ingrese Nombre" name="solicitado" required>
   </div>
+</div>
+<div class="row">
+  <p> </p>
 </div>
 <div class="row">
 <h7 style="font-weight:bold;">Información:</h7>
@@ -52,6 +60,9 @@
         <label for="importe_orden" >Importe</label>
         <input type="text" class="form-control" id="importe_orden" placeholder="Importe" name="importe_orden" required>
       </div>
+      <div class="row">
+        <p> </p>
+      </div>
       <div class="col-auto">
         <label for="adjunto_compra" >Ajuntar Orden de Compra</label>
         <input type="file" class="form-control" id="adjunto_compra" placeholder="Adjuntar Orden de Compra" name="adjunto_compra" style="border:none">
@@ -60,7 +71,7 @@
 <div class="form-row">
         <div class="form-group">
             <button type="submit" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
-            <a type="button" class="btn" id="btnCancelar" href="/proveedores" style="background:red;color:white;" >Cancelar</a>
+            <a type="button" class="btn" id="btnCancelar" href="#" style="background:red;color:white;" >Cancelar</a>
         </div>
   </div>
 </form>

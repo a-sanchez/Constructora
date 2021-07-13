@@ -26,41 +26,28 @@ Route::get('/opcion_contrato',function(){
     return view('contrato.contrato_opciones');
 });
 
-/*Route::get('contrato/contrato_agregar',function(){
-    return view('contrato.contrato');
-});
-
-Route::get('contrato/cat_contratos',function(){
-    return view('contrato.cat_contratos');
-});*/
 Route::resource('contratos',ContratoController::class);
 #-----------------PROVEEDORES---------------------------------#
 Route::get('/opcion_proveedores',function(){
     return view('proveedores.opcion_proveedor');
 });
-/*
-Route::get('proveedores/addproveedor',function(){
-    return view('proveedores.addproveedor');
-});
 
-Route::get('proveedores/cat_proveedores',function(){
-    return view('proveedores.cat_proveedores');
-});*/
 Route::resource('proveedores',proveedores::class);
 #----------------CLIENTES-----------------------------#
 
 Route::get('/clientes_opciones',function(){
     return view('clientes.clientes_opciones');
 });
-/*Route::get('clientes/add_clientes',function(){
-    return view('clientes.add_clientes');
-});
-
-Route::get('clientes/cat_clientes',function(){
-    return view('clientes.cat_clientes');
-});*/
 
 Route::resource('clientes',ClienteController::class);
+#------------ORDENES DE COMPRA------------------------#
+Route::get('/compras_opciones',function(){
+    return view('ordenes_compras.compras_opciones');
+});
+
+Route::get('ordenes_compra/agregar_compra',function(){
+    return view('ordenes_compras.add_compra');
+});
 #----------------FACTURAS------------------------------#
 
 Route::get('/facturas',function(){
@@ -94,10 +81,3 @@ Route::get('/configuracion',function(){
     return view('configuracion.conf_opciones');
 });
 
-#------------ORDENES DE COMPRA------------------------#
-Route::get('/compras_opciones',function(){
-    return view('ordenes_compras.compras_opciones');
-});
-Route::get('ordenes_compra/agregar_compra',function(){
-    return view('ordenes_compras.add_compra');
-});

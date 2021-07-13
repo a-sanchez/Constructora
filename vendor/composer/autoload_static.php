@@ -518,6 +518,7 @@ class ComposerStaticInit8f807858394ba8234027e01d86445e61
         'App\\Models\\cliente' => __DIR__ . '/../..' . '/app/Models/cliente.php',
         'App\\Models\\contrato' => __DIR__ . '/../..' . '/app/Models/contrato.php',
         'App\\Models\\factura' => __DIR__ . '/../..' . '/app/Models/factura.php',
+        'App\\Models\\orden_compra' => __DIR__ . '/../..' . '/app/Models/orden_compra.php',
         'App\\Models\\proveedor' => __DIR__ . '/../..' . '/app/Models/proveedor.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
