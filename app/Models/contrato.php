@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class contrato extends Model
 {
     use HasFactory;
+    protected $table='contratos';
+    public $timestamps = false;
+
+    protected $guarded =[];
+
+    public static function setFile($file)
+    {
+        $ruta = "docs/contrato_adjuntos";
+        $filename =$file->hashName();
+        $file->store($ruta);
+        return $filename;
+    }
 }
