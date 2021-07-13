@@ -15,7 +15,7 @@ class contrato extends Model
 
     public static function setFile($file)
     {
-        $ruta = "docs/contrato_adjuntos";
+        $ruta = "public/docs/contrato_adjuntos";
         $filename =$file->hashName();
         $file->store($ruta);
         return $filename;
