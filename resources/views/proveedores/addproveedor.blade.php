@@ -27,7 +27,7 @@
 <div class="row">
     <div class="col-md-3">
     <label for="nombre_empresa" >Nombre/Empresa</label>
-    <input type="text" class="form-control" id="nombre_empresa" name='nombre_empresa'placeholder="Nombre/Empresa" required>
+    <input type="text" class="form-control" id="nombre_empresa" name='nombre_empresa'placeholder="Nombre/Empresa" >
   </div>
   <div class="col-md-3">
     <label for="alias" >Alias</label>
@@ -38,28 +38,38 @@
     <input type="text" class="form-control" id="razon_social" placeholder="Razon Social" name="razon_social" required>
   </div>
   <div class="col-md-3">
-    <label for="rfc" >R.F.C.</label>
-    <input type="text" class="form-control" id="rfc" placeholder="Razon Social" name="rfc" required>
+    <label for="localidad" >Localidad</label>
+    <input type="text" class="form-control" id="localidad" placeholder="Localidad" name="localidad" required>
   </div>
 </div>
 <div class="row">
-<h7 style="font-weight:bold;">Direccion</h7>
-  <div class="col-auto">
-        <label for="calle" >Calle</label>
-    <input type="text" class="form-control" id="calle" placeholder="Calle" name="calle" required>
+<h7 style="font-weight:bold;">Contacto</h7>
+  <div class="col-md-3">
+        <label for="telefono" >Telefono</label>
+    <input type="text" class="form-control" id="telefono" placeholder="Telefono" name="telefono" required>
   </div>
-      <div class="col-auto">
-        <label for="numero" >Numero</label>
-        <input type="text" class="form-control" id="numero" placeholder="Numero" name="numero" required pattern="[0-9\.]+">
+      <div class="col-md-3">
+        <label for="telefono2" >Telefono</label>
+        <input type="text" class="form-control" id="telefono2" placeholder="Telefono" name="telefono2" >
       </div>
-      <div class="col-auto">
-        <label for="colonia" >Colonia</label>
-        <input type="text" class="form-control" id="colonia" placeholder="Colonia" name="colonia" required>
+      <div class="col-md-3">
+        <label for="email" >Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
       </div>
-      <div class="col-auto">
-        <label for="cp" >CP</label>
-        <input type="text" class="form-control" id="cp" placeholder="CP" name="cp" required pattern="[0-9\.]+">
+      <div class="col-md-3">
+        <label for="email2" >Email</label>
+        <input type="email" class="form-control" id="email2" placeholder="Email" name="email2" >
     </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+  <label for="contacto_ventas" >Contacto Ventas</label>
+    <input type="text" class="form-control" id="contacto_ventas" placeholder="Contacto Ventas" name="contacto_ventas" >
+  </div>
+  <div class="col-md-6">
+  <label for="contacto_pagos" >Contacto Pagos</label>
+    <input type="text" class="form-control" id="contacto_pagos" placeholder="Contacto Pagos" name="contacto_pagos" >
+  </div>
 </div>
 <div class="form-row">
         <div class="form-group">

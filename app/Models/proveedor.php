@@ -17,10 +17,12 @@ class proveedor extends Model
         "nombre_empresa",
         "alias",
         "razon_social",
-        "calle",
-        "numero",
-        "colonia",
-        "cp",
-        "rfc"
+        "localidad",
+        "telefono",
+        "telefono2",
+        "email",
+        "email2",
+        "contacto_ventas",
+        "contacto_pagos"
     ];
 }
