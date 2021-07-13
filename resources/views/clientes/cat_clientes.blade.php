@@ -1,5 +1,5 @@
 @extends('layouts.base_html')
-@section('tittle') CONTRATOS <@endsection
+@section('tittle') CLIENTES <@endsection
 
 @section('body')
 <?php
@@ -8,12 +8,7 @@
 //include '../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php';
 require (__DIR__.'/../../../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php');
 $xcrud = Xcrud::get_instance(); //instantiate xCRUD
-$xcrud->table('contratos'); //employees - MySQL table name
-$xcrud->change_type('fecha','date');
-
-$xcrud->relation("id_cliente","clientes","id","cliente");
-$xcrud->columns("id_cliente,nombre_contraparte,folio,descripcion");
-$xcrud->button('http://example.com','PDF',false,"P",array('target'=>'_blank'));
+$xcrud->table('clientes'); //employees - MySQL table name
 
 echo $xcrud->render(); //magic
 ?>

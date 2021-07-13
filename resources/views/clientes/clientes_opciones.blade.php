@@ -1,6 +1,6 @@
 @extends('layouts.base_html')
 
-@section ('tittle')CONTRATOS @endsection
+@section ('tittle')CLIENTES @endsection
 
 @section('styles')
 <style>
@@ -44,7 +44,7 @@ a{
 <div class="row">
     <div class="col-md-12">
         <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
-            CONTRATO
+            CLIENTES
         </h1>
 
     </div>
@@ -62,13 +62,13 @@ a{
         <ul class="feat" id="about">	
             <li>
             <i class="fas fa-file-alt fa-2x" style="margin-right: 10px"></i>	
-                <a  href="/contratos/create"  style="font-size:20px;" >Agregar Contrato</a>
+                <a  href="/clientes/create"  style="font-size:20px;" >Agregar Cliente</a>
             </li>		    
         </ul>
         <ul class="feat" id="about">	
             <li>
             <i class="fas fa-list fa-2x" style="margin-right: 10px"></i>	
-                <a  href="/contratos" style="font-size:20px;">Catalogo de Contrato</a>
+                <a  href="/clientes" style="font-size:20px;">Catalogo de Clientes</a>
             </li>		    
         </ul>
       </div>
@@ -78,3 +78,4 @@ a{
 </div>
 
 @endsection
+

@@ -16,7 +16,7 @@
 
     <!-- LINKS JAVASCRIPTS -->
     <!-- IMPORTACION JQUERY -->
-    <script src="{{ asset('lib/jquery/jquery.min.js') }}" defer></script>
+    <script src="{{ asset('lib/jquery/jquery.min.js') }}" ></script>
     <!-- IMPORTACION BOOTSTRAP -->
     <script src="{{ asset('lib/bootstrap/js/bootstrap.min.js') }}" defer></script>
     <!-- IMPORTACION SWEETALERT 2 -->

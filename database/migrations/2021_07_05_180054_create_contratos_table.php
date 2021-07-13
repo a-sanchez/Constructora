@@ -14,14 +14,24 @@ class CreateContratosTable extends Migration
     public function up()
     {
         Schema::create('contratos', function (Blueprint $table) {
-            $table->id('numero_contrato');
-            $table->dateTime('fecha',$precision=0);
-            $table->string('nombre');
-            $table->string('calle');
-            $table->integer('numero');
-            $table->string('colonia');
-            $table->integer('cp');
-            $table->integer('pago');
+            $table->id();
+            /*$table->string('calle_contratante');
+            $table->integer('numero_contratante');
+            $table->string('colonia_contratante');
+            $table->integer('cp_contratante');*/
+            $table->string('nombre_contraparte');
+            $table->string('calle_contraparte');
+            $table->integer('numero_contraparte');
+            $table->string('colonia_contraparte');
+            $table->integer('cp_contraparte');
+            $table->string('folio');
+            $table->string('descripcion');
+            $table->float('monto');
+            $table->date('fecha_inicio');
+            $table->date('fecha_final');
+            $table->string('file');
+
+
         });
     }
 
