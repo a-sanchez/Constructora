@@ -12,4 +12,12 @@ class contrato extends Model
     public $timestamps = false;
 
     protected $guarded =[];
+
+    public static function setFile($file)
+    {
+        $ruta = "docs/contrato_adjuntos";
+        $filename =$file->hashName();
+        $file->store($ruta);
+        return $filename;
+    }
 }

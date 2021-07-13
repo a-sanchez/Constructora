@@ -24,6 +24,7 @@ class ContratoController extends Controller
     public function store(contratos_request $request)
     {
         $validation=$request->validated();
+        $validation["file"]=contrato::setFile($validation["file"]);
         contrato::create($validation);
         return response()->json("Contrato creado con exito",201);
     }
