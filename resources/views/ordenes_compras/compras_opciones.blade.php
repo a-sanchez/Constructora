@@ -1,6 +1,6 @@
 @extends('layouts.base_html')
 
-@section ('tittle')CONTRATOS @endsection
+@section ('tittle')ORDENES DE COMPRA @endsection
 
 @section('styles')
 <style>
@@ -25,7 +25,7 @@ ul.feat#about li i {
 }
 ul.feat#about li {
     margin-bottom: 20px;
-    padding: 20px 25px 10px 85px;
+    padding: 20px 25px 10px 40px;
     border: 1px solid #ddd;
     background-color: #f3f3f3;
 }
@@ -44,7 +44,7 @@ a{
 <div class="row">
     <div class="col-md-12">
         <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
-            CONTRATO
+            ORDENES DE COMPRA
         </h1>
 
     </div>
@@ -59,16 +59,16 @@ a{
         <h1></h1> 
       </div>
       <div class="col-md-5" >
-        <ul class="feat" id="about">	
+        <ul class="feat" id="about" style="text-align:center;">	
             <li>
             <i class="fas fa-file-alt fa-2x" style="margin-right: 10px"></i>	
-                <a  href="/contratos/create"  style="font-size:20px;" >Agregar Contrato</a>
+                <a  href="ordenes_compra/agregar_compra"  style="font-size:20px;" >Crear Orden de Compra</a>
             </li>		    
         </ul>
-        <ul class="feat" id="about">	
+        <ul class="feat" id="about" style="text-align:center;">	
             <li>
             <i class="fas fa-list fa-2x" style="margin-right: 10px"></i>	
-                <a  href="/contratos" style="font-size:20px;">Catalogo de Contrato</a>
+                <a  href="/clientes" style="font-size:20px;">Catalogo de Ordenes de Compra</a>
             </li>		    
         </ul>
       </div>
@@ -78,3 +78,4 @@ a{
 </div>
 
 @endsection
+

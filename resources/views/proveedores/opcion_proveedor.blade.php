@@ -74,7 +74,7 @@ ul.feat#about li {
         <ul class="feat" id="about">	
             <li>
             <i class="fas fa-list fa-2x" style="margin-right: 10px"></i>	
-                <a  href="proveedores/" style="font-size:20px;">Catalogo de Proveedores</a>
+                <a  href="/proveedores" style="font-size:20px;">Catalogo de Proveedores</a>
             </li>		    
         </ul>
       </div>

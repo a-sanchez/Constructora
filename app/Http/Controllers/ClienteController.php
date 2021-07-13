@@ -3,31 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\contratos_request;
-use App\Models\contrato;
+use App\Http\Requests\clientes_request;
 use App\Models\cliente;
 
-class ContratoController extends Controller
+class ClienteController extends Controller
 {
     public function index()
     {
-        return view('contrato.cat_contratos');
-
+        return view('clientes.cat_clientes');
     }
-
     public function create()
     {
-        $clientes_contrato = cliente::all();
-        return view('contrato.contrato',["clientes"=>$clientes_contrato]);
+        return view('clientes.add_clientes');
     }
 
-    public function store(contratos_request $request)
+    public function store(clientes_request $request)
     {
         $validation=$request->validated();
-        contrato::create($validation);
-        return response()->json("Contrato creado con exito",201);
+        cliente::create($validation);
+        return response()->json("Cliente creado con exito",201);
     }
-
     public function show($id)
     {
         //
