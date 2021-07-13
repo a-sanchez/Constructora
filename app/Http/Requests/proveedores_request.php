@@ -24,14 +24,11 @@ class proveedores_request extends FormRequest
     public function rules()
     {
         return [
-            'nombre_empresa'=> 'required|string',
             'alias'=>'required|string',
             'razon_social'=>'required|string',
-            'calle'=>'required|string',
-            'numero'=>'required|integer',
-            'colonia'=>'required|string',
-            'cp'=>'required|integer',
-            'rfc'=>'required|string'
+            'localidad'=>'required|string',
+            'telefono'=>'required|string',
+            'email'=>'required|string'
         ];
     }
 }
