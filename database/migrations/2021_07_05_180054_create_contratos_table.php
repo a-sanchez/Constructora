@@ -22,8 +22,8 @@ class CreateContratosTable extends Migration
             $table->string('nombre_contraparte');
             $table->string('folio');
             $table->string('descripcion');
-            $table->float('anticipo');
-            $table->date('fecha_anticipo');
+            $table->float('anticipo')->nullable();
+            $table->date('fecha_anticipo')->nullable();
             $table->float('monto');
             $table->date('fecha_inicio');
             $table->date('fecha_final');
