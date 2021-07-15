@@ -12,6 +12,7 @@
                 <li class="colorlib-active">
                 <li><a href="/clientes_opciones">Cliente</a></li>
                 <li><a href='/opcion_contrato'>Contrato</a></li>
+                <li><a href='/compras'>Orden de Compra</a></li>
                 <li><a href="/facturas">Facturas</a></li>
                 <li><a href="/pagos">Pagos</a></li>
                 <li><a href="/opcion_proveedores">Proveedores</a></li>
