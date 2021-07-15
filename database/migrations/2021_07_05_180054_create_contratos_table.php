@@ -20,15 +20,18 @@ class CreateContratosTable extends Migration
             $table->string('colonia_contratante');
             $table->integer('cp_contratante');*/
             $table->string('nombre_contraparte');
-            $table->string('calle_contraparte');
-            $table->integer('numero_contraparte');
-            $table->string('colonia_contraparte');
-            $table->integer('cp_contraparte');
             $table->string('folio');
             $table->string('descripcion');
+            $table->float('anticipo');
+            $table->date('fecha_anticipo');
             $table->float('monto');
             $table->date('fecha_inicio');
             $table->date('fecha_final');
+            $table->string('calle_contraparte');
+            $table->integer('numero_contraparte');
+            $table->string('colonia_contraparte');
+            $table->string('localidad');
+            $table->integer('cp_contraparte');    
             $table->string('file');
 
 

@@ -13,7 +13,7 @@ class proveedor extends Model
 
     public $timestamps = false;
     
-    protected $fillable = [
+    /*protected $fillable = [
         "nombre_empresa",
         "alias",
         "razon_social",
@@ -24,5 +24,6 @@ class proveedor extends Model
         "email2",
         "contacto_ventas",
         "contacto_pagos"
-    ];
+    ];*/
+    protected $guarded =[];
 }

@@ -2,7 +2,7 @@
 @section('tittle') CONTRATOS <@endsection
 
 @section('body')
-<?php
+@php
 
 //include 'C:\Users\EVOTEK\Desktop\EVOTEK\constructora\public\lib\xcrud\xcrud_1.7.15_2\xcrud\xcrud.php'; //path to xcrud.php
 //include '../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php';
@@ -13,8 +13,9 @@ $xcrud->change_type('fecha','date');
 
 $xcrud->relation("id_cliente","clientes","id","cliente");
 $xcrud->columns("id_cliente,nombre_contraparte,folio,descripcion");
-$xcrud->button('http://example.com','PDF',false,"",array('target'=>'_blank'));
 
+$xcrud->button(asset("/storage/docs/contrato_adjuntos/{file}"),'PDF',false,"P",array('target'=>'_blank'));
+$xcrud->button(url("compras/{id}"),'Orden de Compra',false,"P");
 echo $xcrud->render(); //magic
-?>
+@endphp
 @endsection

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\proveedores_request;
 use App\Models\proveedor;
+
 class proveedores extends Controller
 {
     /**

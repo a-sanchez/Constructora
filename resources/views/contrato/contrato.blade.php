@@ -20,7 +20,7 @@
         </p>
     </div>
 </div>
-  <h5>Contratante</h5>
+  <h5>Cliente</h5>
 
     <form class="row g-3" onSubmit='insert_contrato();' id="form-contrato" >
     @csrf
@@ -43,27 +43,6 @@
                 <input type="text" class="form-control" id="nombre_contraparte" name="nombre_contraparte" required>
             </div>
       </div>
-      <h7>Direccion</h7>
-      <div class="row">
-        <div class="col-auto">
-          <label for="inputcalle2" >Calle</label>
-          <input type="text" class="form-control" id="inputcalle2" placeholder="Calle" name="calle_contraparte" required>
-        </div>
-        <div class="col-auto">
-          <label for="numero_contraparte" >Numero</label>
-          <input type="text" class="form-control" id="numero_contraparte" placeholder="Numero" name="numero_contraparte" required pattern="[0-9\.]+">
-        </div>
-        <div class="col-auto">
-          <label for="colonia_contraparte" >Colonia</label>
-          <input type="text" class="form-control" id="colonia_contraparte" placeholder="Colonia" name="colonia_contraparte" required>
-        </div>
-        <div class="col-auto">
-          <label for="cp_contraparte" >CP</label>
-          <input type="text" class="form-control" id="cp_contraparte" placeholder="CP" name="cp_contraparte" required pattern="[0-9\.]+">
-        </div>
-      </div>
-      
-
       <hr style="color:orange;">
         <h5>Informacion Contrato </h5>
         <div class="form-row" >
@@ -73,13 +52,23 @@
             </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
           <label for="descripcion" >Descripcion</label>
           <input type="text" class="form-control" id="descripcion" placeholder="Descripcion" name="descripcion" required>
         </div>
-        <div class="col-md-6">
-          <label for="monto" >Monto Total</label>
-          <input type="text" class="form-control" id="monto" placeholder="Monto Total" name="monto" required>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="anticipo">Anticipo</label>
+            <input type="text" class="form-control" name="anticipo" id="anticipo" value="0.00">
+          </div>
+          <div class="col-md-4">
+            <label for="fecha_anticipo">Fecha Anticipo</label>
+            <input type="date" class="form-control" name="fecha_anticipo" id="fecha_anticipo">
+          </div>
+          <div class="col-md-4">
+            <label for="monto" >Monto Total</label>
+            <input type="text" class="form-control" id="monto" placeholder="Monto Total" name="monto" required>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -92,7 +81,31 @@
           <input type="date" class="form-control" id="fecha_final" placeholder="Fecha de Fin" name="fecha_final" required>
         </div>
       </div>
-
+      <h7>Direccion de obra</h7>
+      <div class="row">
+        <div class="col-md-4">
+          <label for="inputcalle2" >Calle</label>
+          <input type="text" class="form-control" id="inputcalle2" placeholder="Calle" name="calle_contraparte" required>
+        </div>
+        <div class="col-md-4">
+          <label for="numero_contraparte" >Numero</label>
+          <input type="text" class="form-control" id="numero_contraparte" placeholder="Numero" name="numero_contraparte" required pattern="[0-9\.]+">
+        </div>
+        <div class="col-md-4">
+          <label for="colonia_contraparte" >Colonia</label>
+          <input type="text" class="form-control" id="colonia_contraparte" placeholder="Colonia" name="colonia_contraparte" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="localidad" >Localidad</label>
+          <input type="text" class="form-control" id="localidad" placeholder="Localidad" name="calle_contraparte" required>
+        </div>
+        <div class="col-md-2">
+          <label for="cp_contraparte" >CP</label>
+          <input type="text" class="form-control" id="cp_contraparte" placeholder="CP" name="cp_contraparte" required pattern="[0-9\.]+">
+        </div>
+      </div>
     <div class="row">
       <div class="col-md-6">
       <label for="file" >Adjuntar PDF del contrato:</label>
