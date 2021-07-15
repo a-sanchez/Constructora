@@ -18,6 +18,7 @@ class cliente extends Model
         'telefono',
         'telefono2',
         'email',
+        'rfc',
         'contacto_pago',
         'localidad',
         'calle',

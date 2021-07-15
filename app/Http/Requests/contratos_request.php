@@ -29,16 +29,19 @@ class contratos_request extends FormRequest
         'numero_contratante'=>'required|integer',
         'colonia_contratante'=>'required|string',
         'cp_contratante'=>'required|integer',*/
+        'folio'=>'required|string',
+        'descripcion'=>'required|string',
+        'anticipo'=>'required|regex:/^\d*(\.\d{2})?$/',
+        'fecha_anticipo'=>'required|date',
+        'monto'=>'required|regex:/^\d*(\.\d{2})?$/',
+        'fecha_inicio'=>'required|date',
+        'fecha_final'=>'required|date',
         'nombre_contraparte'=>'required|string',
         'calle_contraparte' =>'required|string',
         'numero_contraparte'=>'required|integer',
         'colonia_contraparte' =>'required|string',
+        'localidad'=>'required|string',
         'cp_contraparte'=>'required|integer',
-        'folio'=>'required|string',
-        'descripcion'=>'required|string',
-        'monto'=>'required|regex:/^\d*(\.\d{2})?$/',
-        'fecha_inicio'=>'required|date',
-        'fecha_final'=>'required|date',
         'file'=>'required|file'
         ];
     }

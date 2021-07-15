@@ -24,7 +24,13 @@ class orden_request extends FormRequest
     public function rules()
     {
         return [
-            'id_contrato'=>'requiered|integer',
+            'folio_orden'=>'required|string',
+            'id_contrato'=>'required|integer',
+            'solicitado'=>'required|string',
+            'fecha_orden'=>'required|date',
+            'descripcion_orden'=>'required|string',
+            'importe_orden'=>'required|regex:/^\d*(\.\d{2})?$/',
+            'adjunto_compra'=>'required|file'
         ];
     }
 }

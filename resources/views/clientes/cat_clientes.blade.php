@@ -9,7 +9,7 @@
 require (__DIR__.'/../../../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php');
 $xcrud = Xcrud::get_instance(); //instantiate xCRUD
 $xcrud->table('clientes'); //employees - MySQL table name
-
+$xcrud->columns("cliente,alias,razon_social,telefono,email,rfc");
 echo $xcrud->render(); //magic
 ?>
 @endsection

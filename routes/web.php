@@ -13,6 +13,7 @@
 use App\Http\Controllers\ContratoController;
 use App\Http\Controllers\proveedores;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\OrdenCompraController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,9 +46,14 @@ Route::get('/compras_opciones',function(){
     return view('ordenes_compras.compras_opciones');
 });
 
-Route::get('ordenes_compra/agregar_compra',function(){
+/*Route::get('ordenes_compra/agregar_compra',function(){
     return view('ordenes_compras.add_compra');
 });
+
+Route::get('ordenes_compra/catalago_compra',function(){
+    return view('ordenes_compras.cat_compras');
+});*/
+Route::resource('compras',OrdenCompraController::class);
 #----------------FACTURAS------------------------------#
 
 Route::get('/facturas',function(){

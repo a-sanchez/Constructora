@@ -3,26 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\orden_request;
+use App\Models\orden_compra;
+use App\Models\contrato;
 
 class OrdenCompraController extends Controller
 {
     public function index()
     {
-        return view('ordenes_compras.compras_opciones');
+        return view('ordenes_compras.cat_compras');
     }
 
     public function create()
     {
-        return view('ordenes_compras.add_compra');
     }
 
-    public function store()
+    public function store(orden_request $request)
     {
-
+        $validation=$request->validated();
+        $validation["adjunto_compra"]=orden_compra::setFile($validation["adjunto_compra"]);
+        orden_compra::create($validation);
+        return response()->json("Orden compra creada",201);
     }
     public function show($id)
     {
-        //
+        $compras_contrato=contrato::find($id);
+        $ctx =[
+            "contrato"=>$compras_contrato
+        ];
+        
+        return view('ordenes_compras.add_compra',$ctx);
     }
 
     public function edit($id)

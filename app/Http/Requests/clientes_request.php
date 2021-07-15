@@ -30,6 +30,7 @@ class clientes_request extends FormRequest
         'telefono'=>'required|string',
         'telefono2'=>'required|string',
         'email'=>'required|string',
+        'rfc'=>'required|string',
         'contacto_pago'=>'required|string',
         'localidad'=>'required|string',
         'calle'=>'required|string',

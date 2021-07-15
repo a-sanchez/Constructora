@@ -24,8 +24,9 @@ class proveedores_request extends FormRequest
     public function rules()
     {
         return [
-            'alias'=>'required|string',
+            'rfc'=>'required|unique|string',
             'razon_social'=>'required|string',
+            'alias'=>'required|string',
             'localidad'=>'required|string',
             'telefono'=>'required|string',
             'email'=>'required|string'

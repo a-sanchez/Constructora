@@ -11,9 +11,12 @@ $xcrud = Xcrud::get_instance(); //instantiate xCRUD
 $xcrud->table('orden_compras'); //employees - MySQL table name
 $xcrud->change_type('fecha','date');
 
-//$xcrud->relation("id_contrato","contratos","id","contrato");
-//$xcrud->columns("id_cliente,nombre_contraparte,folio,descripcion");
-$xcrud->button('http://example.com','PDF',false,"",array('target'=>'_blank'));
+$xcrud->relation("id_contrato","contratos","id","folio");
+$xcrud->columns("folio_orden,solicitado,fecha_orden,descripcion_orden,importe_orden,id_contrato");
+
+//$xcrud->button('http://example.com','EXCEL',false,"",array('target'=>'_blank'));
+$xcrud->button(asset("/storage/docs/ordenes_adjuntos/{adjunto_compra}"),'EXCEL',false,"P",array('target'=>'none'));
+
 
 echo $xcrud->render(); //magic
 ?>

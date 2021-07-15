@@ -33,15 +33,15 @@
     <label for="razon_social" >Razon social</label>
     <input type="text" class="form-control" id="razon_social" placeholder="Razon Social" name="razon_social" required>
   </div>
-  <div class="col-auto">
+  <div class="col-md-4">
     <label for="alias" >Alias</label>
     <input type="text" class="form-control" id="alias" placeholder="Alias" name="alias" required>
   </div>
-  <div class="col-auto">
+  <div class="col-md-4">
     <label for="telefono" >Telefono</label>
     <input type="text" class="form-control" id="telefono" placeholder="Telefono" name="telefono" required>
   </div>
-  <div class="col-auto">
+  <div class="col-md-4">
     <label for="telefono2" >Telefono</label>
     <input type="text" class="form-control" id="telefono2" placeholder="Telefono" name="telefono2" required>
   </div>
@@ -50,21 +50,25 @@
     <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
   </div>
   <div class="col-md-4">
+    <label for="rfc" >R.F.C</label>
+    <input type="rfc" class="form-control" id="rfc" placeholder="R.F.C" name="rfc" required>
+  </div>
+  <div class="col-md-4">
     <label for="contacto_pago" >Contacto Pago</label>
     <input type="text" class="form-control" id="contacto_pago" placeholder="Contacto Pago" name="contacto_pago" required>
+  </div>
+  <div class="col-md-4">
+    <label for="localidad" >Localidad</label>
+    <input type="text" class="form-control" id="localidad" placeholder="Localidad" name="localidad" required>
   </div>
 </div>
 <div class="row">
 <h7 style="font-weight:bold;">Direccion</h7>
       <div class="col-md-4">
-        <label for="localidad" >Localidad</label>
-        <input type="text" class="form-control" id="localidad" placeholder="Localidad" name="localidad" required>
-      </div>
-      <div class="col-md-4">
             <label for="calle" >Calle</label>
         <input type="text" class="form-control" id="calle" placeholder="Calle" name="calle" required>
       </div>
-      <div class="col-auto">
+      <div class="col-md-4">
         <label for="numero" >Numero</label>
         <input type="text" class="form-control" id="numero" placeholder="Numero" name="numero" required pattern="[0-9\.]+">
       </div>

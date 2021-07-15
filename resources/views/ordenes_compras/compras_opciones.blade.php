@@ -62,13 +62,13 @@ a{
         <ul class="feat" id="about" style="text-align:center;">	
             <li>
             <i class="fas fa-file-alt fa-2x" style="margin-right: 10px"></i>	
-                <a  href="ordenes_compra/agregar_compra"  style="font-size:20px;" >Crear Orden de Compra</a>
+                <a  href="/compras/create"  style="font-size:20px;" >Crear Orden de Compra</a>
             </li>		    
         </ul>
         <ul class="feat" id="about" style="text-align:center;">	
             <li>
             <i class="fas fa-list fa-2x" style="margin-right: 10px"></i>	
-                <a  href="/clientes" style="font-size:20px;">Catalogo de Ordenes de Compra</a>
+                <a  href="/compras" style="font-size:20px;">Catalogo de Ordenes de Compra</a>
             </li>		    
         </ul>
       </div>
