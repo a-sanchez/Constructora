@@ -19,8 +19,7 @@ class CreateOrdenComprasTable extends Migration
             $table->string('solicitado');
             $table->date('fecha_orden');
             $table->string('descripcion_orden');
-            $table->float('importe_orden');
-            $table->string('adjunto_compra');
+            $table->string("observaciones");
 
         });
     }

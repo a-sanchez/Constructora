@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\orden_request;
 use App\Models\orden_compra;
+use App\Models\proveedor;
 use App\Models\contrato;
 
 class OrdenCompraController extends Controller
@@ -27,9 +28,11 @@ class OrdenCompraController extends Controller
     }
     public function show($id)
     {
+        $provedores = proveedor::all();
         $compras_contrato=contrato::find($id);
         $ctx =[
-            "contrato"=>$compras_contrato
+            "contrato"=>$compras_contrato,
+            "proveedores"=>$provedores
         ];
         
         return view('ordenes_compras.add_compra',$ctx);
