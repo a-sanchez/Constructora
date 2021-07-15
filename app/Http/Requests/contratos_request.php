@@ -31,8 +31,8 @@ class contratos_request extends FormRequest
         'cp_contratante'=>'required|integer',*/
         'folio'=>'required|string',
         'descripcion'=>'required|string',
-        'anticipo'=>'required|regex:/^\d*(\.\d{2})?$/',
-        'fecha_anticipo'=>'required|date',
+        /*'anticipo'=>'required|regex:/^\d*(\.\d{2})?$/',
+        'fecha_anticipo'=>'required|date',*/
         'monto'=>'required|regex:/^\d*(\.\d{2})?$/',
         'fecha_inicio'=>'required|date',
         'fecha_final'=>'required|date',
