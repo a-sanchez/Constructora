@@ -16,6 +16,7 @@ $xcrud->columns("folio_orden,solicitado,fecha_orden,descripcion_orden,importe_or
 
 //$xcrud->button('http://example.com','EXCEL',false,"",array('target'=>'_blank'));
 $xcrud->button(asset("/storage/docs/ordenes_adjuntos/{adjunto_compra}"),'EXCEL',false,"P",array('target'=>'none'));
+$xcrud->unset_add();
 
 
 echo $xcrud->render(); //magic
