@@ -40,7 +40,7 @@
   <div class="col-md-4">
     <label form="proveedor">Proveedor</label>
     <select class="form-control" name="id_proveedor" id="id_proveedor">
-      <option disabled value="0">Seleccione</option>
+      <option disabled value="0" selected>Seleccione</option>
       @foreach($proveedores as $proveedor)
         <option value="{{$proveedor->id}}">{{$proveedor->rfc}} - {{$proveedor->razon_social}}</option>
       @endforeach
@@ -181,7 +181,7 @@
     let req = await fetch(url, init);
     console.log(req);
     if (req.ok) {
-      //window.location.href = "{{ url('/compras') }}";
+      window.location.href = "{{ url('/compras') }}";
     }
     else{
       Swal.fire({

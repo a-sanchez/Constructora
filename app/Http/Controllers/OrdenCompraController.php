@@ -8,6 +8,7 @@ use App\Models\orden_compra;
 use App\Models\OrdenProducto;
 use App\Models\proveedor;
 use App\Models\contrato;
+use App\Models\OrdenPdf;
 
 class OrdenCompraController extends Controller
 {
@@ -52,5 +53,10 @@ class OrdenCompraController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function OrdenPdf($id)
+    {
+        return OrdenPdf::create();
     }
 }
