@@ -195,17 +195,3 @@
 
 
 }());
-
-function arrayToJson(array) {
-	let jsonArray = [];
-	array.forEach(element => {
-		json = {
-			"concepto":element[0],
-			"unidad":element[1],
-			"cantidad":element[2],
-			"precio_unitario":element[3]
-		};
-		jsonArray.push(json);
-	});
-	return JSON.stringify(jsonArray);
-}
