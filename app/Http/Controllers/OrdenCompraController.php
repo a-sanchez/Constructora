@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\orden_request;
 use App\Models\orden_compra;
+use App\Models\OrdenProducto;
 use App\Models\proveedor;
 use App\Models\contrato;
 
@@ -22,8 +23,8 @@ class OrdenCompraController extends Controller
     public function store(orden_request $request)
     {
         $validation=$request->validated();
-        $validation["adjunto_compra"]=orden_compra::setFile($validation["adjunto_compra"]);
-        orden_compra::create($validation);
+        $orden = orden_compra::create($validation)->id;
+        $productos = orden_compra::setProductos($validation["productos"],$orden);
         return response()->json("Orden compra creada",201);
     }
     public function show($id)

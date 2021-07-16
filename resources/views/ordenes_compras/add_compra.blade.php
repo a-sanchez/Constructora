@@ -138,9 +138,9 @@
 
   function agregarProducto(){
     event.preventDefault();
-    let cantidad = document.getElementById("cantidad");
-    let unidad =  document.getElementById("unidad");
     let concepto = document.getElementById("concepto");
+    let unidad =  document.getElementById("unidad");
+    let cantidad = document.getElementById("cantidad");
     let precio_unitario = document.getElementById("precio_unitario");
     let importe =  parseFloat(parseFloat(precio_unitario.value)*parseFloat(cantidad.value)).toFixed(2);
     if (cantidad.value.trim() == ""
@@ -156,9 +156,9 @@
         return false;
     }
     orden_productos.row.add([
-        cantidad.value.trim().toUpperCase(),
-        unidad.value.trim().toUpperCase(),
         concepto.value.trim().toUpperCase(),
+        unidad.value.trim().toUpperCase(),
+        cantidad.value.trim().toUpperCase(),
         precio_unitario.value.trim().toUpperCase(),
         importe
     ]).draw(false);
@@ -169,7 +169,10 @@
   async function insert_orden(){
     event.preventDefault();
     let form = new FormData(document.getElementById("form-orden"));
+    let productos = orden_productos.rows().data().toArray();
+    let jsonProductos = arrayToJson(productos);
     form.append("id_contrato",document.getElementById("id_contrato").value);
+    form.append("productos",jsonProductos);
     let url = "{{ url('/compras') }}";
     let init = {
       method:"POST",
@@ -178,7 +181,7 @@
     let req = await fetch(url, init);
     console.log(req);
     if (req.ok) {
-      window.location.href = "{{ url('/compras') }}";
+      //window.location.href = "{{ url('/compras') }}";
     }
     else{
       Swal.fire({

@@ -200,10 +200,10 @@ function arrayToJson(array) {
 	let jsonArray = [];
 	array.forEach(element => {
 		json = {
-			"cantidad":element[0],
+			"concepto":element[0],
 			"unidad":element[1],
-			"articulo":element[2],
-			"caracteristica":element[3]
+			"cantidad":element[2],
+			"precio_unitario":element[3]
 		};
 		jsonArray.push(json);
 	});

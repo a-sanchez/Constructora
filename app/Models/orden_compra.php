@@ -10,7 +10,7 @@ class orden_compra extends Model
     use HasFactory;
     protected $table='orden_compras';
     public $timestamps = false;
-    protected $guarded =[];
+    protected $guarded =["productos"];
 
     public static function setFile($adjunto_compra)
     {
@@ -19,6 +19,20 @@ class orden_compra extends Model
         $adjunto_compra->store($ruta);
         return $filename;
 
+    }
+
+    public static function setProductos($productos,$id){
+        $productos = json_decode($productos);
+        foreach ($productos as $value) {
+            OrdenProducto::create([
+                "concepto"=>$value->concepto,
+                "unidad"=>$value->unidad,
+                "cantidad"=>$value->cantidad,
+                "precio_unitario"=>$value->precio_unitario,
+                "importe"=> ($value->cantidad*$value->precio_unitario),
+                "orden_id"=>$id
+            ]);
+        }
     }
 
 }
