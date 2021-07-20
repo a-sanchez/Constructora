@@ -17,7 +17,7 @@ $xcrud->relation('id_proveedor','proveedores','id', 'razon_social');
 $xcrud->relation("id_contrato","contratos","id","folio");
 //$xcrud->button('http://example.com','EXCEL',false,"",array('target'=>'_blank'));
 
-$xcrud->button(URL::to('compras_pdf/{id}'),'PDF',false,"P");
+$xcrud->button(URL::to('compras_pdf/{id}'),'PDF',false,"P",array('target'=>'_blank'));
 $xcrud->unset_add();
 
 

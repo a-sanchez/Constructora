@@ -57,8 +57,8 @@
                         <td border=".5">{{$producto->concepto}}</td>
                         <td border=".5">{{$producto->unidad}}</td>
                         <td border=".5">{{$producto->cantidad}}</td>
-                        <td border=".5">$ {{$producto->precio_unitario}}</td>
-                        <td border=".5">$ {{$producto->importe}}</td>
+                        <td border=".5">$ {{number_format($producto->precio_unitario,2)}}</td>
+                        <td border=".5">$ {{number_format($producto->importe,2)}}</td>
                     </tr>
                     @php
                         $subtotal += $producto->importe;
@@ -72,21 +72,21 @@
                     <td></td>
                     <td></td>
                     <td border=".5">SUB-TOTAL</td>
-                    <td border=".5">$ {{$subtotal}}</td>
+                    <td border=".5">$ {{number_format($subtotal,2)}}</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td border=".5">IVA</td>
-                    <td border=".5">$ {{$iva}}</td>
+                    <td border=".5">$ {{number_format($iva,2)}}</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td border=".5">TOTAL</td>
-                    <td border=".5">$ {{$subtotal + $iva}}</td>
+                    <td border=".5">$ {{number_format($subtotal + $iva,2)}}</td>
                 </tr>
             </table>
         </td>
