@@ -16,7 +16,6 @@ class OrdenPdf extends Model
     {
         $orden = orden_compra::find($id);
         $productos = OrdenProducto::where("orden_id","=",$id)->get();
-        $subTotal = 
         // HEADER TCPDF
         PDF::setHeaderCallback(function($pdf){
             $pdf->Rect(0, 0, $pdf->getPageWidth(), $pdf->getPageHeight(), 'F', array(), array( 247, 247, 247));
