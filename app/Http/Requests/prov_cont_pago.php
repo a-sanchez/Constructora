@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class proveedores_request extends FormRequest
+class prov_cont_pago extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class proveedores_request extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,14 +24,7 @@ class proveedores_request extends FormRequest
     public function rules()
     {
         return [
-            'rfc'=>'required|string',
-            'razon_social'=>'required|string',
-            'alias'=>'required|string',
-            'localidad'=>'required|string',
-            'banco'=>'required|string',
-            'cuenta'=>'required|string',
-            'contacto_ventas'=>'string',
-            'contacto_pagos'=>'string'
+            //
         ];
     }
 }

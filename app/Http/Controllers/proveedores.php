@@ -38,8 +38,9 @@ class proveedores extends Controller
     public function store(proveedores_request $request)
     {
         $validation=$request->validated();
-        proveedor::create($validation);
-        return response()->json("Proveedor creado con exito",201);
+        $prov = proveedor::create($validation);
+        proveedor::contactos($prov->id,$validation['contacto_ventas'],$validation['contacto_pagos']);
+        return response()->json($prov,201);
         
     }
 

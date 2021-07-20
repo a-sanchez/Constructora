@@ -14,8 +14,6 @@ class DeleteColumnsOrdenCompras extends Migration
     public function up()
     {
         Schema::table('orden_compras', function($table) {
-            $table->dropColumn('importe_orden');
-            $table->dropColumn('adjunto_compra');
         });
     }
 

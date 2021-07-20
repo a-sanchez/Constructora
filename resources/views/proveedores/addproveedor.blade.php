@@ -115,7 +115,7 @@
 <div class="form-row">
         <div class="form-group">
             <button type="submit" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
-            <a type="button" class="btn" id="btnCancelar" href="/proveedores" style="background:red;color:white;" >Cancelar</a>
+            <a type="button" class="btn" id="btnCancelar" href="{{ url('/proveedores') }}" style="background:red;color:white;" >Cancelar</a>
         </div>
   </div>
 </form>
@@ -138,9 +138,30 @@
     info:false
   });
 
+  function arrayToJson(array) {
+	let jsonArray = [];
+	array.forEach(element => {
+		json = {
+			"email":element[0],
+			"telefono":element[1],
+		};
+		jsonArray.push(json);
+	});
+	return JSON.stringify(jsonArray);
+}
+
   async function insert_proveedor(){
     event.preventDefault();
     let form = new FormData(document.getElementById("form-proveedor"));
+    let contacto = contacto_ventas.rows().data().toArray();
+    let jsonVentas = arrayToJson(contacto);
+    form.append("contacto_ventas",jsonVentas);
+
+    let contactos = contacto_pagos.rows().data().toArray();
+    let jsonPagos = arrayToJson(contactos);
+    form.append("contacto_pagos",jsonPagos);
+
+
     let url = "{{ url('/proveedores') }}";
     let init = {
       method:"POST",
@@ -148,7 +169,7 @@
     }
     let req = await fetch(url, init);
     if (req.ok) {
-      window.location.href = "{{ url('/proveedores') }}";
+      //window.location.href = "{{ url('/proveedores') }}";
     }
     else{
       Swal.fire({
@@ -186,8 +207,8 @@
     }
 
     //BORRAR FILA DE LA TABLA
-    $('#tabla_requisiciones').on('click', '.remove', function () {
-        var table = $('#tabla_requisiciones').DataTable();
+    $('#contacto_pagos').on('click', '.remove', function () {
+        var table = $('#contacto_pagos').DataTable();
         table
         .row($(this).parents('tr'))
         .remove()
@@ -220,8 +241,8 @@
     }
 
     //BORRAR FILA DE LA TABLA
-    $('#tabla_requisiciones').on('click', '.remove', function () {
-        var table = $('#tabla_requisiciones').DataTable();
+    $('#contacto_ventas').on('click', '.remove', function () {
+        var table = $('#contacto_ventas').DataTable();
         table
         .row($(this).parents('tr'))
         .remove()

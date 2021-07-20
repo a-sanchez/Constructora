@@ -38,7 +38,7 @@
                                     <input autocomplete="off" id="contrasena" name="contrasena" type="password" class="form-control" placeholder="Contraseña">
                                 </div>
                                 <div class="form-group mt-5">
-                                    <a href="/opciones" class="btn btn-primary">Entrar</a>
+                                    <a href={{url('/opciones')}} class="btn btn-primary">Entrar</a>
                                     <!-- <button id="submit" type="submit" class="btn btn-primary btn-send-message">Entrar</button> -->
                                 </div>
                             </form>

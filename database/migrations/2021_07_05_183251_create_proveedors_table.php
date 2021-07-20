@@ -21,8 +21,6 @@ class CreateProveedorsTable extends Migration
             $table->string('localidad');
             $table->string('banco')->nullable();
             $table->string('cuenta')->nullable();
-            $table->string('telefono');
-            $table->string('email');
             $table->string('contacto_ventas')->nullable();
             $table->string('contacto_pagos')->nullable();
         });
