@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\contrato;
+use App\Models\proveedor;
 
 class orden_compra extends Model
 {
@@ -33,6 +35,16 @@ class orden_compra extends Model
                 "orden_id"=>$id
             ]);
         }
+    }
+
+    public function contrato()
+    {
+        return $this->belongsTo(contrato::class,"id_contrato");
+    }
+
+    public function proveedor()
+    {
+        return $this->belongsTo(proveedor::class,"id_proveedor");
     }
 
 }

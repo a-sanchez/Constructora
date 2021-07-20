@@ -26,7 +26,7 @@ class OrdenCompraController extends Controller
         $validation=$request->validated();
         $orden = orden_compra::create($validation)->id;
         $productos = orden_compra::setProductos($validation["productos"],$orden);
-        return response()->json("Orden compra creada",201);
+        return response()->json($orden,201);
     }
     public function show($id)
     {
@@ -57,6 +57,6 @@ class OrdenCompraController extends Controller
 
     public function OrdenPdf($id)
     {
-        return OrdenPdf::create();
+        return OrdenPdf::create($id);
     }
 }

@@ -52,6 +52,14 @@
     <label for="solicitado" >Solicitado Por:</label>
     <input type="text" class="form-control" id="solicitado" placeholder="Ingrese Nombre" name="solicitado" required>
   </div>
+  <div class="col-md-12">
+    <label for="vobo" >Visto Bueno Por:</label>
+    <input type="text" class="form-control" id="vobo" placeholder="Ingrese Nombre" name="vobo" required>
+  </div>
+  <div class="col-md-12">
+    <label for="autorizacion" >Autorizacion Por:</label>
+    <input type="text" class="form-control" id="autorizacion" placeholder="Ingrese Nombre" name="autorizacion" required>
+  </div>
 </div>
 <div class="row">
   <p> </p>
@@ -77,6 +85,12 @@
   <div class="col-md-12">
     <label for="observaciones" >Observaciones</label>
     <input type="text" class="form-control" id="observaciones" placeholder="Observaciones" name="observaciones" required>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-md-2">
+    <label for="iva">I.V.A. %</label>
+    <input type="text" name="iva" id="iva" class="form-control"  pattern="[0-9\.]+"  oninput="setCustomValidity('')"  oninvalid="this.setCustomValidity('Solo valores numericos')">
   </div>
 </div>
 </form>
@@ -179,9 +193,10 @@
       body:form
     }
     let req = await fetch(url, init);
-    console.log(req);
     if (req.ok) {
-      window.location.href = "{{ url('/compras') }}";
+        let res = await req.json();
+        window.open(`{{url('/compras_pdf/${res}')}}`, '_blank');
+        window.location.href = "{{ url('/compras') }}";
     }
     else{
       Swal.fire({

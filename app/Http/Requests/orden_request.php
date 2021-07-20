@@ -27,12 +27,15 @@ class orden_request extends FormRequest
             'folio_orden'=>'required|string',
             'id_proveedor'=>"required|integer",
             'solicitado'=>'required|string',
+            'vobo'=>"required|string",
+            'autorizacion'=>"required|string",
             'fecha_orden'=>'required|date',
             'fecha_entrega'=>"required|date",
             'descripcion_orden'=>'required|string',
             'observaciones'=>"string",
             'id_contrato'=>'required|integer',
-            'productos'=>'string'
+            'productos'=>'string',
+            'iva'=>"required|numeric"
         ];
     }
 }
