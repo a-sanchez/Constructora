@@ -70,19 +70,18 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <label for="contacto_venta_telefono">Telefono</label>
-        <input type="text" class="form-control" style="height: 40px;"  id="contacto_venta_telefono">
-      </div>
-      <div class="col-md-6">
-      
         <label for="contacto_venta_email">Email</label>
         <input type="text" class="form-control" style="height: 40px;" id="contacto_venta_email">
+      </div>
+      <div class="col-md-6">
+        <label for="contacto_venta_telefono">Telefono</label>
+        <input type="text" class="form-control" style="height: 40px;"  id="contacto_venta_telefono">
       </div>
     </div>
     <table id="contacto_ventas" class="table" name="contacto_ventas" width="100%" >
       <thead>
-        <th>Telefono</th>
         <th>Email</th>
+        <th>Telefono</th>
       </thead>      
     </table>
   </div>
@@ -97,18 +96,18 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <label for="contacto_pago_telefono">Telefono</label>
-        <input type="text" class="form-control" style="height: 40px;"  id="contacto_pago_telefono">
-      </div>
-      <div class="col-md-6">
         <label for="contacto_pago_email">Email</label>
         <input type="text" class="form-control" style="height: 40px;" id="contacto_pago_email">
+      </div>
+      <div class="col-md-6">
+        <label for="contacto_pago_telefono">Telefono</label>
+        <input type="text" class="form-control" style="height: 40px;"  id="contacto_pago_telefono">
       </div>
     </div>
     <table id="contacto_pagos" class="table" width="100%">
       <thead>
-        <th>Telefono</th>
         <th>Email</th>
+        <th>Telefono</th>
       </thead>
     </table>
   </div>
