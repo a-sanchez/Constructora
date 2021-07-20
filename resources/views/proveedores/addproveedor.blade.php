@@ -80,8 +80,8 @@
     </div>
     <table id="contacto_ventas" class="table" name="contacto_ventas" width="100%" >
       <thead>
-        <th>Telefono</th>
         <th>Email</th>
+        <th>Telefono</th>
       </thead>      
     </table>
   </div>
@@ -106,8 +106,8 @@
     </div>
     <table id="contacto_pagos" class="table" width="100%">
       <thead>
-        <th>Telefono</th>
         <th>Email</th>
+        <th>Telefono</th>
       </thead>
     </table>
   </div>

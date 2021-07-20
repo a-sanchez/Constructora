@@ -15,6 +15,8 @@ $xcrud->change_type('fecha','date');
 $xcrud->columns("folio_orden,solicitado,fecha_orden,fecha_entrega,descripcion_orden,id_contrato,id_proveedor");
 $xcrud->relation('id_proveedor','proveedores','id', 'razon_social');
 $xcrud->relation("id_contrato","contratos","id","folio");
+$xcrud->column_name('id_contrato','Contrato');
+$xcrud->column_name('id_proveedor','Proveedor');
 //$xcrud->button('http://example.com','EXCEL',false,"",array('target'=>'_blank'));
 
 $xcrud->button(URL::to('compras_pdf/{id}'),'PDF',false,"P",array('target'=>'_blank'));
