@@ -25,12 +25,17 @@ class orden_request extends FormRequest
     {
         return [
             'folio_orden'=>'required|string',
-            'id_contrato'=>'required|integer',
+            'id_proveedor'=>"required|integer",
             'solicitado'=>'required|string',
+            'vobo'=>"required|string",
+            'autorizacion'=>"required|string",
             'fecha_orden'=>'required|date',
+            'fecha_entrega'=>"required|date",
             'descripcion_orden'=>'required|string',
-            'importe_orden'=>'required|regex:/^\d*(\.\d{2})?$/',
-            'adjunto_compra'=>'required|file'
+            'observaciones'=>"string",
+            'id_contrato'=>'required|integer',
+            'productos'=>'string',
+            'iva'=>"required|numeric"
         ];
     }
 }

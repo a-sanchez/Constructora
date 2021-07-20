@@ -54,6 +54,7 @@ Route::get('ordenes_compra/catalago_compra',function(){
     return view('ordenes_compras.cat_compras');
 });*/
 Route::resource('compras',OrdenCompraController::class);
+Route::get("compras_pdf/{id}",[OrdenCompraController::class, 'OrdenPdf']);
 #----------------FACTURAS------------------------------#
 
 Route::get('/facturas',function(){

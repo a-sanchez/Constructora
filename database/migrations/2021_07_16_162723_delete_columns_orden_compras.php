@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdenComprasTable extends Migration
+class DeleteColumnsOrdenCompras extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,7 @@ class CreateOrdenComprasTable extends Migration
      */
     public function up()
     {
-        Schema::create('orden_compras', function (Blueprint $table) {
-            $table->id();
-            $table->string('folio_orden');
-            $table->string('solicitado');
-            $table->date('fecha_orden');
-            $table->string('descripcion_orden');
-
+        Schema::table('orden_compras', function($table) {
         });
     }
 
@@ -30,6 +24,6 @@ class CreateOrdenComprasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orden_compras');
+        //
     }
 }

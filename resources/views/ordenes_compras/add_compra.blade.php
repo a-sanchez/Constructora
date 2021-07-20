@@ -3,6 +3,8 @@
 @section ('tittle')AGREGAR ORDEN DE COMPRA @endsection
 @section('styles')
 
+<link rel="stylesheet" href="{{asset("lib/DataTables/DataTables-1.10.25/css/dataTables.bootstrap5.min.css")}}">
+<link rel="stylesheet" href="{{asset("lib/DataTables/Responsive-2.2.9/css/responsive.dataTables.min.css")}}">
 @endsection
 
 @section('body')
@@ -38,7 +40,10 @@
   <div class="col-md-4">
     <label form="proveedor">Proveedor</label>
     <select class="form-control" name="id_proveedor" id="id_proveedor">
-      <option disabled value="0">Seleccione</option>
+      <option disabled value="0" selected>Seleccione</option>
+      @foreach($proveedores as $proveedor)
+        <option value="{{$proveedor->id}}">{{$proveedor->rfc}} - {{$proveedor->razon_social}}</option>
+      @endforeach
     </select>
   </div>
 </div>
@@ -46,6 +51,14 @@
   <div class="col-md-12">
     <label for="solicitado" >Solicitado Por:</label>
     <input type="text" class="form-control" id="solicitado" placeholder="Ingrese Nombre" name="solicitado" required>
+  </div>
+  <div class="col-md-12">
+    <label for="vobo" >Visto Bueno Por:</label>
+    <input type="text" class="form-control" id="vobo" placeholder="Ingrese Nombre" name="vobo" required>
+  </div>
+  <div class="col-md-12">
+    <label for="autorizacion" >Autorizacion Por:</label>
+    <input type="text" class="form-control" id="autorizacion" placeholder="Ingrese Nombre" name="autorizacion" required>
   </div>
 </div>
 <div class="row">
@@ -68,43 +81,122 @@
     <input type="text" class="form-control" id="descripcion_orden" placeholder="Descripcion orden de compra" name="descripcion_orden" required >
   </div>
 </div>
+<div class="row">
+  <div class="col-md-12">
+    <label for="observaciones" >Observaciones</label>
+    <input type="text" class="form-control" id="observaciones" placeholder="Observaciones" name="observaciones" required>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-md-2">
+    <label for="iva">I.V.A. %</label>
+    <input type="text" name="iva" id="iva" class="form-control"  pattern="[0-9\.]+"  oninput="setCustomValidity('')"  oninvalid="this.setCustomValidity('Solo valores numericos')">
+  </div>
+</div>
+</form>
+<form id="form_productos" onsubmit="agregarProducto();">
 <h7 style="font-weight:bold;">Productos:</h7>
 <div class="row">
-  <div class="col-md-4">
-    <label for="importe_orden" >Importe</label>
-    <input type="text" class="form-control" id="importe_orden" placeholder="Importe" name="importe_orden" required>
+  <div class="form-group col-md-3">
+    <label for="concepto">Concepto</label>
+    <input type="text" name="concepto" id="concepto" class="form-control">
   </div>
-
+  <div class="form-group col-md-3">
+    <label for="unidad">Unidad</label>
+    <input type="text" name="unidad" id="unidad" class="form-control">
+  </div>
+  <div class="form-group col-md-3">
+    <label for="cantidad">Cantidad</label>
+    <input type="text" name="cantidad" id="cantidad" class="form-control"  pattern="[0-9\.]+"  oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Solo valores numericos')">
+  </div>
+  <div class="form-group col-md-3">
+    <label for="precio_unitario">Precio unitario</label>
+    <input type="text" name="precio_unitario" id="precio_unitario" class="form-control"  pattern="[0-9\.]+"  oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Solo valores numericos')">
+  </div>
+  <div class="col-md-12">
+    <button type="submit" class="btn btn-success float-end mt-3" >Agregar producto</button>
+  </div>
 </div>
-      <div class="col-auto">
-        <label for="adjunto_compra" >Ajuntar Orden de Compra</label>
-        <input type="file" class="form-control" id="adjunto_compra" placeholder="Adjuntar Orden de Compra" name="adjunto_compra" style="border:none">
-    </div>
+</form>
+
+<div class="row">
+  <table id="orden_productos" class="table text-center" width="100%">
+    <thead>
+      <th>Concepto</th>
+      <th>Unidad</th>
+      <th>Cantidad</th>
+      <th>Precio unitario</th>
+      <th>Importe</th>
+    </thead>
+  </table>
 </div>
 <div class="form-row">
         <div class="form-group">
-            <button type="submit" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
+            <button type="submit" form="form-orden" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
             <a type="button" class="btn" id="btnCancelar" href="/compras_opciones" style="background:red;color:white;" >Cancelar</a>
         </div>
   </div>
-</form>
 @endsection
 
 @section("scripts")
+  <script src={{asset("lib/DataTables/DataTables-1.10.25/js/jquery.dataTables.min.js")}}></script>
+  <script src={{asset("lib/DataTables/DataTables-1.10.25/js/dataTables.bootstrap5.min.js")}}></script>
+  <script src={{asset("lib/DataTables/Responsive-2.2.9/js/dataTables.responsive.js")}}></script>
 <script>
+//INICIALIZACION DATATABLE
+  let orden_productos = $("#orden_productos").DataTable({
+    paging:false,
+    info:false,
+    searching:false
+  });
+
+  function agregarProducto(){
+    event.preventDefault();
+    let concepto = document.getElementById("concepto");
+    let unidad =  document.getElementById("unidad");
+    let cantidad = document.getElementById("cantidad");
+    let precio_unitario = document.getElementById("precio_unitario");
+    let importe =  parseFloat(parseFloat(precio_unitario.value)*parseFloat(cantidad.value)).toFixed(2);
+    if (cantidad.value.trim() == ""
+        || unidad.value.trim() == ""
+        || concepto.value.trim() == ""
+        || precio_unitario.value.trim() == ""
+    ){
+        Swal.fire(
+          'Error',
+          'Favor de rellenar todos los campos',
+          'error'
+        )
+        return false;
+    }
+    orden_productos.row.add([
+        concepto.value.trim().toUpperCase(),
+        unidad.value.trim().toUpperCase(),
+        cantidad.value.trim().toUpperCase(),
+        precio_unitario.value.trim().toUpperCase(),
+        importe
+    ]).draw(false);
+    document.getElementById("form_productos").reset();
+    concepto.focus();
+  }
+
   async function insert_orden(){
     event.preventDefault();
     let form = new FormData(document.getElementById("form-orden"));
+    let productos = orden_productos.rows().data().toArray();
+    let jsonProductos = arrayToJson(productos);
     form.append("id_contrato",document.getElementById("id_contrato").value);
+    form.append("productos",jsonProductos);
     let url = "{{ url('/compras') }}";
     let init = {
       method:"POST",
       body:form
     }
     let req = await fetch(url, init);
-    console.log(req);
     if (req.ok) {
-      window.location.href = "{{ url('/compras') }}";
+        let res = await req.json();
+        window.open(`{{url('/compras_pdf/${res}')}}`, '_blank');
+        window.location.href = "{{ url('/compras') }}";
     }
     else{
       Swal.fire({
@@ -113,6 +205,20 @@
         text: "Error al registrar la orden de compra"
       });
     }
+  }
+
+  function arrayToJson(array) {
+    let jsonArray = [];
+    array.forEach(element => {
+      json = {
+        "concepto":element[0],
+        "unidad":element[1],
+        "cantidad":element[2],
+        "precio_unitario":element[3]
+      };
+      jsonArray.push(json);
+    });
+    return JSON.stringify(jsonArray);
   }
 </script>
 @endsection

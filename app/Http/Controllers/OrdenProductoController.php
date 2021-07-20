@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrdenProducto;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Http\Requests\proveedores_request;
-use App\Models\proveedor;
-
-class proveedores extends Controller
+class OrdenProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class proveedores extends Controller
      */
     public function index()
     {
-        return view('proveedores.cat_proveedores');
+        //
     }
 
     /**
@@ -26,7 +25,7 @@ class proveedores extends Controller
      */
     public function create()
     {
-        return view('proveedores.addproveedor');
+        //
     }
 
     /**
@@ -35,22 +34,18 @@ class proveedores extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(proveedores_request $request)
+    public function store(Request $request)
     {
-        $validation=$request->validated();
-        $prov = proveedor::create($validation);
-        proveedor::contactos($prov->id,$validation['contacto_ventas'],$validation['contacto_pagos']);
-        return response()->json($prov,201);
-        
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\OrdenProducto  $ordenProducto
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(OrdenProducto $ordenProducto)
     {
         //
     }
@@ -58,10 +53,10 @@ class proveedores extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\OrdenProducto  $ordenProducto
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(OrdenProducto $ordenProducto)
     {
         //
     }
@@ -70,10 +65,10 @@ class proveedores extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\OrdenProducto  $ordenProducto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, OrdenProducto $ordenProducto)
     {
         //
     }
@@ -81,10 +76,10 @@ class proveedores extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\OrdenProducto  $ordenProducto
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(OrdenProducto $ordenProducto)
     {
         //
     }

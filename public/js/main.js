@@ -195,17 +195,3 @@
 
 
 }());
-
-function arrayToJson(array) {
-	let jsonArray = [];
-	array.forEach(element => {
-		json = {
-			"cantidad":element[0],
-			"unidad":element[1],
-			"articulo":element[2],
-			"caracteristica":element[3]
-		};
-		jsonArray.push(json);
-	});
-	return JSON.stringify(jsonArray);
-}
