@@ -62,13 +62,13 @@ a{
         <ul class="feat" id="about">	
             <li>
             <i class="fas fa-file-alt fa-2x" style="margin-right: 10px"></i>	
-                <a  href="/clientes/create"  style="font-size:20px;" >Agregar Cliente</a>
+                <a  href="{{url('/clientes/create')}}"  style="font-size:20px;" >Agregar Cliente</a>
             </li>		    
         </ul>
         <ul class="feat" id="about">	
             <li>
             <i class="fas fa-list fa-2x" style="margin-right: 10px"></i>	
-                <a  href="/clientes" style="font-size:20px;">Catalogo de Clientes</a>
+                <a  href="{{url('/proveedores')}}" style="font-size:20px;">Catalogo de Clientes</a>
             </li>		    
         </ul>
       </div>

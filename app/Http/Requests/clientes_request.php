@@ -27,16 +27,13 @@ class clientes_request extends FormRequest
         'cliente'=>'required|string',
         'razon_social'=>'required|string',
         'alias'=>'required|string',
-        'telefono'=>'required|string',
-        'telefono2'=>'required|string',
-        'email'=>'required|string',
-        'rfc'=>'required|string',
-        'contacto_pago'=>'required|string',
         'localidad'=>'required|string',
         'calle'=>'required|string',
         'numero'=>'required|integer',
         'colonia'=>'required|string',
-        'cp'=>'required|integer'
+        'cp'=>'required|integer',
+        'contacto_cliente'=>'string',
+        'contacto_pagos'=>'string'
         ];
     }
 }

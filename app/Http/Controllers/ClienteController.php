@@ -20,8 +20,9 @@ class ClienteController extends Controller
     public function store(clientes_request $request)
     {
         $validation=$request->validated();
-        cliente::create($validation);
-        return response()->json("Cliente creado con exito",201);
+        $cliente=cliente::create($validation);
+        cliente::contactos($cliente->id,$validation['contacto_cliente'],$validation['contacto_pagos']);
+        return response()->json($cliente,201);
     }
     public function show($id)
     {

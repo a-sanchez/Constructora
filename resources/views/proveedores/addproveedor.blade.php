@@ -169,7 +169,7 @@
     }
     let req = await fetch(url, init);
     if (req.ok) {
-      //window.location.href = "{{ url('/proveedores') }}";
+      window.location.href = "{{ url('/proveedores') }}";
     }
     else{
       Swal.fire({

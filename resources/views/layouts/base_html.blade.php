@@ -10,7 +10,7 @@
             </div>
             <ul>
                 <li class="colorlib-active">
-                <li><a href={{url('/clientes_opciones')}}>Cliente</a></li>
+                <li><a href={{url('/clientes')}}>Cliente</a></li>
                 <li><a href={{url('/contratos')}}>Contrato</a></li>
                 <li><a href={{url('/compras')}}>Orden de Compra</a></li>
                 <li><a href={{url('/facturas')}}>Facturas</a></li>
