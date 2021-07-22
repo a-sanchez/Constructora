@@ -33,6 +33,8 @@ Route::get('/opcion_proveedores',function(){
     return view('proveedores.opcion_proveedor');
 });
 
+//Route::delete('proveedores/{id}','proveedores@destroy')->name('proveedor.destroy');
+
 Route::resource('proveedores',proveedores::class);
 #----------------CLIENTES-----------------------------#
 

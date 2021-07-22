@@ -16,7 +16,7 @@ class ForeingKeyProveedorContactoventa extends Migration
 
         Schema::table('proveedor_contacto_ventas', function ( $table) {
             $table->unsignedBigInteger('id_proveedor');
-            $table->foreign('id_proveedor')-> references('id')->on('proveedores');
+            $table->foreign('id_proveedor')-> references('id')->on('proveedores')->onDelete('cascade');
 
         });
     }
