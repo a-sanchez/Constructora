@@ -30,28 +30,27 @@ class cliente extends Model
     ];*/
 
     protected $guarded=[
-        'contacto_cliente',
-        'contacto_pagos'
+        'contacto_cliente'
+        //'contacto_pagos'
     ];
 
-    public static function contactos($id_cliente,$contacto_cliente,$contacto_pagos){
+    public static function contactos($id_cliente,$contacto_cliente/*,$contacto_pagos*/){
         $contacto_cliente=json_decode($contacto_cliente);
         foreach($contacto_cliente as $cliente){
             contacto_cliente_clientes::create([
                 'email'=>$cliente->email,
                 'telefono'=>$cliente->telefono,
+                'area'=>$cliente->area,
                 'id_cliente'=>$id_cliente
             ]);
-
         }
-
-        $contacto_pagos=json_decode($contacto_pagos);
+        /*$contacto_pagos=json_decode($contacto_pagos);
         foreach($contacto_pagos as $pago){
             contacto_pago_clientes::create([
                 'email'=>$pago->email,
                 'telefono'=>$pago->telefono,
                 'id_cliente'=>$id_cliente
             ]);
-        }
+        }*/
     }
 }

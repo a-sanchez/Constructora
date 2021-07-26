@@ -1,46 +1,6 @@
 @extends('layouts.base_html')
 
-@section ('tittle')FACTURAS @endsection
-
-@section('styles')
-<style>
-ul.feat{
-	list-style:none;
-	margin: 0 0 20px 0;
-	padding:0;
-}
-ul.feat li{
-	padding-left:70px;
-	position:relative;
-}
-ul.feat li img{
-	position:absolute;
-	left:0;
-	top:0;
-}
-
-ul.feat#about li i {
-    font-size: 40px;
-    color: #FF3333;
-}
-ul.feat#about li {
-    margin-bottom: 20px;
-    padding: 20px 25px 10px 85px;
-    border: 1px solid #ddd;
-    background-color: #f3f3f3;
-}
-
-
-</style>
-@endsection
-
-@section('body')
-
-<script src="https://kit.fontawesome.com/b4cf0d1143.js" crossorigin="anonymous"></script>
-
-@extends('layouts.base_html')
-
-@section ('tittle')CONTRATOS @endsection
+@section ('tittle')PRE-FACTURAS @endsection
 
 @section('styles')
 <style>
@@ -84,7 +44,7 @@ a{
 <div class="row">
     <div class="col-md-12">
         <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
-            FACTURAS
+            PRE-FACTURAS
         </h1>
 
     </div>

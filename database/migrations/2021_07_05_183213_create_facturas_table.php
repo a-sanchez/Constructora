@@ -17,6 +17,10 @@ class CreateFacturasTable extends Migration
             $table->id('numero_factura');
             $table->bigInteger('id_contrato')->unsigned();
             $table->foreign('id_contrato')->references('id')->on('contratos');
+            $table->integer('importe_construccion');
+
+
+
             $table->string('nombre_contratante');
             $table->string('calle_contratante');
             $table->integer('numero_contratante');
@@ -34,7 +38,7 @@ class CreateFacturasTable extends Migration
             $table->string('colonia_construccion');
             $table->integer('cp_construccion');
             $table->integer('pago_construccion'); //se lo trae del contrato
-            $table->integer('importe_construccion');
+            
         });
     }
 

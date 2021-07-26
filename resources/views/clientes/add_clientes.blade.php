@@ -42,34 +42,39 @@
 
 <div class="row">
   <h7 style="font-weight:bold;">Contacto</h7>
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="row">
       <div class="col-sm-9">
         <h7>Contacto Clientes</h7>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-3" style="text-align: end;">
         <button class="btn btn-success" onclick="agregarContactoCliente();" >Agregar</button>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label for="email_cliente">Email</label>
         <input type="email" class="form-control" style="height: 40px;" id="email_cliente" name="email_cliente">
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label for="telefono_cliente">Telefono</label>
         <input type="text" class="form-control" style="height: 40px;"  id="telefono_cliente" name="telefono_cliente">
+      </div>
+      <div class="col-md-4">
+        <label for="area">Area</label>
+        <input type="text" class="form-control" style="height: 40px;"  id="area" name="area">
       </div>
     </div>
     <table id="contacto_cliente" class="table" name="contacto_cliente" width="100%" >
       <thead>
         <th>Email</th>
         <th>Telefono</th>
+        <th>Área</th>
       </thead>      
     </table>
   </div>
 
-  <div class="col-md-6">
+  <!--div class="col-md-6">
     <div class="row">
       <div class="col-sm-9">
         <h7>Contacto Pagos</h7>
@@ -94,7 +99,7 @@
         <th>Telefono</th>
       </thead>
     </table>
-  </div>
+  </div-->
 </div>
 
 <hr style="color: orange;">
@@ -146,11 +151,11 @@
     searching:false,
     info:false
   });
-  let contacto_pagos=$("#contacto_pagos").DataTable({
+  /*let contacto_pagos=$("#contacto_pagos").DataTable({
     paging:false,
     searching:false,
     info:false
-  });
+  });*/
 
   function arrayToJson(array) {
 	let jsonArray = [];
@@ -158,6 +163,7 @@
 		json = {
 			"email":element[0],
 			"telefono":element[1],
+      "area":element[2],
 		};
 		jsonArray.push(json);
 	});
@@ -172,9 +178,9 @@
     let jsonClientes = arrayToJson(contacto);
     form.append("contacto_cliente",jsonClientes);
 
-    let contactos = contacto_pagos.rows().data().toArray();
+    /*let contactos = contacto_pagos.rows().data().toArray();
     let jsonPagos = arrayToJson(contactos);
-    form.append("contacto_pagos",jsonPagos);
+    form.append("contacto_pagos",jsonPagos);*/
 
     let url = "{{ url('/clientes') }}";
     let init = {
@@ -195,7 +201,7 @@
     }
   }
 
-  function agregarContactoPago() {
+  /*function agregarContactoPago() {
         event.preventDefault();
         let pagoEmail= document.getElementById("email_pago");
         let pagoTelefono=  document.getElementById("telefono_pago");
@@ -226,14 +232,16 @@
         .remove()
         .draw();
     });
-
+*/
 
   function agregarContactoCliente(){
     event.preventDefault();
     let clienteEmail=document.getElementById("email_cliente");
     let clienteTelefono=document.getElementById("telefono_cliente");
+    let area=document.getElementById("area");
     if(clienteEmail.value.trim()==""
       ||clienteTelefono.value.trim()==""
+      ||area.value.trim()==""
       ){
         Swal.fire(
             'Error',
@@ -244,10 +252,12 @@
       }
       contacto_cliente.row.add([
         clienteEmail.value.trim().toUpperCase(),
-        clienteTelefono.value.trim().toUpperCase()
+        clienteTelefono.value.trim().toUpperCase(),
+        area.value.trim().toUpperCase()
       ]).draw(false);
       clienteEmail.value="";
       clienteTelefono.value="";
+      area.value="";
   }
 
   $('#contacto_cliente').on('click','.remove',function(){

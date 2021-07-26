@@ -21,7 +21,7 @@ class ClienteController extends Controller
     {
         $validation=$request->validated();
         $cliente=cliente::create($validation);
-        cliente::contactos($cliente->id,$validation['contacto_cliente'],$validation['contacto_pagos']);
+    cliente::contactos($cliente->id,$validation['contacto_cliente']/*,$validation['contacto_pagos']*/);
         return response()->json($cliente,201);
     }
     public function show($id)

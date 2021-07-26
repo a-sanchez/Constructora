@@ -23,6 +23,7 @@ $xcrud->columns("id_cliente,nombre_contraparte,folio,descripcion");
 
 $xcrud->button(asset("/storage/docs/contrato_adjuntos/{file}"),'PDF',false,"P",array('target'=>'_blank'));
 $xcrud->button(url("compras/{id}"),'Orden de Compra',false,"P");
+$xcrud->button(url(""),'Pre-factura',false,"P");
 $xcrud->unset_add();
 $xcrud -> unset_title ();
 echo $xcrud->render(); //magic
