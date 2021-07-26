@@ -12,7 +12,7 @@
 </div>
 <a type="button" class="btn" id="btnAgregar" href={{url('/contratos/create')}} style="background:#8d8d8d;color:white;">Nuevo Contrato</a>
 <p></p>
-@php
+<?php
 require (__DIR__.'/../../../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php');
 $xcrud = Xcrud::get_instance(); //instantiate xCRUD
 $xcrud->table('contratos'); //employees - MySQL table name
@@ -27,5 +27,5 @@ $xcrud->button(url(""),'Pre-factura',false,"P");
 $xcrud->unset_add();
 $xcrud -> unset_title ();
 echo $xcrud->render(); //magic
-@endphp
+?>
 @endsection
