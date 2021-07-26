@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnsCliente extends Migration
+class AddColumnsClienteNumero extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddColumnsCliente extends Migration
      */
     public function up()
     {
-        Schema::table('contacto_cliente_clientes',function($table){
-            $table->string("area");
-            
+        Schema::table('clientes',function(Blueprint $table){
+            $table->string('numero');
         });
     }
 

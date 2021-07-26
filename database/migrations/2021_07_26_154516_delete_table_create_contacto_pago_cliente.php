@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnsCliente extends Migration
+class DeleteTableCreateContactoPagoCliente extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class AddColumnsCliente extends Migration
      */
     public function up()
     {
-        Schema::table('contacto_cliente_clientes',function($table){
-            $table->string("area");
+        Schema::table('contacto_pago_clientes', function($table) {
             
+            $table->table('contacto_pago_clientes');
+            
+
         });
     }
 

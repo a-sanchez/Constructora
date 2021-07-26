@@ -29,7 +29,7 @@ class clientes_request extends FormRequest
         'alias'=>'required|string',
         'localidad'=>'required|string',
         'calle'=>'required|string',
-        'numero'=>'required|integer',
+        'numero'=>'required|string',
         'colonia'=>'required|string',
         'cp'=>'required|integer',
         'contacto_cliente'=>'string'
