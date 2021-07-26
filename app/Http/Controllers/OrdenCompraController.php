@@ -36,18 +36,21 @@ class OrdenCompraController extends Controller
             "contrato"=>$compras_contrato,
             "proveedores"=>$provedores
         ];
-        
+
         return view('ordenes_compras.add_compra',$ctx);
     }
 
     public function edit($id)
     {
-        //
+        $orden_compra = orden_compra::find($id);
+        return view("ordenes_compras.edit_compra",compact("orden_compra"));
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $orden_compra = orden_compra::find($id);
+        $update = $orden_compra->update($request->all());
+        return $update;
     }
 
     public function destroy($id)

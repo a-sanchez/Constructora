@@ -20,7 +20,9 @@ $xcrud->column_name('id_proveedor','Proveedor');
 //$xcrud->button('http://example.com','EXCEL',false,"",array('target'=>'_blank'));
 
 $xcrud->button(URL::to('compras_pdf/{id}'),'PDF',false,"P",array('target'=>'_blank'));
+$xcrud->button(URL::to('compras/{id}/edit'),'Editar',false,"P");
 $xcrud->unset_add();
+$xcrud->unset_edit();
 
 
 echo $xcrud->render(); //magic
