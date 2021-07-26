@@ -15,6 +15,7 @@ class AddColumnsCliente extends Migration
     {
         Schema::table('contacto_cliente_clientes',function($table){
             $table->string("area");
+            
         });
     }
 

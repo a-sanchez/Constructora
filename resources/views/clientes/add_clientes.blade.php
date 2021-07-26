@@ -114,7 +114,7 @@
       </div>
       <div class="col-md-4">
         <label for="numero" >Numero</label>
-        <input type="text" class="form-control" id="numero" placeholder="Numero" name="numero" required pattern="[0-9\.]+">
+        <input type="text" class="form-control" id="numero" placeholder="Numero" name="numero" >
       </div>
       <div class="col-md-4">
         <label for="colonia" >Colonia</label>
@@ -122,7 +122,7 @@
       </div>
       <div class="col-auto">
         <label for="cp" >CP</label>
-        <input type="text" class="form-control" id="cp" placeholder="CP" name="cp" required pattern="[0-9\.]+">
+        <input type="text" class="form-control" id="cp" placeholder="CP" name="cp" >
       </div>
       <div class="col-md-4">
         <label for="localidad" >Localidad</label>

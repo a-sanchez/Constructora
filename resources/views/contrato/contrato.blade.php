@@ -30,7 +30,7 @@
                 <select class="form-select" id="id_cliente" name="id_cliente">
                   <option selected disabled value="0" >Seleccione:</option> 
                   @foreach($clientes as $cliente)
-                  <option value="{{$cliente->id}}">{{$cliente->cliente}}</option>
+                  <option value="{{$cliente->id}}">{{$cliente->razon_social}} - {{$cliente->cliente}}</option>
                   @endforeach
                 </select>
             </div>
@@ -89,7 +89,7 @@
         </div>
         <div class="col-md-4">
           <label for="numero_contraparte" >Numero</label>
-          <input type="text" class="form-control" id="numero_contraparte" placeholder="Numero" name="numero_contraparte" required pattern="[0-9\.]+">
+          <input type="text" class="form-control" id="numero_contraparte" placeholder="Numero" name="numero_contraparte" >
         </div>
         <div class="col-md-4">
           <label for="colonia_contraparte" >Colonia</label>
@@ -102,8 +102,8 @@
           <input type="text" class="form-control" id="localidad" placeholder="Localidad" name="localidad" required>
         </div>
         <div class="col-md-2">
-          <label for="cp_contraparte" >CP</label>
-          <input type="text" class="form-control" id="cp_contraparte" placeholder="CP" name="cp_contraparte" required pattern="[0-9\.]+">
+          <label for="cp_contratante" >CP</label>
+          <input type="text" class="form-control" id="cp_contratante" placeholder="CP" name="cp_contratante" >
         </div>
       </div>
     <div class="row">
@@ -120,7 +120,7 @@
       <div class="form-row">
            <div class="form-group">
                <button type="submit" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
-               <a type="button" class="btn" id="btnCancelar" href="/opcion_contrato" style="background:red;color:white;" >Cancelar</a>
+               <a type="button" class="btn" id="btnCancelar" href="{{ url('/contratos') }}" style="background:red;color:white;" >Cancelar</a>
            </div>
        </div>
     </form>

@@ -25,11 +25,11 @@ require (__DIR__.'/../../../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php');//
 $xcrud = Xcrud::get_instance(); //instantiate xCRUD
 $xcrud->table('proveedores'); //employees - MySQL table name
 $xcrud->table_name(' ');
-$xcrud->columns('alias,razon_social,localidad,rfc,proveedor_contacto_ventas.email,proveedor_contacto_pagos.email');
-$xcrud->column_name('proveedor_contacto_ventas.email','Email Ventas');
-$xcrud->column_name('proveedor_contacto_pagos.email','Email Pagos');
+$xcrud->columns('alias,razon_social,localidad,rfc,proveedor_contacto_ventas.email');
+$xcrud->column_name('proveedor_contacto_ventas.email','Email');
+//$xcrud->column_name('proveedor_contacto_pagos.email','Email Pagos');
 $xcrud->join('id','proveedor_contacto_ventas','id_proveedor');
-$xcrud->join('id','proveedor_contacto_pagos','id_proveedor');
+//$xcrud->join('id','proveedor_contacto_pagos','id_proveedor');
 $xcrud->unset_add();
 echo $xcrud->render(); //magic
 ?>

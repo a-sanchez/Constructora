@@ -21,14 +21,15 @@ require (__DIR__.'/../../../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php'); /
 $xcrud = Xcrud::get_instance(); //instantiate xCRUD
 $xcrud->table('clientes'); //employees - MySQL table name
 $xcrud->table_name(' ');
-$xcrud->columns("cliente,alias,razon_social,contacto_cliente_clientes.email,contacto_cliente_clientes.telefono");
+$xcrud->columns("cliente,alias,razon_social,contacto_cliente_clientes.email,contacto_cliente_clientes.telefono,contacto_cliente_clientes.area");
 $xcrud->label(array('cliente'=>'RFC'));
-$xcrud->label(array('contacto_cliente_clientes.email'=>'Email Cliente'));
-$xcrud->label(array('contacto_cliente_clientes.telefono'=>' Telefono Cliente'));
-$xcrud->label(array('contacto_pago_clientes.email'=>'Email Contacto Pago'));
-$xcrud->label(array('contacto_pago_clientes.telefono'=>' Telefono Contacto Pago'));
+$xcrud->label(array('contacto_cliente_clientes.email'=>'Email'));
+$xcrud->label(array('contacto_cliente_clientes.telefono'=>' Telefono'));
+$xcrud->label(array('contacto_cliente_clientes.area'=>' Área'));
+//$xcrud->label(array('contacto_pago_clientes.email'=>'Email Contacto Pago'));
+//$xcrud->label(array('contacto_pago_clientes.telefono'=>' Telefono Contacto Pago'));
 $xcrud->join('id','contacto_cliente_clientes','id_cliente');
-$xcrud->join('id','contacto_pago_clientes','id_cliente');
+//$xcrud->join('id','contacto_pago_clientes','id_cliente');
 $xcrud->unset_add();
 echo $xcrud->render(); //magic
 ?>
