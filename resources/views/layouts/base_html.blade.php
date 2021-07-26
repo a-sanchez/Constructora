@@ -13,7 +13,7 @@
                 <li><a href={{url('/clientes')}}>Cliente</a></li>
                 <li><a href={{url('/contratos')}}>Contrato</a></li>
                 <li><a href={{url('/compras')}}>Orden de Compra</a></li>
-                <li><a href={{url('/facturas')}}>Facturas</a></li>
+                <li><a href={{url('/facturas')}}>Pre-Facturas</a></li>
                 <li><a href={{url('/pagos')}}>Pagos</a></li>
                 <li><a href={{url('/proveedores')}}>Proveedores</a></li>
                 <li><a href={{url('/configuracion')}}>Configuracion</a></li>

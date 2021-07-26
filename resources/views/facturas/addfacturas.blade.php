@@ -1,7 +1,7 @@
 @extends('layouts.base_html')
 
 @section('title')
-    FACTURAS
+    PRE-FACTURAS
 @endsection
 
 @section('styles')
@@ -12,115 +12,88 @@
 <div class="container">
 <div class="row">
     <div class="col-md-12">
-        <h4 style="color:gray;font-size:20px;">-Crear Factura</h4>
+        <h4 style="color:gray;font-size:20px;">-Crear Pre-Factura Cliente</h4>
         <hr style="color: orange;">
     </div>
 </div>
-<h5>Contratante</h5>
-
-<form class="row g-3">
-    <div class="form-row" >
-        <div class="form-group col-md-6">
-            <label for="inputNombre">Nombre</label>
-            <input type="text" class="form-control" id="inputNombre" >
-        </div>
-    </div>
-    <h7>Direccion</h7>
-    <div class="col-auto">
-    <label for="inputcalle" >Calle</label>
-    <input type="text" class="form-control" id="inputcalle" placeholder="Calle">
-  </div>
-  <div class="col-auto">
-    <label for="inputnumero" >Numero</label>
-    <input type="text" class="form-control" id="inputnumero" placeholder="Numero">
-  </div>
-  <div class="col-auto">
-    <label for="inputcolonia" >Colonia</label>
-    <input type="text" class="form-control" id="inputcolonia" placeholder="Colonia">
-  </div>
-  <div class="col-auto">
-    <label for="inputcp" >CP</label>
-    <input type="text" class="form-control" id="inputcp" placeholder="CP">
-  </div>
 
 
-
-
-  <hr style="color: orange;">
-  <h5>Contraparte</h5>
-  <div class="form-row" >
-        <div class="form-group col-md-6">
-            <label for="inputNombre2">Nombre</label>
-            <input type="text" class="form-control" id="inputNombre2" >
-        </div>
+<form id="form-prefactura" class="row g-3" onSubmit='insert_prefactura();'>
+@csrf
+  <div class="row">
+    <div class="col-md-6">
+      <label form="contrato">Contrato</label>
+        <select class="form-control" name="id_contrato" id="id_contrato">
+          <option disabled value="0" selected>Seleccione</option>
+            <option value="0">p1</option>
+        </select>
     </div>
-    <h7>Direccion</h7>
-    <div class="col-auto">
-    <label for="inputcalle2" >Calle</label>
-    <input type="text" class="form-control" id="inputcalle2" placeholder="Calle">
+    <div class="col-md-6">
+        <label for="folio_prefactura" >Folio de Prefactura</label>
+        <input type="text" class="form-control" id="folio_prefactura" name='folio_prefactura'placeholder="Folio de Pre-Factura" required>
+    </div>
   </div>
-  <div class="col-auto">
-    <label for="inputnumero2" >Numero</label>
-    <input type="text" class="form-control" id="inputnumero2" placeholder="Numero">
+  <!--div class="row mt-3" >
+    <div class="col-md-6 d-flex align-items-center">
+  <label for="semana_prefactura" style="white-space: nowrap;">Semana del </label>
+    <input type="date" style="margin-left: 10px;"class="form-control" id="semana_prefactura" name="semana_prefactura" >
+    </div>
+    <div class="col-md-6 d-flex align-items-center" >
+      <label for="semanafin_pefactura" style="margin-right: 10px;" >al </label>
+      <input type="date" class="form-control" id="semanafin_pefactura"  name="semanafin_pefactura">
+    </div>
+  </div-->
+
+  <div class="row">
+    <div class="col-md-6">
+      <label for="monto_total" >Monto Total del Contrato</label>
+      <input type="text" disabled class="form-control" id="monto_total" name='monto_total'>
+    </div>
+    <div class="col-md-6">
+    <label for="fecha_elaboracion" >Fecha Elaboracion Pre-Factura</label>
+      <input type="date" class="form-control" id="fecha_elaboracion" name="Fecha_Elaboracion" required>
+    </div>
   </div>
-  <div class="col-auto">
-    <label for="inputcolonia2" >Colonia</label>
-    <input type="text" class="form-control" id="inputcolonia2" placeholder="Colonia">
-  </div>
-  <div class="col-auto">
-    <label for="inputcp2" >CP</label>
-    <input type="text" class="form-control" id="inputcp2" placeholder="CP">
+  <div class="row">
+    <div class="col-md-6">
+      <label for="importe_estimacion" >Importe de estimacion</label>
+      <input type="text" class="form-control" id="importe_estimacion" placeholder="Ingrese Importe" name="importe_estimacion" required>
+    </div>
+    <div class="col-md-6">
+        <label for="anticipo" >(-) Anticipo Entregado</label>
+        <input type="text" disabled class="form-control" id="anticipo" name='anticipo'>
+    </div>
+</div>
+
+  <div class="row">
+  <h7 style="font-weight:bold;">Retenciones</h7>
   </div>
 
-    <hr style="color:orange;">
-    <h5>Construccion</h5>
-    <div class="form-row" >
-        <div class="form-group col-md-6">
-            <label for="inputhora">Fecha y hora emision</label>
-            <input type="datetime-local" class="form-control" id="inputhora" >
-        </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label for="IVYC" >I.V.Y.C (0.05%)</label>
+      <input type="text" class="form-control" id="IVYC" name="IVYC" >
     </div>
-    <h7>Direccion de la construccion</h7>
-        <div class="col-auto">
-        <label for="inputcalle2" >Calle</label>
-    <input type="text" class="form-control" id="inputcalle2" placeholder="Calle">
+    <div class="col-md-6">
+      <label for="ICIC" >I.C.I.C (0.02%)</label>
+      <input type="text" class="form-control" id="ICIC"  name="ICIC" >
     </div>
-      <div class="col-auto">
-        <label for="inputnumero2" >Numero</label>
-        <input type="text" class="form-control" id="inputnumero2" placeholder="Numero">
-      </div>
-      <div class="col-auto">
-        <label for="inputcolonia2" >Colonia</label>
-        <input type="text" class="form-control" id="inputcolonia2" placeholder="Colonia">
-      </div>
-      <div class="col-auto">
-        <label for="inputcp2" >CP</label>
-        <input type="text" class="form-control" id="inputcp2" placeholder="CP">
+  </div>
+  <div class="row">
+    <p> </p>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+    <label for="file" >Adjuntar Pre-Factura:</label>
+      <input type="file" class="form-control" id="file" name="file" style="border:none;">
     </div>
-    <div class="form-row" >
-        <div class="form-group col-md-6">
-            <label for="inputpago">Pago Acordado</label>
-            <input type="text" class="form-control" id="inputpago" >
-        </div>
-    </div>
-    <div class="form-row" >
-        <div class="form-group col-md-6">
-            <label for="inputImporte">Importe</label>
-            <input type="text" class="form-control" id="inputImporte" >
-        </div>
-    </div>
+  </div>
 
-    <div class="form-row">
-        <div class="col-md-12">
-            <p>         </p>
-        </div>
+  <div class="form-row">
+    <div class="form-group">
+        <a type="button" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
+        <a type="button" class="btn" id="btnCancelar" href="facturas/cat_facturas" style="background:red;color:white;" >Cancelar</a>
     </div>
-
-    <div class="form-row">
-        <div class="form-group">
-            <a type="button" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
-            <a type="button" class="btn" id="btnCancelar" href="/facturas" style="background:red;color:white;" >Cancelar</a>
-        </div>
   </div>
 
 </form>

@@ -32,8 +32,8 @@ class clientes_request extends FormRequest
         'numero'=>'required|integer',
         'colonia'=>'required|string',
         'cp'=>'required|integer',
-        'contacto_cliente'=>'string',
-        'contacto_pagos'=>'string'
+        'contacto_cliente'=>'string'
+        //'contacto_pagos'=>'string'
         ];
     }
 }
