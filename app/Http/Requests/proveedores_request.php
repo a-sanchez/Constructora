@@ -30,8 +30,8 @@ class proveedores_request extends FormRequest
             'localidad'=>'required|string',
             'banco'=>'required|string',
             'cuenta'=>'required|string',
-            'contacto_ventas'=>'string',
-            'contacto_pagos'=>'string'
+            'contacto_ventas'=>'string'
+            //'contacto_pagos'=>'string'
         ];
     }
 }

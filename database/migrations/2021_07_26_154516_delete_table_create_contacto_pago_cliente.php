@@ -13,12 +13,7 @@ class DeleteTableCreateContactoPagoCliente extends Migration
      */
     public function up()
     {
-        Schema::table('contacto_pago_clientes', function($table) {
-            
-            $table->table('contacto_pago_clientes');
-            
-
-        });
+        Schema::dropIfExists('contacto_pago_clientes');
     }
 
     /**

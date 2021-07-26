@@ -32,17 +32,18 @@ class proveedor extends Model
         'contacto_ventas'
     ];
 
-    public static function contactos($id_proveedor,$venta_contactos,$venta_pagos){
+    public static function contactos($id_proveedor,$venta_contactos/*,$venta_pagos*/){
         $venta_contactos=json_decode($venta_contactos);
         foreach($venta_contactos as $venta){
         proveedor_contacto_ventas::create([
             'email'=>$venta->email,
             'telefono'=>$venta->telefono,
+            'area'=>$venta->area,
             'id_proveedor'=>$id_proveedor
         ]);
     
         }
-        $venta_pagos=json_decode($venta_pagos);
+        /*$venta_pagos=json_decode($venta_pagos);
         foreach($venta_pagos as $pago){
             proveedor_contacto_pagos::create([
                 'email'=>$pago->email,
@@ -50,9 +51,6 @@ class proveedor extends Model
                 'id_proveedor'=>$id_proveedor
             ]);
 
-        }
-
-      
-        
+        }*/    
     }
 }

@@ -59,33 +59,38 @@
 
 <div class="row">
   <h7 style="font-weight:bold;">Contacto</h7>
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="row">
       <div class="col-sm-9">
         <h7>Contacto Ventas</h7>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-3" style="text-align: end;">
         <button class="btn btn-success" onclick="agregarContactoVenta();" >Agregar</button>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label for="contacto_venta_email">Email</label>
         <input type="text" class="form-control" style="height: 40px;" id="contacto_venta_email">
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label for="contacto_venta_telefono">Telefono</label>
         <input type="text" class="form-control" style="height: 40px;"  id="contacto_venta_telefono">
+      </div>
+      <div class="col-md-4">
+        <label for="area">Área</label>
+        <input type="text" class="form-control" style="height: 40px;"  id="area">
       </div>
     </div>
     <table id="contacto_ventas" class="table" name="contacto_ventas" width="100%" >
       <thead>
         <th>Email</th>
         <th>Telefono</th>
+        <th>Área</th>
       </thead>      
     </table>
   </div>
-  <div class="col-md-6">
+  <!--div class="col-md-6">
     <div class="row">
       <div class="col-sm-9">
         <h7>Contacto Pagos</h7>
@@ -111,7 +116,7 @@
       </thead>
     </table>
   </div>
-</div>
+</div-->
 <div class="form-row">
         <div class="form-group">
             <button type="submit" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
@@ -132,11 +137,11 @@
     searching:false,
     info:false
   });
-  let contacto_pagos = $("#contacto_pagos").DataTable({
+ /* let contacto_pagos = $("#contacto_pagos").DataTable({
     paging:false,
     searching:false,
     info:false
-  });
+  });*/
 
   function arrayToJson(array) {
 	let jsonArray = [];
@@ -144,6 +149,7 @@
 		json = {
 			"email":element[0],
 			"telefono":element[1],
+      "area":element[2],
 		};
 		jsonArray.push(json);
 	});
@@ -157,9 +163,9 @@
     let jsonVentas = arrayToJson(contacto);
     form.append("contacto_ventas",jsonVentas);
 
-    let contactos = contacto_pagos.rows().data().toArray();
+    /*let contactos = contacto_pagos.rows().data().toArray();
     let jsonPagos = arrayToJson(contactos);
-    form.append("contacto_pagos",jsonPagos);
+    form.append("contacto_pagos",jsonPagos);*/
 
 
     let url = "{{ url('/proveedores') }}";
@@ -183,7 +189,7 @@
 
 
 
-  function agregarContactoPago() {
+  /*function agregarContactoPago() {
         event.preventDefault();
         let pagoEmail= document.getElementById("contacto_pago_email");
         let pagoTelefono=  document.getElementById("contacto_pago_telefono");
@@ -213,7 +219,7 @@
         .row($(this).parents('tr'))
         .remove()
         .draw();
-    });
+    });*/
 
 
  
@@ -221,8 +227,10 @@
         event.preventDefault();
         let ventaEmail= document.getElementById("contacto_venta_email");
         let ventaTelefono=  document.getElementById("contacto_venta_telefono");
+        let area=document.getElementById("area");
         if (ventaEmail.value.trim() == ""
             || ventaTelefono.value.trim() == ""
+            ||area.value.trim()==""
         ){
             Swal.fire(
             'Error',
@@ -234,10 +242,12 @@
 
         contacto_ventas.row.add([
             ventaEmail.value.trim().toUpperCase(),
-            ventaTelefono.value.trim().toUpperCase()
+            ventaTelefono.value.trim().toUpperCase(),
+            area.value.trim().toUpperCase()
         ]).draw(false);
         ventaEmail.value = "";
         ventaTelefono.value = "";
+        area.value="";
     }
 
     //BORRAR FILA DE LA TABLA

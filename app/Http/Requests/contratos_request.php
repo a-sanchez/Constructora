@@ -38,10 +38,10 @@ class contratos_request extends FormRequest
         'fecha_final'=>'required|date',
         'nombre_contraparte'=>'required|string',
         'calle_contraparte' =>'required|string',
-        'numero_contraparte'=>'required|integer',
+        'numero_contraparte'=>'required|string',
         'colonia_contraparte' =>'required|string',
         'localidad'=>'required|string',
-        'cp_contraparte'=>'required|integer',
+        'cp_contraparte'=>'required|string',
         'file'=>'required|file'
         ];
     }

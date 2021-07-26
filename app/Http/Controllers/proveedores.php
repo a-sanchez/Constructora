@@ -39,7 +39,7 @@ class proveedores extends Controller
     {
         $validation=$request->validated();
         $prov = proveedor::create($validation);
-        proveedor::contactos($prov->id,$validation['contacto_ventas'],$validation['contacto_pagos']);
+    proveedor::contactos($prov->id,$validation['contacto_ventas']/*,$validation['contacto_pagos']*/);
         return response()->json($prov,201);
         
     }
