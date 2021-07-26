@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\OrdenProducto;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class OrdenProductoController extends Controller
 {
@@ -15,7 +16,6 @@ class OrdenProductoController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -36,18 +36,27 @@ class OrdenProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (isset($request->action)) {
+            $update = $this->update($request);
+            return $update;
+        }
+        $producto = $request->all();
+        var_dump($request->all());
+        $producto["importe"] = floatval($request->cantidad * $request->precio_unitario);
+        $producto = OrdenProducto::create($producto);
+        return $producto;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\OrdenProducto  $ordenProducto
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(OrdenProducto $ordenProducto)
+    public function show($id)
     {
-        //
+        $productos = OrdenProducto::where("orden_id",$id)->get();
+        return Datatables::of($productos)->make();
     }
 
     /**
@@ -65,22 +74,26 @@ class OrdenProductoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OrdenProducto  $ordenProducto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrdenProducto $ordenProducto)
+    public function update(Request $request)
     {
-        //
+        $producto = OrdenProducto::find($request->id);
+        $producto->update($request->except("action"));
+        $producto->setImporte();
+        return $producto;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\OrdenProducto  $ordenProducto
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrdenProducto $ordenProducto)
+    public function destroy(int $id)
     {
-        //
+        $producto = OrdenProducto::find($id);
+        OrdenProducto::destroy($id);
+        return $producto;
     }
 }
