@@ -17,11 +17,12 @@ class ClienteController extends Controller
         return view('clientes.add_clientes');
     }
 
-    public function store(clientes_request $request)
+    public function store(Request $request)
     {
-        $validation=$request->validated();
+        $validation=$request->all();
+
         $cliente=cliente::create($validation);
-    cliente::contactos($cliente->id,$validation['contacto_cliente']/*,$validation['contacto_pagos']*/);
+        cliente::contactos($cliente->id,$validation['contacto_cliente']/*,$validation['contacto_pagos']*/);
         return response()->json($cliente,201);
     }
     public function show($id)

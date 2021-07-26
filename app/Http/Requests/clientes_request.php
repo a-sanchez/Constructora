@@ -31,7 +31,7 @@ class clientes_request extends FormRequest
         'calle'=>'required|string',
         'numero'=>'required|string',
         'colonia'=>'required|string',
-        'cp'=>'required|integer',
+        'cp'=>'string',
         'contacto_cliente'=>'string'
         //'contacto_pagos'=>'string'
         ];
