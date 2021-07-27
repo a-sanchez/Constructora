@@ -161,12 +161,12 @@ let orden_productos = $("#orden_productos").DataTable({
         {"data":"cantidad"},
         {"data":"precio_unitario",
             render:function(precio_unitario){
-                return `${precio_unitario.toFixed(2)}`;
+                return parseFloat(precio_unitario).toFixed(2);
             }
         },
         {"data":"importe",
             render:function(importe){
-                return `${importe.toFixed(2)}`;
+                return parseFloat(importe) .toFixed(2)};
             }
         },
         {"data":"id",

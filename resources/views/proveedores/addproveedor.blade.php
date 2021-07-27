@@ -18,7 +18,7 @@
     <div class="col-md-12">
         <h4 style="color:gray;font-size:20px;">-Agregar</h4>
         <hr style="color: orange;">
-        <p>  
+        <p>
         </p>
     </div>
 </div>
@@ -87,7 +87,7 @@
         <th>Email</th>
         <th>Telefono</th>
         <th>Área</th>
-      </thead>      
+      </thead>
     </table>
   </div>
   <!--div class="col-md-6">
@@ -160,6 +160,14 @@
     event.preventDefault();
     let form = new FormData(document.getElementById("form-proveedor"));
     let contacto = contacto_ventas.rows().data().toArray();
+    if(contacto.length == 0 ){
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: "Favor de insertar al menos un contacto"
+        });
+        return false;
+    }
     let jsonVentas = arrayToJson(contacto);
     form.append("contacto_ventas",jsonVentas);
 
@@ -222,7 +230,7 @@
     });*/
 
 
- 
+
     function agregarContactoVenta() {
         event.preventDefault();
         let ventaEmail= document.getElementById("contacto_venta_email");

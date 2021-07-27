@@ -18,7 +18,7 @@
     <div class="col-md-12">
         <h4 style="color:gray;font-size:20px;">-Agregar</h4>
         <hr style="color: orange;">
-        <p>  
+        <p>
         </p>
     </div>
 </div>
@@ -39,41 +39,6 @@
     <input type="text" class="form-control" id="alias" placeholder="Alias" name="alias" required>
   </div>
 </div>
-
-<div class="row">
-  <h7 style="font-weight:bold;">Contacto</h7>
-  <div class="col-md-12">
-    <div class="row">
-      <div class="col-sm-9">
-        <h7>Contacto Clientes</h7>
-      </div>
-      <div class="col-sm-3" style="text-align: end;">
-        <button class="btn btn-success" onclick="agregarContactoCliente();" >Agregar</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <label for="email_cliente">Email</label>
-        <input type="email" class="form-control" style="height: 40px;" id="email_cliente" name="email_cliente">
-      </div>
-      <div class="col-md-4">
-        <label for="telefono_cliente">Telefono</label>
-        <input type="text" class="form-control" style="height: 40px;"  id="telefono_cliente" name="telefono_cliente">
-      </div>
-      <div class="col-md-4">
-        <label for="area">Area</label>
-        <input type="text" class="form-control" style="height: 40px;"  id="area" name="area">
-      </div>
-    </div>
-    <table id="contacto_cliente" class="table" name="contacto_cliente" width="100%" >
-      <thead>
-        <th>Email</th>
-        <th>Telefono</th>
-        <th>Área</th>
-      </thead>      
-    </table>
-  </div>
-
   <!--div class="col-md-6">
     <div class="row">
       <div class="col-sm-9">
@@ -129,13 +94,46 @@
         <input type="text" class="form-control" id="localidad" placeholder="Localidad" name="localidad" required>
       </div>
 </div>
-<div class="form-row">
-        <div class="form-group">
-            <button type="submit" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
-            <a type="button" class="btn" id="btnCancelar" href="{{ url('/clientes') }}" style="background:red;color:white;" >Cancelar</a>
-        </div>
-  </div>
 </form>
+<div class="row">
+<h7 style="font-weight:bold;">Contacto</h7>
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-sm-9">
+      <h7>Contacto Clientes</h7>
+    </div>
+    <div class="col-sm-3" style="text-align: end;">
+      <button class="btn btn-success" onclick="agregarContactoCliente();" >Agregar</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label for="email_cliente">Email</label>
+      <input type="email" class="form-control" style="height: 40px;" id="email_cliente" name="email_cliente">
+    </div>
+    <div class="col-md-4">
+      <label for="telefono_cliente">Telefono</label>
+      <input type="text" class="form-control" style="height: 40px;"  id="telefono_cliente" name="telefono_cliente">
+    </div>
+    <div class="col-md-4">
+      <label for="area">Area</label>
+      <input type="text" class="form-control" style="height: 40px;"  id="area" name="area">
+    </div>
+  </div>
+  <table id="contacto_cliente" class="table" name="contacto_cliente" width="100%" >
+    <thead>
+      <th>Email</th>
+      <th>Telefono</th>
+      <th>Área</th>
+    </thead>
+  </table>
+</div>
+<div class="form-row ">
+    <div class="form-group float-end">
+        <button type="submit" form="form-cliente" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
+        <a type="button" class="btn" id="btnCancelar" href="{{ url('/clientes') }}" style="background:red;color:white;" >Cancelar</a>
+    </div>
+</div>
 
 @endsection
 
@@ -175,6 +173,14 @@
     event.preventDefault();
     let form = new FormData(document.getElementById("form-cliente"));
     let contacto = contacto_cliente.rows().data().toArray();
+    if(contacto.length == 0 ){
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: "Favor de insertar al menos un contacto"
+        });
+        return false;
+    }
     let jsonClientes = arrayToJson(contacto);
     form.append("contacto_cliente",jsonClientes);
 
