@@ -53,9 +53,10 @@ class OrdenCompraController extends Controller
         return $update;
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        $orden_compra::destroy($id);
+        return view('ordenes_compras.cat_compras');
     }
 
     public function OrdenPdf($id)

@@ -23,6 +23,10 @@ class orden_compra extends Model
 
     }
 
+    public static function setImporte($importe,$id){
+        
+    }
+
     public static function setProductos($productos,$id){
         $productos = json_decode($productos);
         foreach ($productos as $value) {

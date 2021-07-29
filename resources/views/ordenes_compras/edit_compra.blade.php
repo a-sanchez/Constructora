@@ -166,7 +166,7 @@ let orden_productos = $("#orden_productos").DataTable({
         },
         {"data":"importe",
             render:function(importe){
-                return parseFloat(importe) .toFixed(2)};
+                return parseFloat(importe).toFixed(2);
             }
         },
         {"data":"id",

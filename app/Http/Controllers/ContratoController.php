@@ -21,10 +21,12 @@ class ContratoController extends Controller
         return view('contrato.contrato',["clientes"=>$clientes_contrato]);
     }
 
-    public function store(contratos_request $request)
+    public function store(Request $request)
     {
-        $validation=$request->validated();
-        $validation["file"]=contrato::setFile($validation["file"]);
+        $validation=$request->all();
+        if (isset($request["file"])) {
+            $validation["file"]=contrato::setFile($validation["file"]);
+        }
         contrato::create($validation);
         return response()->json("Contrato creado con exito",201);
     }

@@ -78,7 +78,7 @@
         </div>
         <div class="col-md-6">
           <label for="fecha_final" >Fecha Final</label>
-          <input type="date" class="form-control" id="fecha_final" placeholder="Fecha de Fin" name="fecha_final" required>
+          <input type="date" class="form-control" id="fecha_final" placeholder="Fecha de Fin" name="fecha_final" >
         </div>
       </div>
       <h7>Direccion de obra</h7>
@@ -99,7 +99,7 @@
       <div class="row">
         <div class="col-md-6">
           <label for="localidad" >Localidad</label>
-          <input type="text" class="form-control" id="localidad" placeholder="Localidad" name="localidad" required>
+          <input type="text" class="form-control" id="localidad" placeholder="Localidad" name="localidad" >
         </div>
         <div class="col-md-2">
           <label for="cp_contratante" >CP</label>

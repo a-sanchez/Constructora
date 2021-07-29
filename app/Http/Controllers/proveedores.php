@@ -35,9 +35,9 @@ class proveedores extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(proveedores_request $request)
+    public function store(Request $request)
     {
-        $validation=$request->validated();
+        $validation=$request->all();
         $prov = proveedor::create($validation);
     proveedor::contactos($prov->id,$validation['contacto_ventas']/*,$validation['contacto_pagos']*/);
         return response()->json($prov,201);

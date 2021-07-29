@@ -202,7 +202,7 @@
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: "Error al registrar cliente"
+        text: "Rfc del cliente ya se encuentra registrada"
       });
     }
   }
