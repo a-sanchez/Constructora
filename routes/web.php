@@ -59,8 +59,9 @@ Route::get('ordenes_compra/catalago_compra',function(){
 });*/
 Route::resource('compras',OrdenCompraController::class);
 Route::get("compras_pdf/{id}",[OrdenCompraController::class, 'OrdenPdf']);
-#----------------ORDENES PRODUCTOS-----------------------------#
+#----------------ORDENES PRODUCTOSyy-----------------------------#
 Route::resource('orden_productos',OrdenProductoController::class);
+
 
 #----------------FACTURAS------------------------------#
 

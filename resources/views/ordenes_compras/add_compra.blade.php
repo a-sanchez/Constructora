@@ -35,7 +35,7 @@
   </div>
     <div class="col-md-4">
     <label for="folio_orden" >Folio de Orden de Compra</label>
-    <input type="text" class="form-control" id="folio_orden" name='folio_orden'placeholder="Folio de Orden de Compra" required>
+    <input type="text" disabled class="form-control" id="folio_orden" name='folio_orden' value="{{$folio_orden}}" required>
   </div>
   <div class="col-md-4">
     <label form="proveedor">Proveedor</label>

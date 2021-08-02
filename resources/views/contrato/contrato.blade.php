@@ -106,10 +106,23 @@
           <input type="text" class="form-control" id="cp_contratante" placeholder="CP" name="cp_contratante" >
         </div>
       </div>
+      <p> </p>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-3">
       <label for="file" >Adjuntar PDF del contrato:</label>
         <input type="file" class="form-control" id="file" name="file" style="border:none;">
+      </div>
+      <div class="col-md-3">
+      <label for="file" >Adjuntar PDF del Anticipo:</label>
+        <input type="file" class="form-control" id="file2" name="file2" style="border:none;">
+      </div>
+      <div class="col-md-3">
+      <label for="file" >Adjuntar PDF del Cumplimiento:</label>
+        <input type="file" class="form-control" id="file3" name="file3" style="border:none;">
+      </div>
+      <div class="col-md-3">
+      <label for="file" >Adjuntar PDF de Vicios Ocultos:</label>
+        <input type="file" class="form-control" id="file4" name="file4" style="border:none;">
       </div>
     </div>
 
@@ -143,7 +156,7 @@
     let req = await fetch(url, init);
     console.log(req);
     if (req.ok) {
-      window.location.href = "{{ url('/contratos') }}";
+      //window.location.href = "{{ url('/contratos') }}";
     }
     else{
       Swal.fire({

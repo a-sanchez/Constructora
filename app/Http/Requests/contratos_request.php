@@ -42,7 +42,10 @@ class contratos_request extends FormRequest
         'colonia_contraparte' =>'required|string',
         'localidad'=>'string',
         'cp_contratante'=>'string',
-        'file'=>'string'
+        'file'=>'string',
+        'file2'=>'string',
+        'file3'=>'string',
+        'file4'=>'string'
         ];
     }
 }

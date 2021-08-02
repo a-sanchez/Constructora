@@ -24,15 +24,37 @@ class ContratoController extends Controller
     public function store(Request $request)
     {
         $validation=$request->all();
+        $contrato = contrato::create($validation);
+
         if (isset($request["file"])) {
-            $validation["file"]=contrato::setFile($validation["file"]);
+           $contrato->setFile($validation["file"]);
         }
-        contrato::create($validation);
+        if (isset($request["file2"])) {
+            $contrato->setFile2($validation["file2"]);
+        }
+        if (isset($request["file3"])) {
+            $contrato->setFile3($validation["file3"]);
+        }
+        if (isset($request["file4"])) {
+            $contrato->setFile4($validation["file4"]);
+        }
+
+        // if (isset($request["file3"])) {
+        //     $contrato->setFile($validation["file3"]);
+        // }
+
+        // if (isset($request["file4"])) {
+        //     $contrato->setFile($validation["file4"]);
+        // }
+        
         return response()->json("Contrato creado con exito",201);
     }
 
     public function show($id)
     {
+        $contrato = contrato::find(2);
+        $ruta = $contrato->getRuta();
+        var_dump($ruta);
         //
     }
 

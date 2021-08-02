@@ -24,7 +24,7 @@ $xcrud->columns("id_cliente,clientes.razon_social,folio,descripcion,monto");
 $xcrud->label(array('id_cliente'=>'RFC'));
 $xcrud->label(array('monto'=>'Monto Total'));
 $xcrud->join('id_cliente','clientes','id');
-$xcrud->button(asset("/storage/docs/contrato_adjuntos/{file}"),'PDF',false,"P",array('target'=>'_blank'));
+$xcrud->button(asset("/storage/docs/contrato_adjuntos/{folio}/{file}"),'PDF',false,"P",array('target'=>'_blank'));
 $xcrud->button(url("compras/{id}"),'Orden de Compra',false,"P");
 $xcrud->button(url(""),'Pre-factura',false,"P");
 $xcrud->unset_add();

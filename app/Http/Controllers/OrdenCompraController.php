@@ -32,9 +32,11 @@ class OrdenCompraController extends Controller
     {
         $provedores = proveedor::all();
         $compras_contrato=contrato::find($id);
+        $orden=orden_compra::max('id')+1;
         $ctx =[
             "contrato"=>$compras_contrato,
-            "proveedores"=>$provedores
+            "proveedores"=>$provedores,
+            "folio_orden"=>str_pad($orden."/".date("Y"),10,"0",STR_PAD_LEFT) 
         ];
 
         return view('ordenes_compras.add_compra',$ctx);
@@ -53,11 +55,11 @@ class OrdenCompraController extends Controller
         return $update;
     }
 
-    public function destroy(int $id)
-    {
-        $orden_compra::destroy($id);
-        return view('ordenes_compras.cat_compras');
+    public function destroy($id)
+    {//
     }
+
+  
 
     public function OrdenPdf($id)
     {
