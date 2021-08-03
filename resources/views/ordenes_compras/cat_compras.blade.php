@@ -75,7 +75,7 @@ async function update_status(id) {
     };
     let req = await fetch(url,init);
     if (req.ok) {
-        document.getElementById('xcrud').contentWindow.location.reload()
+       window.location.reload();
     }
     else{
         Swal.fire({

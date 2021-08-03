@@ -11,7 +11,8 @@ class ContratoController extends Controller
 {
     public function index()
     {
-        return view('contrato.cat_contratos');
+        $contratos=contrato::all();
+        return view('contrato.cat_contratos',compact('contratos'));
 
     }
 
@@ -52,10 +53,9 @@ class ContratoController extends Controller
 
     public function show($id)
     {
-        $contrato = contrato::find(2);
-        $ruta = $contrato->getRuta();
-        var_dump($ruta);
-        //
+        $contrato = contrato::find($id);
+        //var_dump($contrato->cliente->razon_social);
+        return view("contrato.contrato_detalle",compact("contrato"));
     }
 
     public function edit($id)

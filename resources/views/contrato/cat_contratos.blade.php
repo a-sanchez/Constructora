@@ -1,6 +1,14 @@
 @extends('layouts.base_html')
 @section('tittle') CONTRATOS <@endsection
+@section("styles")
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<style>
+table{
+    text-transform: uppercase;
+}
+</style>
 
+@endsection
 @section('body')
 <div class="row">
     <div class="col-md-12">
@@ -11,24 +19,51 @@
     </div>
 </div>
 <a type="button" class="btn" id="btnAgregar" href={{url('/contratos/create')}} style="background:#8d8d8d;color:white;">Nuevo Contrato</a>
-<p></p>
-<?php
-require (__DIR__.'/../../../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php'); //localhost
-//require (__DIR__.'/../../../../public_html/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php'); //servidor
-$xcrud = Xcrud::get_instance(); //instantiate xCRUD
-$xcrud->table('contratos'); //employees - MySQL table name
-$xcrud->change_type('fecha','date');
+<table class="table" id="contrato_table" width="100%">
+    <thead>
+        <th >RFC</th>
+        <th width="30%" >Razon Social</th>
+        <th width="8%">Folio</th>
+        <th width="60%">Descripcion</th>
+        <th >Monto</th>
+        <th >Inicio</th>
+        <th >Final</th>
+        <th width="5%" ></th>
+    </thead>
+    <tbody>
+    @foreach($contratos as $contrato)
+        <td class="align-middle">{{$contrato->cliente->cliente}}</td>
+        <td class="align-middle">{{$contrato->cliente->razon_social}}</td>
+        <td class="align-middle">{{$contrato->folio}}</td>
+        <td class="align-middle">{{$contrato->descripcion}}</td>
+        <td class="align-middle">{{$contrato->monto}}</td>
+        <td class="align-middle">{{date('d/m/Y', strtotime($contrato->fecha_inicio))}}</td>
+        <td class="align-middle">{{date('d/m/Y', strtotime($contrato->fecha_final))}}</td>
+        <td class="align-middle">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
-$xcrud->relation("id_cliente","clientes","id","cliente");
-$xcrud->columns("id_cliente,clientes.razon_social,folio,descripcion,monto");
-$xcrud->label(array('id_cliente'=>'RFC'));
-$xcrud->label(array('monto'=>'Monto Total'));
-$xcrud->join('id_cliente','clientes','id');
-$xcrud->button(asset("/storage/docs/contrato_adjuntos/{folio}/{file}"),'PDF',false,"P",array('target'=>'_blank'));
-$xcrud->button(url("compras/{id}"),'Orden de Compra',false,"P");
-$xcrud->button(url(""),'Pre-factura',false,"P");
-$xcrud->unset_add();
-$xcrud -> unset_title ();
-echo $xcrud->render(); //magic
-?>
+                  <li><a class="dropdown-item" href="{{url("compras/{$contrato->id}")}}">Orden de Compra</a></li>
+                  <li><a class="dropdown-item" href="#">Pre-Factura</a></li>
+                  <li><a class="dropdown-item" href="#">Editar</a></li>
+                  <li><a class="dropdown-item" href="{{url("/contratos/{$contrato->id}")}}">Detalles</a></li>
+                  <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                </ul>
+              </div>
+           </td>
+    @endforeach
+    </tbody>
+</table>
+@endsection
+
+@section("scripts")
+<script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script>
+
+    let table = $("#contrato_table").dataTable();
+
+</script>
 @endsection

@@ -18,18 +18,18 @@
     <!-- IMPORTACION JQUERY -->
     <script src="{{ asset('lib/jquery/jquery.min.js') }}" ></script>
     <!-- IMPORTACION BOOTSTRAP -->
-    <script src="{{ asset('lib/bootstrap/js/bootstrap.min.js') }}" defer></script>
+    <script src="{{ asset('lib/bootstrap/js/bootstrap.bundle.min.js') }}" defer></script>
     <!-- IMPORTACION SWEETALERT 2 -->
-    <script src="{{ asset('lib/sweetalert/sweetalert2.all.min.js')}}" defer></script>
+    <script src="{{ asset('lib/sweetalert/sweetalert2.all.min.js')}}"></script>
     <!-- Sticky Kit -->
-    <script src="{{ asset('js/sticky-kit.js')}}" defer></script>
+    <script src="{{ asset('js/sticky-kit.js')}}"></script>
     <!-- Fontawesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ==" crossorigin="anonymous"></script>
     
     <!-- Flexslider -->
-    <script src="{{asset('js/jquery_002.js')}}" defer></script>
+    <script src="{{asset('js/jquery_002.js')}}"></script>
     <!-- MAIN -->
-    <script src="{{ asset('/js/main.js') }}" defer></script>
+    <script src="{{ asset('/js/main.js') }}"></script>
     <style>
         .offcanvas {
             visibility: visible !important;

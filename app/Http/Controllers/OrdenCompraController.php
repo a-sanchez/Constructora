@@ -21,11 +21,11 @@ class OrdenCompraController extends Controller
     {
     }
 
-    public function store(orden_request $request)
+    public function store(Request $request)
     {
-        $validation=$request->validated();
-        $orden = orden_compra::create($validation)->id;
-        $productos = orden_compra::setProductos($validation["productos"],$orden);
+        $validation=$request->all();
+        $orden = orden_compra::create($validation);
+        $productos = orden_compra::setProductos($validation["productos"],$orden->id);
         return response()->json($orden,201);
     }
     public function show($id)

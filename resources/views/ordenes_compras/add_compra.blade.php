@@ -35,7 +35,7 @@
   </div>
     <div class="col-md-4">
     <label for="folio_orden" >Folio de Orden de Compra</label>
-    <input type="text" disabled class="form-control" id="folio_orden" name='folio_orden' value="{{$folio_orden}}" required>
+    <input type="text" readonly class="form-control" id="folio_orden" name='folio_orden' value="{{$folio_orden}}" required>
   </div>
   <div class="col-md-4">
     <label form="proveedor">Proveedor</label>
@@ -133,7 +133,7 @@
 <div class="form-row">
         <div class="form-group">
             <button type="submit" form="form-orden" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
-            <a type="button" class="btn" id="btnCancelar" href="/compras_opciones" style="background:red;color:white;" >Cancelar</a>
+            <a type="button" class="btn" id="btnCancelar" href="/compras" style="background:red;color:white;" >Cancelar</a>
         </div>
   </div>
 @endsection

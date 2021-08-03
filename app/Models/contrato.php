@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\cliente;
 
 class contrato extends Model
 {
@@ -21,7 +22,9 @@ class contrato extends Model
         return $filename;
     }*/
 
-
+    public function cliente(){
+        return $this->belongsTo(cliente::class,"id_cliente");
+    }
     public function setFile($file)
     {
         $filename =$file->hashName();
