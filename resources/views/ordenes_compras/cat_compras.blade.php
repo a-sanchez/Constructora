@@ -21,6 +21,18 @@ $xcrud = Xcrud::get_instance(); //instantiate xCRUD
 
 
 //$xcrud->button('http://example.com','EXCEL',false,"",array('target'=>'_blank'));
+//$xcrud->query('select oc.id as id,folio_orden,solicitado,fecha_orden,fecha_entrega,descripcion_orden,c.folio as Contrato,p.razon_social as Proveedor,importe_total as "Importe_Total_(sin IVA)"
+//from orden_compras oc
+//left join (SELECT orden_id,sum(importe) as importe_total  from orden_productos  group by orden_id) as op
+//ON op.orden_id=oc.id
+//left join contratos c
+//on c.id = oc.id_contrato
+//left join proveedores p
+//on   p.id=oc.id_proveedor
+//where oc.status != 0');
+
+
+
 $xcrud->query('select oc.id as id,folio_orden,solicitado,fecha_orden,fecha_entrega,descripcion_orden,c.folio as Contrato,p.razon_social as Proveedor,importe_total as "Importe_Total_(sin IVA)"
 from constructora.orden_compras oc
 left join (SELECT orden_id,sum(importe) as importe_total  from constructora.orden_productos  group by orden_id) as op

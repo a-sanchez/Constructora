@@ -60,12 +60,16 @@ class ContratoController extends Controller
 
     public function edit($id)
     {
-        //
+        $contrato=contrato::find($id);
+        return view("contrato.contrato_editar",compact("contrato"));
+
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $contrato=contrato::find($id);
+        $update=$contrato->update($request->all());
+        return $update;
     }
 
     public function destroy($id)

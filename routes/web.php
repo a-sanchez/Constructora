@@ -13,6 +13,7 @@
 use App\Http\Controllers\ContratoController;
 use App\Http\Controllers\proveedores;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ContactoClienteClientesController;
 use App\Http\Controllers\OrdenCompraController;
 use App\Http\Controllers\OrdenProductoController;
 use App\Models\OrdenProducto;
@@ -28,6 +29,10 @@ Route::get('/opciones', function () {
 Route::get('/opcion_contrato',function(){
     return view('contrato.contrato_opciones');
 });
+
+// Route::get('editar_contrato/{id}',function($id){
+//     return view('contrato.contrato_editar');
+// });
 
 Route::resource('contratos',ContratoController::class);
 #-----------------PROVEEDORES---------------------------------#
@@ -45,6 +50,8 @@ Route::get('/clientes_opciones',function(){
 });
 
 Route::resource('clientes',ClienteController::class);
+#----------------Clientes_Contacto-----------------------------#
+Route::resource('contacto_cliente', ContactoClienteClientesController::class);
 #------------ORDENES DE COMPRA------------------------#
 Route::get('/compras_opciones',function(){
     return view('ordenes_compras.compras_opciones');
@@ -59,7 +66,7 @@ Route::get('ordenes_compra/catalago_compra',function(){
 });*/
 Route::resource('compras',OrdenCompraController::class);
 Route::get("compras_pdf/{id}",[OrdenCompraController::class, 'OrdenPdf']);
-#----------------ORDENES PRODUCTOSyy-----------------------------#
+#----------------ORDENES PRODUCTOS-----------------------------#
 Route::resource('orden_productos',OrdenProductoController::class);
 
 

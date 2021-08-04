@@ -94,7 +94,7 @@
 <form id="form_productos" onsubmit="agregarProducto();">
 @csrf
 <input type="text" name="orden_id" id="orden_id" value='{{$orden_compra->id}}' hidden>
-<h7 style="font-weight:bold;">Productos:</h7>
+<h6 style="font-weight:bold;">Productos:</h6>
 <div class="row">
   <div class="form-group col-md-3">
     <label for="concepto">Concepto</label>

@@ -72,7 +72,7 @@
 
 
 <div class="row">
-<h7 style="font-weight:bold;">Direccion</h7>
+<h6 style="font-weight:bold;">Direccion</h6>
       <div class="col-md-4">
             <label for="calle" >Calle</label>
         <input type="text" class="form-control" id="calle" placeholder="Calle" name="calle" required>
@@ -85,7 +85,7 @@
         <label for="colonia" >Colonia</label>
         <input type="text" class="form-control" id="colonia" placeholder="Colonia" name="colonia" required>
       </div>
-      <div class="col-auto">
+      <div class="col-md-4">
         <label for="cp" >CP</label>
         <input type="text" class="form-control" id="cp" placeholder="CP" name="cp" >
       </div>

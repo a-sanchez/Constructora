@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('css/animate.css')}}">
 
     <!-- LINKS JAVASCRIPTS -->
+    
     <!-- IMPORTACION JQUERY -->
     <script src="{{ asset('lib/jquery/jquery.min.js') }}" ></script>
     <!-- IMPORTACION BOOTSTRAP -->
@@ -25,11 +26,14 @@
     <script src="{{ asset('js/sticky-kit.js')}}"></script>
     <!-- Fontawesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ==" crossorigin="anonymous"></script>
-    
+
     <!-- Flexslider -->
     <script src="{{asset('js/jquery_002.js')}}"></script>
     <!-- MAIN -->
     <script src="{{ asset('/js/main.js') }}"></script>
+        
+    <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="{{asset('lib/DataTables/jquery.dataTables.spanish.js')}}"></script>
     <style>
         .offcanvas {
             visibility: visible !important;

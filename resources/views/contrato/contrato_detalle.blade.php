@@ -1,6 +1,11 @@
 @extends('layouts.base_html')
 
-@section ('tittle')CONTRATOS @endsection
+@section ('tittle')CONTRATOS
+@endsection
+
+@section("scripts")
+<script src="https://kit.fontawesome.com/b4cf0d1143.js" crossorigin="anonymous"></script>
+@endsection
 
 @section('styles')
 <style>
@@ -19,7 +24,7 @@
             </div>
 <div class="row">
     <div class="col-md-12">
-        <h4 style="color:gray;font-size:20px;">-Agregar</h4>
+        <h4 style="color:gray;font-size:20px;">-DETALLES</h4>
         <hr style="color: orange;">
         <p>  
         </p>
@@ -54,7 +59,7 @@
         <div class="row">
           <div class="col-md-12">
           <label for="descripcion" >Descripcion</label>
-          <input type="text" class="form-control" raadonly value="{{$contrato->descripcion}}">
+          <input type="text" class="form-control" readonly value="{{$contrato->descripcion}}">
         </div>
         <div class="row">
           <div class="col-md-4">
@@ -74,11 +79,11 @@
       <div class="row">
         <div class="col-md-6">
           <label for="fecha_inicio" >Fecha Inicio</label>
-          <input type="date" class="form-control" readonly value="{{$contrato->fecha_inicio}}">
+          <input type="text" class="form-control" readonly value="{{date('d/m/Y', strtotime($contrato->fecha_inicio))}}" >
         </div>
         <div class="col-md-6">
           <label for="fecha_final" >Fecha Final</label>
-          <input type="date" class="form-control" readonly value="{{$contrato->fecha_final}}" >
+          <input type="text" class="form-control" readonly value="{{date('d/m/Y', strtotime($contrato->fecha_final))}}"  >
         </div>
       </div>
       <h5>DIRECCIÓN DE OBRA</h5>
@@ -135,8 +140,8 @@
 
       <div class="form-row mt-2">
 
-           <div class="col-md-12" style="text-align:end">
-               <a type="button" class="btn" id="btnCancelar" href="{{ url('/contratos') }}" style="background:red;color:white;" >Regresar</a>
+           <div class="col-md-12">
+            <a  class="d-flex align-items-center" style="color: blue;text-decoration: none;font-size: 1rem;" href="{{ url('/contratos') }}"><i style="font-size:18px;" id="arrow-left" class="fas fa-arrow-left"></i>Regresar</a>
            </div>
        </div>
     </form>

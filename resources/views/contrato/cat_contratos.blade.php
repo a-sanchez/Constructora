@@ -19,8 +19,8 @@ table{
     </div>
 </div>
 <a type="button" class="btn" id="btnAgregar" href={{url('/contratos/create')}} style="background:#8d8d8d;color:white;">Nuevo Contrato</a>
-<table class="table" id="contrato_table" width="100%">
-    <thead>
+<table  style="padding-top: 10px;" id="contrato_table" width="100%">
+    <thead  style="background-color:#b4b4b4">
         <th >RFC</th>
         <th width="30%" >Razon Social</th>
         <th width="8%">Folio</th>
@@ -32,6 +32,7 @@ table{
     </thead>
     <tbody>
     @foreach($contratos as $contrato)
+        <tr>
         <td class="align-middle">{{$contrato->cliente->cliente}}</td>
         <td class="align-middle">{{$contrato->cliente->razon_social}}</td>
         <td class="align-middle">{{$contrato->folio}}</td>
@@ -48,19 +49,19 @@ table{
 
                   <li><a class="dropdown-item" href="{{url("compras/{$contrato->id}")}}">Orden de Compra</a></li>
                   <li><a class="dropdown-item" href="#">Pre-Factura</a></li>
-                  <li><a class="dropdown-item" href="#">Editar</a></li>
+                  <li><a class="dropdown-item" href="{{url("/contratos/{$contrato->id}/edit")}}">Editar</a></li>
                   <li><a class="dropdown-item" href="{{url("/contratos/{$contrato->id}")}}">Detalles</a></li>
                   <li><a class="dropdown-item" href="#">Eliminar</a></li>
                 </ul>
               </div>
            </td>
+           </tr>
     @endforeach
     </tbody>
 </table>
 @endsection
 
 @section("scripts")
-<script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script>
 
     let table = $("#contrato_table").dataTable();

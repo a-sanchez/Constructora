@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use App\Models\contacto_cliente_clientes;
+use App\Http\Controllers\Controller;
 
 class ContactoClienteClientesController extends Controller
 {
@@ -22,22 +25,23 @@ class ContactoClienteClientesController extends Controller
     }
 
 
-    public function show(OrdenProducto $ordenProducto)
+    public function show($id)
+    {
+        $cliente = contacto_cliente_clientes::where("id_cliente",$id)->get();
+        return Datatables::of($cliente)->make();
+    }
+
+    public function edit(ContactoClienteClientes $cliente)
     {
         //
     }
 
-    public function edit(OrdenProducto $ordenProducto)
+    public function update(Request $request, ContactoClienteClientes $cliente)
     {
         //
     }
 
-    public function update(Request $request, OrdenProducto $ordenProducto)
-    {
-        //
-    }
-
-    public function destroy(OrdenProducto $ordenProducto)
+    public function destroy(ContactoClienteClientes $cliente)
     {
         //
     }

@@ -95,7 +95,7 @@
 </div>
 </form>
 <form id="form_productos" onsubmit="agregarProducto();">
-<h7 style="font-weight:bold;">Productos:</h7>
+<h5 style="font-weight:bold;">Productos:</h5>
 <div class="row">
   <div class="form-group col-md-3">
     <label for="concepto">Concepto</label>
@@ -195,8 +195,8 @@
     let req = await fetch(url, init);
     if (req.ok) {
         let res = await req.json();
-        window.open(`{{url('/compras_pdf/${res}')}}`, '_blank');
-        window.location.href = "{{ url('/compras') }}";
+        window.open(`{{url('/compras_pdf/${res.id}')}}`, '_blank');
+        //window.location.href = "{{ url('/compras') }}";
     }
     else{
       Swal.fire({
