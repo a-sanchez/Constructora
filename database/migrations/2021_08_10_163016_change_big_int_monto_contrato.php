@@ -13,11 +13,16 @@ class ChangeBigIntMontoContrato extends Migration
      */
     public function up()
     {
+<<<<<<< HEAD
         Schema::table('contratos',function($table){
             $table->dropColumn('monto');
         });
        Schema::table('contratos', function (Blueprint $table) {
            $table->double("monto",10,2);
+=======
+       Schema::table('contratos', function (Blueprint $table) {
+           $table->decimal("monto",10,2)->change();
+>>>>>>> a63a0e2f773cc75f2e8db49a6f4850912881b32e
        });
     }
 

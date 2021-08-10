@@ -48,7 +48,7 @@ class ContratoController extends Controller
         // if (isset($request["file4"])) {
         //     $contrato->setFile($validation["file4"]);
         // }
-        
+
         return response()->json("Contrato creado con exito",201);
     }
 
