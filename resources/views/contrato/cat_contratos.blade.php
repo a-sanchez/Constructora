@@ -74,7 +74,6 @@
             }
 
             let req=await fetch(url,init);
-            console.log(req);
             if (req.ok){
                 location.reload();
             }
