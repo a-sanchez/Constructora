@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\contratos_request;
 use App\Models\contrato;
 use App\Models\cliente;
+use App\Models\orden_compra;
 
 class ContratoController extends Controller
 {
@@ -74,6 +75,13 @@ class ContratoController extends Controller
 
     public function destroy($id)
     {
-        //
+        if (orden_compra::where("id_contrato",$id)){
+            return response()->json("Error al eliminar el contrato,contiene orden de compra",409);
+        }
+        else{
+        $contrato = contrato::find($id);
+        contrato::destroy($id);
+        return $contrato;
+    }
     }
 }

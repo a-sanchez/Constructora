@@ -154,7 +154,6 @@
       body:form
     }
     let req = await fetch(url, init);
-    console.log(req);
     if (req.ok) {
       window.location.href = "{{ url('/contratos') }}";
     }
