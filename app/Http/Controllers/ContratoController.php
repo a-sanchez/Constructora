@@ -48,7 +48,7 @@ class ContratoController extends Controller
         // if (isset($request["file4"])) {
         //     $contrato->setFile($validation["file4"]);
         // }
-        
+
         return response()->json("Contrato creado con exito",201);
     }
 
@@ -74,14 +74,14 @@ class ContratoController extends Controller
     }
 
     public function destroy($id)
-    {
-        if (orden_compra::where("id_contrato",$id)){
-            return response()->json("Error al eliminar el contrato,contiene orden de compra",409);
+    {   $ordenes = orden_compra::where("id_contrato",$id)->get();
+        if($ordenes->first() != NULL){
+            return response()->json("Error, Existen ordenes de compra ligadas al contrato",409);
         }
         else{
         $contrato = contrato::find($id);
         contrato::destroy($id);
         return $contrato;
-    }
+        }
     }
 }

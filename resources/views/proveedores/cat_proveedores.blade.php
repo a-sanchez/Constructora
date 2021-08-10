@@ -33,8 +33,40 @@ $xcrud->columns('alias,razon_social,localidad,rfc');
 $xcrud->unset_add();
 $xcrud->unset_view();
 $xcrud->unset_edit();
+$xcrud->unset_remove();
 $xcrud->button(asset("/proveedores/{id}"),"Detalles");
 $xcrud->button(asset("/proveedores/{id}/edit"),"Editar");
+$xcrud->button('#','Eliminar',false,"P",array('onclick'=>'eliminar({id})'));
+
 echo $xcrud->render(); //magic
 ?>
+@endsection
+
+@section('scripts')
+<script>
+    async function eliminar(id) {
+   event.preventDefault();
+     let url='{{url("/proveedores/{id}")}}'.replace('{id}',id);
+       let init = {
+           method: "DELETE",
+           headers: {  'X-CSRF-TOKEN': "{{csrf_token()}}",
+            'Content-Type':'application/json'
+           }
+       }
+
+       let req=await fetch(url,init);
+       if (req.ok){
+           location.reload();
+       }
+       else
+       {
+           let res = await req.json();
+           Swal.fire({
+               icon:"error",
+               title:"Error",
+               text:res
+           });
+       }
+     }
+</script>
 @endsection

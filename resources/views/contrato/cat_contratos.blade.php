@@ -65,7 +65,7 @@
         let table = $("#contrato_table").dataTable();
 
          async function borrarContrato(id) {
-             event.preventDefault();
+            event.preventDefault();
           let url='{{url("/contratos/{id}")}}'.replace('{id}',id);
             let init = {
                 method: "DELETE",
@@ -74,11 +74,12 @@
             }
 
             let req=await fetch(url,init);
+            console.log(req);
             if (req.ok){
                 location.reload();
             }
             else{
-                let res = await req.json(); 
+                let res = await req.json();
                 Swal.fire({
                     icon:"error",
                     title:"Error",
