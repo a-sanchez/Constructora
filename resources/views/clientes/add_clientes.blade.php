@@ -72,7 +72,7 @@
 
 
 <div class="row">
-<h7 style="font-weight:bold;">Direccion</h7>
+<h6 style="font-weight:bold;">Direccion</h6>
       <div class="col-md-4">
             <label for="calle" >Calle</label>
         <input type="text" class="form-control" id="calle" placeholder="Calle" name="calle" required>
@@ -85,7 +85,7 @@
         <label for="colonia" >Colonia</label>
         <input type="text" class="form-control" id="colonia" placeholder="Colonia" name="colonia" required>
       </div>
-      <div class="col-auto">
+      <div class="col-md-4">
         <label for="cp" >CP</label>
         <input type="text" class="form-control" id="cp" placeholder="CP" name="cp" >
       </div>
@@ -96,11 +96,11 @@
 </div>
 </form>
 <div class="row">
-<h7 style="font-weight:bold;">Contacto</h7>
+<h6 style="font-weight:bold;">Contacto</h6>
 <div class="col-md-12">
   <div class="row">
     <div class="col-sm-9">
-      <h7>Contacto Clientes</h7>
+      <h6>Contacto Clientes</h6>
     </div>
     <div class="col-sm-3" style="text-align: end;">
       <button class="btn btn-success" onclick="agregarContactoCliente();" >Agregar</button>
@@ -141,6 +141,7 @@
 <script src={{asset("lib/DataTables/DataTables-1.10.25/js/jquery.dataTables.min.js")}}></script>
 <script src={{asset("lib/DataTables/DataTables-1.10.25/js/dataTables.bootstrap5.min.js")}}></script>
 <script src={{asset("lib/DataTables/Responsive-2.2.9/js/dataTables.responsive.js")}}></script>
+<script src={{asset("lib/DataTables/jquery.dataTables.spanish.js")}}></script>
 <script>
 
 
@@ -202,7 +203,7 @@
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: "Error al registrar cliente"
+        text: "Rfc del cliente ya se encuentra registrada"
       });
     }
   }

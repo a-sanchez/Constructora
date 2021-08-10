@@ -35,7 +35,7 @@
   </div>
     <div class="col-md-4">
     <label for="folio_orden" >Folio de Orden de Compra</label>
-    <input type="text" class="form-control" id="folio_orden" name='folio_orden'placeholder="Folio de Orden de Compra" required>
+    <input type="text" readonly class="form-control" id="folio_orden" name='folio_orden' value="{{$folio_orden}}" required>
   </div>
   <div class="col-md-4">
     <label form="proveedor">Proveedor</label>
@@ -95,7 +95,7 @@
 </div>
 </form>
 <form id="form_productos" onsubmit="agregarProducto();">
-<h7 style="font-weight:bold;">Productos:</h7>
+<h5 style="font-weight:bold;">Productos:</h5>
 <div class="row">
   <div class="form-group col-md-3">
     <label for="concepto">Concepto</label>
@@ -133,7 +133,7 @@
 <div class="form-row">
         <div class="form-group">
             <button type="submit" form="form-orden" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
-            <a type="button" class="btn" id="btnCancelar" href="/compras_opciones" style="background:red;color:white;" >Cancelar</a>
+            <a type="button" class="btn" id="btnCancelar" href="{{ url('/contratos') }}" style="background:red;color:white;" >Cancelar</a>
         </div>
   </div>
 @endsection
@@ -195,7 +195,7 @@
     let req = await fetch(url, init);
     if (req.ok) {
         let res = await req.json();
-        window.open(`{{url('/compras_pdf/${res}')}}`, '_blank');
+        window.open(`{{url('/compras_pdf/${res.id}')}}`, '_blank');
         window.location.href = "{{ url('/compras') }}";
     }
     else{

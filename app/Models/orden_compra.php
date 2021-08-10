@@ -23,6 +23,7 @@ class orden_compra extends Model
 
     }
 
+
     public static function setProductos($productos,$id){
         $productos = json_decode($productos);
         foreach ($productos as $value) {
@@ -36,6 +37,7 @@ class orden_compra extends Model
             ]);
         }
     }
+
 
     public function contrato()
     {

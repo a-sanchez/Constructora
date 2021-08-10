@@ -13,8 +13,10 @@
 use App\Http\Controllers\ContratoController;
 use App\Http\Controllers\proveedores;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ContactoClienteClientesController;
 use App\Http\Controllers\OrdenCompraController;
 use App\Http\Controllers\OrdenProductoController;
+use App\Http\Controllers\ProveedorContactoVentasController;
 use App\Models\OrdenProducto;
 
 Route::get('/', function () {
@@ -29,6 +31,10 @@ Route::get('/opcion_contrato',function(){
     return view('contrato.contrato_opciones');
 });
 
+// Route::get('editar_contrato/{id}',function($id){
+//     return view('contrato.contrato_editar');
+// });
+
 Route::resource('contratos',ContratoController::class);
 #-----------------PROVEEDORES---------------------------------#
 Route::get('/opcion_proveedores',function(){
@@ -38,6 +44,8 @@ Route::get('/opcion_proveedores',function(){
 //Route::delete('proveedores/{id}','proveedores@destroy')->name('proveedor.destroy');
 
 Route::resource('proveedores',proveedores::class);
+#---------------------proveedores contactos------------------------------------------#
+Route::resource('contacto_proveedor',ProveedorContactoVentasController::class);
 #----------------CLIENTES-----------------------------#
 
 Route::get('/clientes_opciones',function(){
@@ -45,6 +53,8 @@ Route::get('/clientes_opciones',function(){
 });
 
 Route::resource('clientes',ClienteController::class);
+#----------------Clientes_Contacto-----------------------------#
+Route::resource('contacto_cliente', ContactoClienteClientesController::class);
 #------------ORDENES DE COMPRA------------------------#
 Route::get('/compras_opciones',function(){
     return view('ordenes_compras.compras_opciones');
@@ -61,6 +71,7 @@ Route::resource('compras',OrdenCompraController::class);
 Route::get("compras_pdf/{id}",[OrdenCompraController::class, 'OrdenPdf']);
 #----------------ORDENES PRODUCTOS-----------------------------#
 Route::resource('orden_productos',OrdenProductoController::class);
+
 
 #----------------FACTURAS------------------------------#
 

@@ -35,11 +35,11 @@ class proveedores extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(proveedores_request $request)
+    public function store(Request $request)
     {
-        $validation=$request->validated();
+        $validation=$request->all();
         $prov = proveedor::create($validation);
-    proveedor::contactos($prov->id,$validation['contacto_ventas']/*,$validation['contacto_pagos']*/);
+        proveedor::contactos($prov->id,$validation['contacto_ventas']/*,$validation['contacto_pagos']*/);
         return response()->json($prov,201);
         
     }
@@ -52,7 +52,8 @@ class proveedores extends Controller
      */
     public function show($id)
     {
-        //
+        $proveedor=proveedor::find($id);
+        return view("proveedores.detalles_proveedores",compact("proveedor"));;
     }
 
     /**
@@ -63,7 +64,8 @@ class proveedores extends Controller
      */
     public function edit($id)
     {
-        //
+        $proveedor=proveedor::find($id);
+        return view("proveedores.edit_proveedores",compact("proveedor"));
     }
 
     /**
@@ -75,7 +77,9 @@ class proveedores extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $proveedor=proveedor::find($id);
+        $update=$proveedor->update($request->all());
+        return $update;
     }
 
     /**

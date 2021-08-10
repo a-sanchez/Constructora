@@ -21,20 +21,22 @@ class OrdenCompraController extends Controller
     {
     }
 
-    public function store(orden_request $request)
+    public function store(Request $request)
     {
-        $validation=$request->validated();
-        $orden = orden_compra::create($validation)->id;
-        $productos = orden_compra::setProductos($validation["productos"],$orden);
+        $validation=$request->all();
+        $orden = orden_compra::create($validation);
+        $productos = orden_compra::setProductos($validation["productos"],$orden->id);
         return response()->json($orden,201);
     }
     public function show($id)
     {
         $provedores = proveedor::all();
         $compras_contrato=contrato::find($id);
+        $orden=orden_compra::max('id')+1;
         $ctx =[
             "contrato"=>$compras_contrato,
-            "proveedores"=>$provedores
+            "proveedores"=>$provedores,
+            "folio_orden"=>str_pad($orden."/".date("Y"),10,"0",STR_PAD_LEFT) 
         ];
 
         return view('ordenes_compras.add_compra',$ctx);
@@ -54,9 +56,10 @@ class OrdenCompraController extends Controller
     }
 
     public function destroy($id)
-    {
-        //
+    {//
     }
+
+  
 
     public function OrdenPdf($id)
     {

@@ -40,9 +40,12 @@ class contratos_request extends FormRequest
         'calle_contraparte' =>'required|string',
         'numero_contraparte'=>'required|string',
         'colonia_contraparte' =>'required|string',
-        'localidad'=>'required|string',
-        'cp_contratante'=>'required|string',
-        'file'=>'required|file'
+        'localidad'=>'string',
+        'cp_contratante'=>'string',
+        'file'=>'string',
+        'file2'=>'string',
+        'file3'=>'string',
+        'file4'=>'string'
         ];
     }
 }

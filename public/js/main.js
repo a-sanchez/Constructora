@@ -189,7 +189,7 @@
 		contentWayPoint();
 		burgerMenu();
 		mobileMenuOutsideClick();
-		sliderMain();
+		// sliderMain();
 		stickyFunction();
 	});
 

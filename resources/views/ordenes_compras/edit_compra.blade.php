@@ -62,7 +62,7 @@
   <p> </p>
 </div>
 <div class="row">
-<h7 style="font-weight:bold;">Información:</h7>
+<h6 style="font-weight:bold;">Información:</h6>
   <div class="col-md-6">
     <label for="fecha_orden" >Fecha de Elaboracion</label>
     <input type="date" class="form-control" id="fecha_orden"  name="fecha_orden"  value="{{$orden_compra->fecha_orden}}" required>
@@ -94,7 +94,7 @@
 <form id="form_productos" onsubmit="agregarProducto();">
 @csrf
 <input type="text" name="orden_id" id="orden_id" value='{{$orden_compra->id}}' hidden>
-<h7 style="font-weight:bold;">Productos:</h7>
+<h6 style="font-weight:bold;">Productos:</h6>
 <div class="row">
   <div class="form-group col-md-3">
     <label for="concepto">Concepto</label>
@@ -166,7 +166,7 @@ let orden_productos = $("#orden_productos").DataTable({
         },
         {"data":"importe",
             render:function(importe){
-                return parseFloat(importe) .toFixed(2)};
+                return parseFloat(importe).toFixed(2);
             }
         },
         {"data":"id",
