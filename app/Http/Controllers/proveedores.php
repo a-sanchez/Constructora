@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests\proveedores_request;
 use App\Models\proveedor;
+
+use App\Models\orden_compra;
+use Illuminate\Http\Request;
+use App\Models\proveedor_contacto_ventas;
+use App\Http\Requests\proveedores_request;
 
 class proveedores extends Controller
 {
@@ -41,7 +43,7 @@ class proveedores extends Controller
         $prov = proveedor::create($validation);
         proveedor::contactos($prov->id,$validation['contacto_ventas']/*,$validation['contacto_pagos']*/);
         return response()->json($prov,201);
-        
+
     }
 
     /**
@@ -90,8 +92,12 @@ class proveedores extends Controller
      */
     public function destroy($id)
     {
+        $ordenes = orden_compra::where("id_proveedor",$id)->get();
+        if($ordenes->first() != NULL){
+            return response()->json("Error, Existen ordenes de compra ligadas al proveedor",409);
+        }
+        proveedor_contacto_ventas::where("id_proveedor",$id)->delete();
         $proveedor = proveedor::find($id);
         $proveedor->delete();
-        return redirect('/');
     }
 }
