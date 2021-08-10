@@ -62,7 +62,7 @@
   <p> </p>
 </div>
 <div class="row">
-<h7 style="font-weight:bold;">Información:</h7>
+<h6 style="font-weight:bold;">Información:</h6>
   <div class="col-md-6">
     <label for="fecha_orden" >Fecha de Elaboracion</label>
     <input type="date" class="form-control" id="fecha_orden"  name="fecha_orden"  value="{{$orden_compra->fecha_orden}}" required>

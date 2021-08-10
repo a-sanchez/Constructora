@@ -16,6 +16,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ContactoClienteClientesController;
 use App\Http\Controllers\OrdenCompraController;
 use App\Http\Controllers\OrdenProductoController;
+use App\Http\Controllers\ProveedorContactoVentasController;
 use App\Models\OrdenProducto;
 
 Route::get('/', function () {
@@ -43,6 +44,8 @@ Route::get('/opcion_proveedores',function(){
 //Route::delete('proveedores/{id}','proveedores@destroy')->name('proveedor.destroy');
 
 Route::resource('proveedores',proveedores::class);
+#---------------------proveedores contactos------------------------------------------#
+Route::resource('contacto_proveedor',ProveedorContactoVentasController::class);
 #----------------CLIENTES-----------------------------#
 
 Route::get('/clientes_opciones',function(){

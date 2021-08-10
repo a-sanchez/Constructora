@@ -34,9 +34,44 @@ $xcrud->label(array('cliente'=>'RFC'));
 //$xcrud->label(array('contacto_pago_clientes.telefono'=>' Telefono Contacto Pago'));
 //$xcrud->join('id','contacto_cliente_clientes','id_cliente');
 $xcrud->button(asset("/clientes/{id}"),"Detalles");
+$xcrud->button(asset("/clientes/{id}/edit"),"Editar");
+$xcrud->button('#','Eliminar',false,"P",array('onclick'=>'eliminar({id})'));
 //$xcrud->join('id','contacto_pago_clientes','id_cliente');
 $xcrud->unset_add();
 $xcrud->unset_view();
+$xcrud->unset_edit();
+$xcrud->unset_remove();
 echo $xcrud->render(); //magic
 ?>
+@endsection
+
+
+
+@section("scripts")
+<script>
+         async function eliminar(id) {
+        event.preventDefault();
+          let url='{{url("/clientes/{id}")}}'.replace('{id}',id);
+            let init = {
+                method: "DELETE",
+                headers: {  'X-CSRF-TOKEN': "{{csrf_token()}}",
+                 'Content-Type':'application/json'
+                }
+            }
+
+            let req=await fetch(url,init);
+            if (req.ok){
+                location.reload();
+            }
+            else
+            {
+                let res = await req.json();
+                Swal.fire({
+                    icon:"error",
+                    title:"Error",
+                    text:res
+                });
+            }
+          }
+</script>
 @endsection

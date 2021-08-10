@@ -21,7 +21,13 @@ class ContactoClienteClientesController extends Controller
 
     public function store(Request $request)
     {
-        //
+        if (isset($request->action)) {
+            $update = $this->update($request);
+            return $update;
+        }
+
+        $contacto=contacto_cliente_clientes::create($request->all());
+        return $contacto;
     }
 
 
@@ -36,13 +42,18 @@ class ContactoClienteClientesController extends Controller
         //
     }
 
-    public function update(Request $request, ContactoClienteClientes $cliente)
+    public function update(Request $request)
     {
-        //
+        
+        $contacto=contacto_cliente_clientes::find($request->id);
+        $contacto->update($request->except("action"));
+        return $contacto;
     }
 
-    public function destroy(ContactoClienteClientes $cliente)
+    public function destroy(int $id)
     {
-        //
+        $contacto=contacto_cliente_clientes::find($id);
+        contacto_cliente_clientes::destroy($id);
+        return $contacto;
     }
 }

@@ -133,7 +133,7 @@
 <div class="form-row">
         <div class="form-group">
             <button type="submit" form="form-orden" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
-            <a type="button" class="btn" id="btnCancelar" href="/compras" style="background:red;color:white;" >Cancelar</a>
+            <a type="button" class="btn" id="btnCancelar" href="{{ url('/contratos') }}" style="background:red;color:white;" >Cancelar</a>
         </div>
   </div>
 @endsection
@@ -196,7 +196,7 @@
     if (req.ok) {
         let res = await req.json();
         window.open(`{{url('/compras_pdf/${res.id}')}}`, '_blank');
-        //window.location.href = "{{ url('/compras') }}";
+        window.location.href = "{{ url('/compras') }}";
     }
     else{
       Swal.fire({

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\orden_compra;
 use App\Models\OrdenProducto;
 use PDF;
+use Symfony\Component\VarDumper\VarDumper;
 
 class OrdenPdf extends Model
 {
