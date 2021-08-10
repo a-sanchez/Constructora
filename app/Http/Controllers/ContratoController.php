@@ -76,12 +76,12 @@ class ContratoController extends Controller
     public function destroy($id)
     {
         if (orden_compra::where("id_contrato",$id)){
-            return response()->json("Error al eliminar el contrato,contiene orden de compra",409);
+            return response()->json("Error al eliminar contrato,contiene ordenes de compra",409);
         }
         else{
         $contrato = contrato::find($id);
         contrato::destroy($id);
         return $contrato;
-    }
+        }
     }
 }
