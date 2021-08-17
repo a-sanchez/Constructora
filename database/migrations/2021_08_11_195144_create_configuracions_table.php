@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeBigIntMontoContrato extends Migration
+class CreateConfiguracionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class ChangeBigIntMontoContrato extends Migration
      */
     public function up()
     {
-        Schema::table('contratos',function($table){
-            $table->dropColumn('monto');
+        Schema::create('configuracions', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
-       Schema::table('contratos', function (Blueprint $table) {
-           $table->double("monto",10,2);
-       });
     }
 
     /**
@@ -28,6 +26,6 @@ class ChangeBigIntMontoContrato extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('configuracions');
     }
 }
