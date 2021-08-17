@@ -13,6 +13,7 @@
 use App\Http\Controllers\ContratoController;
 use App\Http\Controllers\proveedores;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\ContactoClienteClientesController;
 use App\Http\Controllers\OrdenCompraController;
 use App\Http\Controllers\OrdenProductoController;
@@ -102,7 +103,7 @@ Route::get('pagos/historial_pagos',function(){
 
 #-----------------CONFIGURACION-----------------------#
 
-Route::get('/configuracion',function(){
-    return view('configuracion.conf_opciones');
-});
+Route::get('configuracion/listado',[ConfiguracionController::class,"listado"]);
 
+Route::resource('configuracion',ConfiguracionController::class);
+#-----------------PROVEEDORES----------------------------
