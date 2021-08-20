@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DeleteColumnsUsers extends Migration
+class CreatePantallasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,12 @@ class DeleteColumnsUsers extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('pantallas', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->string('url',500);
+            $table->string('id_pantalla_padre');
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class DeleteColumnsUsers extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('pantallas');
     }
 }
