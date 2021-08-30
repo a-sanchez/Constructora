@@ -17,6 +17,7 @@ use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\ContactoClienteClientesController;
 use App\Http\Controllers\OrdenCompraController;
 use App\Http\Controllers\OrdenProductoController;
+use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\ProveedorContactoVentasController;
 use App\Http\Controllers\usercontroller;
 use App\Models\OrdenProducto;
@@ -117,4 +118,7 @@ Route::get('configuracion/listado',[ConfiguracionController::class,"listado"]);
 Route::resource('configuracion',ConfiguracionController::class);
 
 });
-#-----------------PROVEEDORES----------------------------
+#-----------------PERMISOS----------------------------
+
+Route::post('permisos/remove', [PermisosController::class,"removePermisos"]);
+Route::resource('permisos',PermisosController::class);

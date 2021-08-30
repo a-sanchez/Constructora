@@ -6,12 +6,16 @@ use App\Models\permisos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\pantallas;
 
 class ConfiguracionController extends Controller
 {
     public function index(){
+        $pantallas= pantallas::all();
+
         $users=configuracion::all();
-        return view('configuracion.permisos_configuracion',compact("users") );
+        return view('configuracion.permisos_configuracion',compact("users","pantallas"));
+        
         
     }
     public function create(){

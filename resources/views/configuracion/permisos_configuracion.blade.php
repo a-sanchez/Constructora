@@ -19,13 +19,13 @@
     </div>
 </div>
 <a type="button" class="btn btn-warning" href="{{url("/configuracion/listado")}}" style="color:white;">Listado de Usuarios</a>
-<a type="button" class="btn btn-danger" href="#" style="color:white;">Guardar</a>
+<a type="button" class="btn btn-danger" href="#" onclick="savePermisos();"  style="color:white;">Guardar</a>
 <form>
 <hr style="color: orange;">
     <div class="form-row" >
         <div class="col-md-6" style="text-align:center">
-        <select class="form-select" id="id_usuario" name="id_usuario">
-            <option value="0">Seleccione usuario</option>
+        <select class="form-select" id="id_usuario" name="id_usuario" onchange="check_permisos(this.value);">
+            <option value="0"selected required disabled >Seleccione usuario</option>
             @foreach($users as $user)
             <option value="{{$user->id}}">{{$user->name}}</option>
             @endforeach
@@ -35,13 +35,15 @@
     <p></p>
     <div class="form-row">
         <div class="form-group">
-            <label><input type="checkbox" id="check_cliente" value=""> CLIENTE </label><br>
-            <label><input type="checkbox" id="check_contrato" value=""> CONTRATO</label><br>
-            <label><input type="checkbox" id="check_orden" value=""> ORDEN DE COMPRA</label><br>
-            <label><input type="checkbox" id="check_estimacion" value=""> PRE-FACTURAS</label><br>
-            <label><input type="checkbox" id="check_pagos" value=""> PAGOS</label><br>
-            <label><input type="checkbox" id="check_prov" value=""> PROVEEDORES</label><br>
-            <label><input type="checkbox" id="check_conf" value=""> CONFIGURACION</label><br>
+
+            @foreach($pantallas as $pantalla)
+                <div class="form-check">
+                    <input type="checkbox" name="checkbox" class="form-check-input" id="{{$pantalla->id}}" value="{{$pantalla->id}}">
+                    <label class="form-check-label">
+                        {{$pantalla->nombre}}
+                    </label>
+                </div>
+            @endforeach
         </div>
     </div>
 
@@ -50,5 +52,88 @@
 @endsection
 
 @section('scripts')
+<script>
+
+    function resetChecked(){
+        let checkbox = document.getElementsByName("checkbox");
+        for (let i = 0; i < checkbox.length; i++) {
+            checkbox[i].checked = false;
+        }
+    }
+
+   var checkbox = document.querySelectorAll("input[type=checkbox]").forEach(checkbox=>{
+        checkbox.addEventListener('change', async function() {
+            if( document.getElementById("id_usuario").value == "0"){
+            this.checked = false;
+            alert("Favor de seleccionar usuario");
+       }
+        let url='{{url("/permisos")}}';
+        form = new FormData();
+        form.append('id_usuario', document.getElementById("id_usuario").value);
+        form.append("id_pantalla",this.value);
+
+        if (this.checked) {
+            init = {
+                method:'POST',
+                body:form,
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            }
+
+            let req = await fetch(url,init);
+
+            if (req.ok){
+                let res = await req.json();
+                console.log(res);
+            }
+            else{
+                alert("permisos no guardados")
+            }
+            
+        } 
+        else {
+            init = {
+                method:'POST',
+                body:form,
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            }
+            url = '{{url("/permisos/remove")}}'
+            let req = await fetch(url,init);
+
+        }
+        
+        });
+    });
+
+    
+    async function check_permisos(id_usuario){
+        resetChecked();
+        url="{{url('permisos/{id_usuario}')}}".replace("{id_usuario}",id_usuario);
+        init = {
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            }
+            let req = await fetch(url,init);
+            let res = await req.json();
+            res.forEach(element => {
+                document.getElementById(element.id_pantalla).checked =true;
+            });
+            
+        
+    }
+function savePermisos() {
+    Swal.fire(
+        'Permisos Actualizados',
+        '',
+        'success'
+    ).then(()=>{
+        window.location.href=("{{url("/")}}");
+    });
+}
+</script>
 
 @endsection

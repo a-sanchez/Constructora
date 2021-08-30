@@ -9,6 +9,6 @@ class permisos extends Model
 {
     use HasFactory;
     protected $table='permisos';
-    public $timestamps=true;
+    public $timestamps=false;
     protected $guarded=[];
 }
