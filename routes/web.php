@@ -18,15 +18,24 @@ use App\Http\Controllers\ContactoClienteClientesController;
 use App\Http\Controllers\OrdenCompraController;
 use App\Http\Controllers\OrdenProductoController;
 use App\Http\Controllers\ProveedorContactoVentasController;
+use App\Http\Controllers\usercontroller;
 use App\Models\OrdenProducto;
+use phpDocumentor\Reflection\Types\Resource_;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/opciones', function () {
-    return view('opciones');
-});
+// Route::get('/opciones', function () {
+//     return view('opciones');
+// });
+
+Route::get('/', [usercontroller::class,"index"])->name("login");
+Route::post('/login', [usercontroller::class,"inicioSesion"]);
+
+Route::group(['middleware'=>['auth']],function(){
+
+Route::get('/salir',[usercontroller::class,"salir"]);
 #---------------------CONTRATOS--------------------------------#
 Route::get('/opcion_contrato',function(){
     return view('contrato.contrato_opciones');
@@ -106,4 +115,6 @@ Route::get('pagos/historial_pagos',function(){
 Route::get('configuracion/listado',[ConfiguracionController::class,"listado"]);
 
 Route::resource('configuracion',ConfiguracionController::class);
+
+});
 #-----------------PROVEEDORES----------------------------

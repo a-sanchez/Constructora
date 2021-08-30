@@ -31,15 +31,16 @@
                     <div class="row">
                         <div class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
                             <form id="login-form" enctype="multipart/form-data" onsubmit="submitForm();">
+                                @csrf
                                 <div class="form-group mt-3">
                                     <input autocomplete="off" id="email" name="email" type="text" class="form-control" placeholder="Usuario">
                                 </div>
                                 <div class="form-group mt-3">
-                                    <input autocomplete="off" id="contrasena" name="contrasena" type="password" class="form-control" placeholder="Contraseña">
+                                    <input autocomplete="off" id="password" name="password" type="password" class="form-control" placeholder="Contraseña">
                                 </div>
                                 <div class="form-group mt-5">
-                                    <a href={{url('/opciones')}} class="btn btn-primary">Entrar</a>
-                                    <!-- <button id="submit" type="submit" class="btn btn-primary btn-send-message">Entrar</button> -->
+                                    {{-- <a href="#" class="btn btn-primary">Entrar</a> --}}
+                                    <button id="submit" type="submit" class="btn btn-primary btn-send-message">Entrar</button>
                                 </div>
                             </form>
                         </div>
@@ -50,4 +51,36 @@
     </div>
 </div>
     
+@endsection
+
+@section('scripts')
+<script>
+async function submitForm(){
+            event.preventDefault();
+            //  Convierte el formulario a Objeto formdata
+            let form = new FormData(document.getElementById("login-form"));
+            //Agregamos el campo accion
+            //INIT
+            let url = "{{url("/login")}}";
+            let init = {
+                method:"POST",
+                body:form
+            };
+            //PETICION
+            let req = await fetch(url, init);
+            //SI LA PETICION TIENE STATUS OK REDIRECICONA
+            if(req.ok){
+                window.location.href = "{{url("/")}}";
+                return;
+            }
+            //SI NO  AGREGA MENSAJE EN SWALERT
+            let res = await req.json();
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: res
+            })
+            document.getElementById('password').value = "";
+        }
+</script>
 @endsection

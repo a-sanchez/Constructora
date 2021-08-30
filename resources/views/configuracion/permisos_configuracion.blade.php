@@ -6,13 +6,13 @@
 <div class="row">
     <div class="col-md-12">
         <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
-        CONFIGURACIÓN
+        PERMISOS
         </h1>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <h4 style="color:gray;font-size:20px;">-Permisos</h4>
+        <h4 style="color:gray;font-size:20px;">-Agregar permisos</h4>
         <hr style="color: orange;">
         <p>
         </p>

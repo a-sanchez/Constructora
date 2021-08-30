@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\configuracion;
+use App\Models\permisos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ConfiguracionController extends Controller
 {
@@ -16,11 +19,14 @@ class ConfiguracionController extends Controller
     }
 
     public function listado(){
+        $usuario = Auth::user();
         $users=configuracion::all();
+        $permisos=permisos::where("id_usuario",$usuario->id);
         return view('configuracion.listado',compact('users'));
     }
     public function store(Request $request){
         $validation=$request->all();
+        $validation["password"] = Hash::make($validation["password"]);
         $user=configuracion::create($validation);
         return response()->json("Usuario creado con exito",201);
     }

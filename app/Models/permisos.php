@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class permisos extends Model
 {
     use HasFactory;
+    protected $table='permisos';
+    public $timestamps=true;
+    protected $guarded=[];
 }

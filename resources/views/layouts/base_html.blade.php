@@ -16,8 +16,8 @@
                 <li><a href={{url('/facturas')}}>Pre-Facturas</a></li>
                 <li><a href={{url('/pagos')}}>Pagos</a></li>
                 <li><a href={{url('/proveedores')}}>Proveedores</a></li>
-                <li><a href={{url('/configuracion')}}>Configuracion</a></li>
-                <li><a href="/">Salir</a></li>
+                <li><a href={{url('/configuracion')}}>PERMISOS</a></li>
+                <li><a href={{url('/salir')}}>Salir</a></li>
             </ul>
         </nav>
     </aside>
