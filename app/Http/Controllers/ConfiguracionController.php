@@ -12,11 +12,10 @@ class ConfiguracionController extends Controller
 {
     public function index(){
         $pantallas= pantallas::all();
-
-        $users=configuracion::all();
+        $users=configuracion::where("id","!=","1")->get();
         return view('configuracion.permisos_configuracion',compact("users","pantallas"));
-        
-        
+
+
     }
     public function create(){
         return view('configuracion.add_usuario');
@@ -49,7 +48,7 @@ class ConfiguracionController extends Controller
         $update=$user->update($request->all());
         return $update;
     }
-    
+
     public function destroy($id){
         $user=configuracion::find($id);
         configuracion::destroy($id);

@@ -1,6 +1,6 @@
 @extends('layouts.base_html')
 @section('tittle') AGREGAR USUARIO
-@endsection 
+@endsection
 @section("styles")
 <style>
     .colorlib-contact{
@@ -37,8 +37,8 @@
 <div class="row d-flex flex-row justify-content-center alig-items-center">
     <div class="col-md-4">
     <a><i style="font-size:1.5rem;color:red" id="envelope"  class="fas fa-envelope"></i></a>
-    <label for="nombre_email" >Email</label>
-    <input type="email" class="form-control" id="email" name="email" required>
+    <label for="nombre_email" >Usuario</label>
+    <input type="text" class="form-control" id="email" name="email" required>
     </div>
 </div>
 <br>

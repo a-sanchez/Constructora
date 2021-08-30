@@ -1,8 +1,8 @@
 @extends('layouts.base')
 @section('menu')
     @php
-        $permisos = DB::table("permisos")->select();
-        var_dump($permisos);
+        use App\Models\permisos;
+        $permisos = permisos::where("id_usuario",Auth::user()->id)->get();
     @endphp
     <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
     <aside id="colorlib-aside" role="complementary" class="border js-fullheight" style="height: 982px;">
@@ -14,14 +14,20 @@
             </div>
             <ul>
                 <li class="colorlib-active">
-                <li><a href={{url('/clientes')}}>Cliente</a></li>
-                <li><a href={{url('/contratos')}}>Contrato</a></li>
-                <li><a href={{url('/compras')}}>Orden de Compra</a></li>
-                <li><a href={{url('/facturas')}}>Pre-Facturas</a></li>
-                <li><a href={{url('/pagos')}}>Pagos</a></li>
-                <li><a href={{url('/proveedores')}}>Proveedores</a></li>
-                <li><a href={{url('/configuracion')}}>PERMISOS</a></li>
-                <li><a href={{url('/salir')}}>Salir</a></li>
+                    @if(Auth::user()->id == 1)
+                        <li><a href={{url('/clientes')}}>Cliente</a></li>
+                        <li><a href={{url('/contratos')}}>Contrato</a></li>
+                        <li><a href={{url('/compras')}}>Orden de Compra</a></li>
+                        <li><a href={{url('/facturas')}}>Pre-Facturas</a></li>
+                        <li><a href={{url('/pagos')}}>Pagos</a></li>
+                        <li><a href={{url('/proveedores')}}>Proveedores</a></li>
+                        <li><a href={{url('/configuracion')}}>PERMISOS</a></li>
+                    @else
+                        @foreach($permisos as $opcion)
+                            <li><a href={{url("{$opcion->pantalla->url}")}}>{{$opcion->pantalla->nombre}}</a></li>
+                        @endforeach
+                    @endif
+                        <li><a href={{url('/salir')}}>Salir</a></li>
             </ul>
         </nav>
     </aside>
