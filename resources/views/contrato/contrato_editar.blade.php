@@ -29,7 +29,7 @@
     </div>
     <h5>Cliente</h5>
 
-    <form class="row g-3" id="form-contrato" onsubmit='edit_contrato({{$contrato->id}});'>
+    <form class="row g-3" enctype="multipart/form-data" id="form-contrato" onsubmit='edit_contrato({{$contrato->id}});'>
         @csrf
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -115,30 +115,47 @@
         <br>
         <div class="row mt-2">
             @if($contrato->file)
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <a class="btn btn-secondary" href={{url("/storage/docs/contrato_adjuntos/{$contrato->folio}/{$contrato->file}")}} target="_blank">Contrato</a>
+                <a  style="color: black" href="#"  class="btn"><i style="font-size:1.5rem" id="trash-alt"  onclick='borrarFile1("{{$contrato->file}}")' class="fas fa-trash-alt"></i></a>
+            </div>
+            @else
+            <div class="col-md-6">
+            <label for="file">Adjuntar PDF de Contrato: </label>
+            <input type="file" class="form-control" id="file" name="file" style="border:none;">
+            </div>
             @endif
-                <a  style="color: white;background-color:red;border:none;" href="#" class="btn" onclick="#"><i style="font-size:1.5rem" id="trash-alt"  class="fas fa-trash-alt"></i></a>
-                <input type="file" class="form-control" id="file" name="file" style="border:none;">
-                </div>
-
-
-
-
-                
             @if($contrato->file2)
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <a class="btn btn-secondary" href={{url("/storage/docs/contrato_adjuntos/{$contrato->folio}/{$contrato->file2}")}} target="_blank">Anticipo</a>
+                <a  style="color: black" href="#"  class="btn"><i style="font-size:1.5rem" onclick='borrarFile2("{{$contrato->file2}}")' id="trash-alt"  class="fas fa-trash-alt"></i></a>
+            </div>
+            @else
+            <div class="col-md-6">
+            <label for="file2">Adjuntar PDF de Anticipo: </label>
+            <input type="file" class="form-control" id="file2" name="file2" style="border:none;">
             </div>
             @endif
             @if($contrato->file3)
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <a class="btn btn-secondary" href={{url("/storage/docs/contrato_adjuntos/{$contrato->folio}/{$contrato->file3}")}} target="_blank">Cumplimiento</a>
+                <a  style="color: black" href="#"  class="btn"><i style="font-size:1.5rem" id="trash-alt" onclick='borrarFile3("{{$contrato->file3}}")' class="fas fa-trash-alt"></i></a>
+            </div>
+            @else
+            <div class="col-md-6">
+            <label for="file3">Adjuntar PDF de Cumplimiento:  </label>
+            <input type="file" class="form-control" id="file3" name="file3" style="border:none;">
             </div>
             @endif
             @if($contrato->file4)
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <a class="btn btn-secondary" href={{url("/storage/docs/contrato_adjuntos/{$contrato->folio}/{$contrato->file4}")}} target="_blank">Vicios Ocultos</a>
+                <a  style="color: black" class="btn"><i style="font-size:1.5rem" id="trash-alt" onclick='borrarFile("{{$contrato->file4}}")' class="fas fa-trash-alt"></i></a>
+            </div>
+            @else
+            <div class="col-md-6">
+            <label for="file4">Adjuntar PDF de Vicios Ocultos:  </label>
+            <input type="file" class="form-control" id="file4" name="file4" style="border:none;">
             </div>
             @endif
         </div>
@@ -158,9 +175,9 @@
         async function edit_contrato(id) {
             event.preventDefault();
             let form = new FormData(document.getElementById("form-contrato"));
-            let url = "{{url('/contratos/{id}')}}".replace("{id}", id);
+            let url = "{{url('/contratos/actualizar/{id}')}}".replace("{id}", id);
             let init = {
-                method: "PUT"
+                method: "POST"
                 , headers: {
                     'X-CSRF-Token': document.getElementsByName("_token")[0].value
                     , "Content-Type": "application/json"
@@ -169,7 +186,7 @@
             }
             let req = await fetch(url, init);
             if (req.ok) {
-                window.location.href = "{{url('/contratos')}}";
+                //window.location.href = "{{url('/contratos')}}";
             } else {
                 Swal.fire({
                     icon: 'error'
@@ -177,6 +194,114 @@
                     , text: 'Error al actualizar el contrato'
                 , });
             }
+        }
+
+
+        async function borrarFile1(file){
+            event.preventDefault();
+            let id =   {{ $contrato->id }}
+            let url='{{url("/contratos/eliminar1/{id}/{file}")}}'.replace("{file}",file);
+            url = url.replace("{id}",id);
+            let init={
+                method:"DELETE",
+                headers: {
+                    'X-CSRF-Token': document.getElementsByName("_token")[0].value
+                    , "Content-Type": "application/json"
+                }
+            }
+            let req = await fetch(url,init);
+            if(req.ok){
+               location.reload();
+            }
+            else{
+                Swal.fire({
+                    icon: 'error'
+                    , title: 'Error'
+                    , text: 'Error al borrar el archivo'
+                , });
+            }
+
+        }
+
+        async function borrarFile2(file2){
+            event.preventDefault();
+            let id =   {{ $contrato->id }}
+            let url='{{url("/contratos/eliminar2/{id}/{file2}")}}'.replace("{file2}",file2);
+            url = url.replace("{id}",id);
+            let init={
+                method:"DELETE",
+                headers: {
+                    'X-CSRF-Token': document.getElementsByName("_token")[0].value
+                    , "Content-Type": "application/json"
+                }
+            }
+            let req = await fetch(url,init);
+            if(req.ok){
+               location.reload();
+            }
+            else{
+                Swal.fire({
+                    icon: 'error'
+                    , title: 'Error'
+                    , text: 'Error al borrar el archivo'
+                , });
+            }
+
+        }
+
+        async function borrarFile3(file3){
+            event.preventDefault();
+            let id =   {{ $contrato->id }}
+            let url='{{url("/contratos/eliminar3/{id}/{file3}")}}'.replace("{file3}",file3);
+            url = url.replace("{id}",id);
+            console.log(url);
+            let init={
+                method:"DELETE",
+                headers: {
+                    'X-CSRF-Token': document.getElementsByName("_token")[0].value
+                    , "Content-Type": "application/json"
+                }
+            }
+            let req = await fetch(url,init);
+            if(req.ok){
+               location.reload();
+            }
+            else{
+                Swal.fire({
+                    icon: 'error'
+                    , title: 'Error'
+                    , text: 'Error al borrar el archivo'
+                , });
+            }
+
+        }
+
+
+
+        async function borrarFile(file4){
+            event.preventDefault();
+            let id =   {{ $contrato->id }}
+            let url='{{url("/contratos/eliminar/{id}/{file4}")}}'.replace("{file4}",file4);
+            url = url.replace("{id}",id);
+            let init={
+                method:"DELETE",
+                headers: {
+                    'X-CSRF-Token': document.getElementsByName("_token")[0].value
+                    , "Content-Type": "application/json"
+                }
+            }
+            let req = await fetch(url,init);
+            if(req.ok){
+               location.reload();
+            }
+            else{
+                Swal.fire({
+                    icon: 'error'
+                    , title: 'Error'
+                    , text: 'Error al borrar el archivo'
+                , });
+            }
+
         }
 
     </script>

@@ -25,6 +25,9 @@ class contrato extends Model
     public function cliente(){
         return $this->belongsTo(cliente::class,"id_cliente");
     }
+
+    
+
     public function setFile($file)
     {
         $filename =$file->hashName();

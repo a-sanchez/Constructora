@@ -7,7 +7,7 @@ use App\Http\Requests\contratos_request;
 use App\Models\contrato;
 use App\Models\cliente;
 use App\Models\orden_compra;
-
+use Illuminate\Support\Facades\DB;
 class ContratoController extends Controller
 {
     public function index()
@@ -70,8 +70,27 @@ class ContratoController extends Controller
     {
         $contrato=contrato::find($id);
         $update=$contrato->update($request->all());
+
         return $update;
     }
+
+    public function actualizar(Request $request,$id){
+
+        $contrato=contrato::find($id);
+        if(empty($contrato->file4)){
+            $validation=$request->all();
+            $contrato = contrato::create($validation);
+                if (isset($request["file4"])) {
+                    $contrato->setFile4($validation["file4"]);
+                }
+            }
+        else{
+            "existen datos";
+        }
+
+        }
+
+    
 
     public function destroy($id)
     {   $ordenes = orden_compra::where("id_contrato",$id)->get();
@@ -84,4 +103,43 @@ class ContratoController extends Controller
         return $contrato;
         }
     }
+
+    public function eliminar1($id)
+    {
+        $eliminar = DB::table('contratos')
+        ->where('id',$id)
+        ->update(['file'=>null]);
+        return $eliminar;
+
+    }
+
+    public function eliminar2($id)
+    {
+        $eliminar = DB::table('contratos')
+        ->where('id',$id)
+        ->update(['file2'=>null]);
+        return $eliminar;
+
+    }
+
+    public function eliminar3($id)
+    {
+        $eliminar = DB::table('contratos')
+        ->where('id',$id)
+        ->update(['file3'=>null]);
+        return $eliminar;
+
+    }
+
+
+    public function eliminar($id)
+    {
+        $eliminar = DB::table('contratos')
+        ->where('id',$id)
+        ->update(['file4'=>null]);
+        return $eliminar;
+
+    }
+
+
 }

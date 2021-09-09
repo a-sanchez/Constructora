@@ -42,10 +42,15 @@ Route::get('/opcion_contrato',function(){
     return view('contrato.contrato_opciones');
 });
 
+
 // Route::get('editar_contrato/{id}',function($id){
 //     return view('contrato.contrato_editar');
 // });
-
+Route::delete('contratos/eliminar1/{id}/{file}', [ContratoController::class,"eliminar1"]);
+Route::delete('contratos/eliminar2/{id}/{file2}', [ContratoController::class,"eliminar2"]);
+Route::delete('contratos/eliminar3/{id}/{file3}', [ContratoController::class,"eliminar3"]);
+Route::delete('contratos/eliminar/{id}/{file4}', [ContratoController::class,"eliminar"]);
+Route::post('contratos/actualizar/{id}',[ContratoController::class,'actualizar']);
 Route::resource('contratos',ContratoController::class);
 #-----------------PROVEEDORES---------------------------------#
 Route::get('/opcion_proveedores',function(){

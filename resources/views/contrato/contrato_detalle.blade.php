@@ -118,22 +118,22 @@
       <br>
     <div class="row mt-2">
       @if($contrato->file)
-      <div class="col-md-4">
+      <div class="col-md-3">
         <a class="btn btn-secondary"  href={{url("/storage/docs/contrato_adjuntos/{$contrato->folio}/{$contrato->file}")}} target="_blank" >Contrato</a>
       </div>
       @endif
       @if($contrato->file2)
-      <div class="col-md-4">
+      <div class="col-md-3">
         <a class="btn btn-secondary"  href={{url("/storage/docs/contrato_adjuntos/{$contrato->folio}/{$contrato->file2}")}} target="_blank" >Anticipo</a> 
       </div>
       @endif
       @if($contrato->file3)
-      <div class="col-md-4">
+      <div class="col-md-3">
       <a class="btn btn-secondary"  href={{url("/storage/docs/contrato_adjuntos/{$contrato->folio}/{$contrato->file3}")}} target="_blank" >Cumplimiento</a>
       </div>
       @endif
       @if($contrato->file4)
-      <div class="col-md-4">
+      <div class="col-md-3">
       <a class="btn btn-secondary"  href={{url("/storage/docs/contrato_adjuntos/{$contrato->folio}/{$contrato->file4}")}} target="_blank" >Vicios Ocultos</a>   
       </div>
       @endif
