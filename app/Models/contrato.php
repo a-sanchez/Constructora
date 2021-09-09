@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\cliente;
+use Illuminate\Support\Facades\Storage;
 
 class contrato extends Model
 {
@@ -30,6 +31,9 @@ class contrato extends Model
 
     public function setFile($file)
     {
+        if( $this->attributes["file"] != null){
+            Storage::delete($this->getRuta()."/".$this->attributes["file"]);
+        }
         $filename =$file->hashName();
         $file->store($this->getRuta());
         $this->attributes["file"] = $filename;
@@ -39,6 +43,9 @@ class contrato extends Model
 
     public function setFile2($file)
     {
+        if( $this->attributes["file2"] != null){
+            Storage::delete($this->getRuta()."/".$this->attributes["file2"]);
+        }
         $filename =$file->hashName();
         $file->store($this->getRuta());
         $this->attributes["file2"] = $filename;
@@ -48,6 +55,9 @@ class contrato extends Model
 
     public function setFile3($file)
     {
+        if( $this->attributes["file3"] != null){
+            Storage::delete($this->getRuta()."/".$this->attributes["file3"]);
+        }
         $filename =$file->hashName();
         $file->store($this->getRuta());
         $this->attributes["file3"] = $filename;
@@ -57,6 +67,9 @@ class contrato extends Model
 
     public function setFile4($file)
     {
+        if( $this->attributes["file4"] != null){
+            Storage::delete($this->getRuta()."/".$this->attributes["file4"]);
+        }
         $filename =$file->hashName();
         $file->store($this->getRuta());
         $this->attributes["file4"] = $filename;

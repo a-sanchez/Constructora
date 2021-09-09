@@ -74,19 +74,25 @@ class ContratoController extends Controller
         return $update;
     }
 
-    public function actualizar(Request $request,$id){
 
+
+    public function actualizar(Request $request,$id){
         $contrato=contrato::find($id);
-        if(empty($contrato->file4)){
-            $validation=$request->all();
-            $contrato = contrato::create($validation);
-                if (isset($request["file4"])) {
-                    $contrato->setFile4($validation["file4"]);
-                }
-            }
-        else{
-            "existen datos";
+        switch($request->file){
+            case 'file':
+                $contrato->setFile($request->file_info);
+                break;
+            case 'file2':
+                $contrato->setFile2($request->file_info);
+                break;
+            case 'file3':
+                $contrato->setFile3($request->file_info);
+                break;
+            case 'file4':
+                $contrato->setFile4($request->file_info);
+                break;
         }
+
 
         }
 

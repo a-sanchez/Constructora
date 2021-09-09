@@ -122,7 +122,7 @@
             @else
             <div class="col-md-6">
             <label for="file">Adjuntar PDF de Contrato: </label>
-            <input type="file" class="form-control" id="file" name="file" style="border:none;">
+            <input type="file" class="form-control" id="file" name="file" onchange = updatefile(this); style="border:none;">
             </div>
             @endif
             @if($contrato->file2)
@@ -133,7 +133,7 @@
             @else
             <div class="col-md-6">
             <label for="file2">Adjuntar PDF de Anticipo: </label>
-            <input type="file" class="form-control" id="file2" name="file2" style="border:none;">
+            <input type="file" class="form-control" id="file2" name="file2" onchange = updatefile(this); style="border:none;">
             </div>
             @endif
             @if($contrato->file3)
@@ -144,7 +144,7 @@
             @else
             <div class="col-md-6">
             <label for="file3">Adjuntar PDF de Cumplimiento:  </label>
-            <input type="file" class="form-control" id="file3" name="file3" style="border:none;">
+            <input type="file" class="form-control" id="file3" name="file3" onchange = updatefile(this); style="border:none;">
             </div>
             @endif
             @if($contrato->file4)
@@ -155,7 +155,7 @@
             @else
             <div class="col-md-6">
             <label for="file4">Adjuntar PDF de Vicios Ocultos:  </label>
-            <input type="file" class="form-control" id="file4" name="file4" style="border:none;">
+            <input type="file" class="form-control" id="file4" name="file4" onchange = updatefile(this); style="border:none;">
             </div>
             @endif
         </div>
@@ -186,7 +186,7 @@
             }
             let req = await fetch(url, init);
             if (req.ok) {
-                //window.location.href = "{{url('/contratos')}}";
+            window.location.href = "{{url('/contratos')}}";
             } else {
                 Swal.fire({
                     icon: 'error'
@@ -276,6 +276,23 @@
 
         }
 
+        async function updatefile(file){
+            let form = new FormData();
+            form.append('file',file.id);
+            form.append('file_info',file.files[0]);
+            let id =   {{ $contrato->id }}
+            let url='{{url("/contratos/actualizar/{id}")}}'.replace('{id}',id);
+            let init ={
+                method:"POST",
+                headers:{
+                    'X-CSRF-Token': document.getElementsByName("_token")[0].value
+                },
+                body:form
+            }
+
+            let req = await fetch(url,init);
+
+        }
 
 
         async function borrarFile(file4){
