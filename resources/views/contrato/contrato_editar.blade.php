@@ -9,10 +9,33 @@
         text-transform: uppercase;
     }
 
+    .loader-background{
+        width: 100%;
+        height: 100%;
+        top: 0%;
+        left: 0%;
+        position: fixed;
+        z-index: 1;
+        background-color: black;
+        opacity: 0.3;
+    }
+
+    .spinner-border{
+        top: 44%;
+        left: 60%;
+        position: fixed;
+        color: #FF9C00;
+    }
 </style>
 @endsection
 
 @section('body')
+
+<div class="loader-background" style="display: none;" id="loader">
+    <div class="spinner-border">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
 <div class="container">
     <div class="col-md-12">
         <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
@@ -277,6 +300,7 @@
         }
 
         async function updatefile(file){
+            document.getElementById("loader").style.display = "block";
             let form = new FormData();
             form.append('file',file.id);
             form.append('file_info',file.files[0]);
@@ -291,7 +315,7 @@
             }
 
             let req = await fetch(url,init);
-
+            document.getElementById("loader").style.display = "none";
         }
 
 
