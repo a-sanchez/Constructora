@@ -70,7 +70,6 @@ class ContratoController extends Controller
     {
         $contrato=contrato::find($id);
         $update=$contrato->update($request->all());
-
         return $update;
     }
 
@@ -96,7 +95,7 @@ class ContratoController extends Controller
 
         }
 
-    
+
 
     public function destroy($id)
     {   $ordenes = orden_compra::where("id_contrato",$id)->get();
