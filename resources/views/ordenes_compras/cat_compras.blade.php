@@ -44,6 +44,7 @@ on   p.id=oc.id_proveedor
 where oc.status != 0');
 $xcrud->button(URL::to('compras_pdf/{id}'),'PDF',false,"P",array('target'=>'_blank'));
 $xcrud->button(URL::to('compras/{id}/edit'),'Editar',false,"P");
+$xcrud->button(URL::to('compras/orden/{id}'),'Operar Orden',false,"P");
 $xcrud->button('#','Eliminar',false,"P",array('onclick'=>'update_status({id})'));
 $xcrud->unset_add();
 $xcrud->unset_edit();

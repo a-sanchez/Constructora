@@ -3,6 +3,8 @@
 @endsection 
 @section("styles") 
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="{{ asset('lib/DataTables/Responsive-2.2.9/css/responsive.dataTables.min.css') }}">    <style>
+    
     <style>
         table {
             text-transform: uppercase;
@@ -62,7 +64,9 @@
     @section("scripts")
     <script src="https://kit.fontawesome.com/b4cf0d1143.js" crossorigin="anonymous"></script>
     <script>
-        let table=$("#usuario_lista").dataTable();
+        let table=$("#usuario_lista").dataTable({
+            responsive:true
+        });
 
         
         

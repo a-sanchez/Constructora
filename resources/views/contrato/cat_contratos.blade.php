@@ -1,5 +1,9 @@
 @extends('layouts.base_html')
-@section('tittle') CONTRATOS <@endsection @section("styles") <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+@section('tittle') CONTRATOS @endsection 
+@section("styles") 
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="{{ asset('lib/DataTables/Responsive-2.2.9/css/responsive.dataTables.min.css') }}">    <style>
+
     <style>
         table {
             text-transform: uppercase;
@@ -47,7 +51,7 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
                             <li><a class="dropdown-item" href="{{url("compras/{$contrato->id}")}}">Orden de Compra</a></li>
-                            <li><a class="dropdown-item" href="#">Pre-Factura</a></li>
+                            <li><a class="dropdown-item" href="{{url("facturas/{$contrato->id}")}}">Generar Pre-Factura</a></li>
                             <li><a class="dropdown-item" href="{{url("/contratos/{$contrato->id}/edit")}}">Editar</a></li>
                             <li><a class="dropdown-item" href="{{url("/contratos/{$contrato->id}")}}">Detalles</a></li>
                             <li><a  class="dropdown-item" href="" onclick='borrarContrato({{$contrato->id}})'>Eliminar</a></li>
@@ -62,7 +66,9 @@
 
     @section("scripts")
     <script>
-        let table = $("#contrato_table").dataTable();
+        let table = $("#contrato_table").dataTable({
+            responsive:true
+        });
 
          async function borrarContrato(id) {
             event.preventDefault();

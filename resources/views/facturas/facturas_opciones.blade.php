@@ -6,7 +6,7 @@
 <style>
 ul.feat{
 	list-style:none;
-	margin: 0 0 20px 0;
+	margin: 0 0 0px 0;
 	padding:0;
 }
 ul.feat li{
@@ -25,7 +25,7 @@ ul.feat#about li i {
 }
 ul.feat#about li {
     margin-bottom: 20px;
-    padding: 20px 25px 10px 85px;
+    padding: 20px 25px 10px 0px;
     border: 1px solid #ddd;
     background-color: #f3f3f3;
 }
@@ -54,21 +54,27 @@ a{
         <h4 style="color:gray;font-size:20px">-Opciones</h4>
         <hr style="color:orange;">
 
-<div class="row">
+<div class="row ">
       <div class="col-md-3" >
         <h1></h1> 
       </div>
-      <div class="col-md-5" >
+      <div class="col-md-5 mt-4" style="text-align: center;">
         <ul class="feat" id="about">	
-            <li>
-            <i class="fas fa-file-alt fa-2x" style="margin-right: 10px"></i>	
-                <a  href="facturas/addfacturas" style="font-size:20px;">Agregar Factura</a>
+            <li>	
+            <i class="fas fa-check-circle" style="font-size: 30px;margin-right: 5px;"></i>
+                <a  href="{{ url('/facturas/create') }}" style="font-size:20px;">Registro de Pre-Factura</a>
             </li>		    
         </ul>
         <ul class="feat" id="about">	
-            <li>
-            <i class="fas fa-list fa-2x" style="margin-right: 10px"></i>	
-                <a  href="facturas/cat_facturas" style="font-size:20px;">Catalogo de Facturas</a>
+            <li style="padding-right: 60px;">
+            <i class="fas fa-file-alt fa-2x" style="margin-right: 5px;" ></i>	
+                <a  href="#" style="font-size:20px;">Operar Pre-Factura</a>
+            </li>		    
+        </ul>
+        <ul class="feat" id="about">	
+            <li style="padding-right: 40px;margin-right: 5px;">
+            <i class="fas fa-list fa-2x" ></i>	
+                <a  href="url{{'facturas/cat_facturas'}}" style="font-size:20px;">Pagos de Pre-Factura</a>
             </li>		    
         </ul>
       </div>

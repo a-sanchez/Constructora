@@ -42,6 +42,11 @@ class OrdenCompraController extends Controller
         return view('ordenes_compras.add_compra',$ctx);
     }
 
+    public function orden($id)
+    {
+        $orden_compra = orden_compra::find($id);
+        return view("ordenes_compras.operar",compact("orden_compra"));
+    }
     public function edit($id)
     {
         $orden_compra = orden_compra::find($id);

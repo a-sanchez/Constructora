@@ -18,8 +18,8 @@
                         <li><a href={{url('/clientes')}}>Cliente</a></li>
                         <li><a href={{url('/contratos')}}>Contrato</a></li>
                         <li><a href={{url('/compras')}}>Orden de Compra</a></li>
-                        <li><a href={{url('/facturas')}}>Pre-Facturas</a></li>
-                        <li><a href={{url('/pagos')}}>Pagos</a></li>
+                        <li><a href={{url('/facturas')}}>Operar pre-factura</a></li>
+                        <li><a href={{url('/pagos_proveedores')}}>Pagos proveedores</a></li>
                         <li><a href={{url('/proveedores')}}>Proveedores</a></li>
                         <li><a href={{url('/configuracion')}}>PERMISOS</a></li>
                     @else

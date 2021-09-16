@@ -10,18 +10,20 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use App\Http\Controllers\ContratoController;
-use App\Http\Controllers\proveedores;
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\ConfiguracionController;
-use App\Http\Controllers\ContactoClienteClientesController;
-use App\Http\Controllers\OrdenCompraController;
-use App\Http\Controllers\OrdenProductoController;
-use App\Http\Controllers\PermisosController;
-use App\Http\Controllers\ProveedorContactoVentasController;
-use App\Http\Controllers\usercontroller;
 use App\Models\OrdenProducto;
+use App\Http\Controllers\proveedores;
+use App\Http\Controllers\usercontroller;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\FacturaController;
+use App\Http\Controllers\ContratoController;
+use App\Http\Controllers\PermisosController;
 use phpDocumentor\Reflection\Types\Resource_;
+use App\Http\Controllers\OrdenCompraController;
+use App\Http\Controllers\ConfiguracionController;
+use App\Http\Controllers\OrdenProductoController;
+use App\Http\Controllers\ContactoClienteClientesController;
+use App\Http\Controllers\PagosProveedoresController;
+use App\Http\Controllers\ProveedorContactoVentasController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -83,6 +85,7 @@ Route::get('/compras_opciones',function(){
 Route::get('ordenes_compra/catalago_compra',function(){
     return view('ordenes_compras.cat_compras');
 });*/
+Route::get("compras/orden/{id}",[OrdenCompraController::class,'orden']);
 Route::resource('compras',OrdenCompraController::class);
 Route::get("compras_pdf/{id}",[OrdenCompraController::class, 'OrdenPdf']);
 #----------------ORDENES PRODUCTOS-----------------------------#
@@ -91,31 +94,40 @@ Route::resource('orden_productos',OrdenProductoController::class);
 
 #----------------FACTURAS------------------------------#
 
-Route::get('/facturas',function(){
-    return view('facturas.facturas_opciones');
-});
+// Route::get('facturas/registro_factura',function(){
+//     return view('facturas.registro_factura');
+// });
+Route::get('facturas/pagar',[FacturaController::class,'pagar']);
+Route::resource('facturas',FacturaController::class);
 
-Route::get('facturas/addfacturas',function(){
-    return view('facturas.addfacturas');
-});
 
-Route::get('facturas/cat_facturas',function(){
-    return view('facturas.cat_facturas');
-});
+// Route::get('/facturas',function(){
+//     return view('facturas.facturas_opciones');
+// });
+
+// Route::get('facturas/addfacturas',function(){
+//     return view('facturas.addfacturas');
+// });
+
+// Route::get('facturas/cat_facturas',function(){
+//     return view('facturas.cat_facturas');
+// });
 #----------------PAGOS---------------------------------#
 
-Route::get('/pagos',function(){
-    return view('pagos.opciones_pago');
-});
+// Route::get('/pagos',function(){
+//     return view('pagos.opciones_pago');
+// });
 
-Route::get('pagos/realizapago',function(){
-    return view('pagos.realizapago');
-});
+// Route::get('pagos/realizapago',function(){
+//     return view('pagos.realizapago');
+// });
 
-Route::get('pagos/historial_pagos',function(){
-    return view('pagos.historial_pagos');
-});
+// Route::get('pagos/historial_pagos',function(){
+//     return view('pagos.historial_pagos');
+// });
 
+Route::get('pagos_proveedores/detalles_pago',[PagosProveedoresController::class,"detalles_pago"]);
+Route::resource('pagos_proveedores',PagosProveedoresController::class);
 #-----------------CONFIGURACION-----------------------#
 
 Route::get('configuracion/listado',[ConfiguracionController::class,"listado"]);
