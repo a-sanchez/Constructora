@@ -76,7 +76,7 @@
     </div>
     <div class="col-md-6">
       <label for="sub_iva" >SubTotal con IVA</label>
-      <input type="text"disabled class="form-control" id="subtotal_iva"   name="subtotal_iva" required value="0.00">
+      <input type="text"disabled class="form-control" id="subtotal_iva"    name="subtotal_iva" required value="0.00">
     </div>
   </div>
   <div class="row mt-2">
@@ -159,10 +159,10 @@
         var a = parseFloat(document.getElementById("sub_total").value),
             b = ((parseFloat(document.getElementById("iva").value))/100)||0;
             
+            let c = (a*b).toFixed(2);
+            document.getElementById("subtotal_iva").value=c;
 
-            document.getElementById("subtotal_iva").value=a*b;
-            c=document.getElementById("subtotal_iva").value=a*b;
-            document.getElementById("total_estimacion").value=(c+a).toFixed(2);
+            document.getElementById("total_estimacion").value= (+c + +a);
       }
       catch(e){}
     }
@@ -172,9 +172,13 @@
         var a= ((parseFloat(document.getElementById("ivyc").value))/100)||0,
             c=((parseFloat(document.getElementById("icic").value))/100)||0,
             b=parseFloat(document.getElementById("importe_estimacion").value);
-            x=document.getElementById("monto_ivyc").value=a*b;
-            y=document.getElementById("monto_icic").value=b*c;
-            document.getElementById("total_retenciones").value=(x+y).toFixed(2);
+
+            let x=(a*b).toFixed(2);
+            document.getElementById("monto_ivyc").value=x;
+            let y = (b*c).toFixed(2);
+            document.getElementById("monto_icic").value=y;
+
+            document.getElementById("total_retenciones").value=(+x + +y)
       }
       catch(e){}
     }
@@ -183,6 +187,7 @@
       var retenciones = document.getElementById("total_retenciones").value;
       document.getElementById("neto").value=(estimacion-retenciones).toFixed(2);
     }
+
 
     async function insert_prefactura(){
       event.preventDefault();
@@ -206,8 +211,7 @@
       if(req.ok){
         let res =await req.json();
         window.open(`{{url('/prefacturas_pdf/${res.id}')}}`, '_blank');
-        //console.log(res.id);
-        //window.location.href="{{url('/facturas')}}";
+        window.location.href="{{url('/facturas')}}";
       }
       else{
         Swal.fire({

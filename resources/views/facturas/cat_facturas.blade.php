@@ -42,7 +42,7 @@
                 <td class="align-middle">{{date('d/m/Y', strtotime($prefactura->fecha_final))}}</td>
                 <td class="align-middle">{{$prefactura->status}}</td>
                 <td>   
-                    <a  type="button" style="color: red;" href="#" class="btn"><i style="font-size:2rem" id="file-pdf"  class="fas fa-file-pdf"></i></a>
+                    <a  type="button" style="color: red;" href="{{url("prefacturas_pdf/{$prefactura->id}")}}" class="btn"><i style="font-size:2rem" id="file-pdf"  class="fas fa-file-pdf"></i></a>
 
                 </td>
                 <td>

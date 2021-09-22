@@ -14,7 +14,6 @@ class FacturaController extends Controller
     public function index()
     {
         $pre_facturas=factura::all();
-
         return view('facturas.cat_facturas',compact('pre_facturas'));
     }
     public function create()
