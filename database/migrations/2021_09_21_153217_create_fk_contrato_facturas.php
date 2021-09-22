@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMontoColumnContrato extends Migration
+class CreateFkContratoFacturas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddMontoColumnContrato extends Migration
      */
     public function up()
     {
-        // Schema::table('contratos', function (Blueprint $table) {
-        //     $table->decimal("monto",12,2);
-        // });
+        Schema::table('facturas',function($table){
+            $table->unsignedBigInteger('id_contrato');
+            $table->foreign('id_contrato')->references('id')->on('contratos')->default(1);
+        });
     }
 
     /**

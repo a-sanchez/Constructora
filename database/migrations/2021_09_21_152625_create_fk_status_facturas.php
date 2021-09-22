@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMontoColumnContrato extends Migration
+class CreateFkStatusFacturas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddMontoColumnContrato extends Migration
      */
     public function up()
     {
-        // Schema::table('contratos', function (Blueprint $table) {
-        //     $table->decimal("monto",12,2);
-        // });
+        Schema::table('facturas',function($table){
+            $table->unsignedBigInteger('id_status');
+            $table->foreign('id_status')->references('id')->on('estatus_facturas')->default(1);
+        });
     }
 
     /**
@@ -24,7 +25,6 @@ class AddMontoColumnContrato extends Migration
      * @return void
      */
     public function down()
-    {
-        //
+    {//
     }
 }

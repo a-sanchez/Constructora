@@ -99,7 +99,7 @@ Route::resource('orden_productos',OrdenProductoController::class);
 // });
 Route::get('facturas/pagar',[FacturaController::class,'pagar']);
 Route::resource('facturas',FacturaController::class);
-
+Route::get("prefacturas_pdf/{id}",[FacturaController::class,'PrefacturaPDF']);
 
 // Route::get('/facturas',function(){
 //     return view('facturas.facturas_opciones');
