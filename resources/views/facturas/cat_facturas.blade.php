@@ -31,14 +31,20 @@
             <th>Inicio</th>
             <th>Final</th>
             <th >Estatus</th>
+            <th width="15%">PRE-FACTURA</th>
             <th width="5%">Facturar</th>
         </thead>
-        <tbody>
-            <tr style="text-align:center">
-                <td >TECNOLOGIAS EVOLUTIVAS DE MEXICO</td>
-                <td >14/09/2021</td>
-                <td >15/09/2021</td>
-                <td>VIGENTE</td>
+        <tbody style="text-align:center">
+            @foreach($pre_facturas as $prefactura)
+            <tr>
+                <td class="align-middle">{{$prefactura->contrato->cliente->razon_social}}</td>
+                <td class="align-middle">{{date('d/m/Y', strtotime($prefactura->fecha_inicio))}}</td>
+                <td class="align-middle">{{date('d/m/Y', strtotime($prefactura->fecha_final))}}</td>
+                <td class="align-middle">{{$prefactura->status}}</td>
+                <td>   
+                    <a  type="button" style="color: red;" href="{{url("prefacturas_pdf/{$prefactura->id}")}}" class="btn"><i style="font-size:2rem" id="file-pdf"  class="fas fa-file-pdf"></i></a>
+
+                </td>
                 <td>
                     <div class="dropdown" >
                         <button style="background-color:#f16532;text-align:center;border-color:orange" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -47,28 +53,12 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item" href="{{url('facturas/create')}}">Facturar</a></li>
                             <li><a class="dropdown-item" href="{{url('facturas/pagar')}}">Pagar Factura</a></li>
-                        </ul>
-                    </div>
-                </td>
-
-            </tr>
-            {{-- @foreach($facturas as $facturas)
-            <tr>
-                <td class="align-middle">{{$factura->cliente->razon_social}}</td>
-                <td class="align-middle">{{date('d/m/Y', strtotime($factyras->fecha_inicio))}}</td>
-                <td class="align-middle">{{date('d/m/Y', strtotime($factyras->fecha_final))}}</td>
-                <td class="align-middle">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">Generar Factura</a></li>
+                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
                         </ul>
                     </div>
                 </td>
             </tr>
-            @endforeach --}}
+            @endforeach
         </tbody>
     </table>
     @endsection

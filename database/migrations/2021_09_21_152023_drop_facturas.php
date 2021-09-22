@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMontoColumnContrato extends Migration
+class DropFacturas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,7 @@ class AddMontoColumnContrato extends Migration
      */
     public function up()
     {
-        // Schema::table('contratos', function (Blueprint $table) {
-        //     $table->decimal("monto",12,2);
-        // });
+        SCHEMA::drop('facturas');
     }
 
     /**

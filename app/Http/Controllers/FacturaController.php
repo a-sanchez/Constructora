@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\status;
 use App\Models\cliente;
 use App\Models\factura;
 use App\Models\contrato;
+use App\Models\prefacturaPdf;
 use Illuminate\Http\Request;
 
 class FacturaController extends Controller
@@ -18,15 +20,18 @@ class FacturaController extends Controller
     {
         return view('facturas.facturar');
     }
+    
 
     public function store(Request $request)
     {
-        //
+        $validation=$request->all();
+        $prefacturas=factura::create($validation);
+        return response()->json($prefacturas,201);
     }
     public function show($id)
     {
         $contrato=contrato::find($id);
-        $prefactura=factura::max('numero_factura')+1;
+        $prefactura=factura::max('id')+1;
         $ctx=[
             "folio_prefactura"=>str_pad($prefactura."/".date("Y"),10,"0",STR_PAD_LEFT)
         ];
@@ -42,6 +47,7 @@ class FacturaController extends Controller
         //
     }
 
+
     public function update(Request $request, $id)
     {
         
@@ -51,6 +57,11 @@ class FacturaController extends Controller
     public function destroy($id)
     {   
         //
+    }
+
+    public function PrefacturaPDF($id)
+    {
+        return prefacturaPdf::create($id);
     }
 
 

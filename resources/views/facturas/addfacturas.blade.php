@@ -15,6 +15,7 @@
         <h4 style="color:gray;font-size:20px;">-Crear Pre-Factura Contrato</h4>
         <hr style="color: orange;">
     </div>
+    <div class="div"></div>
 </div>
 
 
@@ -40,25 +41,25 @@
   <div class="row">
     <div class="col-md-6">
     <label for="fecha_elaboracion" >Fecha de Inicio</label>
-      <input type="date" class="form-control" id="fecha_elaboracion" name="Fecha_Elaboracion" required>
+      <input type="date" class="form-control" id="fecha_elaboracion" name="fecha_inicio" required>
     </div>
       <div class="col-md-6">
         <label for="fecha_elaboracion" >Fecha Final</label>
-          <input type="date" class="form-control" id="fecha_final" name="Fecha_final" required>
+          <input type="date" class="form-control" id="fecha_final" name="fecha_final" required>
         </div>
   </div>
   <div class="row">
     <div class="col-md-4">
       <label for="importe_estimacion" >Importe de estimacion</label>
-      <input type="text" class="form-control" id="importe_estimacion" placeholder="Ingrese Importe" name="importe_estimacion" required>
+      <input type="text" class="form-control" id="importe_estimacion" oninput="cal()" placeholder="Ingrese Importe" name="importe_estimacion" id="importe_estimacion" required>
     </div>
     <div class="col-md-4">
         <label for="anticipo" >(-) Anticipo Entregado</label>
-        <input type="text"  class="form-control" id="anticipo" name='anticipo' readonly value="{{$contrato->anticipo}}">
+        <input type="text"  class="form-control" id="anticipo" name='anticipo' oninput="cal()" disabled value="{{$contrato->anticipo}}">
     </div>
     <div class="col-md-4">
       <label for="sub-total" >Sub-Total</label>
-      <input type="text" disabled class="form-control" id="subtotal" name='subtotal' value="0.00">
+      <input type="text" disabled class="form-control" id="sub_total" name='sub_total' value="0.00">
   </div>
 </div>
   <div class="row">
@@ -71,11 +72,20 @@
   <div class="row mt-2">
     <div class="col-md-6">
       <label for="iva" >% de I.V.A</label>
-      <input type="text" class="form-control" id="iva" placeholder="Ingrese el iva correspondiente" name="iva" required>
+      <input type="text" class="form-control" id="iva" oninput="total()" placeholder="Ingrese el iva correspondiente" name="iva" required>
+    </div>
+    <div class="col-md-6">
+      <label for="sub_iva" >SubTotal con IVA</label>
+      <input type="text"disabled class="form-control" id="subtotal_iva"    name="subtotal_iva" required value="0.00">
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-md-6">
+
     </div>
     <div class="col-md-6">
         <label for="total_estimacion" >Total de estimación</label>
-        <input type="text" disabled  class="form-control" id="total_estimacion" name='total_estimacion' value="0.00">
+        <input type="text" disabled  class="form-control" id="total_estimacion"  name='total_estimacion' value="0.00">
     </div>
   </div>
 
@@ -83,21 +93,29 @@
   <div class="row mt-3">
     <div class="col-md-6">
       <label for="IVYC" >I.V.Y.C (0.05%)</label>
-      <input type="text" class="form-control" id="IVYC" name="IVYC" >
+      <input type="text" class="form-control" oninput="retencion()" id="ivyc" name="ivyc" >
     </div>
     <div class="col-md-6">
       <label for="primer_monto" >Monto con I.V.Y.C </label>
-      <input type="text" disabled class="form-control" id="primer_monto" name="primer_monto" value="0.00" >
+      <input type="text" disabled class="form-control" id="monto_ivyc" name="monto_ivyc" value="0.00" >
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
       <label for="ICIC" >I.C.I.C (0.02%)</label>
-      <input type="text"  class="form-control" id="ICIC" name="ICIC"  >
+      <input type="text"  class="form-control" oninput="retencion()" id="icic" name="icic"  >
     </div>
     <div class="col-md-6">
       <label for="segundo_monto" >Monto con I.C.I.C </label>
-      <input type="text" disabled class="form-control" id="segundo_monto"  name="segundo_monto" value="0.00" >
+      <input type="text" disabled class="form-control"  id="monto_icic"  name="monto_icic" value="0.00" >
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-6">
+      <label for="retenciones" >Total de retenciones </label>
+      <input type="text" disabled class="form-control"  id="total_retenciones"  name="total_retenciones" value="0.00" >
     </div>
   </div>
 
@@ -106,7 +124,7 @@
     <div class="col-md-4">
     </div>
     <div class="col-md-4" style="text-align:center">
-      <label for="neto" >Neto de la estimación </label>
+      <label for="neto" >Neto de la estimación &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-success " style="color:white;" onclick="Sumar();">Calcular</a> </label>
       <input type="text" disabled class="form-control" id="neto" name="neto" value="0.00">
     </div>
     <div class="col-md-4">
@@ -115,7 +133,7 @@
 
   <div class="form-row">
     <div class="form-group">
-        <a type="button" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
+        <button type="submit" class="btn" id="btnGuardar" style="background:blue;color:white;">Guardar</button>
         <a type="button" class="btn" id="btnCancelar" href="{{url("/contratos")}}" style="background:red;color:white;" >Cancelar</a>
     </div>
   </div>
@@ -123,4 +141,85 @@
 </form>
 </div>
 
+@endsection
+
+@section('scripts')
+<script>
+  function cal(){
+    try{
+      var a=parseFloat(document.getElementById("importe_estimacion").value)||0.00,
+          b=parseFloat(document.getElementById("anticipo").value);
+
+          document.getElementById("sub_total").value=(a-b).toFixed(2);
+      }
+      catch(e){}
+    }
+    function total(){
+      try{
+        var a = parseFloat(document.getElementById("sub_total").value),
+            b = ((parseFloat(document.getElementById("iva").value))/100)||0;
+            
+            let c = (a*b).toFixed(2);
+            document.getElementById("subtotal_iva").value=c;
+
+            document.getElementById("total_estimacion").value= (+c + +a);
+      }
+      catch(e){}
+    }
+    
+    function retencion(){
+      try{
+        var a= ((parseFloat(document.getElementById("ivyc").value))/100)||0,
+            c=((parseFloat(document.getElementById("icic").value))/100)||0,
+            b=parseFloat(document.getElementById("importe_estimacion").value);
+
+            let x=(a*b).toFixed(2);
+            document.getElementById("monto_ivyc").value=x;
+            let y = (b*c).toFixed(2);
+            document.getElementById("monto_icic").value=y;
+
+            document.getElementById("total_retenciones").value=(+x + +y)
+      }
+      catch(e){}
+    }
+    function Sumar(){
+      var estimacion = document.getElementById("total_estimacion").value;
+      var retenciones = document.getElementById("total_retenciones").value;
+      document.getElementById("neto").value=(estimacion-retenciones).toFixed(2);
+    }
+
+
+    async function insert_prefactura(){
+      event.preventDefault();
+      let form= new FormData(document.getElementById("form-prefactura"));
+      form.append("id_status",1);
+      form.append("anticipo",document.getElementById("anticipo").value);
+      form.append("sub_total",document.getElementById("sub_total").value);
+      form.append("subtotal_iva",document.getElementById("subtotal_iva").value);
+      form.append("total_estimacion",document.getElementById("total_estimacion").value);
+      form.append("monto_ivyc",document.getElementById("monto_ivyc").value);
+      form.append("monto_icic",document.getElementById("monto_icic").value);
+      form.append("total_retenciones",document.getElementById("total_retenciones").value);
+      form.append("neto",document.getElementById("neto").value);
+      let url="{{url('/facturas')}}";
+      let init = {
+        method:"POST",
+        body:form
+      }
+      let req = await fetch(url,init);
+      //console.log(JSON.stringify(Object.fromEntries(form))
+      if(req.ok){
+        let res =await req.json();
+        window.open(`{{url('/prefacturas_pdf/${res.id}')}}`, '_blank');
+        window.location.href="{{url('/facturas')}}";
+      }
+      else{
+        Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: "ERROR AL REGISTRAR LA PREFACTURA"
+      });
+      }
+    }
+</script>
 @endsection
