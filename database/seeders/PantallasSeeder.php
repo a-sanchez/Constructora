@@ -21,6 +21,10 @@ class PantallasSeeder extends Seeder
         pantallas::create(['nombre'=>'PAGOS','url'=>"/pagos"]);
         pantallas::create(['nombre'=>'PROVEEDORES','url'=>"/proveedores"]);
         pantallas::create(['nombre'=>'CONFIGURACION','url'=>"/configuracion"]);
+        status::create(['status'=>'En proceso..']);
+        status::create(['status'=>'Operada']);
+        status::create(['status'=>'Pagada']);
+        
 
     }
 }
