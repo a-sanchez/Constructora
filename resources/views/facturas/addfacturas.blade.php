@@ -162,7 +162,7 @@
             let c = (a*b).toFixed(2);
             document.getElementById("subtotal_iva").value=c;
 
-            document.getElementById("total_estimacion").value= (+c + +a);
+            document.getElementById("total_estimacion").value= parseFloat(+c + +a).toFixed(2);
       }
       catch(e){}
     }
