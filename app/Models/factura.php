@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\status;
-use App\Models\contrato;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class factura extends Model
 {
@@ -28,6 +26,30 @@ class factura extends Model
         $contrato= contrato::where("id",$this->id_contrato)->first();
         return $contrato;
     }
-    
 
+    public function setFile($file)
+    {
+        
+        $filename =$file->hashName();
+        $file->store($this->getRuta());
+        $this->attributes["pdf_oficial"] = $filename;
+        $this->save();
+        //return $filename;
+    }
+
+    public function setFile2($file)
+    {
+        
+        $filename =$file->hashName();
+        $file->store($this->getRuta());
+        $this->attributes["xml_oficial"] = $filename;
+        $this->save();
+        //return $filename;
+    }
+
+    public function getRuta()
+    {
+        $ruta ="public/docs/facturas_oficiales/".str_replace("/","_",$this->attributes["folio_prefactura"]);
+        return $ruta;
+    }
 }

@@ -31,7 +31,7 @@
             <th>Inicio</th>
             <th>Final</th>
             <th >Estatus</th>
-            <th width="15%">PRE-FACTURA</th>
+            <th width="15%">Archivos</th>
             <th width="5%">Facturar</th>
         </thead>
         <tbody style="text-align:center">
@@ -42,8 +42,19 @@
                 <td class="align-middle">{{date('d/m/Y', strtotime($prefactura->fecha_final))}}</td>
                 <td class="align-middle">{{$prefactura->status}}</td>
                 <td>   
-                    <a  type="button" style="color: red;" href="{{url("prefacturas_pdf/{$prefactura->id}")}}" class="btn"><i style="font-size:2rem" id="file-pdf"  class="fas fa-file-pdf"></i></a>
-
+                    <div class="dropdown" >
+                        <button style="background-color:black;text-align:center;border-color:black" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Seleccione
+                        </button>
+                        <?php
+                        $fecha = str_replace("/","_",$prefactura->folio_prefactura);
+                        ?>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="{{url("prefacturas_pdf/{$prefactura->id}")}}">Pre-Factura</a></li>
+                            <li><a class="dropdown-item" href={{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->pdf_oficial}")}}>Factura Oficial</a></li>
+                            <li><a class="dropdown-item" href="{{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->xml_oficial}")}}">XML Oficial</a></li>
+                        </ul>
+                    </div>
                 </td>
                 <td>
                     <div class="dropdown" >
@@ -51,7 +62,7 @@
                             Opciones
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="{{url('facturas/create')}}">Facturar</a></li>
+                            <li><a class="dropdown-item" href="{{url("facturas/{$prefactura->id}/edit")}}">Facturar</a></li>
                             <li><a class="dropdown-item" href="{{url('facturas/pagar')}}">Pagar Factura</a></li>
                             <li><a class="dropdown-item" href="#">Eliminar</a></li>
                         </ul>
@@ -66,5 +77,6 @@
     @section("scripts")
     <script>
         let table = $("#facturas_table").dataTable();
+
     </script>
     @endsection

@@ -18,7 +18,7 @@ class FacturaController extends Controller
     }
     public function create()
     {
-        return view('facturas.facturar');
+        //
     }
     
 
@@ -44,16 +44,31 @@ class FacturaController extends Controller
 
     public function edit($id)
     {
-        //
+        $prefactura=factura::find($id);
+        return view('facturas.facturar',compact("prefactura"));
     }
 
 
     public function update(Request $request, $id)
     {
-        
-        //
+        $prefactura=factura::find($id);
+        $update=$prefactura->update($request->all());
+        return $update;
     }
 
+    public function actualizar(Request $request,$id){
+        $prefactura=factura::find($id);
+        switch($request->file){
+            case 'pdf_oficial':
+                $prefactura->setFile($request->file_info);
+                break;
+            case 'xml_oficial':
+                $prefactura->setFile2($request->file_info);
+                break;
+        }
+
+    }
+        
     public function destroy($id)
     {   
         //
