@@ -51,8 +51,15 @@
                         ?>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item" href="{{url("prefacturas_pdf/{$prefactura->id}")}}">Pre-Factura</a></li>
-                            <li><a class="dropdown-item" href={{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->pdf_oficial}")}}>Factura Oficial</a></li>
-                            <li><a class="dropdown-item" href="{{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->xml_oficial}")}}">XML Oficial</a></li>
+                            @if($prefactura->id_status==2)
+                                <li><a class="dropdown-item" href={{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->pdf_oficial}")}}>Factura Oficial</a></li>
+                                <li><a class="dropdown-item" href="{{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->xml_oficial}")}}">XML Oficial</a></li>
+                            @endif
+                            @if($prefactura->id_status==3)
+                                <li><a class="dropdown-item" href={{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->pdf_oficial}")}}>Factura Oficial</a></li>
+                                <li><a class="dropdown-item" href="{{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->xml_oficial}")}}">XML Oficial</a></li>
+                                <li><a class="dropdown-item" href="#">Detalles del pago</a></li>
+                            @endif
                         </ul>
                     </div>
                 </td>
@@ -62,8 +69,12 @@
                             Opciones
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            @if($prefactura->id_status==1)
                             <li><a class="dropdown-item" href="{{url("facturas/{$prefactura->id}/edit")}}">Facturar</a></li>
-                            <li><a class="dropdown-item" href="{{url('facturas/pagar')}}">Pagar Factura</a></li>
+                            @endif                            
+                            @if($prefactura->id_status==2)
+                            <li><a class="dropdown-item" href="{{url('facturas/pagar')}}">Pagar Factura</a></li>                                
+                            @endif  
                             <li><a class="dropdown-item" href="#">Eliminar</a></li>
                         </ul>
                     </div>
