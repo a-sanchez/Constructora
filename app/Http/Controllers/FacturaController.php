@@ -6,6 +6,7 @@ use App\Models\status;
 use App\Models\cliente;
 use App\Models\factura;
 use App\Models\contrato;
+use App\Models\create_forma_pago;
 use App\Models\prefacturaPdf;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class FacturaController extends Controller
     {
         //
     }
-    
+
 
     public function store(Request $request)
     {
@@ -32,15 +33,23 @@ class FacturaController extends Controller
     {
         $contrato=contrato::find($id);
         $prefactura=factura::max('id')+1;
-        $ctx=[
-            "folio_prefactura"=>str_pad($prefactura."/".date("Y"),10,"0",STR_PAD_LEFT)
+            $ctx=[
+                "folio_prefactura"=>str_pad($prefactura."/".date("Y"),10,"0",STR_PAD_LEFT)
         ];
         return view('facturas.addfacturas',compact('contrato'),$ctx);
     }
 
-    public function pagar(){
-        return view('facturas.pagar');
+    public function pagar($id){
+        $prefactura=factura::find($id);
+        $forma=create_forma_pago::all();
+        return view('facturas.pagar',compact("prefactura"),["formas"=>$forma]);
     }
+
+    public function detalles_pago($id){
+        $prefactura=factura::find($id);
+        return view("facturas.pago_detalle",compact("prefactura"));
+    }
+
 
     public function edit($id)
     {
@@ -70,8 +79,15 @@ class FacturaController extends Controller
     }
         
     public function destroy($id)
-    {   
-        //
+    {   $factura = factura::find($id);
+        if($factura->id_status==3){
+            return response()->json("ERROR,Existen pagos en esta factura",409);
+        }
+        else{
+            $factura = factura::find($id);
+            factura::destroy($id);
+            return $factura;
+        }
     }
 
     public function PrefacturaPDF($id)

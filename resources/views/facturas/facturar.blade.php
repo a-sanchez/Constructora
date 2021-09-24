@@ -101,7 +101,7 @@
         }
         let req = await fetch (url,init);
         if(req.ok){
-            //window.location.href="{{url('/facturas')}}";
+            window.location.href="{{url('/facturas')}}";
         }
         else{
             Swal.fire({

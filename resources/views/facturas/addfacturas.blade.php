@@ -193,6 +193,7 @@
       event.preventDefault();
       let form= new FormData(document.getElementById("form-prefactura"));
       form.append("id_status",1);
+      form.append("id_forma",1);
       form.append("anticipo",document.getElementById("anticipo").value);
       form.append("sub_total",document.getElementById("sub_total").value);
       form.append("subtotal_iva",document.getElementById("subtotal_iva").value);

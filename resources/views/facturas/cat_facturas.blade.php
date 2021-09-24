@@ -6,6 +6,8 @@
 
 @section('styles')
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="{{ asset('lib/DataTables/Responsive-2.2.9/css/responsive.dataTables.min.css') }}"> 
+
 <style>
     table {
         text-transform: uppercase;
@@ -52,13 +54,21 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item" href="{{url("prefacturas_pdf/{$prefactura->id}")}}">Pre-Factura</a></li>
                             @if($prefactura->id_status==2)
+                                @if($prefactura->pdf_oficial!=null)
                                 <li><a class="dropdown-item" href={{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->pdf_oficial}")}}>Factura Oficial</a></li>
-                                <li><a class="dropdown-item" href="{{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->xml_oficial}")}}">XML Oficial</a></li>
+                                @endif
+                                @if($prefactura->xml_oficial!=null)
+                                    <li><a class="dropdown-item" href="{{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->xml_oficial}")}}">XML Oficial</a></li> 
+                                @endif
                             @endif
                             @if($prefactura->id_status==3)
+                                @if($prefactura->pdf_oficial!=null)
                                 <li><a class="dropdown-item" href={{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->pdf_oficial}")}}>Factura Oficial</a></li>
-                                <li><a class="dropdown-item" href="{{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->xml_oficial}")}}">XML Oficial</a></li>
-                                <li><a class="dropdown-item" href="#">Detalles del pago</a></li>
+                                @endif
+                                @if($prefactura->xml_oficial!=null)
+                                    <li><a class="dropdown-item" href="{{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->xml_oficial}")}}">XML Oficial</a></li>
+                                @endif
+                                <li><a class="dropdown-item" href="{{url("facturas/detalles_pago/{$prefactura->id}")}}">Detalles del pago</a></li>
                             @endif
                         </ul>
                     </div>
@@ -73,9 +83,9 @@
                             <li><a class="dropdown-item" href="{{url("facturas/{$prefactura->id}/edit")}}">Facturar</a></li>
                             @endif                            
                             @if($prefactura->id_status==2)
-                            <li><a class="dropdown-item" href="{{url('facturas/pagar')}}">Pagar Factura</a></li>                                
+                            <li><a class="dropdown-item" href="{{url("facturas/pagar/{$prefactura->id}")}}">Pagar Factura</a></li>                                
                             @endif  
-                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                            <li><a class="dropdown-item" href="" onclick='borrarFactura({{$prefactura->id}})'>Eliminar</a></li>
                         </ul>
                     </div>
                 </td>
@@ -87,7 +97,30 @@
 
     @section("scripts")
     <script>
-        let table = $("#facturas_table").dataTable();
+        let table = $("#facturas_table").dataTable({
+        });
 
+        async function borrarFactura(id){
+            event.preventDefault();
+            let url='{{url("/facturas/{id}")}}'.replace('{id}',id);
+            let init={
+                method:"DELETE",
+                headers: {  'X-CSRF-TOKEN': "{{csrf_token()}}"
+                }
+            }
+            let req=await fetch(url,init);
+            if (req.ok){
+                location.reload();
+            }
+            else{
+                let res = await req.json();
+                Swal.fire({
+                    icon:"error",
+                    title:"Error",
+                    text:res
+                });
+            }
+
+        }
     </script>
     @endsection
