@@ -45,7 +45,7 @@ class OrdenPdf extends Model
         $html = $view->render();
         PDF::SetFont('helvetica', 'B',9);
         //OBTIENE INSERTA EL HTML EN EL PDF
-        PDF::setY(25);
+        PDF::setY(30);
         PDF::writeHTML($html,true,0,false,false,"");
         //Escribir footer
         $html = <<<EOD
@@ -63,7 +63,7 @@ class OrdenPdf extends Model
                  </table>
         EOD;
         PDF::SetAutoPageBreak(false); 
-        PDF::SetY(-35);
+        PDF::SetY(-34);
         PDF::writeHTML($html,true,0,false,false,"");
         PDF::Output();
         
