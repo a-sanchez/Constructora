@@ -44,7 +44,6 @@ Route::get('/opcion_contrato',function(){
     return view('contrato.contrato_opciones');
 });
 
-
 // Route::get('editar_contrato/{id}',function($id){
 //     return view('contrato.contrato_editar');
 // });
@@ -97,9 +96,13 @@ Route::resource('orden_productos',OrdenProductoController::class);
 // Route::get('facturas/registro_factura',function(){
 //     return view('facturas.registro_factura');
 // });
-Route::get('facturas/pagar',[FacturaController::class,'pagar']);
-Route::resource('facturas',FacturaController::class);
+Route::get('facturas/pagar/{id}',[FacturaController::class,'pagar']);
 Route::get("prefacturas_pdf/{id}",[FacturaController::class,'PrefacturaPDF']);
+Route::post("facturas/actualizar/{id}",[FacturaController::class,'actualizar']);
+Route::get("facturas/detalles_pago/{id}",[FacturaController::class,'detalles_pago']);
+Route::resource('facturas',FacturaController::class);
+
+
 
 // Route::get('/facturas',function(){
 //     return view('facturas.facturas_opciones');

@@ -6,6 +6,8 @@
 
 @section('styles')
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="{{ asset('lib/DataTables/Responsive-2.2.9/css/responsive.dataTables.min.css') }}"> 
+
 <style>
     table {
         text-transform: uppercase;
@@ -31,7 +33,7 @@
             <th>Inicio</th>
             <th>Final</th>
             <th >Estatus</th>
-            <th width="15%">PRE-FACTURA</th>
+            <th width="15%">Archivos</th>
             <th width="5%">Facturar</th>
         </thead>
         <tbody style="text-align:center">
@@ -42,8 +44,34 @@
                 <td class="align-middle">{{date('d/m/Y', strtotime($prefactura->fecha_final))}}</td>
                 <td class="align-middle">{{$prefactura->status}}</td>
                 <td>   
-                    <a  type="button" style="color: red;" href="{{url("prefacturas_pdf/{$prefactura->id}")}}" class="btn"><i style="font-size:2rem" id="file-pdf"  class="fas fa-file-pdf"></i></a>
-
+                    <div class="dropdown" >
+                        <button style="background-color:black;text-align:center;border-color:black" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Seleccione
+                        </button>
+                        <?php
+                        $fecha = str_replace("/","_",$prefactura->folio_prefactura);
+                        ?>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="{{url("prefacturas_pdf/{$prefactura->id}")}}">Pre-Factura</a></li>
+                            @if($prefactura->id_status==2)
+                                @if($prefactura->pdf_oficial!=null)
+                                <li><a class="dropdown-item" href={{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->pdf_oficial}")}}>Factura Oficial</a></li>
+                                @endif
+                                @if($prefactura->xml_oficial!=null)
+                                    <li><a class="dropdown-item" href="{{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->xml_oficial}")}}">XML Oficial</a></li> 
+                                @endif
+                            @endif
+                            @if($prefactura->id_status==3)
+                                @if($prefactura->pdf_oficial!=null)
+                                <li><a class="dropdown-item" href={{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->pdf_oficial}")}}>Factura Oficial</a></li>
+                                @endif
+                                @if($prefactura->xml_oficial!=null)
+                                    <li><a class="dropdown-item" href="{{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->xml_oficial}")}}">XML Oficial</a></li>
+                                @endif
+                                <li><a class="dropdown-item" href="{{url("facturas/detalles_pago/{$prefactura->id}")}}">Detalles del pago</a></li>
+                            @endif
+                        </ul>
+                    </div>
                 </td>
                 <td>
                     <div class="dropdown" >
@@ -51,9 +79,13 @@
                             Opciones
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="{{url('facturas/create')}}">Facturar</a></li>
-                            <li><a class="dropdown-item" href="{{url('facturas/pagar')}}">Pagar Factura</a></li>
-                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                            @if($prefactura->id_status==1)
+                            <li><a class="dropdown-item" href="{{url("facturas/{$prefactura->id}/edit")}}">Facturar</a></li>
+                            @endif                            
+                            @if($prefactura->id_status==2)
+                            <li><a class="dropdown-item" href="{{url("facturas/pagar/{$prefactura->id}")}}">Pagar Factura</a></li>                                
+                            @endif  
+                            <li><a class="dropdown-item" href="" onclick='borrarFactura({{$prefactura->id}})'>Eliminar</a></li>
                         </ul>
                     </div>
                 </td>
@@ -65,6 +97,30 @@
 
     @section("scripts")
     <script>
-        let table = $("#facturas_table").dataTable();
+        let table = $("#facturas_table").dataTable({
+        });
+
+        async function borrarFactura(id){
+            event.preventDefault();
+            let url='{{url("/facturas/{id}")}}'.replace('{id}',id);
+            let init={
+                method:"DELETE",
+                headers: {  'X-CSRF-TOKEN': "{{csrf_token()}}"
+                }
+            }
+            let req=await fetch(url,init);
+            if (req.ok){
+                location.reload();
+            }
+            else{
+                let res = await req.json();
+                Swal.fire({
+                    icon:"error",
+                    title:"Error",
+                    text:res
+                });
+            }
+
+        }
     </script>
     @endsection

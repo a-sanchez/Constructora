@@ -22,34 +22,13 @@ class OrdenPdf extends Model
             $pdf->Rect(0, 0, $pdf->getPageWidth(), $pdf->getPageHeight(), 'F', array(), array( 247, 247, 247));
             // Set font
             $pdf->SetFont('helvetica', 'B', 20);
+            $pdf->SetMargins(0,35, 0); 
             // Title
             $pdf->Image(\URL::asset("images/constructura2.jpg"),0, 0, 60, 30, 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
             $pdf->SetY(10);
             $pdf->Cell(0, 0, 'REQUISICIÓN DE COMPRA', 0, false, 'C', 0, '', 0, false, 'M', 'M');
         });
-        // Footer TCPDF
-        PDF::setFooterCallback(function($pdf) use ($orden){
-            $pdf->SetY(-55);
-            $pdf->Multicell(0, 0, $orden->observaciones, 0, "C", 0, 1, '','',true, 0, false,true,0);
-            $html = <<<EOD
-                <table border=".5" cellpadding="3">
-                    <tr >
-                        <td height = "50px"></td>
-                        <td height = "50px"></td> 
-                        <td height = "50px"></td>
-                    </tr>
-                    <tr style = "text-align: center;">
-                        <td>$orden->solicitado</td>
-                        <td>Vo.Bo.<br>$orden->vobo</td> 
-                        <td>AUTORIZA <br>$orden->autorizacion</td>
-                    </tr>
-                </table>
-            EOD;
-            $pdf->SetY(-40);
-            PDF::writeHTML($html,true,0,false,false,"");
-
-            
-        });
+        
 
         //CONFIGURACION 
         PDF::SetAuthor('Evotek');
@@ -66,8 +45,27 @@ class OrdenPdf extends Model
         $html = $view->render();
         PDF::SetFont('helvetica', 'B',9);
         //OBTIENE INSERTA EL HTML EN EL PDF
-        PDF::setY(20);
+        PDF::setY(30);
+        PDF::writeHTML($html,true,0,false,false,"");
+        //Escribir footer
+        $html = <<<EOD
+                 <table border=".5" cellpadding="3">
+                     <tr >
+                         <td height = "50px"></td>
+                         <td height = "50px"></td> 
+                         <td height = "50px"></td>
+                     </tr>
+                     <tr style = "text-align: center;">
+                         <td>$orden->solicitado</td>
+                         <td>Vo.Bo.<br>$orden->vobo</td> 
+                         <td>AUTORIZA <br>$orden->autorizacion</td>
+                     </tr>
+                 </table>
+        EOD;
+        PDF::SetAutoPageBreak(false); 
+        PDF::SetY(-34);
         PDF::writeHTML($html,true,0,false,false,"");
         PDF::Output();
+        
     }
 }

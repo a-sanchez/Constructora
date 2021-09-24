@@ -79,7 +79,7 @@
         <div class="row">
             <div class="col-md-12">
                 <label for="descripcion">Descripcion</label>
-                <input type="text" class="form-control" id="descripcion" name="descripcion" raadonly value="{{$contrato->descripcion}}">
+                <input type="text" class="form-control" id="descripcion" name="descripcion" readonly value="{{$contrato->descripcion}}">
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -209,7 +209,7 @@
             }
             let req = await fetch(url, init);
             if (req.ok) {
-            //window.location.href = "{{url('/contratos')}}";
+            window.location.href = "{{url('/contratos')}}";
             } else {
                 Swal.fire({
                     icon: 'error'

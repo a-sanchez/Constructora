@@ -55,7 +55,8 @@ class ContratoController extends Controller
     public function show($id)
     {
         $contrato = contrato::find($id);
-        //var_dump($contrato->cliente->razon_social);
+        // var_dump($contrato->cliente->razon_social);
+        // die;
         return view("contrato.contrato_detalle",compact("contrato"));
     }
 
@@ -91,6 +92,7 @@ class ContratoController extends Controller
                 $contrato->setFile4($request->file_info);
                 break;
         }
+
 
 
         }

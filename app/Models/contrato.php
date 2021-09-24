@@ -13,7 +13,7 @@ class contrato extends Model
     protected $table='contratos';
     public $timestamps = false;
 
-    protected $guarded =[];
+    protected $guarded =["file","file2","file3","file4"];
 
     /*public static function setFile($file)
     {
