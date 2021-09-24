@@ -92,3 +92,15 @@
         </td>
     </tr>
 </table> 
+{{-- <table border=".5" cellpadding="3" >
+    <tr >
+        <td height = "50px"></td>
+        <td height = "50px"></td> 
+        <td height = "50px"></td>
+    </tr>
+    <tr style = "text-align: center;">
+        <td>{{$orden->solicitado}}</td>
+        <td>Vo.Bo.<br>{{$orden->vobo}}</td> 
+        <td>AUTORIZA <br>{{$orden->autorizacion}}</td>
+    </tr>
+</table> --}}
