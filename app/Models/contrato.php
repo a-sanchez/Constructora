@@ -13,16 +13,7 @@ class contrato extends Model
     protected $table='contratos';
     public $timestamps = false;
 
-    protected $guarded =["file","file2","file3","file4"];
-
-    /*public static function setFile($file)
-    {
-        $ruta = "public/docs/contrato_adjuntos";
-        $filename =$file->hashName();
-        $file->store($ruta);
-        return $filename;
-    }*/
-
+    protected $guarded =[""];
     public function cliente(){
         return $this->belongsTo(cliente::class,"id_cliente");
     }
