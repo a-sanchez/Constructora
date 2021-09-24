@@ -42,18 +42,21 @@
             CONTRATOS
         </h1>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h4 style="color:gray;font-size:20px;">-Agregar</h4>
-            <hr style="color: orange;">
-            <p>
-            </p>
-        </div>
-    </div>
-    <h5>Cliente</h5>
+    
 
     <form class="row g-3" enctype="multipart/form-data" id="form-contrato" onsubmit='edit_contrato({{$contrato->id}});'>
         @csrf
+        <div class="row mt-2">
+            <div class="col-md-6 mt-3">
+                <h4 style="color:gray;font-size:20px;">-Agregar</h4>
+            </div>
+            <div class="col-md-6 mt-3" style="text-align:end">
+                <button type="submit" class="btn" id="btnGuardar" style="background:green;color:white;">Actualizar</button>
+                <a type="button" class="btn" id="btnCancelar" href="{{ url('/contratos') }}" style="background:red;color:white;">Cancelar</a>
+            </div>
+        </div>
+        <hr style="color: orange;">
+        <h5>Cliente</h5>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="id_cliente" name="id_cliente">Nombre</label>
@@ -131,6 +134,8 @@
                 <input type="text" class="form-control" id="cp_contratante" name="cp_contratante" value="{{$contrato->cp_contratante}}">
             </div>
         </div>
+    </form>
+    <form>
         <hr style="color:orange;">
         <div class="row">
             <h5>ARCHIVOS ADJUNTOS DEL CONTRATO</h5>
@@ -182,11 +187,6 @@
             </div>
             @endif
         </div>
-
-            <div class="form-row mt-2">
-                <button type="submit" class="btn" id="btnGuardar" style="background:green;color:white;">Actualizar</button>
-                <a type="button" class="btn" id="btnCancelar" href="{{ url('/contratos') }}" style="background:red;color:white;">Cancelar</a>
-            </div>
         </div>
     </form>
 
