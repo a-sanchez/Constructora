@@ -61,7 +61,7 @@ class prefacturaPdf extends Model
                     </tr>
                 </table>
                 
-            EOD;
+EOD;
             $pdf->Image(\URL::asset("images/conbe_fotter.jpg"),5, 230, 180, 60, 'JPG', '', 'B', false, 300, '', false, false, 0, false, false, false);
             $pdf->writeHTMLCell('0','0','10','230',$html);
         });
