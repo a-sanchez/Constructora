@@ -52,23 +52,23 @@
                         $fecha = str_replace("/","_",$prefactura->folio_prefactura);
                         ?>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="{{url("prefacturas_pdf/{$prefactura->id}")}}">Pre-Factura</a></li>
+                            <li><a target="_blank" class="dropdown-item" href="{{url("prefacturas_pdf/{$prefactura->id}")}}">Pre-Factura</a></li>
                             @if($prefactura->id_status==2)
                                 @if($prefactura->pdf_oficial!=null)
-                                <li><a class="dropdown-item" href={{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->pdf_oficial}")}}>Factura Oficial</a></li>
+                                <li><a target="_blank" class="dropdown-item" href={{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->pdf_oficial}")}}>Factura Oficial</a></li>
                                 @endif
                                 @if($prefactura->xml_oficial!=null)
-                                    <li><a class="dropdown-item" href="{{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->xml_oficial}")}}">XML Oficial</a></li> 
+                                    <li><a class="dropdown-item" target="_blank" href="{{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->xml_oficial}")}}">XML Oficial</a></li> 
                                 @endif
                             @endif
                             @if($prefactura->id_status==3)
                                 @if($prefactura->pdf_oficial!=null)
-                                <li><a class="dropdown-item" href={{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->pdf_oficial}")}}>Factura Oficial</a></li>
+                                <li><a class="dropdown-item" target="_blank" href={{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->pdf_oficial}")}}>Factura Oficial</a></li>
                                 @endif
                                 @if($prefactura->xml_oficial!=null)
-                                    <li><a class="dropdown-item" href="{{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->xml_oficial}")}}">XML Oficial</a></li>
+                                    <li><a class="dropdown-item" target="_blank" href="{{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->xml_oficial}")}}">XML Oficial</a></li>
                                 @endif
-                                <li><a class="dropdown-item" href="{{url("facturas/detalles_pago/{$prefactura->id}")}}">Detalles del pago</a></li>
+                                <li><a class="dropdown-item" target="_blank" href="{{url("facturas/detalles_pago/{$prefactura->id}")}}">Detalles del pago</a></li>
                             @endif
                         </ul>
                     </div>
