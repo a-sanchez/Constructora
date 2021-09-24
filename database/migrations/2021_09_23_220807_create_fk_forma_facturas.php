@@ -15,7 +15,7 @@ class CreateFkFormaFacturas extends Migration
     {
         Schema::table('facturas',function($table){
             $table->unsignedBigInteger('id_forma');
-            $table->foreign('id_forma')->references('id')->on('forma_pagos')->default(2);
+            $table->foreign('id_forma')->references('id')->on('forma_pagos')->default(1);
         });
     }
 
