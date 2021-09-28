@@ -11,5 +11,5 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 /public/lib/xcrud
-/resources/ordenes_compras/cat_compras.blad.php
+
 token_repo.txt
