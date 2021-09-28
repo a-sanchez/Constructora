@@ -12,23 +12,9 @@
 <?php
 //include 'C:\Users\EVOTEK\Desktop\EVOTEK\constructora\public\lib\xcrud\xcrud_1.7.15_2\xcrud\xcrud.php'; //path to xcrud.php
 //include '../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php';
-require (__DIR__.'/../../../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php');// solo para localhost
+require (__DIR__.'/../../../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php');
 //require (__DIR__.'/../../../../public_html/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php'); //servidor
-$xcrud = Xcrud::get_instance(); //instantiate xCRUD
-
-//$xcrud->change_type('fecha','date');
-
-
-
-//$xcrud->button('http://example.com','EXCEL',false,"",array('target'=>'_blank'));
-//$xcrud->query('select oc.id as id,folio_orden,solicitado,fecha_orden,fecha_entrega,descripcion_orden,c.folio as Contrato,p.razon_social as Proveedor,importe_total as "Importe_Total_(sin IVA)"
-//from orden_compras oc
-//left join (SELECT orden_id,sum(importe) as importe_total  from orden_productos  group by orden_id) as op
-//ON op.orden_id=oc.id
-//left join contratos c
-//on c.id = oc.id_contrato
-//left join proveedores p
-//on   p.id=oc.id_proveedor
+$xcrud = Xcrud::get_instance(); 
 //where oc.status != 0');
 
 
