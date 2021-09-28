@@ -92,7 +92,7 @@
   <h4 style="color:white;background-color:orange;font-size:23px;font-weight:bold;text-align:center">Retenciones</h4>
   <div class="row mt-3">
     <div class="col-md-6">
-      <label for="IVYC" >I.V.Y.C (0.05%)</label>
+      <label for="IVYC" >I.V.Y.C </label>
       <input type="text" class="form-control" oninput="retencion()" id="ivyc" name="ivyc" >
     </div>
     <div class="col-md-6">
@@ -102,7 +102,7 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <label for="ICIC" >I.C.I.C (0.02%)</label>
+      <label for="ICIC" >I.C.I.C</label>
       <input type="text"  class="form-control" oninput="retencion()" id="icic" name="icic"  >
     </div>
     <div class="col-md-6">

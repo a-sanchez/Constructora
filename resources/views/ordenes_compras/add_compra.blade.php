@@ -185,6 +185,8 @@
     let form = new FormData(document.getElementById("form-orden"));
     let productos = orden_productos.rows().data().toArray();
     let jsonProductos = arrayToJson(productos);
+    form.append("id_status",1);
+    form.append("id_forma",1);
     form.append("id_contrato",document.getElementById("id_contrato").value);
     form.append("productos",jsonProductos);
     let url = "{{ url('/compras') }}";
