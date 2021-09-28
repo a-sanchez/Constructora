@@ -44,7 +44,7 @@ on   p.id=oc.id_proveedor
 where oc.status != 0');
 $xcrud->button(URL::to('compras_pdf/{id}'),'PDF',false,"P",array('target'=>'_blank'));
 $xcrud->button(URL::to('compras/{id}/edit'),'Editar',false,"P");
-$xcrud->button(URL::to('compras/orden/{id}'),'Operar Orden',false,"P");
+$xcrud->button(URL::to('pagos_proveedores/orden/{id}'),'Operar Orden',false,"P");
 $xcrud->button('#','Eliminar',false,"P",array('onclick'=>'update_status({id})'));
 $xcrud->unset_add();
 $xcrud->unset_edit();
@@ -63,6 +63,8 @@ catch(Exception $e){
     $xcrud->columns("folio_orden,solicitado,fecha_orden,fecha_entrega,descripcion_orden,id_contrato,id_proveedor");
     $xcrud->relation('id_proveedor','proveedores','id', 'razon_social');
     $xcrud->relation("id_contrato","contratos","id","folio");
+    $xcrud->relation("id_status","estatus_facturas","id","status");
+    $xcrud->column_name('id_estatus','Estatus');
     $xcrud->column_name('id_contrato','Contrato');
     $xcrud->column_name('id_proveedor','Proveedor');
 

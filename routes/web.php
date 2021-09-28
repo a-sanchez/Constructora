@@ -84,7 +84,7 @@ Route::get('/compras_opciones',function(){
 Route::get('ordenes_compra/catalago_compra',function(){
     return view('ordenes_compras.cat_compras');
 });*/
-Route::get("compras/orden/{id}",[OrdenCompraController::class,'orden']);
+//Route::get("compras/orden/{id}",[OrdenCompraController::class,'orden']);
 Route::resource('compras',OrdenCompraController::class);
 Route::get("compras_pdf/{id}",[OrdenCompraController::class, 'OrdenPdf']);
 #----------------ORDENES PRODUCTOS-----------------------------#
@@ -101,35 +101,13 @@ Route::get("prefacturas_pdf/{id}",[FacturaController::class,'PrefacturaPDF']);
 Route::post("facturas/actualizar/{id}",[FacturaController::class,'actualizar']);
 Route::get("facturas/detalles_pago/{id}",[FacturaController::class,'detalles_pago']);
 Route::resource('facturas',FacturaController::class);
-
-
-
-// Route::get('/facturas',function(){
-//     return view('facturas.facturas_opciones');
-// });
-
-// Route::get('facturas/addfacturas',function(){
-//     return view('facturas.addfacturas');
-// });
-
-// Route::get('facturas/cat_facturas',function(){
-//     return view('facturas.cat_facturas');
-// });
 #----------------PAGOS---------------------------------#
 
-// Route::get('/pagos',function(){
-//     return view('pagos.opciones_pago');
-// });
-
-// Route::get('pagos/realizapago',function(){
-//     return view('pagos.realizapago');
-// });
-
-// Route::get('pagos/historial_pagos',function(){
-//     return view('pagos.historial_pagos');
-// });
-
-Route::get('pagos_proveedores/detalles_pago',[PagosProveedoresController::class,"detalles_pago"]);
+Route::get('pagos_proveedores/pagar/{id}',[PagosProveedoresController::class,'pagar']);
+Route::get('pagos_proveedores/detalles_pago/{id}',[PagosProveedoresController::class,"detalles_pago"]);
+Route::get("pagos_proveedores/orden/{id}",[PagosProveedoresController::class,'orden']);
+Route::post("pagos_proveedores/orden/",[PagosProveedoresController::class,'new_orden']);
+Route::get("pagos_proveedores/detalles/{id}",[PagosProveedoresController::class,'detalles']);
 Route::resource('pagos_proveedores',PagosProveedoresController::class);
 #-----------------CONFIGURACION-----------------------#
 

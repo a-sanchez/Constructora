@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <form id="form-pago" class="row g-3" onSubmit='pago_proveedor();'>
+    <form id="form-pago" class="row g-3" onsubmit='pago_proveedor({{$pagos->id}});'>
         @csrf
             <div class="row mt-3">
                 <div class="col-md-6">
@@ -25,8 +25,13 @@
                   <input type="date"  class="form-control"  id="fecha_pago" name='fecha_pago'>
                 </div>
                 <div class="col-md-6">
-                    <label for="fecha_pago" >Forma de Pago</label>
-                    <input type="text"  class="form-control"  id="forma_pago" name='forma_pago'>
+                    <label for="id_forma" name="id_forma">Forma de Pago</label>
+                    <select class="form-control" id="id_forma" name="id_forma">
+                      <option selected disabled value="0" >Seleccione forma de pago:</option> 
+                      @foreach($formas as $forma)
+                      <option value="{{$forma->id}}">{{$forma->forma}}</option>
+                      @endforeach
+                    </select>
                 </div>
             </div>
             <div class="row mt-3">
@@ -46,16 +51,45 @@
             </div>
             <div class="row mt-3" style="text-align:center">
                 <div class="col-md-12">
-                    <input type="text"  class="form-control input-sm"  id="comentario" name='comentario' >
+                    <input type="text"  class="form-control input-sm"  id="comentarios_pagos" name='comentarios_pagos' >
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-md-6" style="text-align:end;">
-                    <a type="button" class="btn" id="btnGuardar" style="background:rgb(13, 194, 13);color:white;">Guardar</a>
+                    <button type="submit" class="btn" id="btnGuardar" style="background:rgb(13, 194, 13);color:white;">Guardar</button>
                 </div>
                 <div class="col-md-6">
                     <a type="button" class="btn" id="btnCancelar" href="{{url("/pagos_proveedores")}}" style="background:red;color:white;" >Cancelar</a>
                 </div>
             </div>
         {{-- al actualizar datos se actualizara el estatus de pagado a pagado  --}}
+        @endsection
+        @section('scripts')
+        <script>
+        async function pago_proveedor(id){
+        event.preventDefault();
+        let form = new FormData(document.getElementById("form-pago"));
+        form.append("id_status",3);
+        let url = "{{url('/pagos_proveedores/{id}')}}".replace("{id}",id);
+        let init={
+            method:"PUT",
+            headers:{
+                'X-CSRF-Token': document.getElementsByName("_token")[0].value
+                , "Content-Type": "application/json"
+            }
+            ,body:JSON.stringify(Object.fromEntries(form))
+        }
+        let req = await fetch (url,init);
+        if(req.ok){
+            window.location.href="{{url('/pagos_proveedores')}}";
+        }
+        else{
+            Swal.fire({
+                    icon: 'error'
+                    , title: 'Error'
+                    , text: 'Error al generar pago'
+                , });
+        }
+    }
+        </script>
         @endsection

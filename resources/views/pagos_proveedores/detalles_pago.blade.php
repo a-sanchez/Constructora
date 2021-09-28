@@ -26,26 +26,26 @@
         </div>
     </div>
 
-    <form id="form-pago" class="row g-3 " onSubmit='pago_proveedor();'  >
+    <form id="form-pago" class="row g-3 " onsubmit='pago_proveedor({{$pagos->id}});'  >
         @csrf
             <div class="row mt-3">
                 <div class="col-md-6">
                   <label for="fecha_pago" >Fecha de pago</label>
-                  <input type="date" disabled class="form-control"  id="fecha_pago" name='fecha_pago'>
+                  <input type="date" disabled class="form-control" value="{{$pagos->fecha_pago}}" id="fecha_pago" name='fecha_pago'>
                 </div>
                 <div class="col-md-6">
                     <label for="fecha_pago" >Forma de Pago</label>
-                    <input type="text" disabled class="form-control"  id="forma_pago" name='forma_pago'>
+                    <input type="text" disabled class="form-control" value="{{$pagos->forma_pago->forma}}" id="forma_pago" name='forma_pago'>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-md-6">
                   <label for="referencia" >Rerencia(caracter)</label>
-                  <input type="text" disabled class="form-control"  id="referencia" name='referencia'>
+                  <input type="text" disabled class="form-control" value="{{$pagos->referencia}}" id="referencia" name='referencia'>
                 </div>
                 <div class="col-md-6">
                     <label for="importe" >Importe del pago</label>
-                    <input type="text" disabled class="form-control"  id="importe" name='importe'>
+                    <input type="text" disabled class="form-control" value="{{$pagos->importe}}" id="importe" name='importe'>
                 </div>
             </div>
             <div class="row">
@@ -55,7 +55,7 @@
             </div>
             <div class="row mt-3" style="text-align:center">
                 <div class="col-md-12">
-                    <input type="text" disabled class="form-control input-sm"  id="comentario" name='comentario' >
+                    <input type="text" disabled class="form-control input-sm" value="{{$pagos->comentarios}}" id="comentario" name='comentario' >
                 </div>
             </div>
             <div class="row mt-4">

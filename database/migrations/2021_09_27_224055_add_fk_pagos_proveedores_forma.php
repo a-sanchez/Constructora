@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFkStatusFacturas extends Migration
+class AddFkPagosProveedoresForma extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateFkStatusFacturas extends Migration
      */
     public function up()
     {
-        Schema::table('facturas',function($table){
-            $table->unsignedBigInteger('id_status');
-            $table->foreign('id_status')->references('id')->on('estatus_facturas');
+        Schema::table('pagos_proveedores',function($table){
+            $table->unsignedBigInteger('id_forma');
+            $table->foreign('id_forma')->references('id')->on('forma_pagos')->default(1);
         });
     }
 
@@ -26,6 +26,6 @@ class CreateFkStatusFacturas extends Migration
      */
     public function down()
     {
-        
+        //
     }
 }
