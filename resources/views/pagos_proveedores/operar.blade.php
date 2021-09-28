@@ -96,6 +96,7 @@ async function insert_operar(id){
     event.preventDefault();
     let form = new FormData(document.getElementById("form-operar"));
     form.append("id_status",2);
+    form.append("id_forma",1);
     form.append("sub_total",document.getElementById("sub_total").value);
     form.append("impuestos",document.getElementById("impuestos").value);
     form.append("total",document.getElementById("total").value);
