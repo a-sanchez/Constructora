@@ -178,7 +178,8 @@
             let y = (b*c).toFixed(2);
             document.getElementById("monto_icic").value=y;
 
-            document.getElementById("total_retenciones").value=(+x + +y)
+            document.getElementById("total_retenciones").value=parseFloat(+x + +y).toFixed(2);
+      }
       }
       catch(e){}
     }

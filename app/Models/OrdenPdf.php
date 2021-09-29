@@ -22,7 +22,7 @@ class OrdenPdf extends Model
             $pdf->Rect(0, 0, $pdf->getPageWidth(), $pdf->getPageHeight(), 'F', array(), array( 247, 247, 247));
             // Set font
             $pdf->SetFont('helvetica', 'B', 20);
-            $pdf->SetMargins(0,35, 0); 
+            $pdf->SetMargins(0,30, 0); 
             // Title
             $pdf->Image(\URL::asset("images/constructura2.jpg"),0, 0, 60, 30, 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
             $pdf->SetY(10);
@@ -49,6 +49,11 @@ class OrdenPdf extends Model
         PDF::writeHTML($html,true,0,false,false,"");
         //Escribir footer
         $html = <<<EOD
+                   <table style="text-align:center">
+                   <tr style="text-align:center">
+                        <td>$orden->observaciones</td> 
+                    </tr>
+                    </table>
                  <table border=".5" cellpadding="3">
                      <tr >
                          <td height = "50px"></td>
@@ -63,7 +68,7 @@ class OrdenPdf extends Model
                  </table>
         EOD;
         PDF::SetAutoPageBreak(false); 
-        PDF::SetY(-34);
+        PDF::SetY(-38);
         PDF::writeHTML($html,true,0,false,false,"");
         PDF::Output();
         
