@@ -71,7 +71,7 @@
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" style="background-color: black;
-                            border-color: black;" aria-expanded="false">
+                            border-color: black;" aria-expanded="false">Opciones
     
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
