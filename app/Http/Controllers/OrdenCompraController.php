@@ -21,13 +21,13 @@ class OrdenCompraController extends Controller
         $proveedores=contrato::all();
         $views = DB::table('orden_compras')
                 ->select('orden_compras.id','folio_orden','solicitado','fecha_orden','fecha_entrega','descripcion_orden','contratos.folio','proveedores.razon_social',DB::raw('SUM(orden_productos.importe) as importe_total'))
-                ->join('orden_productos','orden_productos.orden_id','=','orden_compras.id')
-                ->join('contratos','contratos.id','=','orden_compras.id_contrato')
-                ->join('proveedores','proveedores.id','=','orden_compras.id_proveedor')
+                ->leftJoin('orden_productos','orden_productos.orden_id','=','orden_compras.id')
+                ->leftJoin('contratos','contratos.id','=','orden_compras.id_contrato')
+                ->leftJoin('proveedores','proveedores.id','=','orden_compras.id_proveedor')
                 ->where('orden_compras.status','!=','0')
                 ->groupBy('orden_compras.id')
                 ->get();
-         //var_dump($views);
+         //var_dump($views->toSql());
          //die;
         return view('ordenes_compras.cat_compras',compact("orden","contratos","proveedores","views"));
     }
