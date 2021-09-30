@@ -1,90 +1,127 @@
 @extends('layouts.base_html')
-@section('tittle') ORDENES DE COMPRA <@endsection
+@section('tittle') COMPRAS @endsection 
+@section("styles") 
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="{{ asset('lib/DataTables/Responsive-2.2.9/css/responsive.dataTables.min.css') }}">
 
-@section('body')
-<div class="row">
-    <div class="col-md-12">
-        <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
-            ORDENES DE COMPRA
-        </h1>
+    <style>
+        table {
+        text-transform: uppercase;
+    }
+    
+    .dataTables_filter{
+        margin-bottom:0.5rem;
+    }
+    .colorlib-contact{
+        padding-top:1rem;
+    }
+    table.dataTable.no-footer {
+    border-bottom: 1px solid #fff;
+    }
+    table.dataTable thead th {
+    border-bottom: 1px solid white;
+    }
+    td{
+        background-color:#FFF2CC;
+        }
+
+    tbody, td,th, tr {
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-bottom:white;
+    }
+
+    
+
+
+    </style>
+    @section('body')
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
+                ORDENES DE COMPRA
+            </h1>
+            <hr style="color: orange;">
+        </div>
     </div>
-</div>
-<?php
-//include 'C:\Users\EVOTEK\Desktop\EVOTEK\constructora\public\lib\xcrud\xcrud_1.7.15_2\xcrud\xcrud.php'; //path to xcrud.php
-//include '../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php';
-require (__DIR__.'/../../../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php');
-//require (__DIR__.'/../../../../public_html/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php'); //servidor
-$xcrud = Xcrud::get_instance(); 
-//where oc.status != 0');
+    <table style="text-align:center;width: 100%;" id="orden_table" width="100%">
+        <thead style="background-color:#ff9c00;color:white;text-align:center">
+            <th>Folio Orden</th>
+            <th>Solicitado</th>
+            <th >Fecha Orden</th>
+            <th >Fecha Entrega</th>
+            <th >Descripcion Orden</th>
+            <th >Contrato</th>
+            <th >Proveedor</th>
+            <th>Importe Total(Sin IVA)</th>
+            <th ></th>
+        </thead>
+        <tbody>
+            @foreach($views as $view)
+                <tr style="text-align:center">
+                    <td>{{$view->folio_orden}}</td>
+                    <td>{{$view->solicitado}}</td>
+                    <td>{{$view->fecha_orden}}</td>
+                    <td>{{$view->fecha_entrega}}</td>
+                    <td>{{$view->descripcion_orden}}</td>
+                    <td>{{$view->folio}}</td>                    
+                    <td>{{$view->razon_social}}</td>
+                    <td> $ {{number_format($view->importe_total,2)}}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" style="background-color: black;
+                            border-color: black;" aria-expanded="false">
+    
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    
+                                <li><a class="dropdown-item" target ="_blank" href="{{url("compras_pdf/{$view->id}")}}">PDF ORDEN</a></li>
+                                <li><a class="dropdown-item" href="{{url("compras/{$view->id}/edit")}}">Editar</a></li>
+                                <li><a class="dropdown-item" href="{{url("/pagos_proveedores/orden/{$view->id}")}}">Operar Orden</a></li>
+                                <li><a  class="dropdown-item" href="" onclick='update_status({{$view->id}})'>Eliminar</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    @endsection
 
-
-
-$xcrud->query('select oc.id as id,folio_orden,solicitado,fecha_orden,fecha_entrega,descripcion_orden,c.folio as Contrato,p.razon_social as Proveedor,importe_total as "Importe_Total_(sin IVA)"
-from constructora.orden_compras oc
-left join (SELECT orden_id,sum(importe) as importe_total  from constructora.orden_productos  group by orden_id) as op
-ON op.orden_id=oc.id
-left join constructora.contratos c
-on c.id = oc.id_contrato
-left join constructora.proveedores p
-on   p.id=oc.id_proveedor
-where oc.status != 0');
-$xcrud->button(URL::to('compras_pdf/{id}'),'PDF',false,"P",array('target'=>'_blank'));
-$xcrud->button(URL::to('compras/{id}/edit'),'Editar',false,"P");
-$xcrud->button(URL::to('pagos_proveedores/orden/{id}'),'Operar Orden',false,"P");
-$xcrud->button('#','Eliminar',false,"P",array('onclick'=>'update_status({id})'));
-$xcrud->unset_add();
-$xcrud->unset_edit();
-$xcrud->unset_numbers();
-
-
-
-try{
-
-    echo $xcrud->render(); //magic
-}
-catch(Exception $e){
-    $xcrud = Xcrud::get_instance(); //instantiate xCRUD
-    $xcrud->table('orden_compras'); //employees - MySQL table name
-    $xcrud->columns("folio_orden,solicitado,fecha_orden,fecha_entrega,descripcion_orden,id_contrato,id_proveedor");
-    $xcrud->columns("folio_orden,solicitado,fecha_orden,fecha_entrega,descripcion_orden,id_contrato,id_proveedor");
-    $xcrud->relation('id_proveedor','proveedores','id', 'razon_social');
-    $xcrud->relation("id_contrato","contratos","id","folio");
-    $xcrud->relation("id_status","estatus_facturas","id","status");
-    $xcrud->column_name('id_estatus','Estatus');
-    $xcrud->column_name('id_contrato','Contrato');
-    $xcrud->column_name('id_proveedor','Proveedor');
-
-    $xcrud->where('status !=', 0);
-    echo $xcrud->render(); //magic
-}
-?>
-@endsection
-@section('scripts')
-<script>
-
-
-async function update_status(id) {
-    event.preventDefault();
-    let url = "{{url('/compras/{N°}')}}".replace("{N°}",id);
-    let init = {
-        method:"PUT",
-        headers:{
-            'X-CSRF-Token' : "{{ csrf_token() }}",
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify({'status':0})
-    };
-    let req = await fetch(url,init);
-    if (req.ok) {
-       window.location.reload();
-    }
-    else{
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Error al eliminar',
+    @section('scripts')
+    <script>
+        let table = $("#orden_table").dataTable({
+            responsive:true,
+            ordering:false
         });
-    }
-}
-</script>
+
+        async function update_status(id) {
+            event.preventDefault();
+            let url = "{{url('/compras/{id}')}}".replace("{id}",id);
+            let init = {
+                method:"PUT",
+                headers:{
+                    'X-CSRF-Token' : "{{ csrf_token() }}",
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({'status':0})
+            };
+            let req = await fetch(url,init);
+            if (req.ok) {
+              window.location.reload();
+            }
+            else{
+                let res = await req.json();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: res
+                });
+            }
+        }
+
+    </script>
+    @endsection
+
 @endsection
