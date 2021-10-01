@@ -43,7 +43,7 @@
                 <td class="align-middle">{{$prefactura->contrato->cliente->razon_social}}</td>
                 <td class="align-middle">{{date('d/m/Y', strtotime($prefactura->fecha_inicio))}}</td>
                 <td class="align-middle">{{date('d/m/Y', strtotime($prefactura->fecha_final))}}</td>
-                <td class="align-middle">{{number_format($prefactura->neto)}}</td>
+                <td class="align-middle">{{number_format($prefactura->neto,2)}}</td>
                 <td class="align-middle">{{$prefactura->status}}</td>
                 <td>   
                     <div class="dropdown" >
