@@ -54,8 +54,11 @@
                         $fecha = str_replace("/","_",$prefactura->folio_prefactura);
                         ?>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            @if($prefactura->id_status==1)
                             <li><a target="_blank" class="dropdown-item" href="{{url("prefacturas_pdf/{$prefactura->id}")}}">Pre-Factura</a></li>
+                            @endif
                             @if($prefactura->id_status==2)
+                            <li><a target="_blank" class="dropdown-item" href="{{url("prefacturas_pdf/{$prefactura->id}")}}">Factura</a></li>
                                 @if($prefactura->pdf_oficial!=null)
                                 <li><a target="_blank" class="dropdown-item" href={{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->pdf_oficial}")}}>Factura Oficial</a></li>
                                 @endif
@@ -64,6 +67,7 @@
                                 @endif
                             @endif
                             @if($prefactura->id_status==3)
+                                <li><a target="_blank" class="dropdown-item" href="{{url("prefacturas_pdf/{$prefactura->id}")}}">Factura</a></li>
                                 @if($prefactura->pdf_oficial!=null)
                                 <li><a class="dropdown-item" target="_blank" href={{url("/storage/docs/facturas_oficiales/{$fecha}/{$prefactura->pdf_oficial}")}}>Factura Oficial</a></li>
                                 @endif
