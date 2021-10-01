@@ -18,7 +18,8 @@ class proveedores extends Controller
      */
     public function index()
     {
-        return view('proveedores.cat_proveedores');
+        $proveedores = proveedor::all();
+        return view('proveedores.cat_proveedores',compact('proveedores'));
     }
 
     /**

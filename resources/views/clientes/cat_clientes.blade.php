@@ -1,5 +1,41 @@
 @extends('layouts.base_html')
-@section('tittle') CLIENTES <@endsection
+@section('tittle') CLIENTES @endsection
+@section('styles')
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="{{ asset('lib/DataTables/Responsive-2.2.9/css/responsive.dataTables.min.css') }}">
+
+    <style>
+        table {
+            text-transform: uppercase;
+        }
+
+        .dataTables_filter{
+        margin-bottom:0.5rem;
+    }
+    .colorlib-contact{
+        padding-top:1rem;
+    }
+    table.dataTable.no-footer {
+    border-bottom: 1px solid #fff;
+    }
+    table.dataTable thead th {
+    border-bottom: 1px solid white;
+    }
+    td{
+        background-color:#FFF2CC;
+        }
+
+    tbody, td,th, tr {
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-bottom:white;
+    }
+        
+
+    </style>
+
+@endsection
 
 @section('body')
 <div class="row">
@@ -13,42 +49,45 @@
          <hr style="color: orange;">
     </div>
 </div>
-
-
-
-<?php
-
-//include 'C:\Users\EVOTEK\Desktop\EVOTEK\constructora\public\lib\xcrud\xcrud_1.7.15_2\xcrud\xcrud.php'; //path to xcrud.php
-//include '../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php';
-require (__DIR__.'/../../../public/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php'); // solo para localhost
-//require (__DIR__.'/../../../../public_html/lib/xcrud/xcrud_1.7.15_2/xcrud/xcrud.php'); //servidor
-$xcrud = Xcrud::get_instance(); //instantiate xCRUD
-$xcrud->table('clientes'); //employees - MySQL table name
-$xcrud->table_name(' ');
-$xcrud->columns("cliente,alias,razon_social");
-$xcrud->label(array('cliente'=>'RFC'));
-//$xcrud->label(array('contacto_cliente_clientes.email'=>'Email'));
-//$xcrud->label(array('contacto_cliente_clientes.telefono'=>' Telefono'));
-//$xcrud->label(array('contacto_cliente_clientes.area'=>' Área'));
-//$xcrud->label(array('contacto_pago_clientes.email'=>'Email Contacto Pago'));
-//$xcrud->label(array('contacto_pago_clientes.telefono'=>' Telefono Contacto Pago'));
-//$xcrud->join('id','contacto_cliente_clientes','id_cliente');
-$xcrud->button(asset("/clientes/{id}"),"Detalles");
-$xcrud->button(asset("/clientes/{id}/edit"),"Editar");
-$xcrud->button('#','Eliminar',false,"P",array('onclick'=>'eliminar({id})'));
-//$xcrud->join('id','contacto_pago_clientes','id_cliente');
-$xcrud->unset_add();
-$xcrud->unset_view();
-$xcrud->unset_edit();
-$xcrud->unset_remove();
-echo $xcrud->render(); //magic
-?>
+<table id="cliente_table" width="100%">
+    <thead style="background-color:#ff9c00;text-align:center;color:white">
+        <th>RFC</th>
+        <th>CLIENTE</th>
+        <th>ALIAS</th>
+        <th width="15%">OPCIONES</th>
+    </thead>
+    <tbody>
+        @foreach($clientes as $cliente)
+        <tr style="text-align:center">
+            <td class="align-middle">{{$cliente->cliente}}</td>
+            <td class="align-middle">{{$cliente->razon_social}}</td>
+            <td class="align-middle">{{$cliente->alias}}</td>
+            <td class="align-middle">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" 
+                    aria-expanded="false" style="background-color: black;
+                    border-color: black;">
+                    Seleccione
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{url("/clientes/{$cliente->id}")}}">Detalles</a></li>
+                        <li><a class="dropdown-item" href="{{url("/clientes/{$cliente->id}/edit")}}">Editar</a></li>
+                        <li><a  class="dropdown-item" href="" onclick='eliminar({{$cliente->id}})'>Eliminar</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 @endsection
-
-
 
 @section("scripts")
 <script>
+
+    let table = $("#cliente_table").dataTable({
+            responsive:true
+    });
          async function eliminar(id) {
         event.preventDefault();
           let url='{{url("/clientes/{id}")}}'.replace('{id}',id);

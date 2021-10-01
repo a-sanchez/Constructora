@@ -9,6 +9,30 @@
             text-transform: uppercase;
         }
 
+        .dataTables_filter{
+        margin-bottom:0.5rem;
+    }
+    .colorlib-contact{
+        padding-top:1rem;
+    }
+    table.dataTable.no-footer {
+    border-bottom: 1px solid #fff;
+    }
+    table.dataTable thead th {
+    border-bottom: 1px solid white;
+    }
+    td{
+        background-color:#FFF2CC;
+        }
+
+    tbody, td,th, tr {
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-bottom:white;
+    }
+        
+
     </style>
 
     @endsection
@@ -21,9 +45,9 @@
             <hr style="color: orange;">
         </div>
     </div>
-    <a type="button" class="btn" id="btnAgregar" href={{url('/contratos/create')}} style="background:#8d8d8d;color:white;">Nuevo Contrato</a>
-    <table style="padding-top: 10px;" id="contrato_table" width="100%">
-        <thead style="background-color:#b4b4b4">
+    <a type="button" class="btn mb-3" id="btnAgregar" href={{url('/contratos/create')}} style="background:#8d8d8d;color:white;">Nuevo Contrato</a>
+    <table  id="contrato_table" width="100%">
+        <thead style="background-color:#ff9c00;text-align:center;color:white">
             <th>RFC</th>
             <th width="30%">Razon Social</th>
             <th width="8%">Folio</th>
@@ -45,7 +69,8 @@
                 <td class="align-middle">{{date('d/m/Y', strtotime($contrato->fecha_final))}}</td>
                 <td class="align-middle">
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: black;
+                        border-color: black;">
 
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -93,7 +118,6 @@
             }
           }
 
-//imrpotar js y css de tables responsive 
 
             
        

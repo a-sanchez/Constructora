@@ -2,6 +2,7 @@
 @section('tittle') OPERAR ORDEN DE COMPRA
 @endsection
 
+
 @section('body')
 
 <div class="container">
