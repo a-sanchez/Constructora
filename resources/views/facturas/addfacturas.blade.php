@@ -180,7 +180,7 @@
 
             document.getElementById("total_retenciones").value=parseFloat(+x + +y).toFixed(2);
       }
-      }
+      
       catch(e){}
     }
     function Sumar(){

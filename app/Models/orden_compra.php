@@ -12,7 +12,7 @@ class orden_compra extends Model
     use HasFactory;
     protected $table='orden_compras';
     public $timestamps = false;
-    protected $guarded =["productos"];
+    protected $guarded =["productos","estado"];
 
     public static function setFile($adjunto_compra)
     {
@@ -47,6 +47,11 @@ class orden_compra extends Model
     public function proveedor()
     {
         return $this->belongsTo(proveedor::class,"id_proveedor");
+    }
+
+    public function getEstadoAttribute(){
+        $estado = status::where("id",$this->id_status)->first();
+        return $estado->status;
     }
 
 }

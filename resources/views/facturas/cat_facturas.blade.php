@@ -32,6 +32,7 @@
             <th width="30%">Razon Social</th>
             <th>Inicio</th>
             <th>Final</th>
+            <th>Total</th>
             <th >Estatus</th>
             <th width="15%">Archivos</th>
             <th width="5%">Facturar</th>
@@ -42,6 +43,7 @@
                 <td class="align-middle">{{$prefactura->contrato->cliente->razon_social}}</td>
                 <td class="align-middle">{{date('d/m/Y', strtotime($prefactura->fecha_inicio))}}</td>
                 <td class="align-middle">{{date('d/m/Y', strtotime($prefactura->fecha_final))}}</td>
+                <td class="align-middle">{{number_format($prefactura->neto)}}</td>
                 <td class="align-middle">{{$prefactura->status}}</td>
                 <td>   
                     <div class="dropdown" >
