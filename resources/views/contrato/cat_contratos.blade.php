@@ -64,7 +64,7 @@
                 <td class="align-middle">{{$contrato->cliente->razon_social}}</td>
                 <td class="align-middle">{{$contrato->folio}}</td>
                 <td class="align-middle">{{$contrato->descripcion}}</td>
-                <td class="align-middle">{{$contrato->monto}}</td>
+                <td class="align-middle">{{number_format($contrato->monto,2)}}</td>
                 <td class="align-middle">{{date('d/m/Y', strtotime($contrato->fecha_inicio))}}</td>
                 <td class="align-middle">{{date('d/m/Y', strtotime($contrato->fecha_final))}}</td>
                 <td class="align-middle">
