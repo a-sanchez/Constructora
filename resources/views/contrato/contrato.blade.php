@@ -59,7 +59,7 @@
             </div>
             <div class="form-group col-md-4">
               <label for="folio">Costo de Operación</label>
-              <input type="text" class="form-control" id="costo" name="costo"placeholder="Ingrese costo" required >
+              <input type="text" class="form-control" id="costo" name="costo"placeholder="Ingrese costo" value="0.00" required >
            </div>
            <div class="form-group col-md-1">
           </div>
