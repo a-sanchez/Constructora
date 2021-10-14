@@ -89,7 +89,7 @@ function resta(){
         var subtotal = parseFloat(document.getElementById("sub_total").value),
         impuestos = parseFloat(document.getElementById("impuestos").value)||0.00;
 
-        document.getElementById("total").value = parseFloat(subtotal-impuestos).toFixed(2);
+        document.getElementById("total").value = parseFloat(subtotal+impuestos).toFixed(2);
         }
 
 

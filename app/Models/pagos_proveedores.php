@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\status;
 use App\Models\contrato;
+use App\Models\proveedor;
 use App\Models\orden_compra;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,6 +33,10 @@ class pagos_proveedores extends Model
     public function getFormaPagoAttribute(){
         $forma= create_forma_pago::where("id",$this->id_forma)->first();
         return $forma;
+    }
+    public function getProveedorAttribute(){
+        $proveedor = proveedor::where("id",$this->id_proveedor)->first();
+        return $proveedor;
     }
 }
 

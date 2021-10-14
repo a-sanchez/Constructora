@@ -17,5 +17,6 @@ class FormaPagosSeeder extends Seeder
         create_forma_pago::create(['forma'=>'Efectivo']);
         create_forma_pago::create(['forma'=>'Transferencia']);
         create_forma_pago::create(['forma'=>'Cheque']);
+        // create_forma_pago::create(['forma'=>'Tarjeta']);
     }
 }

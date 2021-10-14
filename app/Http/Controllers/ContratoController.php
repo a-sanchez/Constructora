@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\contratos_request;
 use App\Models\contrato;
 use App\Models\cliente;
+use App\Models\factura;
 use App\Models\orden_compra;
 use Illuminate\Support\Facades\DB;
 class ContratoController extends Controller
@@ -101,8 +102,9 @@ class ContratoController extends Controller
 
     public function destroy($id)
     {   $ordenes = orden_compra::where("id_contrato",$id)->get();
-        if($ordenes->first() != NULL){
-            return response()->json("Error, Existen ordenes de compra ligadas al contrato",409);
+        $facturas=factura::where("id_contrato",$id)->get();
+        if($ordenes->first() != NULL || $facturas->first()!=NULL){
+            return response()->json("Error, Existen ordenes de compra o facturas ligadas al contrato",409);
         }
         else{
         $contrato = contrato::find($id);

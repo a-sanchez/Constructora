@@ -73,38 +73,40 @@
         </div>
         <hr style="color:orange;">
         <h5>Informacion Contrato </h5>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="folio">Folio del Contrato</label>
-                <input type="text" class="form-control" id="folio" name="folio" value="{{$contrato->folio}}">
+        <div class="row" >
+            <div class="form-group col-md-1">
+            </div>
+              <div class="form-group col-md-4">
+                  <label for="folio">Folio del Contrato</label>
+                  <input type="text" class="form-control" id="folio" name="folio"  value="{{$contrato->folio}}" >
+              </div>
+              <div class="form-group col-md-2">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="folio">Costo de Operación</label>
+                <input type="text" class="form-control" id="costo" name="costo"  value="{{$contrato->costo}}" >
+             </div>
+             <div class="form-group col-md-1">
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <label for="descripcion">Descripcion</label>
-                <input type="text" class="form-control" id="descripcion" name="descripcion" readonly value="{{$contrato->descripcion}}">
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="anticipo">Anticipo</label>
-                    <input type="text" class="form-control" name="anticipo" id="anticipo" value="{{$contrato->anticipo}}">
-                </div>
-                <div class="col-md-4">
-                    <label for="fecha_anticipo">Fecha Anticipo</label>
-                    <input type="date" class="form-control" name="fecha_anticipo" id="fecha_anticipo" value="{{$contrato->fecha_anticipo}}">
-                </div>
-                <div class="col-md-4">
-                    <label for="monto">Monto Total</label>
-                    <input type="text" class="form-control" id="monto" name="monto" value="{{$contrato->monto}}">
-                </div>
+                {{-- <input type="text" class="form-control" id="descripcion" name="descripcion"  value="{{$contrato->descripcion}}"> --}}
+                <textarea style="height: 113px;resize:none" id="descripcion" name="descripcion" class="form-control">{{$contrato->descripcion}}</textarea>
+
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <label for="monto">Monto Total</label>
+                <input type="text" class="form-control" id="monto" name="monto" value="{{$contrato->monto}}">
+            </div>
+            <div class="col-md-4">
                 <label for="fecha_inicio">Fecha Inicio</label>
                 <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" value="{{$contrato->fecha_inicio}}">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label for="fecha_final">Fecha Final</label>
                 <input type="date" class="form-control" id="fecha_final" name="fecha_final" value="{{$contrato->fecha_final}}">
             </div>

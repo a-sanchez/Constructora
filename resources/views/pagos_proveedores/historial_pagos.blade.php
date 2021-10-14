@@ -29,33 +29,38 @@
 <table style="width: 100%;border: 1px solid black;" id="pagos_table" width="100%">
     <thead style="background-color:#ff9c00;color:white;text-align:center">
         <th >Folio factura</th>
+        <th>Contrato</th>
+        <th >Proveedor</th>
         <th>Fecha emisión</th>
         <th>Fecha vencimiento</th>
-        <th width="10%">SubTotal</th>
-        <th width="10%">Impuestos</th>
-        <th width="3%">Total</th>
-        <th width="20%">Observaciones y comentarios</th>
+        <th >SubTotal</th>
+        <th >Impuestos</th>
+        <th >Total</th>
         <th>Estatus</th>
-        <th width="3%"></th>
+        <th >Observaciones y comentarios</th>
+        <th></th>
     </thead>
-    <tbody>
+    <tbody style="text-align:center">
         @foreach($operadas as $operar)
         <tr style="text-align:center">
             <td>{{$operar->folio_factura}}</td>
+            <td>{{$operar->contrato->folio}}</td>
+            <td> {{$operar->orden->proveedor->razon_social}} </td>
             <td>{{$operar->fecha_emision}}</td>
             <td>{{$operar->fecha_vencimiento}}</td>
             <td>{{number_format($operar->sub_total,2)}}</td>
             <td>{{number_format($operar->impuestos,2)}}</td>
             <td>{{number_format($operar->total,2)}}</td>
-            <td>{{$operar->comentarios}}</td>
             <td>{{$operar->status}}</td>
-            <td>
+            <td>{{$operar->comentarios}}</td>
+            <td style="text-align:center">
                 @if($operar->id_status ==2)
                 <a  type="button" style="color: green; " class="btn"  href="{{url("pagos_proveedores/pagar/{$operar->id}")}}"><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
                 <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='borrar_pago({{$operar->id}})' class="fas fa-trash-alt"></i></a>
                 @endif
                 @if($operar->id_status==3)
                 <a  style="color: blue;" href="{{url("pagos_proveedores/detalles/{$operar->id}")}}" class="btn" ><i style="font-size:1.5rem" id="info-circle"  class="fas fa-info-circle"></i></a>
+                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='update_pago({{$operar->id}})' class="fas fa-trash-alt"></i></a>
                 @endif
             </td>
         </tr>
@@ -68,6 +73,31 @@
 let table = $("#pagos_table").dataTable({
     responsive:true
 });
+
+async function update_pago(id){
+    event.preventDefault();
+    let url='{{url("/pagos_proveedores/{id}")}}'.replace('{id}',id);
+    let init = {
+                method:"PUT",
+                headers:{
+                    'X-CSRF-Token' : "{{ csrf_token() }}",
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({'id_status':2})
+            };
+let req = await fetch(url,init);
+if (req.ok){
+    location.reload();
+}
+else{
+    
+    Swal.fire({
+        icon:"error",
+        title:"Error",
+        text:"Error al eliminar"
+    });
+}
+}
 
 async function borrar_pago(id){
     event.preventDefault();

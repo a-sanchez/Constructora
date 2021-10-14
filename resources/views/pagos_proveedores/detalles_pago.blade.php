@@ -40,7 +40,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-md-6">
-                  <label for="referencia" >Rerencia(caracter)</label>
+                  <label for="referencia" >Referencia(caracter)</label>
                   <input type="text" disabled class="form-control" value="{{$pagos->referencia}}" id="referencia" name='referencia'>
                 </div>
                 <div class="col-md-6">

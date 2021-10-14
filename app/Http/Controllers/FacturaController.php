@@ -54,6 +54,7 @@ class FacturaController extends Controller
     public function edit($id)
     {
         $prefactura=factura::find($id);
+        $contrato=contrato::find($id);
         return view('facturas.facturar',compact("prefactura"));
     }
 
@@ -63,6 +64,11 @@ class FacturaController extends Controller
         $prefactura=factura::find($id);
         $update=$prefactura->update($request->all());
         return $update;
+    }
+
+    public function editar($id){
+        $prefactura=factura::find($id);
+        return view('facturas.editarfacturas',compact("prefactura"));
     }
 
     public function actualizar(Request $request,$id){

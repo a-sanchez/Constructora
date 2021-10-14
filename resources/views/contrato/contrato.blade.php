@@ -40,23 +40,38 @@
       <div class="form-row" >
             <div class="form-group col-md-6">
                 <label for="nombre_contraparte">Nombre</label>
+                
                 <input type="text" class="form-control" id="nombre_contraparte" name="nombre_contraparte" required>
             </div>
       </div>
       <hr style="color:orange;">
-        <h5>Informacion Contrato </h5>
-        <div class="form-row" >
+     
+        <h5 style="text-align:center; font-weight:bold">Informacion Contrato </h5>
+  
+        <div class="row" >
+          <div class="form-group col-md-1">
+          </div>
             <div class="form-group col-md-4">
                 <label for="folio">Folio del Contrato</label>
                 <input type="text" class="form-control" id="folio" name="folio"placeholder="Ingrese folio de contrato" required >
             </div>
+            <div class="form-group col-md-2">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="folio">Costo de Operación</label>
+              <input type="text" class="form-control" id="costo" name="costo"placeholder="Ingrese costo" required >
+           </div>
+           <div class="form-group col-md-1">
+          </div>
         </div>
         <div class="row">
           <div class="col-md-12">
           <label for="descripcion" >Descripcion</label>
-          <input type="text" class="form-control" id="descripcion" placeholder="Descripcion" name="descripcion" required>
+          {{-- <input type="text" class="form-control" id="descripcion" placeholder="Descripcion" name="descripcion" required> --}}
+          <textarea style="height: 113px;resize:none" id="descripcion" placeholder="Agregar descripcion" name="descripcion" class="form-control" required></textarea>
+
         </div>
-        <div class="row">
+        {{-- <div class="row">
           <div class="col-md-4">
             <label for="anticipo">Anticipo</label>
             <input type="text" class="form-control" name="anticipo" id="anticipo" value="0.00">
@@ -69,14 +84,18 @@
             <label for="monto" >Monto Total</label>
             <input type="text" class="form-control" id="monto" placeholder="Monto Total" name="monto" required>
           </div>
-        </div>
+        </div> --}}
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
+          <label for="monto" >Monto Total</label>
+          <input type="text" class="form-control" id="monto" placeholder="Monto Total" name="monto" required>
+        </div>
+        <div class="col-md-4">
           <label for="fecha_inicio" >Fecha Inicio</label>
           <input type="date" class="form-control" id="fecha_inicio" placeholder="Fecha de Inicio" name="fecha_inicio">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="fecha_final" >Fecha Final</label>
           <input type="date" class="form-control" id="fecha_final" placeholder="Fecha de Fin" name="fecha_final" >
         </div>

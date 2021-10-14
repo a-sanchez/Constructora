@@ -50,18 +50,28 @@
       </div>
       <hr style="color:orange;">
         <h5>Informacion Contrato </h5>
-        <div class="form-row" >
-            <div class="form-group col-md-4">
-                <label for="folio">Folio del Contrato</label>
-                <input type="text" class="form-control" readonly value="{{$contrato->folio}}" >
+        <div class="row" >
+            <div class="form-group col-md-1">
+            </div>
+              <div class="form-group col-md-4">
+                  <label for="folio">Folio del Contrato</label>
+                  <input type="text" class="form-control" id="folio" name="folio" readonly value="{{$contrato->folio}}" >
+              </div>
+              <div class="form-group col-md-2">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="folio">Costo de Operación</label>
+                <input type="text" class="form-control" id="costo" name="costo" readonly value="$ {{number_format($contrato->costo,2)}}" >
+             </div>
+             <div class="form-group col-md-1">
             </div>
         </div>
         <div class="row">
           <div class="col-md-12">
           <label for="descripcion" >Descripcion</label>
-          <input type="text" class="form-control" readonly value="{{$contrato->descripcion}}">
+          <textarea style="height: 113px;resize:none" class="form-control" readonly >{{$contrato->descripcion}}</textarea>
         </div>
-        <div class="row">
+        {{-- <div class="row">
           <div class="col-md-4">
             <label for="anticipo">Anticipo</label>
             <input type="text" class="form-control" readonly value="{{$contrato->anticipo}}">
@@ -74,14 +84,18 @@
             <label for="monto" >Monto Total</label>
             <input type="text" class="form-control" readonly value="{{$contrato->monto}}">
           </div>
-        </div>
+        </div> --}}
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
+          <label for="monto" >Monto Total</label>
+          <input type="text" class="form-control" readonly value="{{$contrato->monto}}">
+        </div>
+        <div class="col-md-4">
           <label for="fecha_inicio" >Fecha Inicio</label>
           <input type="text" class="form-control" readonly value="{{date('d/m/Y', strtotime($contrato->fecha_inicio))}}" >
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="fecha_final" >Fecha Final</label>
           <input type="text" class="form-control" readonly value="{{date('d/m/Y', strtotime($contrato->fecha_final))}}"  >
         </div>

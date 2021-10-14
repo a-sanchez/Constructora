@@ -49,19 +49,29 @@
         </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <label for="importe_estimacion" >Importe de estimacion</label>
       <input type="text" class="form-control" id="importe_estimacion" oninput="cal()" placeholder="Ingrese Importe" name="importe_estimacion" id="importe_estimacion" required>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
+      <label for="anticipo" >(%) Anticipo Entregado</label>
+      <input type="text"  class="form-control" id="porcentaje" oninput="cal()" name='porcentaje'>
+  </div>
+    <div class="col-md-3">
         <label for="anticipo" >(-) Anticipo Entregado</label>
-        <input type="text"  class="form-control" id="anticipo" name='anticipo' oninput="cal()" disabled value="{{$contrato->anticipo}}">
+        <input type="text"  class="form-control" id="anticipo" disabled name='anticipo' oninput="cal()" >
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <label for="sub-total" >Sub-Total</label>
       <input type="text" disabled class="form-control" id="sub_total" name='sub_total' value="0.00">
   </div>
 </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="concepto">Concepto de pago de estimación</label>
+      <input type="text" class="form-control" id="concepto_pago" name="concepto_pago">
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-12">
       <label for="concepto">Concepto de la estimación</label>
@@ -145,12 +155,24 @@
 
 @section('scripts')
 <script>
+
   function cal(){
     try{
       var a=parseFloat(document.getElementById("importe_estimacion").value)||0.00,
-          b=parseFloat(document.getElementById("anticipo").value);
+          porcentaje=parseFloat(document.getElementById("porcentaje").value)||0,
+          iva= ((parseFloat(document.getElementById("iva").value))/100)||0;
+
+          document.getElementById("anticipo").value=a*(porcentaje/100);
+          let b =  document.getElementById("anticipo").value=(a*(porcentaje/100)).toFixed(2);
 
           document.getElementById("sub_total").value=(a-b).toFixed(2);
+
+          let sub_total= document.getElementById("sub_total").value=(a-b).toFixed(2);
+
+          let c = (sub_total*iva).toFixed(2);
+          document.getElementById("subtotal_iva").value=c;
+
+          document.getElementById("total_estimacion").value= parseFloat(+c + +sub_total).toFixed(2);
       }
       catch(e){}
     }

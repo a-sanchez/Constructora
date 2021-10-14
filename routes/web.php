@@ -99,6 +99,7 @@ Route::resource('orden_productos',OrdenProductoController::class);
 Route::get('facturas/pagar/{id}',[FacturaController::class,'pagar']);
 Route::get("prefacturas_pdf/{id}",[FacturaController::class,'PrefacturaPDF']);
 Route::post("facturas/actualizar/{id}",[FacturaController::class,'actualizar']);
+Route::get("facturas/editar/{id}",[FacturaController::class,'editar']);
 Route::get("facturas/detalles_pago/{id}",[FacturaController::class,'detalles_pago']);
 Route::resource('facturas',FacturaController::class);
 #----------------PAGOS---------------------------------#

@@ -117,10 +117,5 @@
                 });
             }
           }
-
-
-            
-       
-
     </script>
     @endsection

@@ -18,7 +18,7 @@ class PantallasSeeder extends Seeder
         pantallas::create(['nombre'=>'CONTRATOS','url'=>"/contratos"]);
         pantallas::create(['nombre'=>'ORDEN COMPRA','url'=>"/compras"]);
         pantallas::create(['nombre'=>'PREFACTURAS','url'=>"/facturas"]);
-        pantallas::create(['nombre'=>'PAGOS','url'=>"/pagos"]);
+        pantallas::create(['nombre'=>'PAGOS','url'=>"/pagos_proveedores"]);
         pantallas::create(['nombre'=>'PROVEEDORES','url'=>"/proveedores"]);
         pantallas::create(['nombre'=>'CONFIGURACION','url'=>"/configuracion"]);
         

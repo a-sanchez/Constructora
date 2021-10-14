@@ -32,7 +32,6 @@
     border-bottom:white;
     }
 
-    
 
 
     </style>
@@ -55,6 +54,8 @@
             <th >Contrato</th>
             <th >Proveedor</th>
             <th>Importe Total(Sin IVA)</th>
+            {{-- <th>Factura Grupal</th> --}}
+            <th>Estatus</th>
             <th ></th>
         </thead>
         <tbody>
@@ -68,11 +69,14 @@
                     <td>{{$view->folio}}</td>                    
                     <td>{{$view->razon_social}}</td>
                     <td> $ {{number_format($view->importe_total,2)}}</td>
+                    {{-- <td>
+                        <input type="checkbox" name="grupal"  id="grupal" style="text-align:center">
+                    </td> --}}
+                    <td>{{$view->status}}</td>
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" style="background-color: black;
                             border-color: black;" aria-expanded="false">Opciones
-    
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     
@@ -92,8 +96,9 @@
     @section('scripts')
     <script>
         let table = $("#orden_table").dataTable({
-            responsive:true,
-            ordering:false
+            responsive:true
+            // responsive:true,
+            // columnDefs:[{responsivePriority:1,targets:8}]
         });
 
         async function update_status(id) {
@@ -106,6 +111,7 @@
                     'Content-Type':'application/json'
                 },
                 body:JSON.stringify({'status':0})
+
             };
             let req = await fetch(url,init);
             if (req.ok) {

@@ -7,7 +7,7 @@
 
     <div class="col-md-12">
         <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
-            PAGO A ROVEEDOR
+            PAGO A PROVEEDOR
         </h1>
     </div>
     <div class="row">
@@ -36,7 +36,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-md-6">
-                  <label for="referencia" >Rerencia(caracter)</label>
+                  <label for="referencia" >Referencia(caracter)</label>
                   <input type="text"  class="form-control"  id="referencia" name='referencia'>
                 </div>
                 <div class="col-md-6">
