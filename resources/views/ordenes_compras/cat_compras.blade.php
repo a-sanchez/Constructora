@@ -1,6 +1,6 @@
 @extends('layouts.base_html')
-@section('tittle') COMPRAS @endsection 
-@section("styles") 
+@section('tittle') COMPRAS @endsection
+@section("styles")
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="{{ asset('lib/DataTables/Responsive-2.2.9/css/responsive.dataTables.min.css') }}">
 
@@ -8,7 +8,7 @@
         table {
         text-transform: uppercase;
     }
-    
+
     .dataTables_filter{
         margin-bottom:0.5rem;
     }
@@ -66,12 +66,12 @@
                     <td>{{$view->fecha_orden}}</td>
                     <td>{{$view->fecha_entrega}}</td>
                     <td>{{$view->descripcion_orden}}</td>
-                    <td>{{$view->folio}}</td>                    
+                    <td>{{$view->folio}}</td>
                     <td>{{$view->razon_social}}</td>
                     <td> $ {{number_format($view->importe_total,2)}}</td>
                     <td>
                         @if($view->status=='En proceso..')
-                        <input type="checkbox" name="grupal" class="{{$view->razon_social}}"  onchange="change(this);" style="text-align:center">
+                        <input type="checkbox" name="grupal" class="{{$view->razon_social}}" style="text-align:center">
                         @endif
                     </td>
                     <td>{{$view->status}}</td>
@@ -118,31 +118,26 @@
             columnDefs:[{responsivePriority:1,targets:8}]
         });
 
-        function change(elemento) {
-            verificarChecks();
         var checkbox = document.querySelectorAll("input[type=checkbox]");
         checkbox.forEach(check => {
-            check.checked = false;
-            check.addEventListener("change",function () {
+            check.addEventListener('change', function() {
+                if (this.checked) {
                     checkbox.forEach(element => {
-                        if(element.className != check.className){
+                        if (this.className != element.className) {
                             element.disabled = true;
                         }
                     });
-                });
-            });
-        }
-
-        function verificarChecks() {
-            let checks = document.querySelectorAll("input[type='checkbox']");
-            let checked = false;
-            checks.forEach(check => {
-                if(check.checked){
-                    checked = true;
+                } else {
+                    if(!$("input:checkbox:checked").length > 0){
+                        checkbox.forEach(element => {
+                            if (this.className != element.className) {
+                                element.disabled = false;
+                            }
+                        });
+                    }
                 }
             });
-           
-        }
+        });
         async function update_status(id) {
             event.preventDefault();
             let url = "{{url('/compras/{id}')}}".replace("{id}",id);
