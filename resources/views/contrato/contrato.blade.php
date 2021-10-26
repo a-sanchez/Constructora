@@ -71,20 +71,6 @@
           <textarea style="height: 113px;resize:none" id="descripcion" placeholder="Agregar descripcion" name="descripcion" class="form-control" required></textarea>
 
         </div>
-        {{-- <div class="row">
-          <div class="col-md-4">
-            <label for="anticipo">Anticipo</label>
-            <input type="text" class="form-control" name="anticipo" id="anticipo" value="0.00">
-          </div>
-          <div class="col-md-4">
-            <label for="fecha_anticipo">Fecha Anticipo</label>
-            <input type="date" class="form-control" name="fecha_anticipo" id="fecha_anticipo">
-          </div>
-          <div class="col-md-4">
-            <label for="monto" >Monto Total</label>
-            <input type="text" class="form-control" id="monto" placeholder="Monto Total" name="monto" required>
-          </div>
-        </div> --}}
       </div>
       <div class="row">
         <div class="col-md-4">

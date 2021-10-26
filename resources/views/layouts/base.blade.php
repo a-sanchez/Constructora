@@ -34,7 +34,7 @@
         
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="{{asset('lib/DataTables/jquery.dataTables.spanish.js')}}"></script>
-    <script src={{asset("lib/DataTables/Responsive-2.2.9/js/dataTables.responsive.js")}}></script>
+    <script src="{{asset('lib/DataTables/Responsive-2.2.9/js/dataTables.responsive.js')}}"></script>
     <style>
         .offcanvas {
             visibility: visible !important;

@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use App\Http\Controllers\AddNewCuentaController;
 use App\Models\OrdenProducto;
 use App\Http\Controllers\proveedores;
 use App\Http\Controllers\usercontroller;
@@ -21,8 +23,9 @@ use phpDocumentor\Reflection\Types\Resource_;
 use App\Http\Controllers\OrdenCompraController;
 use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\OrdenProductoController;
-use App\Http\Controllers\ContactoClienteClientesController;
+use App\Http\Controllers\HistorialCuentasController;
 use App\Http\Controllers\PagosProveedoresController;
+use App\Http\Controllers\ContactoClienteClientesController;
 use App\Http\Controllers\ProveedorContactoVentasController;
 
 // Route::get('/', function () {
@@ -85,6 +88,8 @@ Route::get('ordenes_compra/catalago_compra',function(){
     return view('ordenes_compras.cat_compras');
 });*/
 //Route::get("compras/orden/{id}",[OrdenCompraController::class,'orden']);
+Route::get('compras/reporte',[OrdenCompraController::class,'reporte']);
+Route::get('proveedor/{id_proveedor}/contrato/{id_contrato}/estatus/{id_status}',[OrdenCompraController::class,'generar_reporte']);
 Route::resource('compras',OrdenCompraController::class);
 Route::get("compras_pdf/{id}",[OrdenCompraController::class, 'OrdenPdf']);
 #----------------ORDENES PRODUCTOS-----------------------------#
@@ -121,3 +126,13 @@ Route::resource('configuracion',ConfiguracionController::class);
 
 Route::post('permisos/remove', [PermisosController::class,"removePermisos"]);
 Route::resource('permisos',PermisosController::class);
+
+#----------------CUENTAS POR PAGAR----------------------------#
+Route::post('cuentas/agregar',[HistorialCuentasController::class,"agregar"]);
+Route::get('cuentas/costo/{id}',[HistorialCuentasController::class,"nuevacuenta"]);
+Route::get('cuentas/update_vista',[HistorialCuentasController::class,"update_vista"]);
+Route::get('cuentas/detalles',[HistorialCuentasController::class,"detalles"]);
+Route::resource('cuentas', HistorialCuentasController::class);
+
+Route::resource('nuevas_cuentas', AddNewCuentaController::class);
+

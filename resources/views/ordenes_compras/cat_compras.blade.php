@@ -37,12 +37,15 @@
     </style>
     @section('body')
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
                 ORDENES DE COMPRA
             </h1>
-            <hr style="color: orange;">
         </div>
+        <div class="col-md-2 mt-2" style="text-align:center">
+            <a type="button" href="{{url('compras/reporte')}}" class="btn" style="background-color: #1b1b97;color:white">Generar Reporte</a>
+        </div>
+        <hr class="mt-3" style="color: orange;">
     </div>
     <table style="text-align:center;width: 100%;" id="orden_table" width="100%">
         <thead style="background-color:#ff9c00;color:white;text-align:center">
@@ -54,7 +57,7 @@
             <th >Contrato</th>
             <th >Proveedor</th>
             <th>Importe Total(Sin IVA)</th>
-            <th>Factura Grupal</th>
+            {{-- <th>Factura Grupal</th> --}}
             <th>Estatus</th>
             <th ></th>
         </thead>
@@ -69,11 +72,11 @@
                     <td>{{$view->folio}}</td>                    
                     <td>{{$view->razon_social}}</td>
                     <td> $ {{number_format($view->importe_total,2)}}</td>
-                    <td>
+                    {{-- <td>
                         @if($view->status=='En proceso..')
                         <input type="checkbox" name="grupal" class="{{$view->razon_social}}"  onchange="change(this);" style="text-align:center">
                         @endif
-                    </td>
+                    </td> --}}
                     <td>{{$view->status}}</td>
                     <td>
                         <div class="dropdown">
@@ -90,7 +93,7 @@
                     </td>
                 </tr>
             @endforeach
-            <div class="row mb-3 d-flex justify-content-center" >
+            {{-- <div class="row mb-3 d-flex justify-content-center" >
                 <div class="col-md-3">
                     <label for="gasto_operacion">Gasto de operacion del contrato</label>
                     <input type="text" class="form-control" id="gasto_operacion" name="gasto_operacion">
@@ -106,7 +109,7 @@
                 <div class=" col-md-3 " >
                     <button type="submit" class="btn btn-success" style="margin-top: 2.1rem;">Operar Grupal</button>
                 </div>
-            </div>
+            </div> --}}
         </tbody>
     </table>
     @endsection
@@ -117,32 +120,6 @@
             responsive:true,
             columnDefs:[{responsivePriority:1,targets:8}]
         });
-
-        function change(elemento) {
-            verificarChecks();
-        var checkbox = document.querySelectorAll("input[type=checkbox]");
-        checkbox.forEach(check => {
-            check.checked = false;
-            check.addEventListener("change",function () {
-                    checkbox.forEach(element => {
-                        if(element.className != check.className){
-                            element.disabled = true;
-                        }
-                    });
-                });
-            });
-        }
-
-        function verificarChecks() {
-            let checks = document.querySelectorAll("input[type='checkbox']");
-            let checked = false;
-            checks.forEach(check => {
-                if(check.checked){
-                    checked = true;
-                }
-            });
-           
-        }
         async function update_status(id) {
             event.preventDefault();
             let url = "{{url('/compras/{id}')}}".replace("{id}",id);
@@ -171,5 +148,3 @@
 
     </script>
     @endsection
-
-@endsection

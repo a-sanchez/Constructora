@@ -98,11 +98,14 @@
     </tr>
     <tr>
         <td colspan="3" style="text-align:start"  style="height:80px">RECIBI DE {{$factura->contrato->cliente->razon_social}} la cantidad de: $ <b>{{$factura->monto_total}} </b>
+            <br>
+            <b>{{$factura->concepto}}</b>
+            <br>
             POR CONCEPTO DE PAGO DE ESTIMACION <b>{{$factura->concepto_pago}}</b>
         <br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>DEL CONTRATO &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> {{$factura->contrato->folio}}  
         <br>DE LA OBRA: 
-        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{$factura->concepto}}</b>
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{$factura->contrato->descripcion}}</b>
         </td>
         
     </tr>

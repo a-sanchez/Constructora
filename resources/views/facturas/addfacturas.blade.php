@@ -33,8 +33,8 @@
         </select>
     </div>
     <div class="col-md-4">
-      <label for="monto_total" >Monto Total del Contrato</label>
-      <input type="text"  class="form-control" id="monto_total" name='monto_total' readonly value="{{$contrato->monto}}">
+      <label for="monto_total" >Cantidad</label>
+      <input type="text"  class="form-control" id="monto_total" name='monto_total'  value="0.00">
     </div>
   </div>
   <h4 style="color:white;background-color:orange;font-size:23px;font-weight:bold;text-align:center">Estimación</h4>
@@ -74,7 +74,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <label for="concepto">Concepto de la estimación</label>
+      <label for="concepto">Cantidad en letra</label>
       <input type="text" class="form-control" id="concepto" name="concepto">
     </div>
   </div>

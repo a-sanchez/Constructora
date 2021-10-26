@@ -5,7 +5,7 @@
         $permisos = permisos::where("id_usuario",Auth::user()->id)->get();
     @endphp
     <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
-    <aside id="colorlib-aside" role="complementary" class="border js-fullheight" style="height: 982px;">
+    <aside id="colorlib-aside" role="complementary" class="border js-fullheight" >
         <nav id="colorlib-main-menu" role="navigation">
             <div class="row">
                 <div class="col-md-12">
@@ -20,6 +20,7 @@
                         <li><a href={{url('/compras')}}>Orden de Compra</a></li>
                         <li><a href={{url('/facturas')}}>Operar pre-factura</a></li>
                         <li><a href={{url('/pagos_proveedores')}}>Pagos proveedores</a></li>
+                        <li><a href={{url('/cuentas')}}>Cuentas por pagar</a></li>
                         <li><a href={{url('/proveedores')}}>Proveedores</a></li>
                         <li><a href={{url('/configuracion')}}>PERMISOS</a></li>
                     @else
