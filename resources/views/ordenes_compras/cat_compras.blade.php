@@ -57,8 +57,8 @@
             <th >Contrato</th>
             <th >Proveedor</th>
             <th>Importe Total(Sin IVA)</th>
-            <th>Factura Grupal</th>
-            {{-- <th>Estatus</th> --}}
+            {{-- <th>Factura Grupal</th> --}}
+            <th>Estatus</th>
             <th ></th>
         </thead>
         <tbody>
