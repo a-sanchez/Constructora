@@ -58,7 +58,7 @@
             <th >Proveedor</th>
             <th>Importe Total(Sin IVA)</th>
             <th>Factura Grupal</th>
-            <th>Estatus</th>
+            {{-- <th>Estatus</th> --}}
             <th ></th>
         </thead>
         <tbody>
@@ -72,11 +72,11 @@
                     <td>{{$view->folio}}</td>                    
                     <td>{{$view->razon_social}}</td>
                     <td> $ {{number_format($view->importe_total,2)}}</td>
-                    <td>
+                    {{-- <td>
                         @if($view->status=='En proceso..')
                         <input type="checkbox" name="grupal" class="{{$view->razon_social}}"  onchange="change(this);" style="text-align:center">
                         @endif
-                    </td>
+                    </td> --}}
                     <td>{{$view->status}}</td>
                     <td>
                         <div class="dropdown">
