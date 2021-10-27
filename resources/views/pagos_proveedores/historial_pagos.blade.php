@@ -20,7 +20,7 @@
 @section('body')
 <div class="row">
     <div class="col-md-12">
-        <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
+        <h1 class="animate-box fadeInLeft animated mt-5" data-animate-effect="fadeInLeft">
             PAGOS A PROVEEDORES
         </h1>
         <hr style="color: orange;">

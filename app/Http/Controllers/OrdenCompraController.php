@@ -107,7 +107,6 @@ class OrdenCompraController extends Controller
         where 		`orden_compras`.`id_contrato` = `contratos`.`id`
         group by `folio`;");
         $estatus=status::all();
-
         return view('ordenes_compras.reporte',compact("proveedores","contratos","estatus"));
     }
     public function generar_reporte($id_proveedor, $id_contrato,$id_status){

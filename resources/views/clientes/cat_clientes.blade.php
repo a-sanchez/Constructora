@@ -38,9 +38,10 @@
 @endsection
 
 @section('body')
+
 <div class="row">
     <div class="col-md-12">
-        <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
+        <h1 class="animate-box fadeInLeft animated mt-5" data-animate-effect="fadeInLeft">
             CLIENTES
             <div class="col-md-8 col-md-offset-2">
             <a type="button" class="btn" id="btnAgregar" href={{url('/clientes/create')}} style="background:#8d8d8d;color:white;">Nuevo Cliente</a>

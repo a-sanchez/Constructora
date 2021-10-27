@@ -1,9 +1,5 @@
 @extends('layouts.base_html')
 
-@section('title')
-    OPERAR PRE-FACTURAS
-@endsection
-
 @section('styles')
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="{{ asset('lib/DataTables/Responsive-2.2.9/css/responsive.dataTables.min.css') }}"> 
@@ -25,6 +21,13 @@
 @endsection
 
 @section('body')
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="animate-box fadeInLeft animated mt-5" data-animate-effect="fadeInLeft">
+            OPERAR PRE-FACTURAS
+        </h1>
+    </div>
+</div>
     <h4 style="color:gray;font-size:20px;">-Listado de Pre-Facturas</h4>
     <hr style="color: orange;">
     <table  id="facturas_table" width="100%" style="width: 100%;border: 1px solid black;">
