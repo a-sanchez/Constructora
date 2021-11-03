@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class OrdencompraIdPago extends Migration
+class DeleteColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class OrdencompraIdPago extends Migration
      */
     public function up()
     {
-        Schema::table('pago',function($table){
-            $table->unsignedBigInteger('id_pago');
-            $table->foreing('id_pago')->references('pagos_proveedores');
+        Schema::table('add_new_cuentas',function($table){
+            $table->dropColumn('importe');
         });
     }
 

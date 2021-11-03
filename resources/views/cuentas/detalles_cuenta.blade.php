@@ -66,7 +66,6 @@
             <th>PosFechadas</th>
             <th>Depósitos</th>
             <th>Importe</th>
-            <th>Saldo</th>
         </thead>
     </table>
     <div class="row">
@@ -97,7 +96,7 @@
         info:false,
         ajax:`{{url('/nuevas_cuentas/${id_historial}')}}`,
         drawCallback: function () {
-            var sum = this.api().column(7,{page:'current'}).data().sum();
+            var sum = this.api().column(6,{page:'current'}).data().sum();
             let res = parseFloat(document.getElementById("costo").value) + parseFloat(sum);
             document.getElementById("total").value=res;
         },
@@ -119,9 +118,6 @@
             },
             {
                 "data":"deposito"
-            },
-            {
-                "data":"importe"
             },
             {
                 "data":"saldo"

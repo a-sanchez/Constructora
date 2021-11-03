@@ -84,12 +84,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 <label for="importe">Importe</label>
                 <input type="text" class="form-control" id="importe" name="importe">
-            </div>
+            </div> --}}
             <div class="col-md-4">
-                <label for="saldo">Saldo</label>
+                <label for="saldo">Importe</label>
                 <input type="text" class="form-control" id="saldo" name="saldo">
             </div>
             <div class="col-md-4">
@@ -115,7 +115,6 @@
                     <th>PosFechadas</th>
                     <th>Depósitos</th>
                     <th>Importe</th>
-                    <th>Saldo</th>
                     <th width="8%"></th>
                 </thead>
             </table>
@@ -155,7 +154,7 @@
         info:false,
         ajax:`{{url('/nuevas_cuentas/${id_historial}')}}`,
         drawCallback: function () {
-            var sum = this.api().column(8,{page:'current'}).data().sum();
+            var sum = this.api().column(7,{page:'current'}).data().sum();
             let res = parseFloat(document.getElementById("costo").value) + parseFloat(sum);
             document.getElementById("total").value=res;
         },
@@ -180,9 +179,6 @@
             },
             {
                 "data":"deposito"
-            },
-            {
-                "data":"importe"
             },
             {
                 "data":"saldo"
@@ -216,8 +212,7 @@
                         ,[4,'fecha']
                         ,[5,'posfechadas']
                         ,[6,'deposito']
-                        ,[7,'importe']
-                        ,[8,'saldo']
+                        ,[7,'saldo']
                     ]
                 },
                 //ON SUCCESS, RECARGA LA TABLA DE LOS PRODUCTOS

@@ -86,7 +86,6 @@
         <th>PosFechadas</th>
         <th>Depósitos</th>
         <th>Importe</th>
-        <th>Saldo</th>
         <th></th>
     </thead>
 </table>
