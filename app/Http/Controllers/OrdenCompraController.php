@@ -23,8 +23,8 @@ class OrdenCompraController extends Controller
         $contratos=contrato::all();
         $proveedores=contrato::all();
         $views = DB::table('orden_compras')
-                ->select('orden_compras.id','folio_orden','solicitado','fecha_orden','contratos.costo','fecha_entrega','descripcion_orden',
-                'contratos.folio','proveedores.razon_social','estatus_facturas.status',DB::raw('SUM(orden_productos.importe) as importe_total'))
+                ->select('orden_compras.id','folio_orden','solicitado','iva','fecha_orden','contratos.costo','fecha_entrega','descripcion_orden',
+                'contratos.folio','proveedores.razon_social','estatus_facturas.status',DB::raw('(SUM(orden_productos.importe)*(iva/100))+(SUM(orden_productos.importe)) as importe_total'))
                 ->leftJoin('orden_productos','orden_productos.orden_id','=','orden_compras.id')
                 ->leftJoin('estatus_facturas','estatus_facturas.id',"=","orden_compras.id_status")
                 ->leftJoin('contratos','contratos.id','=','orden_compras.id_contrato')
@@ -32,8 +32,8 @@ class OrdenCompraController extends Controller
                 ->where('orden_compras.status','!=','0')
                 ->groupBy('orden_compras.id')
                 ->get();
-        //  $views->dump();
-        //  die;
+          //$views->dump();
+          //die;
          //die;
         return view('ordenes_compras.cat_compras',compact("orden","contratos","proveedores","views"));
     }

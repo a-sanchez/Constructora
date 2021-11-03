@@ -19,8 +19,8 @@ class CreateAddNewCuentasTable extends Migration
             $table->string("pago");
             $table->date("fecha");
             $table->date("posfechadas");
-            $table->string("deposito");
-            $table->decimal("importe",12,2);
+            $table->string("deposito")->nullable();
+            //$table->decimal("importe",12,2);
             $table->decimal("saldo",12,2);
             $table->timestamps();
 

@@ -20,6 +20,11 @@ class PagosProveedoresController extends Controller
         $orden_compra = orden_compra::find($id);
         return view("pagos_proveedores.operar",compact("orden_compra"));
     }
+
+    public function operar_grupal(){
+        return view("pagos_proveedores.operar_grupal");
+    }
+
     //agregar validation al crear
     public function new_orden(Request $request)
     {
@@ -70,6 +75,7 @@ class PagosProveedoresController extends Controller
         //
     }
 
+    
     public function destroy($id)
     {
         $pagos = pagos_proveedores::find($id);

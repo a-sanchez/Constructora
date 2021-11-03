@@ -197,8 +197,8 @@
     let req = await fetch(url, init);
     if (req.ok) {
         let res = await req.json();
-        //window.open(`{{url('/compras_pdf/${res.id}')}}`, '_blank');
-        //window.location.href = "{{ url('/compras') }}";
+        window.open(`{{url('/compras_pdf/${res.id}')}}`, '_blank');
+        window.location.href = "{{ url('/compras') }}";
     }
     else{
       Swal.fire({

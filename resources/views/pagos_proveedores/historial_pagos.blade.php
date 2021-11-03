@@ -31,6 +31,7 @@
         <th >Folio factura</th>
         <th>Contrato</th>
         <th >Proveedor</th>
+        <th>Folio Orden</th>
         <th>Fecha emisión</th>
         <th>Fecha vencimiento</th>
         <th >SubTotal</th>
@@ -46,6 +47,7 @@
             <td>{{$operar->folio_factura}}</td>
             <td>{{$operar->contrato->folio}}</td>
             <td> {{$operar->orden->proveedor->razon_social}} </td>
+            <td>{{$operar->orden->folio_orden}}</td>
             <td>{{$operar->fecha_emision}}</td>
             <td>{{$operar->fecha_vencimiento}}</td>
             <td>{{number_format($operar->sub_total,2)}}</td>

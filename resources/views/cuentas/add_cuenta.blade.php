@@ -56,12 +56,12 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4">
+    {{-- <div class="col-md-4">
         <label for="importe">Importe</label>
         <input type="text" class="form-control" id="importe" name="importe">
-    </div>
+    </div> --}}
     <div class="col-md-4">
-        <label for="saldo">Saldo</label>
+        <label for="saldo">Importe</label>
         <input type="text" class="form-control" id="saldo" name="saldo">
     </div>
     <div class="col-md-4">
@@ -123,7 +123,7 @@
         info:false,
         ajax:`{{url('/nuevas_cuentas/${id_historial}')}}`,
         drawCallback: function () {
-            var sum = this.api().column(7,{page:'current'}).data().sum();
+            var sum = this.api().column(6,{page:'current'}).data().sum();
             console.log(sum);
             console.log(document.getElementById("costo").value);
             let res = parseFloat(document.getElementById("costo").value) + parseFloat(sum);
@@ -146,9 +146,6 @@
             },
             {
                 data:"deposito"
-            },
-            {
-                data:"importe"
             },
             {
                 data:"saldo"
