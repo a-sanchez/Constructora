@@ -142,5 +142,5 @@ Route::resource('nuevas_cuentas', AddNewCuentaController::class);
 
 Route::resource('orden_pago',OrdenPagoController::class);
 
-
+Route::get("pagos_proveedores2/pagar/{id}",[PagosProveedores2Controller::class,'pagar']);
 Route::resource('pagos_proveedores2', PagosProveedores2Controller::class);

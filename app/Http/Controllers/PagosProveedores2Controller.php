@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\orden_pago;
-use App\Models\pagos_proveedores2;
 use Illuminate\Http\Request;
+use App\Models\create_forma_pago;
+use App\Models\pagos_proveedores2;
 
 class PagosProveedores2Controller extends Controller
 {
@@ -48,6 +49,11 @@ class PagosProveedores2Controller extends Controller
     public function show(pagos_proveedores2 $pagos_proveedores2)
     {
         //
+    }
+    public function pagar($id){
+        $pagos = pagos_proveedores2::find($id);
+        $forma=create_forma_pago::all();
+        return view('pagos_proveedores.add_pago',compact("pagos"),["formas"=>$forma]);
     }
 
     /**
