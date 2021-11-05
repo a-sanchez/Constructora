@@ -2,7 +2,14 @@
 @section('tittle') OPERAR ORDEN DE COMPRA
 @endsection
 
-
+                @php
+                    $operaciones = [];
+                    foreach ($ordenes as $orden) {
+                        array_push($operaciones,$orden->orden->folio_orden);
+                    }
+                    $operaciones = implode("-",$operaciones);
+                    
+                @endphp
 @section('body')
 
 <div class="container">
@@ -19,16 +26,20 @@
             </p>
         </div>
     </div>
-    <form  class="row g-3" id="form-operar" >
+    <form  class="row g-3" id="form-operar" onsubmit="update_operar({{$operar->id}})">
         @csrf
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label for="folio_factura" >Folio de factura</label>
                 <input type="text"  class="form-control" id="folio_factura" name='folio_factura' required>  
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label for="folio_orden" >Folio de Orden</label>
-                <input type="text"  disabled class="form-control" id="folio_orden" name='folio_orden'  required>  
+                <input type="text"  disabled class="form-control" value= '{{$operaciones}}' required> 
+            </div>
+            <div class="col-md-4">
+                <label for="folio_factura" >Folio del Contrato</label>
+                <input type="text"  class="form-control" id="id_contrato" value ='{{$operar->contrato->folio}}' name='id_contrato' disabled>  
             </div>
         </div>
         <div class="row mt-2">
@@ -44,11 +55,11 @@
         <div class="row mt-2">
             <div class="col-md-4">
                 <label for="sub_total">SubTotal</label>
-                <input type="text" class="form-control" id="sub_total"  name="sub_total">
+                <input type="text" class="form-control" id="sub_total"  oninput="resta();" name="sub_total">
             </div>
             <div class="col-md-4">
                 <label for="impuestos">Impuestos</label>
-                <input type="text"  class="form-control" id="impuestos"  name="impuestos">
+                <input type="text"  class="form-control" id="impuestos"  oninput="resta();" name="impuestos">
             </div>
             <div class="col-md-4">
                 <label for="total">Total</label>
@@ -68,14 +79,12 @@
         </div>
         <div class="row mt-4">
             <div class="col-md-6" style="text-align:end;">
-                <button type="submit" href="#" class="btn" id="btnGuardar" style="background:rgb(13, 194, 13);color:white;">Guardar</button>
+                <button type="submit"  class="btn" id="btnGuardar" style="background:rgb(13, 194, 13);color:white;">Guardar</button>
             </div>
             <div class="col-md-6">
                 <a type="button" class="btn" id="btnCancelar" href="{{url("/compras")}}" style="background:red;color:white;" >Cancelar</a>
             </div>
         </div>
-        <input type="text" hidden id="id_orden" name = "id_orden" >
-        <input type="text" hidden id="id_contrato" name = "id_contrato" >
 
     </form>
 </div>
@@ -84,39 +93,41 @@
 @section('scripts')
 <script>
 
-// function resta(){
-
-//         var subtotal = parseFloat(document.getElementById("sub_total").value),
-//         impuestos = parseFloat(document.getElementById("impuestos").value)||0.00;
-
-//         document.getElementById("total").value = parseFloat(subtotal+impuestos).toFixed(2);
-//         }
+ function resta(){
+         var subtotal = parseFloat(document.getElementById("sub_total").value),
+         impuestos = parseFloat(document.getElementById("impuestos").value)||0.00;
+         document.getElementById("total").value = parseFloat(subtotal+impuestos).toFixed(2);
+         }
 
 
-// async function insert_operar(id){
-//     event.preventDefault();
-//     let form = new FormData(document.getElementById("form-operar"));
-//     form.append("id_status",2);
-//     form.append("id_forma",1);
-//     form.append("sub_total",document.getElementById("sub_total").value);
-//     form.append("impuestos",document.getElementById("impuestos").value);
-//     form.append("total",document.getElementById("total").value);
-//     let url="{{url('/pagos_proveedores/orden')}}";
-//     let init = {
-//         method:"POST",
-//         body:form
-//       }
-//     let req = await fetch(url,init);
-//     if(req.ok){
-//         window.location.href="{{url('/pagos_proveedores')}}"
-//     }
-//     else{
-//         Swal.fire({
-//                     icon: 'error'
-//                     , title: 'Error'
-//                     , text: 'Error al crear factura'
-//                 , });
-//     }
-// }
+  async function update_operar(id){
+       event.preventDefault();
+       let form = new FormData(document.getElementById("form-operar"));
+       form.append("id_status",2);
+       form.append("id_forma",1);
+       form.append("sub_total",document.getElementById("sub_total").value);
+       form.append("impuestos",document.getElementById("impuestos").value);
+       form.append("total",document.getElementById("total").value);
+       let url="{{url('/pagos_proveedores2/{id}')}}".replace("{id}",id);
+       let init = {
+           method:"PUT",
+           headers:{
+              'X-CSRF-Token' : document.getElementsByName("_token")[0].value,
+              "Content-Type":"application/json"
+          },
+           body:JSON.stringify(Object.fromEntries(form))
+         }
+       let req = await fetch(url,init);
+       if(req.ok){
+          window.location.href="{{url('/pagos_proveedores')}}"
+       }
+       else{
+           Swal.fire({
+                       icon: 'error'
+                       , title: 'Error'
+                       , text: 'Error al operar'
+                   , });
+       }
+  }
 </script>
 @endsection

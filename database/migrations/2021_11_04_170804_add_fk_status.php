@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIdStatus extends Migration
+class AddFkStatus extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddIdStatus extends Migration
      */
     public function up()
     {
-        Schema::table('orden_pagos',function($table){
+        Schema::table('pagos_proveedores2s',function($table){
             $table->unsignedBigInteger('id_status');
             $table->foreign('id_status')->references('id')->on('estatus_facturas');
         });

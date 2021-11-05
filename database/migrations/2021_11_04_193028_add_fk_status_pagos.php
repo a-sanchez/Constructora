@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdenPagosTable extends Migration
+class AddFkStatusPagos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateOrdenPagosTable extends Migration
      */
     public function up()
     {
-        Schema::create('orden_pagos', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_orden');
-            $table->foreign('id_orden')->references('id')->on('orden_compras');
+        Schema::table('orden_pagos',function($table){
+            $table->unsignedBigInteger('id_status');
+            $table->foreign('id_status')->references('id')->on('estatus_facturas');
         });
     }
 
@@ -26,6 +26,6 @@ class CreateOrdenPagosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orden_pagos');
+        //
     }
 }

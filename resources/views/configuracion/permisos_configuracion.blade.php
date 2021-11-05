@@ -85,7 +85,6 @@
 
             if (req.ok){
                 let res = await req.json();
-                console.log(res);
             }
             else{
                 alert("permisos no guardados")

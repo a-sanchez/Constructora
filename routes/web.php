@@ -26,6 +26,8 @@ use App\Http\Controllers\OrdenProductoController;
 use App\Http\Controllers\HistorialCuentasController;
 use App\Http\Controllers\PagosProveedoresController;
 use App\Http\Controllers\ContactoClienteClientesController;
+use App\Http\Controllers\OrdenPagoController;
+use App\Http\Controllers\PagosProveedores2Controller;
 use App\Http\Controllers\ProveedorContactoVentasController;
 
 // Route::get('/', function () {
@@ -112,7 +114,6 @@ Route::resource('facturas',FacturaController::class);
 Route::get('pagos_proveedores/pagar/{id}',[PagosProveedoresController::class,'pagar']);
 Route::get('pagos_proveedores/detalles_pago/{id}',[PagosProveedoresController::class,"detalles_pago"]);
 Route::get("pagos_proveedores/orden/{id}",[PagosProveedoresController::class,'orden']);
-Route::post('pagos_proveedores/operar_grupal/{ordenes}',[PagosProveedoresController::class,'operar_grupal']);
 Route::post("pagos_proveedores/orden/",[PagosProveedoresController::class,'new_orden']);
 Route::get("pagos_proveedores/detalles/{id}",[PagosProveedoresController::class,'detalles']);
 Route::resource('pagos_proveedores',PagosProveedoresController::class);
@@ -137,3 +138,9 @@ Route::resource('cuentas', HistorialCuentasController::class);
 
 Route::resource('nuevas_cuentas', AddNewCuentaController::class);
 
+#----------------ORDEN_PAGO---------------------------------------#
+
+Route::resource('orden_pago',OrdenPagoController::class);
+
+
+Route::resource('pagos_proveedores2', PagosProveedores2Controller::class);

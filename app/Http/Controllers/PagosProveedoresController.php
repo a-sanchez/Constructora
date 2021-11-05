@@ -7,13 +7,40 @@ use App\Models\orden_compra;
 use Illuminate\Http\Request;
 use App\Models\create_forma_pago;
 use App\Models\pagos_proveedores;
+use App\Models\pagos_proveedores2;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Exists;
 
 class PagosProveedoresController extends Controller
 {
     public function index()
     {
         $operadas=pagos_proveedores::all();
-        return view('pagos_proveedores.historial_pagos',compact('operadas'));
+        $proveedores = pagos_proveedores2::all();
+    
+        if($proveedores->isEmpty()){
+            $views=[];
+        }
+        else{
+        $views=DB::select ("select pagos_proveedores2s.id,folio_factura,contratos.folio as contrato,
+        proveedores.razon_social,fecha_emision,fecha_vencimiento,sub_total,impuestos,total,
+        group_concat(orden_compras.folio_orden SEPARATOR '\n') as folio_orden, estatus_facturas.status,
+        comentarios
+        from pagos_proveedores2s
+        join orden_pagos
+        on pagos_proveedores2s.id = orden_pagos.id_pago
+        join orden_compras
+        on orden_pagos.id_orden = orden_compras.id
+        join contratos
+        on pagos_proveedores2s.id_contrato = contratos.id
+        join estatus_facturas
+        on pagos_proveedores2s.id_status = estatus_facturas.id 
+        join proveedores
+        on proveedores.id = orden_compras.id_proveedor
+        where folio_factura <>  '' 
+        group by folio_factura;"
+        );}
+        return view('pagos_proveedores.historial_pagos',compact('operadas','views'));
     }
     public function orden($id)
     {
@@ -22,6 +49,7 @@ class PagosProveedoresController extends Controller
     }
 
     public function operar_grupal(){
+        
         return view("pagos_proveedores.operar_grupal");
     }
 

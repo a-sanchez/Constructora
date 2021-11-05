@@ -26,7 +26,7 @@
         <hr style="color: orange;">
     </div>
 </div>
-<table style="width: 100%;border: 1px solid black;" id="pagos_table" width="100%">
+<table style="width: 100%;border: 1px solid black;" id="pagos_table" class ="display" width="100%">
     <thead style="background-color:#ff9c00;color:white;text-align:center">
         <th >Folio factura</th>
         <th>Contrato</th>
@@ -69,11 +69,59 @@
         @endforeach
     </tbody>
 </table>
+
+<div class="row mt-4">
+<table style="width: 100%;border: 1px solid black;margin-top: 2rem;" id="grupales_table" class="display" width="100%">
+    <thead style="background-color:#ff9c00;color:white;text-align:center">
+        <th >Folio factura</th>
+        <th>Contrato</th>
+        <th >Proveedor</th>
+        <th>Folio Orden</th>
+        <th>Fecha emisión</th>
+        <th>Fecha vencimiento</th>
+        <th >SubTotal</th>
+        <th >Impuestos</th>
+        <th >Total</th>
+        <th>Estatus</th>
+        <th >Observaciones y comentarios</th>
+        <th></th>
+    </thead>
+    <tbody style="text-align:center">
+        @foreach($views as $view)
+        <tr style="text-align:center">
+            <td>{{$view->folio_factura}}</td>
+            <td>{{$view->contrato}}</td>
+            <td>{{$view->razon_social}}</td>
+            <td>{{$view->folio_orden}}</td>
+            <td>{{$view->fecha_emision}}</td>
+            <td>{{$view->fecha_vencimiento}}</td>
+            <td>{{number_format($view->sub_total,2)}}</td>
+            <td>{{number_format($view->impuestos,2)}}</td>
+            <td>{{number_format($view->total,2)}}</td>
+            <td>{{$view->status}}</td>
+            <td>{{$view->comentarios}}</td>
+            <td style="text-align:center">
+                @if($view->status =="Operada")
+                <a  type="button" style="color: green; " class="btn"  href="{{url("pagos_proveedores2/pagar/{$view->id}")}}"><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
+                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='borrar_pago2({{$view->id}})' class="fas fa-trash-alt"></i></a>
+                @endif
+                @if($view->status=="Pagada")
+                <a  style="color: blue;" href="{{url("pagos_proveedores2/detalles/{$view->id}")}}" class="btn" ><i style="font-size:1.5rem" id="info-circle"  class="fas fa-info-circle"></i></a>
+                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='update_pago2({{$view->id}})' class="fas fa-trash-alt"></i></a>
+                @endif
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+</div>
 @endsection
 @section('scripts')
 <script>
-let table = $("#pagos_table").dataTable({
-    responsive:true
+$(document).ready(function(){
+    $('table.display').DataTable({
+        responsive:true
+    });
 });
 
 async function update_pago(id){
@@ -104,6 +152,27 @@ else{
 async function borrar_pago(id){
     event.preventDefault();
     let url='{{url("/pagos_proveedores/{id}")}}'.replace('{id}',id);
+    let init = {
+        method:"DELETE",
+        headers: {  'X-CSRF-TOKEN': "{{csrf_token()}}"
+                }
+}
+let req = await fetch(url,init);
+if (req.ok){
+    location.reload();
+}
+else{
+    
+    Swal.fire({
+        icon:"error",
+        title:"Error",
+        text:"Error al eliminar"
+    });
+}
+}
+async function borrar_pago2(id){
+    event.preventDefault();
+    let url='{{url("/pagos_proveedores2/{id}")}}'.replace('{id}',id);
     let init = {
         method:"DELETE",
         headers: {  'X-CSRF-TOKEN': "{{csrf_token()}}"

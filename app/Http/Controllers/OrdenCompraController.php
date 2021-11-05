@@ -13,6 +13,8 @@ use App\Models\OrdenProducto;
 use App\Models\pagos_proveedores;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\orden_request;
+use App\Models\orden_pago;
+use App\Models\pagos_proveedores2;
 use Illuminate\View\ViewServiceProvider;
 
 class OrdenCompraController extends Controller
@@ -22,6 +24,7 @@ class OrdenCompraController extends Controller
         $orden=orden_compra::all();
         $contratos=contrato::all();
         $proveedores=contrato::all();
+        $pagos=pagos_proveedores2::max('id')+1;
         $views = DB::table('orden_compras')
                 ->select('orden_compras.id','folio_orden','solicitado','iva','fecha_orden','contratos.costo','fecha_entrega','descripcion_orden',
                 'contratos.folio','proveedores.razon_social','estatus_facturas.status',DB::raw('(SUM(orden_productos.importe)*(iva/100))+(SUM(orden_productos.importe)) as importe_total'))
@@ -34,8 +37,9 @@ class OrdenCompraController extends Controller
                 ->get();
           //$views->dump();
           //die;
-         //die;
-        return view('ordenes_compras.cat_compras',compact("orden","contratos","proveedores","views"));
+        //  dump($pagos);
+        //  die;
+        return view('ordenes_compras.cat_compras',compact("orden","contratos","proveedores","views","pagos"));
     }
 
     public function create()

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\orden_compra;
 use App\Models\orden_pago;
 use App\Models\pagos_proveedores2;
 use Illuminate\Http\Request;
 
-class OrdenPagoController extends Controller
+class PagosProveedores2Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,16 +17,15 @@ class OrdenPagoController extends Controller
     {
         //
     }
-
+ 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-    //
-
+        //
     }
 
     /**
@@ -38,23 +36,16 @@ class OrdenPagoController extends Controller
      */
     public function store(Request $request)
     {
-        $ordenes = explode(",",$request->id_orden);
-        $contrato = orden_compra::find($ordenes[0])->id_contrato;
-        $pagos=pagos_proveedores2::create(["id_contrato"=>$contrato]);
-        foreach ($ordenes as $orden) {
-            orden_pago::create(["id_orden"=>$orden,"id_pago"=>$pagos->id,"id_status"=>$request->id_status]);
-        }
-
-        return response()->json($pagos->id);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\orden_pago  $orden_pago
+     * @param  \App\Models\pagos_proveedores2  $pagos_proveedores2
      * @return \Illuminate\Http\Response
      */
-    public function show(orden_pago $orden_pago)
+    public function show(pagos_proveedores2 $pagos_proveedores2)
     {
         //
     }
@@ -62,33 +53,40 @@ class OrdenPagoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\orden_pago  $orden_pago
+     * @param  \App\Models\pagos_proveedores2  $pagos_proveedores2
      * @return \Illuminate\Http\Response
      */
-    public function edit(orden_pago $orden_pago)
+    public function edit($id)
     {
-        //
+        $operar=pagos_proveedores2::find($id);
+        $ordenes = orden_pago::where("id_pago",$id)->get();
+        return view("pagos_proveedores.operar_grupal",compact("operar","ordenes"));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\orden_pago  $orden_pago
+     * @param  \App\Models\pagos_proveedores2  $pagos_proveedores2
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, orden_pago $orden_pago)
+    public function update(Request $request,$id)
     {
-        //
+        $operar=pagos_proveedores2::find($id);
+        $update=$operar->update($request->all());
+        return $update;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\orden_pago  $orden_pago
+     * @param  \App\Models\pagos_proveedores2  $pagos_proveedores2
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
+        $pagos = pagos_proveedores2::find($id);
+        pagos_proveedores2::destroy($id);
+        return $pagos;
     }
 }
