@@ -53,9 +53,13 @@ class PagosProveedores2Controller extends Controller
     public function pagar($id){
         $pagos = pagos_proveedores2::find($id);
         $forma=create_forma_pago::all();
-        return view('pagos_proveedores.add_pago',compact("pagos"),["formas"=>$forma]);
+        return view('pagos_proveedores.add_pago2',compact("pagos"),["formas"=>$forma]);
     }
 
+    public function detalles($id){
+        $pagos=pagos_proveedores2::find($id);
+        return view('pagos_proveedores.detalles_pago',compact("pagos"));
+    }
     /**
      * Show the form for editing the specified resource.
      *
