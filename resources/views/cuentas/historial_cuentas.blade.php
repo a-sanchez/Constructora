@@ -211,7 +211,7 @@
 
         let req = await fetch(url,init);
         if(req.ok){
-            //location.reload();
+            location.reload();
         }
         else{
             let res = await req.json();
