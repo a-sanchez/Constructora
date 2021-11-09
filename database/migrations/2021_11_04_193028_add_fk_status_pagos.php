@@ -13,10 +13,10 @@ class AddFkStatusPagos extends Migration
      */
     public function up()
     {
-        Schema::table('orden_pagos',function($table){
-            $table->unsignedBigInteger('id_status');
-            $table->foreign('id_status')->references('id')->on('estatus_facturas');
-        });
+        // Schema::table('orden_pagos',function($table){
+        //     $table->unsignedBigInteger('id_status');
+        //     $table->foreign('id_status')->references('id')->on('estatus_facturas');
+        // });
     }
 
     /**
