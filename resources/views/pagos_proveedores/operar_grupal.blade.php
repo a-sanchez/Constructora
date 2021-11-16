@@ -9,6 +9,11 @@
                     }
                     $operaciones = implode("-",$operaciones);
                     
+                    $grupales=[];
+                    foreach ($ordenes as $orden) {
+                        array_push($grupales,$orden->orden->id);
+                    }
+                    $grupales = implode(",",$grupales);
                 @endphp
 @section('body')
 
@@ -82,7 +87,7 @@
                 <button type="submit"  class="btn" id="btnGuardar" style="background:rgb(13, 194, 13);color:white;">Guardar</button>
             </div>
             <div class="col-md-6">
-                <a type="button" class="btn" id="btnCancelar" href="{{url("/compras")}}" style="background:red;color:white;" >Cancelar</a>
+                <button type="button" class="btn" id="btnCancelar"  onclick  ="delete_pago({{$operar->id}})"href="" style="background:red;color:white;" >Cancelar</button>
             </div>
         </div>
 
@@ -92,13 +97,11 @@
 
 @section('scripts')
 <script>
-
  function resta(){
          var subtotal = parseFloat(document.getElementById("sub_total").value),
          impuestos = parseFloat(document.getElementById("impuestos").value)||0.00;
          document.getElementById("total").value = parseFloat(subtotal+impuestos).toFixed(2);
          }
-
 
   async function update_operar(id){
        event.preventDefault();
@@ -129,5 +132,53 @@
                    , });
        }
   }
+ 
+  async function Updates_Grupal() {
+            let check=[{{$grupales}}];
+            check.forEach(async (element) => {
+                let url = "{{url('/compras/{id}')}}".replace("{id}",element);
+                let init = {
+                    method:"PUT",
+                    headers:{
+                        'X-CSRF-Token' : "{{ csrf_token() }}",
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({'id_status':1})
+                };
+                let req =await fetch (url,init);
+                 if(req.ok){
+                    window.location.href="{{url('/compras')}}";
+                 }
+                 else{
+                     Swal.fire({
+                       icon: 'error',
+                       title: 'Error',
+                       text: "Error al actualizar estatus"
+                     });
+                 }
+            });
+            
+        }
+
+async function delete_pago(id){
+    event.preventDefault();
+    let url='{{url("/pagos_proveedores2/{id}")}}'.replace('{id}',id);
+    let init = {
+        method:"DELETE",
+        headers: {  'X-CSRF-TOKEN': "{{csrf_token()}}"
+                }
+        }
+    let req = await fetch(url,init);
+    if (req.ok){
+        Updates_Grupal();
+    }
+    else{
+        Swal.fire({
+            icon:"error",
+            title:"Error",
+            text:"Error al eliminar"
+        });
+    }
+}
 </script>
 @endsection

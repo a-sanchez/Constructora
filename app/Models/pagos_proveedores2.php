@@ -15,7 +15,7 @@ class pagos_proveedores2 extends Model
      protected $appends =["status","contrato","forma_pago"];
     public function getStatusAttribute(){
          $status = status::where("id",$this->id_status)->first();
-         return $status->status;
+         return $status;
      }
      public function getContratoAttribute(){
          $contrato= contrato::where("id",$this->id_contrato)->first();

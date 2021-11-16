@@ -59,37 +59,62 @@
                     <button type="submit" class="btn" id="btnGuardar" style="background:rgb(13, 194, 13);color:white;">Guardar</button>
                 </div>
                 <div class="col-md-6">
-                    <a type="button" class="btn" id="btnCancelar" href="{{url("/pagos_proveedores")}}" style="background:red;color:white;" >Cancelar</a>
+                    <a type="button" class="btn" id="btnCancelar" onclick="cancelar({{$pagos->id_orden}});" href="" style="background:red;color:white;" >Cancelar</a>
                 </div>
             </div>
         {{-- al actualizar datos se actualizara el estatus de pagado a pagado  --}}
         @endsection
-        @section('scripts')
-        <script>
-        async function pago_proveedor(id){
-        event.preventDefault();
-        let form = new FormData(document.getElementById("form-pago"));
-        form.append("id_status",3);
-        let url = "{{url('/pagos_proveedores/{id}')}}".replace("{id}",id);
-        let init={
-            method:"PUT",
-            headers:{
-                'X-CSRF-Token': document.getElementsByName("_token")[0].value
-                , "Content-Type": "application/json"
-            }
-            ,body:JSON.stringify(Object.fromEntries(form))
-        }
-        let req = await fetch (url,init);
-        if(req.ok){
-            window.location.href="{{url('/pagos_proveedores')}}";
-        }
-        else{
-            Swal.fire({
-                    icon: 'error'
-                    , title: 'Error'
-                    , text: 'Error al generar pago'
-                , });
-        }
+ @section('scripts')
+ <script>
+ async function pago_proveedor(id){
+     event.preventDefault();
+     let form = new FormData(document.getElementById("form-pago"));
+     form.append("id_status",3);
+     let url = "{{url('/pagos_proveedores/{id}')}}".replace("{id}",id);
+     let init={
+         method:"PUT",
+         headers:{
+             'X-CSRF-Token': document.getElementsByName("_token")[0].value
+             , "Content-Type": "application/json"
+         }
+         ,body:JSON.stringify(Object.fromEntries(form))
+     }
+     let req = await fetch (url,init);
+     if(req.ok){
+         window.location.href="{{url('/pagos_proveedores')}}";
+     }
+     else{
+         Swal.fire({
+                 icon: 'error'
+                 , title: 'Error'
+                 , text: 'Error al generar pago'
+             , });
+     }
+}
+
+async function cancelar(id){
+    event.preventDefault();
+    let url="{{url('/compras/{id}')}}".replace("{id}",id);
+    console.log(url);
+    let init={
+        method:"PUT",
+        headers:{
+            'X-CSRF-Token' : "{{ csrf_token() }}",
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({'id_status':2})        
+    };
+    let req = await fetch(url,init);
+    if (req.ok) {
+       window.location.href="{{url('/pagos_proveedores')}}";
     }
-        </script>
-        @endsection
+    else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'ERROR AL ACTUALIZAR ESTATUS DE ORDEN'
+        });
+    }  
+}
+ </script>
+ @endsection

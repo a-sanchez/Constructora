@@ -57,8 +57,8 @@
             <td>{{$operar->comentarios}}</td>
             <td style="text-align:center">
                 @if($operar->id_status ==2)
-                <a  type="button" style="color: green; " class="btn"  href="{{url("pagos_proveedores/pagar/{$operar->id}")}}"><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
-                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='borrar_pago({{$operar->id}})' class="fas fa-trash-alt"></i></a>
+                <a  type="button" style="color: green; " class="btn" onclick="update_pago_orden({{$operar->id_orden}});" href=""><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
+                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='borrar_pago({{$operar->id}}),back_status({{$operar->id_orden}});'  class="fas fa-trash-alt"></i></a>
                 @endif
                 @if($operar->id_status==3)
                 <a  style="color: blue;" href="{{url("pagos_proveedores/detalles/{$operar->id}")}}" class="btn" ><i style="font-size:1.5rem" id="info-circle"  class="fas fa-info-circle"></i></a>
@@ -103,7 +103,7 @@
             <td style="text-align:center">
                 @if($view->status =="Operada")
                 <a  type="button" style="color: green; " class="btn"  href="{{url("pagos_proveedores2/pagar/{$view->id}")}}"><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
-                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='borrar_pago2({{$view->id}})' class="fas fa-trash-alt"></i></a>
+                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt"  onclick='borrar_pago2({{$view->id}})' class="fas fa-trash-alt"></i></a>
                 @endif
                 @if($view->status=="Pagada")
                 <a  style="color: blue;" href="{{url("pagos_proveedores2/detalles/{$view->id}")}}" class="btn" ><i style="font-size:1.5rem" id="info-circle"  class="fas fa-info-circle"></i></a>
@@ -123,6 +123,79 @@ $(document).ready(function(){
         responsive:true
     });
 });
+async function borrar_pago(id){
+    event.preventDefault();
+    let url='{{url("/pagos_proveedores/{id}")}}'.replace('{id}',id);
+    let init = {
+        method:"DELETE",
+        headers: {  'X-CSRF-TOKEN': "{{csrf_token()}}"
+                }
+}
+let req = await fetch(url,init);
+if (req.ok){
+    location.reload();
+}
+else{
+    
+    Swal.fire({
+        icon:"error",
+        title:"Error",
+        text:"Error al eliminar"
+    });
+}
+}
+async function back_status(id) {
+        event.preventDefault();
+            let url = "{{url('/compras/{id}')}}".replace("{id}",id);
+            let init = {
+                method:"PUT",
+                headers:{
+                    'X-CSRF-Token' : "{{ csrf_token() }}",
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({'id_status':1})
+
+            };
+            
+            let req = await fetch(url,init);
+            if (req.ok) {
+               alert("Se ha eliminado correctamente");
+            }
+            else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'ERROR AL ACTUALIZAR ESTATUS DE ORDEN'
+                });
+            }
+        
+    }
+
+async function update_pago_orden(id){
+    event.preventDefault();
+    let url="{{url('/compras/{id}')}}".replace("{id}",id);
+    console.log(url);
+    let init={
+        method:"PUT",
+        headers:{
+            'X-CSRF-Token' : "{{ csrf_token() }}",
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({'id_status':3})        
+    };
+    let req = await fetch(url,init);
+    if (req.ok) {
+       window.location.href="{{url('pagos_proveedores/pagar/{id}')}}".replace("{id}",id);
+    }
+    else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'ERROR AL ACTUALIZAR ESTATUS DE ORDEN'
+        });
+    }    
+}
+
 
 async function update_pago(id){
     event.preventDefault();
@@ -148,28 +221,32 @@ else{
     });
 }
 }
-
-async function borrar_pago(id){
+async function update_pago2(id){
     event.preventDefault();
-    let url='{{url("/pagos_proveedores/{id}")}}'.replace('{id}',id);
+    let url='{{url("/pagos_proveedores2/{id}")}}'.replace('{id}',id);
     let init = {
-        method:"DELETE",
-        headers: {  'X-CSRF-TOKEN': "{{csrf_token()}}"
-                }
+                method:"PUT",
+                headers:{
+                    'X-CSRF-Token' : "{{ csrf_token() }}",
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({'id_status':2})
+            };
+    let req = await fetch(url,init);
+    if (req.ok){
+        location.reload();
+    }
+    else{
+        
+        Swal.fire({
+            icon:"error",
+            title:"Error",
+            text:"Error al eliminar"
+        });
+    }
 }
-let req = await fetch(url,init);
-if (req.ok){
-    location.reload();
-}
-else{
-    
-    Swal.fire({
-        icon:"error",
-        title:"Error",
-        text:"Error al eliminar"
-    });
-}
-}
+
+
 async function borrar_pago2(id){
     event.preventDefault();
     let url='{{url("/pagos_proveedores2/{id}")}}'.replace('{id}',id);
@@ -177,7 +254,7 @@ async function borrar_pago2(id){
         method:"DELETE",
         headers: {  'X-CSRF-TOKEN': "{{csrf_token()}}"
                 }
-}
+        }
 let req = await fetch(url,init);
 if (req.ok){
     location.reload();

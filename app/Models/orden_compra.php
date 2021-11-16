@@ -13,6 +13,7 @@ class orden_compra extends Model
     protected $table='orden_compras';
     public $timestamps = false;
     protected $guarded =["productos","estado"];
+    protected $appends=["estado"];
 
     public static function setFile($adjunto_compra)
     {

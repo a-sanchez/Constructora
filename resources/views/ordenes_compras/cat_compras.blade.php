@@ -84,10 +84,18 @@
                             border-color: black;" aria-expanded="false">Opciones
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                @if($view->id_status==1)
                                 <li><a class="dropdown-item" target ="_blank" href="{{url("compras_pdf/{$view->id}")}}">PDF ORDEN</a></li>
                                 <li><a class="dropdown-item" href="{{url("compras/{$view->id}/edit")}}">Editar</a></li>
-                                <li><a class="dropdown-item"  href="{{url("/pagos_proveedores/orden/{$view->id}")}}">Operar Orden</a></li>
+                                <li><a class="dropdown-item" onclick='orden_estatus({{$view->id}})' href="">Operar Orden</a></li>
                                 <li><a  class="dropdown-item" href="" onclick='update_status({{$view->id}})'>Eliminar</a></li>
+                                @elseif($view->id_status==2)
+                                <li><a class="dropdown-item" target ="_blank" href="{{url("compras_pdf/{$view->id}")}}">PDF ORDEN</a></li>
+                                <li><a class="dropdown-item" href="{{url("compras/{$view->id}/edit")}}">Editar</a></li>
+                                <li><a  class="dropdown-item" href="" onclick='update_status({{$view->id}})'>Eliminar</a></li>
+                                @else
+                                <li><a class="dropdown-item" target ="_blank" href="{{url("compras_pdf/{$view->id}")}}">PDF ORDEN</a></li>
+                                @endif
                             </ul>
                         </div>
                     </td>
@@ -107,7 +115,7 @@
                     <input type="text" class="form-control" id="total" name="total" value="0.00">
                 </div>
                 <div class=" col-md-3 " >
-                    <button class="btn btn-success" id="btn_grupal" style="margin-top: 2.1rem;" onclick ="Ordenes();" >Orden Grupal</button>
+                    <button class="btn btn-success" id="btn_grupal" style="margin-top: 2.1rem;" onclick ="Updates_Grupal();" >Orden Grupal</button>
                 </div>
             </div>
         </tbody>
@@ -121,9 +129,6 @@
             responsive:true,
             columnDefs:[{responsivePriority:1,targets:8}]
         });
-
-        
-
         var checkbox = document.querySelectorAll("input[type=checkbox]");
         checkbox.forEach(check => {
             check.addEventListener('change', function() {
@@ -147,6 +152,37 @@
             });
         });
 
+        let flag = 0;
+        async function Updates_Grupal() {
+            let check=getCheckedBox();
+            check.forEach(async (element) => {
+                event.preventDefault();
+                let url = "{{url('/compras/{id}')}}".replace("{id}",element);
+                let init = {
+                    method:"PUT",
+                    headers:{
+                        'X-CSRF-Token' : "{{ csrf_token() }}",
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({'id_status':2})
+                };
+                let req =await fetch (url,init);
+                 if(req.ok){
+                     if(flag==0){
+                    Ordenes();
+                    flag++;
+                    }
+                 }
+                 else{
+                     Swal.fire({
+                       icon: 'error',
+                       title: 'Error',
+                       text: "Error al actualizar estatus"
+                     });
+                 }
+            }); 
+        }
+
         var contrato = document.getElementById("id_contrato");
         var gasto = document.getElementById("gasto_operacion");
         var sub_total = document.getElementById("ordenes");
@@ -159,9 +195,7 @@
             } 
             else {
             resta(casilla)
-        
             }
-        
         function suma(casilla){ 
             sub_total.value = parseFloat(sub_total.value*1 + casilla.value*1).toFixed(2);
             }
@@ -183,7 +217,6 @@
 
         async function Ordenes(){
             let check = getCheckedBox();
-            console.log(check);
             let form= new FormData();
             form.append("id_contrato",contrato);
             form.append("id_orden",check);
@@ -219,12 +252,33 @@
                 checked.push(checks[index].step);
             });
             return checked;
-        //   let id = checkedBox;
-        //   let cambio = checkedBox.join("/");
         }
+        
+        async function orden_estatus(id) {
+            event.preventDefault();
+            let url = "{{url('/compras/{id}')}}".replace("{id}",id);
+            let init = {
+                method:"PUT",
+                headers:{
+                    'X-CSRF-Token' : "{{ csrf_token() }}",
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({'id_status':2})
 
-        
-        
+            };
+            
+            let req = await fetch(url,init);
+            if (req.ok) {
+               window.location.href="{{url('/pagos_proveedores/orden/{id}')}}".replace("{id}",id);
+            }
+            else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'ERROR AL ACTUALIZAR ESTATUS DE ORDEN'
+                });
+            }
+        }
         async function update_status(id) {
             event.preventDefault();
             let url = "{{url('/compras/{id}')}}".replace("{id}",id);

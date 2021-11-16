@@ -266,11 +266,10 @@ async function edit_orden(id) {
         window.location.href = "{{url('/compras')}}";
     }
     else{
-      let res =await req.json();
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: res,
+            text: 'ERROR AL ACTUALIZAR LA ORDEN',
         })
     }
 }

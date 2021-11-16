@@ -71,7 +71,7 @@
                 <button type="submit" href="#" class="btn" id="btnGuardar" style="background:rgb(13, 194, 13);color:white;">Guardar</button>
             </div>
             <div class="col-md-6">
-                <a type="button" class="btn" id="btnCancelar" href="{{url("/compras")}}" style="background:red;color:white;" >Cancelar</a>
+                <a type="button" class="btn" id="btnCancelar" onclick="back_status({{$orden_compra->id}});"  style="background:red;color:white;" >Cancelar</a>
             </div>
         </div>
         <input type="text" hidden id="id_orden" name = "id_orden" value="{{$orden_compra->id}}">
@@ -83,6 +83,33 @@
 
 @section('scripts')
 <script>
+
+    async function back_status(id) {
+        event.preventDefault();
+            let url = "{{url('/compras/{id}')}}".replace("{id}",id);
+            let init = {
+                method:"PUT",
+                headers:{
+                    'X-CSRF-Token' : "{{ csrf_token() }}",
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({'id_status':1})
+
+            };
+            
+            let req = await fetch(url,init);
+            if (req.ok) {
+                window.location.href="{{url('/compras')}}";
+            }
+            else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'ERROR AL ACTUALIZAR ESTATUS DE ORDEN'
+                });
+            }
+        
+    }
 
 function resta(){
 

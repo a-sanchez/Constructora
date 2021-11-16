@@ -27,7 +27,7 @@ class OrdenCompraController extends Controller
         $pagos=pagos_proveedores2::max('id')+1;
         $views = DB::table('orden_compras')
                 ->select('orden_compras.id','folio_orden','solicitado','iva','fecha_orden','contratos.costo','fecha_entrega','descripcion_orden',
-                'contratos.folio','proveedores.razon_social','estatus_facturas.status',DB::raw('(SUM(orden_productos.importe)*(iva/100))+(SUM(orden_productos.importe)) as importe_total'))
+                'contratos.folio','proveedores.razon_social','estatus_facturas.status','orden_compras.id_status',DB::raw('(SUM(orden_productos.importe)*(iva/100))+(SUM(orden_productos.importe)) as importe_total'))
                 ->leftJoin('orden_productos','orden_productos.orden_id','=','orden_compras.id')
                 ->leftJoin('estatus_facturas','estatus_facturas.id',"=","orden_compras.id_status")
                 ->leftJoin('contratos','contratos.id','=','orden_compras.id_contrato')
@@ -76,15 +76,15 @@ class OrdenCompraController extends Controller
 
     public function update(Request $request, $id)
     {   
-        $operada = pagos_proveedores::where('id_orden',$id)->get();
-        if($operada->first()!=NULL){
-            return response()->json('Error, esta orden ya tiene registros en pagos proveedores',409);
-        }
-        else{
+        // $operada = pagos_proveedores::where('id_orden',$id)->get();
+        // if($operada->first()!=NULL){
+        //     return response()->json('Error, esta orden ya tiene registros en pagos proveedores',409);
+        // }
+        // else{
         $orden_compra = orden_compra::find($id);
         $update = $orden_compra->update($request->all());
         return $update;
-        }
+        // }
     }
 
     public function destroy($id)
