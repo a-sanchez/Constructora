@@ -141,7 +141,7 @@ async function Update_estatus_grupales(id) {
     };
     let req =await fetch (url,init);
     if(req.ok){
-        let id2 = {{$view->id}};
+        let id2 = ({{$view->id}});
         if(flag==0){
             window.location.href="{{url('pagos_proveedores2/pagar/{id}')}}".replace("{id}",id2);
             flag++;
@@ -149,10 +149,10 @@ async function Update_estatus_grupales(id) {
     }
     else{
         Swal.fire({
-                       icon: 'error',
-                       title: 'Error',
-                       text: "Error al actualizar estatus"
-                     });
+           icon: 'error',
+           title: 'Error',
+           text: "Error al actualizar estatus"
+         });
     }
     });
 
