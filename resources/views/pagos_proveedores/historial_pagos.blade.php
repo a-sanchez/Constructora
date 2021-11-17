@@ -17,6 +17,7 @@
 
     </style>
 @endsection
+
 @section('body')
 <div class="row">
     <div class="col-md-12">
@@ -102,8 +103,8 @@
             <td>{{$view->comentarios}}</td>
             <td style="text-align:center">
                 @if($view->status =="Operada")
-                <a  type="button" style="color: green; " class="btn"  href="{{url("pagos_proveedores2/pagar/{$view->id}")}}"><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
-                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt"  onclick='borrar_pago2({{$view->id}})' class="fas fa-trash-alt"></i></a>
+                <a  type="button" style="color: green; " class="btn" onclick="Update_estatus_grupales('{{$view->folios}}');" ><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
+                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt"  onclick="borrar_pago2({{$view->id}});back_status2('{{$view->folios}}')" class="fas fa-trash-alt"></i></a>
                 @endif
                 @if($view->status=="Pagada")
                 <a  style="color: blue;" href="{{url("pagos_proveedores2/detalles/{$view->id}")}}" class="btn" ><i style="font-size:1.5rem" id="info-circle"  class="fas fa-info-circle"></i></a>
@@ -123,6 +124,39 @@ $(document).ready(function(){
         responsive:true
     });
 });
+
+let flag=0;
+async function Update_estatus_grupales(id) {
+    let grupales = id.split(",");
+    grupales.forEach(async element => {
+    let url = "{{url('/compras/{id}')}}".replace("{id}",element);
+    console.log(url);
+    let init = {
+        method:"PUT",
+        headers:{
+            'X-CSRF-Token' : "{{ csrf_token() }}",
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({'id_status':3})
+    };
+    let req =await fetch (url,init);
+    if(req.ok){
+        let id2 = {{$view->id}};
+        if(flag==0){
+            window.location.href="{{url('pagos_proveedores2/pagar/{id}')}}".replace("{id}",id2);
+            flag++;
+        }
+    }
+    else{
+        Swal.fire({
+                       icon: 'error',
+                       title: 'Error',
+                       text: "Error al actualizar estatus"
+                     });
+    }
+    });
+
+}
 async function borrar_pago(id){
     event.preventDefault();
     let url='{{url("/pagos_proveedores/{id}")}}'.replace('{id}',id);
@@ -131,6 +165,9 @@ async function borrar_pago(id){
         headers: {  'X-CSRF-TOKEN': "{{csrf_token()}}"
                 }
 }
+
+
+
 let req = await fetch(url,init);
 if (req.ok){
     location.reload();

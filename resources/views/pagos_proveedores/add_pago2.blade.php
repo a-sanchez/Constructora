@@ -1,7 +1,15 @@
 @extends('layouts.base_html')
 
 @section ('tittle')PAGOS PROVEEDORES @endsection
-
+@php
+        $grupales=[];
+            foreach ($ordenes as $orden) {
+                array_push($grupales,$orden->orden->id);
+            }
+            $grupales = implode(",",$grupales);
+            // var_dump($grupales);
+            // die;
+@endphp
 @section('body')
 <div class="container pt-1">
 
@@ -12,11 +20,10 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h4 style="color:gray;font-size:20px;">-Registrar los siguientes datos para el pago</h4>
+            <h4 style="color:gray;font-size:20px;">-Registrar los siguientes datos para el pago </h4>
             <hr style="color: orange;">
         </div>
     </div>
-
     <form id="form-pago" class="row g-3" onsubmit='pago_proveedor({{$pagos->id}});'>
         @csrf
             <div class="row mt-3">
@@ -27,7 +34,7 @@
                 <div class="col-md-6">
                     <label for="id_forma" name="id_forma">Forma de Pago</label>
                     <select class="form-control" id="id_forma" name="id_forma">
-                      <option selected disabled value="0" >Seleccione forma de pago:</option> 
+                      <option selected disabled value="0" >Seleccione forma de pago:</option>
                       @foreach($formas as $forma)
                       <option value="{{$forma->id}}">{{$forma->forma}}</option>
                       @endforeach
@@ -59,7 +66,8 @@
                     <button type="submit" class="btn" id="btnGuardar" style="background:rgb(13, 194, 13);color:white;">Guardar</button>
                 </div>
                 <div class="col-md-6">
-                    <a type="button" class="btn" id="btnCancelar" href="{{url("/pagos_proveedores")}}" style="background:red;color:white;" >Cancelar</a>
+                    
+                <a type="button" class="btn" id="btnCancelar" onclick="Update_status('{{$grupales}}');"  style="background:red;color:white;" >Cancelar</a>
                 </div>
             </div>
         {{-- al actualizar datos se actualizara el estatus de pagado a pagado  --}}
@@ -91,6 +99,35 @@
                     , text: 'Error al generar pago'
                 , });
         }
+    }
+    let flag=0;
+    async function Update_status(id){
+        let ordenes = id.split(",");
+        ordenes.forEach( async element => {
+            let url = "{{url('/compras/{id}')}}".replace("{id}",element);
+            console.log(url);
+            let init = {
+            method:"PUT",
+            headers:{
+                'X-CSRF-Token' : "{{ csrf_token() }}",
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({'id_status':2})
+            };
+            let req =await fetch (url,init);
+            if(req.ok){
+                if(flag==0){
+                    window.location.href="{{url('/pagos_proveedores')}}";
+                flag++;}
+            }
+            else{
+            Swal.fire({
+                           icon: 'error',
+                           title: 'Error',
+                           text: "Error al actualizar estatus"
+                         });
+            }
+        });
     }
         </script>
         @endsection

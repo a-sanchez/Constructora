@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\contrato;
+use App\Models\orden_pago;
 use App\Models\orden_compra;
 use Illuminate\Http\Request;
 use App\Models\create_forma_pago;
@@ -24,6 +25,7 @@ class PagosProveedoresController extends Controller
         else{
         $views=DB::select ("select pagos_proveedores2s.id,folio_factura,contratos.folio as contrato,
         proveedores.razon_social,fecha_emision,fecha_vencimiento,sub_total,impuestos,total,
+        group_concat(orden_compras.id SEPARATOR ',') as folios,
         group_concat(orden_compras.folio_orden SEPARATOR '\n') as folio_orden, estatus_facturas.status,
         comentarios
         from pagos_proveedores2s
@@ -42,6 +44,7 @@ class PagosProveedoresController extends Controller
         );}
         return view('pagos_proveedores.historial_pagos',compact('operadas','views'));
     }
+    
     public function orden($id)
     {
         $orden_compra = orden_compra::find($id);

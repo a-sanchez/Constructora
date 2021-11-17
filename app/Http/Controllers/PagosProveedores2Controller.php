@@ -52,8 +52,9 @@ class PagosProveedores2Controller extends Controller
     }
     public function pagar($id){
         $pagos = pagos_proveedores2::find($id);
-        $forma=create_forma_pago::all();
-        return view('pagos_proveedores.add_pago2',compact("pagos"),["formas"=>$forma]);
+        $formas=create_forma_pago::all();
+        $ordenes = orden_pago::where("id_pago",$id)->get();
+        return view('pagos_proveedores.add_pago2',compact("pagos","ordenes","formas"));
     }
 
     public function detalles($id){
@@ -70,6 +71,7 @@ class PagosProveedores2Controller extends Controller
     {
         $operar=pagos_proveedores2::find($id);
         $ordenes = orden_pago::where("id_pago",$id)->get();
+        
         return view("pagos_proveedores.operar_grupal",compact("operar","ordenes"));
     }
 

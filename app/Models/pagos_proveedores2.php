@@ -17,6 +17,7 @@ class pagos_proveedores2 extends Model
          $status = status::where("id",$this->id_status)->first();
          return $status;
      }
+     
      public function getContratoAttribute(){
          $contrato= contrato::where("id",$this->id_contrato)->first();
          return $contrato;
@@ -29,5 +30,6 @@ class pagos_proveedores2 extends Model
          $proveedor = proveedor::where("id",$this->id_proveedor)->first();
          return $proveedor;
      }
+     
 
 }
