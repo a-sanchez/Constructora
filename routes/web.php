@@ -91,7 +91,7 @@ Route::get('ordenes_compra/catalago_compra',function(){
 });*/
 //Route::get("compras/orden/{id}",[OrdenCompraController::class,'orden']);
 Route::get('compras/reporte',[OrdenCompraController::class,'reporte']);
-Route::get('proveedor/{id_proveedor}/contrato/{id_contrato}/estatus/{id_status}',[OrdenCompraController::class,'generar_reporte']);
+Route::get('proveedor/{id_proveedor}/contrato/{id_contrato}/estatus/{id_status}/fecha/{fecha1}/fecha/{fecha2}',[OrdenCompraController::class,'generar_reporte']);
 Route::resource('compras',OrdenCompraController::class);
 Route::get("compras_pdf/{id}",[OrdenCompraController::class, 'OrdenPdf']);
 #----------------ORDENES PRODUCTOS-----------------------------#

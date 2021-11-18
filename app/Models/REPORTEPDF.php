@@ -12,7 +12,7 @@ class REPORTEPDF extends Model
 {
     use HasFactory;
 
-    public static function create($id_proveedor, $id_contrato,$id_status, $views,$proveedores){
+    public static function create($id_proveedor, $id_contrato,$id_status, $views,$proveedores,$fecha1,$fecha2){
         $ordenes = $views;
         $proveedor=proveedor::find($id_proveedor);
         PDF::setHeaderCallback(function($pdf){

@@ -113,7 +113,7 @@ class OrdenCompraController extends Controller
         $estatus=status::all();
         return view('ordenes_compras.reporte',compact("proveedores","contratos","estatus"));
     }
-    public function generar_reporte($id_proveedor, $id_contrato,$id_status){
+    public function generar_reporte($id_proveedor, $id_contrato,$id_status,$fecha1,$fecha2){
         $proveedores=proveedor::all();
         if ($id_status == 0 and $id_contrato!=0) {
             $views = DB::table('orden_compras')
@@ -123,9 +123,10 @@ class OrdenCompraController extends Controller
         ->leftJoin('proveedores','proveedores.id','=','orden_compras.id_proveedor')
         ->where('id_contrato','=',$id_contrato)
         ->where('id_proveedor','=',$id_proveedor)
+        ->whereBetween('orden_compras.fecha_orden',[$fecha1,$fecha2])
         ->get();
         //return view('ordenes_compras.reportePDF',compact('views'));
-        REPORTEPDF::create($id_proveedor, $id_contrato,$id_status,$views,$proveedores);
+        REPORTEPDF::create($id_proveedor, $id_contrato,$id_status,$views,$proveedores,$fecha1,$fecha2);
         }
         elseif ($id_status==0 && $id_contrato==0) {
             $views=DB::select("select folio_orden,fecha_orden,fecha_entrega,descripcion_orden,solicitado,contratos.folio as folio,
@@ -134,10 +135,9 @@ class OrdenCompraController extends Controller
             left join estatus_facturas on estatus_facturas.id = orden_compras.id_status
             left join contratos on contratos.id = orden_compras.id_contrato
             left join proveedores on proveedores.id = orden_compras.id_proveedor
-            where id_proveedor = $id_proveedor");
+            where id_proveedor = $id_proveedor and orden_compras.fecha_orden between '$fecha1' and '$fecha2' ");
 
-            REPORTEPDF::create($id_proveedor, $id_contrato,$id_status,$views,$proveedores);
-        }
+            REPORTEPDF::create($id_proveedor, $id_contrato,$id_status,$views,$proveedores,$fecha1,$fecha2);}
         elseif ($id_status!=0 && $id_contrato==0) {
             $views=DB::select("select folio_orden,fecha_orden,fecha_entrega,descripcion_orden,solicitado,contratos.folio as folio,
             proveedores.razon_social as razon_social,estatus_facturas.status,observaciones
@@ -145,9 +145,9 @@ class OrdenCompraController extends Controller
             left join estatus_facturas on estatus_facturas.id = orden_compras.id_status
             left join contratos on contratos.id = orden_compras.id_contrato
             left join proveedores on proveedores.id = orden_compras.id_proveedor
-            where id_proveedor = $id_proveedor and id_status=$id_status");
+            where id_proveedor = $id_proveedor and id_status=$id_status and orden_compras.fecha_orden between '$fecha1' and '$fecha2' ");
 
-            REPORTEPDF::create($id_proveedor, $id_contrato,$id_status,$views,$proveedores);
+            REPORTEPDF::create($id_proveedor, $id_contrato,$id_status,$views,$proveedores,$fecha1,$fecha2);
         }
         else{
             $views = DB::table('orden_compras')
@@ -158,9 +158,10 @@ class OrdenCompraController extends Controller
         ->where('id_contrato','=',$id_contrato)
         ->where('id_proveedor','=',$id_proveedor)
         ->where('id_status','=',$id_status)
+        ->whereBetween('orden_compras.fecha_orden',[$fecha1,$fecha2])
         ->get();
         //return  view('ordenes_compras.reportePDF',compact('views'));
-        REPORTEPDF::create($id_proveedor, $id_contrato,$id_status, $views,$proveedores);
+        REPORTEPDF::create($id_proveedor, $id_contrato,$id_status, $views,$proveedores,$fecha1,$fecha2);
         }
 
         

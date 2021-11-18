@@ -40,6 +40,15 @@
                   </select>
             </div>
         </div>
+        <div class="row mt-2" >
+            <label for="estatus">Fecha</label>
+            <div class="col-md-6">
+                <input type="date" class="form-control" id="fecha1" name="fecha_orden" required>
+            </div>
+            <div class="col-md-6">
+                <input type="date" class="form-control" id="fecha2" name="fecha_orden" required>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-3">
             </div>
@@ -74,14 +83,19 @@ async function reportes(){
     let proveedor = document.getElementById("id_proveedor").value;
     let contrato = document.getElementById("id_contrato").value;
     let status=document.getElementById("id_status").value;
+    let fecha1=document.getElementById("fecha1").value;
+    let fecha2=document.getElementById("fecha2").value;
     let form = new FormData(document.getElementById("form-reporte"));
-    let url="{{url('proveedor/{id_proveedor}/contrato/{id_contrato}/estatus/{id_status}')}}".replace("{id_proveedor}",proveedor);
+    console.log(form);
+    let url="{{url('proveedor/{id_proveedor}/contrato/{id_contrato}/estatus/{id_status}/fecha/{fecha1}/fecha/{fecha2}')}}".replace("{id_proveedor}",proveedor);
     let url2 = url.replace("{id_contrato}",contrato);
     let url3 = url2.replace("{id_status}",status);
+    let url4 = url3.replace("{fecha1}",fecha1);
+    let url5 = url4.replace("{fecha2}",fecha2);
     let init = {
         method:"GET"
     }
-    let req = await fetch(url3,init);
+    let req = await fetch(url5,init);
         if(req.ok){
          //let res = await req.json();
          window.open(req.url);
