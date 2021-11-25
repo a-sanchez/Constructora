@@ -65,8 +65,24 @@
             <th>Fecha</th>
             <th>PosFechadas</th>
             <th>Depósitos</th>
-            <th>Importe</th>
+            <th>Ingresos</th>
+            <th>Egresos</th>
+            <th>Saldo</th>
         </thead>
+        <tfoot style="background-color: #fff2cc;">
+            <tr>
+                <th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th style="font-weight: bold">Total </th>
+                    <th id="ingresos">{{$ingresos_egresos["ingresos"]}}</th>
+                    <th id="egresos">{{$ingresos_egresos["egresos"]}}</th>
+                    <th></th>
+                </th>
+            </tr>
+        </tfoot>
     </table>
     <div class="row">
         <div class="col-md-4"></div>
@@ -87,7 +103,8 @@
 @section('scripts')
     <script src="https://cdn.datatables.net/plug-ins/1.11.3/api/sum().js"></script>
 <script>
-        let id_historial = @json($historial->id);
+    let id_historial = @json($historial->id);
+    let temp = parseFloat(document.getElementById("costo").value);
     let cuentas = $("#cuentas").DataTable({
         responsive:true,
         paging:false,
@@ -120,7 +137,34 @@
                 "data":"deposito"
             },
             {
-                "data":"saldo"
+                "data":"saldo",
+                "render":function(data,type,row){
+                    if(!data.includes('-')){
+                        return data;
+                    }
+                    else{
+                        return ' ';
+                    }
+                }
+            },
+            {
+                "data":"saldo",
+                "render":function(data,type,row){
+                    if(data.includes('-')){
+                        return data;
+                    }
+                    else{
+                        return ' ';
+                    }
+                }
+            },
+            {
+                "data":"saldo",
+                "render": function (data) {
+                    temp = temp + parseFloat(data);
+                    return temp;
+
+                }
             }
         ]
     });

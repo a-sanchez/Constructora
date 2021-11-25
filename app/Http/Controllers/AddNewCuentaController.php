@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\add_new_cuenta;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 
 class AddNewCuentaController extends Controller
 {
@@ -42,8 +43,11 @@ class AddNewCuentaController extends Controller
             $this->update($validation);
             return $validation;
         }
-
-        $cuentas=add_new_cuenta::create($validation);
+        
+        $cuentas=add_new_cuenta::create($validation)->toArray();
+        
+        $egr = add_new_cuenta::getEgresosAtrribute($cuentas["id_costo"])->toArray();
+        $cuentas = array_merge($cuentas,["egr"=>$egr]);
         return response()->json($cuentas,201);
     }
 
@@ -56,7 +60,10 @@ class AddNewCuentaController extends Controller
     public function show($id)
     {
         $cuentas=add_new_cuenta::where("id_costo",$id)->get();
-        return DataTables::of($cuentas)->make();
+        $ingresos_egresos=add_new_cuenta::getEgresosAtrribute($id);
+        // $cuentas->merge($ingresos_egresos);
+
+        return DataTables::of($cuentas)->addColumn("egresos",$ingresos_egresos['egresos'])->addColumn("ingresos",$ingresos_egresos['ingresos'])->make();
     }
 
     /**
@@ -93,7 +100,8 @@ class AddNewCuentaController extends Controller
     public function destroy(int $id)
     {
         $cuenta=add_new_cuenta::find($id);
+        $costo_id = $cuenta->id_costo;
         add_new_cuenta::destroy($id);
-        return $cuenta;
+        return response()->json(add_new_cuenta::getEgresosAtrribute($costo_id),200);
     }
 }

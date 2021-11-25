@@ -4,10 +4,37 @@
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="{{ asset('lib/DataTables/Responsive-2.2.9/css/responsive.dataTables.min.css') }}">
 
+
 <style>
     table{
         text-transform: uppercase;
         text-align: center;
+    }
+    .dataTables_filter{
+    margin-bottom:0.5rem;
+    }
+    .colorlib-contact{
+        padding-top:1rem;
+    }
+    table.dataTable.no-footer {
+    border-bottom: 1px solid #fff;
+    }
+    table.dataTable thead th{
+        background-color:#ff9c00;
+        color:white;
+    }
+    table.dataTable tbody tr {
+    background-color: #FFF2CC;
+    }
+    table.dataTable {
+    border-collapse:unset;
+    border-spacing: 0;
+    }
+    th,td{
+        border-color: white;
+        border-style:solid;
+        border-width:1px;
+        vertical-align: middle;
     }
 </style>
 @endsection
@@ -22,7 +49,9 @@
 </div>
 <form id="form-cuentas" class="row g-3" onsubmit="agregarForma()">
     @csrf
-<div class="row">
+<h1 style="text-align:center;font-weight: bold;font-size: 32px;background: #ff9c00;color: black;">{{$historial->banco}}</h1>
+<h1 style="text-align:center;font-weight: bold;bold;font-size: 22px;background: #f16532;color: white;">FLUJO DIARIO</h1>
+<div class="row mt-4">
     <div class="col-md-4">
         <label for="id_forma" name="id_forma">Forma de Pago</label>
                 <select class="form-control" id="id_forma" name="id_forma">
@@ -38,7 +67,7 @@
     </div>
     <div class="col-md-4">
         <label for="pago">Concepto de pago</label>
-        <input type="text" class="form-control" id="pago" name="pago">
+        <input type="text" class="form-control" id="pago" name="pago" required>
     </div>
 </div>
 <div class="row">
@@ -79,15 +108,32 @@
 
 <table class="table" id="cuentas" name="cuentas" width="100%">
     <thead>
-        <th>Forma de pago</th>
+        <th width="14%">Forma pago</th>
         <th>Beneficiario</th>
-        <th>Concepto de pago</th>
+        <th width="18%">Concepto pago</th>
         <th>Fecha</th>
         <th>PosFechadas</th>
         <th>Depósitos</th>
-        <th>Importe</th>
-        <th></th>
+        <th>Ingresos</th>
+        <th>Egresos</th>
+        <th>Saldo</th>
+        <th width="8%"></th>
     </thead>
+    <tfoot style="background-color: #fff2cc;">
+        <tr>
+            <th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th style="font-weight: bold">Total </th>
+                <th id="ingresos">{{number_format($ingresos_egresos["ingresos"],2)}}</th>
+                <th id="egresos">{{number_format($ingresos_egresos["egresos"],2)}}</th>
+                <th></th>
+                <th></th>
+            </th>
+        </tr>
+    </tfoot>
 </table>
 </form>
 <form id="form-total" onsubmit="update_total({{$historial->id}})">
@@ -114,6 +160,7 @@
 <script src="https://cdn.datatables.net/plug-ins/1.11.3/api/sum().js"></script>
 <script>
     let id_historial = @json($historial->id);
+    let temp = parseFloat(document.getElementById("costo").value);
     let cuentas = $("#cuentas").DataTable({
         responsive:true,
         paging:false,
@@ -123,10 +170,8 @@
         ajax:`{{url('/nuevas_cuentas/${id_historial}')}}`,
         drawCallback: function () {
             var sum = this.api().column(6,{page:'current'}).data().sum();
-            console.log(sum);
-            console.log(document.getElementById("costo").value);
             let res = parseFloat(document.getElementById("costo").value) + parseFloat(sum);
-            document.getElementById("total").value=res;
+            document.getElementById("total").value=(res).toFixed(2);
         },
         columns:[{
             data:"forma_pago.forma"
@@ -146,8 +191,35 @@
             {
                 data:"deposito"
             },
+            { 
+                "data":"saldo",
+                "render":function(data,type,row){
+                    if(!data.includes('-')){
+                        return data;
+                    }
+                    else{
+                        return ' ';
+                    }
+                }
+            },
             {
-                data:"saldo"
+                "data":"saldo",
+                "render":function(data,type,row){
+                    if(data.includes('-')){
+                        return data;
+                    }
+                    else{
+                        return ' ';
+                    }
+                }
+            },
+            {
+                "data":"saldo",
+                "render": function (data) {
+                    temp = temp + parseFloat(data);
+                    return temp.toFixed(2);
+
+                }
             },
             {
                 data:"id",render:function(id){
@@ -168,6 +240,10 @@
             let req = await fetch(url, init);
             if (req.ok) {
                 cuentas.ajax.reload();
+                res = await req.json();
+                temp=parseFloat(document.getElementById("costo").value);
+                document.getElementById("ingresos").innerHTML = res.ingresos;
+                document.getElementById("egresos").innerHTML=res.egresos;
             } else {
                 Swal.fire(
                     "error"
@@ -187,6 +263,10 @@
             let req= await fetch(url,init);
             if(req.ok){
                 await cuentas.ajax.reload();
+                res = await req.json();
+                temp=parseFloat(document.getElementById("costo").value);
+                document.getElementById("ingresos").innerHTML = res.egr.ingresos;
+                document.getElementById("egresos").innerHTML=res.egr.egresos;
             }
             else{
               Swal.fire({

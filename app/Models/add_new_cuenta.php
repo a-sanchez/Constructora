@@ -23,4 +23,19 @@ class add_new_cuenta extends Model
         $costo= historial_cuentas::where("id",$this->id_costo)->first();
         return $costo;
     }
+
+    public static function getEgresosAtrribute($id){
+        $egresos = 0;
+        $ingresos=0;
+        $cuentas=add_new_cuenta::where("id_costo",$id)->get();
+        foreach ($cuentas as $cuenta) {
+            if (str_contains($cuenta->saldo,'-')) {
+                $egresos+=floatval($cuenta->saldo);
+            }
+            else{
+                $ingresos+=floatval($cuenta->saldo);
+            }
+        }
+        return collect(['egresos'=>$egresos,'ingresos'=>$ingresos]);
+    }
 }

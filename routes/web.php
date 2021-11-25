@@ -135,7 +135,7 @@ Route::get('cuentas/costo/{id}',[HistorialCuentasController::class,"nuevacuenta"
 Route::get('cuentas/update_vista',[HistorialCuentasController::class,"update_vista"]);
 Route::get('cuentas/detalles',[HistorialCuentasController::class,"detalles"]);
 Route::resource('cuentas', HistorialCuentasController::class);
-
+Route::get("flujo_diarioPDF/{id}",[HistorialCuentasController::class,'flujo_diarioPDF']);
 Route::resource('nuevas_cuentas', AddNewCuentaController::class);
 
 #----------------ORDEN_PAGO---------------------------------------#

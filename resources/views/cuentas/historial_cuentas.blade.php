@@ -59,7 +59,14 @@
                     </div>
                     <div class="modal-body">
                         <label for="gasto">Ingrese gasto de operacion</label>
-                        <input type="text" id="costo_operacion" name="costo_operacion" class="form-control">
+                        <input type="text" id="costo_operacion" name="costo_operacion" class="form-control" required>
+                    </div>
+                    <div class="modal-body">
+                        <label for="gasto">Banco</label>
+                        <select name="banco" id="banco" class="form-control" required>
+                            <option value="HSBC">HSBC</option>
+                            <option value="AFIRME">AFIRME</option>
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -75,6 +82,7 @@
     <thead style="background-color:#ff9c00;text-align:center;color:white">
     <th>Dia de creación</th>
     <th>Gasto de operación actual</th>
+    <th>Banco</th>
     <th>Opciones</th>
     </thead>
     <tbody>
@@ -150,10 +158,12 @@
                 {{$dia}} {{date("j",strtotime($cuenta->created_at))}} {{$mes1}} {{date("Y",strtotime($cuenta->created_at))}}
             </td>
             <td>{{$cuenta->total}}</td>
+            <td>{{$cuenta->banco}}</td>
             <td>
                 <a  type="button" style="color: green; " class="btn"  href="{{url("cuentas/{$cuenta->id}/edit")}}"><i style="font-size:1.5rem;" id="pencil-alt"  class="fas fa-pencil-alt"></i></a> 
-                <a  style="color: red;" href="" class="btn"  onclick='borrarCuenta({{$cuenta->id}})' ><i style="font-size:1.5rem" id="trash-alt"  class="fas fa-trash-alt"></i></a>
+                <a  style="color: black;" href="" class="btn"  onclick='borrarCuenta({{$cuenta->id}})' ><i style="font-size:1.5rem" id="trash-alt"  class="fas fa-trash-alt"></i></a>
                 <a  style="color: blue;" href="{{url("cuentas/{$cuenta->id}")}}" class="btn" ><i style="font-size:1.5rem" id="info-circle"  class="fas fa-info-circle"></i></a>
+                <a  target="_blank" style="color: red;" href="{{url("flujo_diarioPDF/{$cuenta->id}")}}" class="btn" ><i style="font-size:1.5rem" id="file-pdf"  class="fas fa-file-pdf"></i></a>
             </td>
             @endforeach
         </tr>
