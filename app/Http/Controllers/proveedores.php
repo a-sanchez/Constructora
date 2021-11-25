@@ -18,7 +18,7 @@ class proveedores extends Controller
      */
     public function index()
     {
-        $proveedores = proveedor::all();
+        $proveedores = proveedor::all()->where("status","!=",0);
         return view('proveedores.cat_proveedores',compact('proveedores'));
     }
 

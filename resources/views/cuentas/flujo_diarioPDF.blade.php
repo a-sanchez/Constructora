@@ -2,12 +2,12 @@
 <table >
     <tr style=" line-height:20px;">
         <td width="10%"style="border-top-width:0.8px;border-bottom-width:0.8px;border-left-width:0.8px;text-align:center;font-weight:bold;"></td>
-        <td width="20%"style="border-top-width:0.8px;border-bottom-width:0.8px;text-align:center;font-weight:bold;"></td>
-        <td width="40%"style="border-top-width:0.8px;border-bottom-width:0.8px;text-align:center;font-weight:bold;">{{$historial->banco}} <br>REPORTE DIARIO DE FLUJO<br></td>
+        <td width="18%"style="border-top-width:0.8px;border-bottom-width:0.8px;text-align:center;font-weight:bold;"></td>
+        <td width="39%"style="border-top-width:0.8px;border-bottom-width:0.8px;text-align:center;font-weight:bold;">{{$historial->banco}} <br>REPORTE DIARIO DE FLUJO<br></td>
         <td width="1%" style="border-top-width:0.8px;border-bottom-width:0.8px;text-align:center;font-weight:bold;"></td>
         <td width="1%" style="border-top-width:0.8px;border-bottom-width:0.8px;text-align:center;font-weight:bold;"></td>
-        <td width="28%"style="border-top-width:0.8px;border-bottom-width:0.8px;border-right-width:0.8px;font-size:9px;text-align:center">
-            <img  src="images/constructura2.jpg" width="100" height="60px">
+        <td width="31%"style="border-top-width:0.8px;border-bottom-width:0.8px;border-right-width:0.8px;font-size:9px;text-align:center">
+            <img style="border-top-width: 0.8px " src="images/constructura2.jpg" width="100" height="60px">
             <br>
             <?php
             $mes1 = "";
@@ -90,32 +90,43 @@
     </tr>
 </table>
 <table >
-    <tr style=" line-height:20px;text-align:center;font-size:10px;background-color:#FFE699">
+    <tr style=" line-height:20px;text-align:center;font-size:8px;background-color:#FFE699;font-weight:bold">
         <td border=".5" width="20%">TIPO DE PAGO</td>
         <td border=".5" width="20%">MOTIVO</td>
         <td border=".5" width="25%">BENEFICIARIO</td>
-        <td border=".5" width="15%" >INGRESO</td>
+        <td border=".5" width="13%" >INGRESO</td>
         <td border=".5" width="10%" >EGRESO</td>
-        <td border=".5" width="10%">SALDO</td>
+        <td border=".5" width="12%">SALDO</td>
     </tr>
-
+@php
+    $temp = $historial->costo_operacion
+@endphp
     @foreach($cuentas as $cuenta)
-        <tr style="text-align:center">
-            <td border=".5">{{$cuenta->id_forma}}</td>
+        <tr style="text-align:center;font-size:10px;">
+            <td border=".5">{{$cuenta->forma}}</td>
             <td border=".5">{{$cuenta->pago}}</td>
             <td border=".5">{{$cuenta->beneficiario}}</td>
             <td border=".5">
-                @if(str_contains($cuenta->saldo,'-'))
-                    {{$cuenta->saldo}}
+                @if(!(str_contains($cuenta->saldo,'-')))
+                    {{number_format($cuenta->saldo,2)}}
                 @endif
             </td>
             <td border=".5">
-                @if(!(str_contains($cuenta->saldo,'-')))
-                    {{$cuenta->saldo}}
+                @if(str_contains($cuenta->saldo,'-'))
+                    {{number_format($cuenta->saldo,2)}}
                 @endif
             </td>
-            <td border=".5">0</td>
-        </tr>
-        
+            <td border=".5">
+                {{number_format($temp = $temp+$cuenta->saldo,2)}}
+            </td>
+        </tr>        
     @endforeach
+    <tr style="text-align:center;font-size:10px;">
+        <td border=".5" width="20%"></td>
+        <td border=".5" width="20%"></td>
+        <td border=".5" width="25%"></td>
+        <td border=".5" width="13%" ><b>{{number_format($ingresos_egresos["ingresos"],2)}}</b></td>
+        <td border=".5" width="10%" ><b>{{number_format($ingresos_egresos["egresos"],2)}}</b></td>
+        <td border=".5" width="12%"></td>
+        </tr>
 </table>

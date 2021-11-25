@@ -161,6 +161,7 @@
   async function insert_proveedor(){
     event.preventDefault();
     let form = new FormData(document.getElementById("form-proveedor"));
+    form.append("status",1);
     let contacto = contacto_ventas.rows().data().toArray();
     if(contacto.length == 0 ){
         Swal.fire({

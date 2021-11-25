@@ -93,10 +93,11 @@
    event.preventDefault();
      let url='{{url("/proveedores/{id}")}}'.replace('{id}',id);
        let init = {
-           method: "DELETE",
+           method: "PUT",
            headers: {  'X-CSRF-TOKEN': "{{csrf_token()}}",
             'Content-Type':'application/json'
-           }
+           },
+           body:JSON.stringify({'status':0})
        }
 
        let req=await fetch(url,init);
@@ -105,11 +106,10 @@
        }
        else
        {
-           let res = await req.json();
            Swal.fire({
                icon:"error",
                title:"Error",
-               text:res
+               text:"ERROR"
            });
        }
      }
