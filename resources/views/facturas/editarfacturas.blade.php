@@ -58,7 +58,7 @@ PRE-FACTURAS
             </div>
             <div class="col-md-3">
                 <label for="anticipo">(-) Anticipo Entregado</label>
-                <input type="text" class="form-control" id="anticipo" name='anticipo' oninput="cal()" disabled
+                <input type="text" class="form-control" id="anticipo" name='anticipo' oninput="cal()" 
                     value="{{$prefactura->anticipo}}">
             </div>
             <div class="col-md-3">
@@ -165,10 +165,20 @@ PRE-FACTURAS
 <script>
     function cal(){
     try{
+        
         var a=parseFloat(document.getElementById("importe_estimacion").value)||0.00,
           porcentaje=parseFloat(document.getElementById("porcentaje").value)||0,
           iva= ((parseFloat(document.getElementById("iva").value))/100)||0;
 
+          if (porcentaje==0) {
+            let b = document.getElementById("anticipo").value;
+            let sub_total= document.getElementById("sub_total").value=(a-b).toFixed(2);
+            let c = (sub_total*iva).toFixed(2);
+            document.getElementById("subtotal_iva").value=c;
+            
+            document.getElementById("total_estimacion").value= parseFloat(+c + +sub_total).toFixed(2);
+          }
+          else{
           document.getElementById("anticipo").value=a*(porcentaje/100);
           let b =  document.getElementById("anticipo").value=(a*(porcentaje/100)).toFixed(2);
 
@@ -180,6 +190,7 @@ PRE-FACTURAS
           document.getElementById("subtotal_iva").value=c;
 
           document.getElementById("total_estimacion").value= parseFloat(+c + +sub_total).toFixed(2);
+          }
       }
       catch(e){}
     }
