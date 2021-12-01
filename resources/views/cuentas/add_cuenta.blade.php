@@ -76,20 +76,6 @@
         <input type="date" class="form-control" id="fecha" name="fecha">
     </div>
     <div class="col-md-4">
-        <label for="posfechadas">PosFechadas</label>
-        <input type="date" class="form-control" id="posfechadas" name="posfechadas">
-    </div>
-    <div class="col-md-4">
-        <label for="deposito">Depósitos</label>
-        <input type="text" class="form-control" id="deposito" name="deposito">
-    </div>
-</div>
-<div class="row">
-    {{-- <div class="col-md-4">
-        <label for="importe">Importe</label>
-        <input type="text" class="form-control" id="importe" name="importe">
-    </div> --}}
-    <div class="col-md-4">
         <label for="saldo">Importe</label>
         <input type="text" class="form-control" id="saldo" name="saldo">
     </div>
@@ -97,6 +83,19 @@
         <button type="submit" class="btn btn-success"  style="margin-top: 36px;">Agregar</button>
     </div>
 </div>
+{{-- <div class="row">
+    <div class="col-md-4">
+        <label for="importe">Importe</label>
+        <input type="text" class="form-control" id="importe" name="importe">
+    </div>
+    <div class="col-md-4">
+        <label for="saldo">Importe</label>
+        <input type="text" class="form-control" id="saldo" name="saldo">
+    </div>
+    <div class="col-md-4">
+        <button type="submit" class="btn btn-success"  style="margin-top: 36px;">Agregar</button>
+    </div>
+</div> --}}
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4"></div>
@@ -112,8 +111,6 @@
         <th>Beneficiario</th>
         <th width="18%">Concepto pago</th>
         <th>Fecha</th>
-        <th>PosFechadas</th>
-        <th>Depósitos</th>
         <th>Ingresos</th>
         <th>Egresos</th>
         <th>Saldo</th>
@@ -122,8 +119,6 @@
     <tfoot style="background-color: #fff2cc;">
         <tr>
             <th>
-                <th></th>
-                <th></th>
                 <th></th>
                 <th></th>
                 <th style="font-weight: bold">Total </th>
@@ -184,12 +179,6 @@
             },
             {
                 data:"fecha"
-            },
-            {
-                data:"posfechadas"
-            },
-            {
-                data:"deposito"
             },
             { 
                 "data":"saldo",
