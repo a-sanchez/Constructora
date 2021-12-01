@@ -58,7 +58,7 @@
             <td>{{$operar->comentarios}}</td>
             <td style="text-align:center">
                 @if($operar->id_status ==2)
-                <a  type="button" style="color: green; " class="btn" onclick="update_pago_orden({{$operar->id_orden}});" href=""><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
+                <a  type="button" style="color: green; " class="btn" onclick="update_pago_orden({{$operar->id_orden}},{{$operar->id}});" href=""><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
                 <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='borrar_pago({{$operar->id}}),back_status({{$operar->id_orden}});'  class="fas fa-trash-alt"></i></a>
                 @endif
                 @if($operar->id_status==3)
@@ -206,7 +206,7 @@ async function back_status(id) {
         
     }
 
-async function update_pago_orden(id){
+async function update_pago_orden(id,id2){
     event.preventDefault();
     let url="{{url('/compras/{id}')}}".replace("{id}",id);
     console.log(url);
@@ -220,7 +220,7 @@ async function update_pago_orden(id){
     };
     let req = await fetch(url,init);
     if (req.ok) {
-       window.location.href="{{url('pagos_proveedores/pagar/{id}')}}".replace("{id}",id);
+       window.location.href="{{url('pagos_proveedores/pagar/{id}')}}".replace("{id}",id2);
     }
     else{
         Swal.fire({
