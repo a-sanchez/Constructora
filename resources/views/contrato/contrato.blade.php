@@ -3,6 +3,29 @@
 @section ('tittle')CONTRATOS @endsection
 
 @section('styles')
+<style>
+  input {
+      text-transform: uppercase;
+  }
+
+  .loader-background{
+      width: 100%;
+      height: 100%;
+      top: 0%;
+      left: 0%;
+      position: fixed;
+      z-index: 1;
+      background-color: black;
+      opacity: 0.3;
+  }
+
+  .spinner-border{
+      top: 44%;
+      left: 60%;
+      position: fixed;
+      color: #FF9C00;
+  }
+</style>
 @endsection
 
 @section('body')
@@ -115,19 +138,19 @@
     <div class="row">
       <div class="col-md-3">
       <label for="file" >Adjuntar PDF del contrato:</label>
-        <input type="file" class="form-control" id="file" name="file" style="border:none;">
+        <input type="file" class="form-control" id="file" name="file"  style="border:none;"  >
       </div>
       <div class="col-md-3">
       <label for="file" >Adjuntar PDF del Anticipo:</label>
-        <input type="file" class="form-control" id="file2" name="file2" style="border:none;">
+        <input type="file" class="form-control" id="file2" name="file2"  style="border:none;" >
       </div>
       <div class="col-md-3">
       <label for="file" >Adjuntar PDF del Cumplimiento:</label>
-        <input type="file" class="form-control" id="file3" name="file3" style="border:none;">
+        <input type="file" class="form-control" id="file3" name="file3"  style="border:none;" >
       </div>
       <div class="col-md-3">
       <label for="file" >Adjuntar PDF de Vicios Ocultos:</label>
-        <input type="file" class="form-control" id="file4" name="file4" style="border:none;">
+        <input type="file" class="form-control" id="file4" name="file4"  style="border:none;" >
       </div>
     </div>
 
@@ -149,6 +172,8 @@
 
 @section("scripts")
 <script>
+
+
   async function insert_contrato(){
     event.preventDefault();
     let form = new FormData(document.getElementById("form-contrato"));
@@ -160,7 +185,8 @@
     }
     let req = await fetch(url, init);
     if (req.ok) {
-      window.location.href = "{{ url('/contratos') }}";
+        Swal.showLoading();
+        window.location.href = "{{ url('/contratos') }}";
     }
     else{
       Swal.fire({
