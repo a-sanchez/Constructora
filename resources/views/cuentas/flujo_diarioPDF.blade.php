@@ -108,16 +108,16 @@
             <td border=".5">{{$cuenta->beneficiario}}</td>
             <td border=".5">
                 @if(!(str_contains($cuenta->saldo,'-')))
-                    {{number_format($cuenta->saldo,2)}}
+                    ${{number_format($cuenta->saldo,2)}}
                 @endif
             </td>
             <td border=".5">
                 @if(str_contains($cuenta->saldo,'-'))
-                    {{number_format($cuenta->saldo,2)}}
+                    ${{number_format($cuenta->saldo,2)}}
                 @endif
             </td>
             <td border=".5">
-                {{number_format($temp = $temp+$cuenta->saldo,2)}}
+                ${{number_format($temp = $temp+$cuenta->saldo,2)}}
             </td>
         </tr>        
     @endforeach
@@ -125,8 +125,16 @@
         <td border=".5" width="20%"></td>
         <td border=".5" width="20%"></td>
         <td border=".5" width="25%"></td>
-        <td border=".5" width="13%" ><b>{{number_format($ingresos_egresos["ingresos"],2)}}</b></td>
-        <td border=".5" width="10%" ><b>{{number_format($ingresos_egresos["egresos"],2)}}</b></td>
+        <td border=".5" width="13%" ><b>${{number_format($ingresos_egresos["ingresos"],2)}}</b></td>
+        <td border=".5" width="10%" ><b>${{number_format($ingresos_egresos["egresos"],2)}}</b></td>
         <td border=".5" width="12%"></td>
-        </tr>
+    </tr>
+    <tr style="text-align:center;font-size:10px;">
+        <td border=".5" width="20%"></td>
+        <td border=".5" width="20%"></td>
+        <td border=".5" width="25%"></td>
+        <td border=".5" width="13%" ></td>
+        <td border=".5" width="10%"><b>TOTAL</b></td>
+        <td border=".5" width="12%"><b>${{number_format($historial->total)}}</b></td>
+    </tr>
 </table>
