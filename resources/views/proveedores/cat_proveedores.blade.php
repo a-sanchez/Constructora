@@ -55,6 +55,7 @@
         <th>ALIAS</th>
         <th>LOCALIDAD</th>
         <th>RFC</th>
+        <th>TIPO DE PAGO</th>
         <th>OPCIONES</th>
     </thead>
     <tbody>
@@ -64,6 +65,7 @@
                 <td class="align-middle">{{$proveedor->alias}}</td>
                 <td class="align-middle">{{$proveedor->localidad}}</td>
                 <td class="align-middle">{{$proveedor->rfc}}</td>
+                <td class="align-middle">{{$proveedor->pagos}}</td>
                 <td class="align-middle">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" 

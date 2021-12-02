@@ -31,6 +31,25 @@
                 <label for="rfc">R.F.C</label>
                 <input type="text" class="form-control" id="rfc" value="{{$proveedor->rfc}}" name="rfc" required>
             </div>
+            <div class="col-md-6">
+                <label for="pagos" >Tipo de Pago</label>
+                <select class="form-control" name="pagos" id="pagos" selected value="{{$proveedor->pagos}}">
+                    <?php
+                    if ($proveedor->pagos == 'CONTADO') {
+                        echo(
+                             "<option selected value=$proveedor->pagos>$proveedor->pagos</option>
+                            <option value=CRÉDITO>CRÉDITO</option>"
+                    );
+                    }
+                    else {
+                        echo(
+                             "<option selected value=$proveedor->pagos>$proveedor->pagos</option>
+                            <option value=CONTADO>CONTADO</option>"
+                    );
+                    }
+                    ?>
+                </select>
+              </div>
         </div>
         <div class="row">
             <div class="col-md-4">

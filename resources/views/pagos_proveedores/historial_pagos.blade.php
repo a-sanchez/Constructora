@@ -49,8 +49,8 @@
             <td>{{$operar->contrato->folio}}</td>
             <td> {{$operar->orden->proveedor->razon_social}} </td>
             <td>{{$operar->orden->folio_orden}}</td>
-            <td>{{$operar->fecha_emision}}</td>
-            <td>{{$operar->fecha_vencimiento}}</td>
+            <td>{{date("d-m-Y",strtotime($operar->fecha_emision))}}</td>
+            <td>{{date("d-m-Y",strtotime($operar->fecha_vencimiento))}}</td>
             <td>{{number_format($operar->sub_total,2)}}</td>
             <td>{{number_format($operar->impuestos,2)}}</td>
             <td>{{number_format($operar->total,2)}}</td>
@@ -94,8 +94,10 @@
             <td>{{$view->contrato}}</td>
             <td>{{$view->razon_social}}</td>
             <td>{{$view->folio_orden}}</td>
-            <td>{{$view->fecha_emision}}</td>
-            <td>{{$view->fecha_vencimiento}}</td>
+            <td>
+                {{date("d-m-Y",strtotime($view->fecha_emision))}}
+            </td>
+            <td>{{date("d-m-Y",strtotime($view->fecha_vencimiento))}}</td>
             <td>{{number_format($view->sub_total,2)}}</td>
             <td>{{number_format($view->impuestos,2)}}</td>
             <td>{{number_format($view->total,2)}}</td>

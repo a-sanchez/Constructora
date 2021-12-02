@@ -31,6 +31,10 @@
                 <label for="rfc">R.F.C</label>
                 <input type="text" class="form-control" id="rfc" readonly value="{{$proveedor->rfc}}" name="rfc" required>
             </div>
+            <div class="col-md-6">
+                <label for="rfc">Tipo de Pago</label>
+                <input type="text" class="form-control" id="rfc" readonly value="{{$proveedor->pagos}}" >
+            </div>
         </div>
         <div class="row">
             <div class="col-md-4">

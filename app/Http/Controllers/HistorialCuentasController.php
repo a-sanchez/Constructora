@@ -19,7 +19,8 @@ class HistorialCuentasController extends Controller
     {
         $cuenta=historial_cuentas::max('id')+1;
         $cuentas=historial_cuentas::all();
-        return view('cuentas.historial_cuentas',compact("cuenta","cuentas"));
+        $fechas = add_new_cuenta::all();
+        return view('cuentas.historial_cuentas',compact("cuenta","cuentas","fechas"));
     }
 
     public function agregar(Request $request){
