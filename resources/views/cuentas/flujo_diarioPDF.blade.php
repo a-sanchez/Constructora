@@ -135,6 +135,6 @@
         <td border=".5" width="25%"></td>
         <td border=".5" width="13%" ></td>
         <td border=".5" width="10%"><b>TOTAL</b></td>
-        <td border=".5" width="12%"><b>${{number_format($historial->total)}}</b></td>
+        <td border=".5" width="12%"><b>${{number_format($historial->total),2}}</b></td>
     </tr>
 </table>
