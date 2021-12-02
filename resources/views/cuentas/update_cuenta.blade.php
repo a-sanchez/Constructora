@@ -74,7 +74,27 @@
         <div class="row">
             <div class="col-md-4">
                 <label for="fecha">Fecha</label>
-                <input type="date" class="form-control" id="fecha" name="fecha">
+                <input type="date" class="form-control" id="fecha" name="fecha"
+                <?php
+                $id = $historial->id;
+                $fechas = DB::table('add_new_cuentas')
+                 ->select('fecha as creado')
+                 ->where('id_costo',$id)
+                 ->groupBy('id_costo')
+                 ->get();
+                 $fecha2 = DB::table('historial_cuentas')
+                ->select('created_at')
+                ->where('id',$id)
+                ->get();
+                 if(sizeof($fechas) > 0){
+                     $fecha = json_decode($fechas);
+                     $date = $fecha[0]->creado;
+                    }
+                else{
+                    $date2 = $fecha2[0]->created_at;
+                    $date = date("Y-m-d",strtotime($date2));
+                }
+                ?> value="{{$date}}">
             </div>
                 <div class="col-md-4">
                     <label for="saldo">Importe</label>

@@ -63,8 +63,6 @@
             <th>Beneficiario</th>
             <th width="18%">Concepto pago</th>
             <th>Fecha</th>
-            <th>PosFechadas</th>
-            <th>Depósitos</th>
             <th>Ingresos</th>
             <th>Egresos</th>
             <th>Saldo</th>
@@ -72,8 +70,6 @@
         <tfoot style="background-color: #fff2cc;">
             <tr>
                 <th>
-                    <th></th>
-                    <th></th>
                     <th></th>
                     <th></th>
                     <th style="font-weight: bold">Total </th>
@@ -129,12 +125,6 @@
             },
             {
                 "data":"fecha"
-            },
-            {
-                "data":"posfechadas"
-            },
-            {
-                "data":"deposito"
             },
             {
                 "data":"saldo",

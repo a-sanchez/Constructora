@@ -73,7 +73,7 @@
 <div class="row">
     <div class="col-md-4">
         <label for="fecha">Fecha</label>
-        <input type="date" class="form-control" id="fecha" name="fecha">
+        <input type="date" class="form-control" id="fecha" name="fecha" value="<?php echo date("Y-m-d"); ?>">
     </div>
     <div class="col-md-4">
         <label for="saldo">Importe</label>

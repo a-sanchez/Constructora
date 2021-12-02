@@ -88,9 +88,28 @@
     <tbody>
         @foreach($cuentas as $cuenta)
         <tr>
-            <td><?php
+            <td>
+                
+                <?php
+                $id = $cuenta->id;
+                $fecha2 = DB::table('historial_cuentas')
+                ->select('created_at')
+                ->where('id',$id)
+                ->get();
+                $fechas = DB::table('add_new_cuentas')
+                 ->select('fecha as creado')
+                 ->where('id_costo',$id)
+                 ->groupBy('id_costo')
+                 ->get();
+                 if(sizeof($fechas) > 0){
+                     $fecha = json_decode($fechas);
+                     $date = $fecha[0]->creado;
+                    }
+                else{
+                    $date = $fecha2[0]->created_at;
+                }
             $mes1 = "";
-                switch (date("m", strtotime($cuenta->created_at))) {
+                switch (date("m", strtotime($date))) {
                     case '01':
                         $mes1 = "ENERO";
                         break;
@@ -130,7 +149,7 @@
                 }
 
                 $dia = "";
-                switch (date("l", strtotime($cuenta->created_at))) {
+                switch (date("l", strtotime($date))) {
                     case 'Monday':
                         $dia = "LUNES";
                         break;
@@ -155,7 +174,7 @@
                 }
                 ?>
                 
-                {{$dia}} {{date("j",strtotime($cuenta->created_at))}} {{$mes1}} {{date("Y",strtotime($cuenta->created_at))}}
+                {{$dia}} {{date("j",strtotime($date))}} {{$mes1}} {{date("Y",strtotime($date))}}
             </td>
             <td>{{$cuenta->total}}</td>
             <td>{{$cuenta->banco}}</td>
