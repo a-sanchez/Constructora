@@ -41,6 +41,10 @@
                             <option value=CRÉDITO>CRÉDITO</option>"
                     );
                     }
+                    elseif ($proveedor->pagos == NULL) {
+                        echo("<option selected value=CONTADO>CONTADO</option>
+                            <option value=CRÉDITO>CRÉDITO</option>");
+                    }
                     else {
                         echo(
                              "<option selected value=$proveedor->pagos>$proveedor->pagos</option>
