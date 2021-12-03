@@ -13,10 +13,7 @@ class REPORTEPDF extends Model
     use HasFactory;
 
     public static function create($id_contrato,$id_status, $views,$fecha1,$fecha2){
-        if (!empty($views)) {
-            alert("ESTE CONTRATO NO TIENE ORDENES DE COMPRA");
-        }
-        else{
+  
         $ordenes = $views;
         PDF::setHeaderCallback(function($pdf){
             $pdf->Rect(0, 0, $pdf->getPageWidth(), $pdf->getPageHeight(), 'F', array(), array( 247, 247, 247));
@@ -82,4 +79,4 @@ EOD;
 
     }
 }
-}
+
