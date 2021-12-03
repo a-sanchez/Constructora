@@ -1,3 +1,4 @@
+
 <table>
     <tr>
         <th style="text-align:center;">
@@ -54,8 +55,19 @@
         <td >
             <table>
                 <tr style="text-align:center">
-                    <td width="60%"><b>Proveedor:</b> {{$proveedor->razon_social}}</td>
-                    <td></td>
+                    <td width="50%"><b>CONTRATO:
+                        <?php
+                        $contrato = $ordenes[0]->folio;
+                        ?>
+                        {{$contrato}}
+                    </b>
+                    </td>
+                    <td><b>OBRA:</b>
+                        <?php
+                        $obra = $ordenes[0]->descripcion;
+                        ?>
+                        {{$obra}}
+                    </td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -68,24 +80,22 @@
     <tr>
         <td>
             <table>
-                <tr style="text-align:center;background-color:#f16532">
-                    <td width="11%" border=".5">FOLIO ORDEN</td>
-                    <td width="11%" border=".5">CONTRATO</td>
-                    <td width="11%" border=".5">FECHA ORDEN</td>
-                    <td width="23%" border=".5">DESCRIPCION</td>
-                    <td width="11%" border=".5">FECHA ENTREGA</td>
-                    <td width="23%" border=".5">OBSERVACIONES</td>
-                    <td width="10%" border=".5">ESTATUS</td>
+                <tr style="text-align:center;vertical-align:middle;background-color:#fab84e;font-weight:bold;">
+                    <td width="17%" height="20" border=".5">NO.REQUISICIÓN</td>
+                    <td width="12%" border=".5">FECHA</td>
+                    <td width="25%" border=".5">PROVEEDOR</td>
+                    <td width="15%" border=".5">SUBTOTAL</td>
+                    <td width="11%" border=".5">IVA</td>
+                    <td width="20%" border=".5">TOTAL</td>
                 </tr>
                     @foreach($ordenes as $orden)
                         <tr style="text-align:center;">
                             <td border=".5">{{$orden->folio_orden}}</td>
-                            <td border=".5">{{$orden->folio}}</td>
-                            <td border=".5">{{$orden->fecha_orden}}</td>
-                            <td border=".5">{{$orden->descripcion_orden}}</td>
-                            <td border=".5">{{$orden->fecha_entrega}}</td>
-                            <td border=".5">{{$orden->observaciones}}</td>
-                            <td border=".5">{{$orden->status}}</td>
+                            <td border=".5">{{date("d/m/y",strtotime($orden->fecha_orden))}}</td>
+                            <td border=".5">{{$orden->razon_social}}</td>
+                            <td border=".5">{{number_format($orden->importe,2)}}</td>
+                            <td border=".5">{{number_format($orden->IVA,2)}}</td>
+                            <td border=".5">{{number_format($orden->total,2)}}</td>
                         </tr>
                     @endforeach
             </table>

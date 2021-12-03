@@ -12,9 +12,12 @@ class REPORTEPDF extends Model
 {
     use HasFactory;
 
-    public static function create($id_proveedor, $id_contrato,$id_status, $views,$proveedores,$fecha1,$fecha2){
+    public static function create($id_contrato,$id_status, $views,$fecha1,$fecha2){
+        if (!empty($views)) {
+            alert("ESTE CONTRATO NO TIENE ORDENES DE COMPRA");
+        }
+        else{
         $ordenes = $views;
-        $proveedor=proveedor::find($id_proveedor);
         PDF::setHeaderCallback(function($pdf){
             $pdf->Rect(0, 0, $pdf->getPageWidth(), $pdf->getPageHeight(), 'F', array(), array( 247, 247, 247));
             // Set font
@@ -70,7 +73,7 @@ EOD;
             $pdf->writeHTMLCell('0','0','10','230',$html);
         });
         PDF::AddPage('P', 'Letter');
-        $view = \View::make("ordenes_compras.reportePDF",compact("ordenes","proveedor"));
+        $view = \View::make("ordenes_compras.reportePDF",compact("ordenes"));
         $html = $view->render();
         PDF::SetFont('helvetica', '',10);
         //OBTIENE INSERTA EL HTML EN EL PDF
@@ -78,4 +81,5 @@ EOD;
         PDF::Output();
 
     }
+}
 }
