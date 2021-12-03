@@ -25,9 +25,9 @@
                 
             </div>
             <div class="col-md-6">
-                <label for="contrato">Contrato</label>
+                <label for="contrato">Obra</label>
                 <select autocomplete="on" class="form-control" name="id_contrato" id="id_contrato">
-                    <option value="0" selected>Todos</option>
+                    <option value="0" selected disabled>SELECCIONE</option>
                     @foreach($contratos as $contrato)
                       <option value="{{$contrato->id}}">{{$contrato->descripcion}}</option>
                     @endforeach
