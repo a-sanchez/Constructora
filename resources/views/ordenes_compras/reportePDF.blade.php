@@ -52,24 +52,27 @@
             </td>
     </tr>
     <tr>
+        <td></td>
+    </tr>
+    <tr>
         <td >
             <table>
-                <tr style="text-align:center">
-                    <td width="50%"><b>CONTRATO:
+                <tr>
+                    <td width="9%"></td>
+                    <td width="30%" style="text-align:center;"><b>CONTRATO:
                         <?php
                         $contrato = $ordenes[0]->folio;
                         ?>
                         {{$contrato}}
                     </b>
                     </td>
-                    <td><b>OBRA:</b>
+                    <td width="60%"><b>OBRA:</b>
                         <?php
                         $obra = $ordenes[0]->descripcion;
                         ?>
                         {{$obra}}
                     </td>
-                    <td></td>
-                    <td></td>
+                    <td width="1%"></td>
                 </tr>
             </table>
         </td>
