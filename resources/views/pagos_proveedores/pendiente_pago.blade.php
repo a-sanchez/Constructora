@@ -21,35 +21,37 @@
         @csrf
             <div class="row mt-3">
                 <div class="col-md-4">
-                  <label for="fecha_pago" >Fecha de pago</label>
-                  <input type="date"  class="form-control"  id="fecha_pago" name='fecha_pago'>
-                </div>
+                    <label for="fecha_pago" >Fecha de pago</label>
+                    <input type="date" disabled class="form-control" value="{{$pagos->fecha_pago}}" id="fecha_pago" name='fecha_pago'>
+                  </div>
                 <div class="col-md-4">
                     <label for="id_forma" name="id_forma">Forma de Pago</label>
-                    <select class="form-control" id="id_forma" name="id_forma">
-                      <option selected disabled value="0" >Seleccione forma de pago:</option> 
-                      @foreach($formas as $forma)
-                      <option value="{{$forma->id}}">{{$forma->forma}}</option>
-                      @endforeach
+                    <select disabled class="form-control" id="id_forma" name="id_forma">
+                      <option selected value="{{$pagos->forma_pago->id}}">{{$pagos->forma_pago->forma}}</option>
                     </select>
                 </div>
+                
                 <div class="col-md-4">
                     <label for="id_forma" name="id_forma">Estatus del pago</label>
                     <select class="form-control" id="estatus_pago" name="estatus_pago">
-                      <option selected  value="PAGADO" >PAGADO</option> 
-                      <option  value="PENDIENTE" >PENDIENTE</option> 
+                      <option  value="PAGADO" >PAGADO</option> 
+                      <option  selected value="PENDIENTE" >PENDIENTE</option> 
                     </select>
                 </div>
                 
             </div>
             <div class="row mt-3">
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <label for="referencia" >Referencia(caracter)</label>
-                  <input type="text"  class="form-control"  id="referencia" name='referencia'>
+                  <input type="text" disabled class="form-control"  id="referencia" name='referencia'>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="importe" >Importe del pago</label>
-                    <input type="text"  class="form-control"  id="importe" name='importe'>
+                    <input type="text"  disabled  class="form-control"  id="importe" name='importe' value="{{$pagos->total}}">
+                </div>
+                <div class="col-md-4">
+                    <label for="importe" >Saldo Pendiente</label>
+                    <input type="text"  class="form-control"  id="saldo_pendiente" name='saldo_pendiente' value="{{number_format($pagos->saldo_pendiente,2)}}">
                 </div>
             </div>
             <div class="row">
@@ -59,7 +61,7 @@
             </div>
             <div class="row mt-3" style="text-align:center">
                 <div class="col-md-12">
-                    <input type="text"  class="form-control input-sm"  id="comentarios_pagos" name='comentarios_pagos' >
+                    <input type="text"  alue="{{$pagos->comentarios}}" class="form-control input-sm"  id="comentarios_pagos" name='comentarios_pagos' >
                 </div>
             </div>
             <div class="row mt-4">

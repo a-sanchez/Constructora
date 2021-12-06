@@ -112,6 +112,7 @@ Route::resource('facturas',FacturaController::class);
 #----------------PAGOS---------------------------------#
 
 Route::get('pagos_proveedores/pagar/{id}',[PagosProveedoresController::class,'pagar']);
+Route::get('pagos_proveedores/pagar_pendiente/{id}',[PagosProveedoresController::class,'pagar_pendiente']);
 Route::get('pagos_proveedores/detalles_pago/{id}',[PagosProveedoresController::class,"detalles_pago"]);
 Route::get("pagos_proveedores/orden/{id}",[PagosProveedoresController::class,'orden']);
 Route::post("pagos_proveedores/orden/",[PagosProveedoresController::class,'new_orden']);
@@ -143,4 +144,5 @@ Route::resource('nuevas_cuentas', AddNewCuentaController::class);
 Route::resource('orden_pago',OrdenPagoController::class);
 Route::get("pagos_proveedores2/detalles/{id}",[PagosProveedores2Controller::class,'detalles']);
 Route::get("pagos_proveedores2/pagar/{id}",[PagosProveedores2Controller::class,'pagar']);
+Route::get('pagos_proveedores2/pagar_pendiente/{id}',[PagosProveedores2Controller::class,'pagar_pendiente']);
 Route::resource('pagos_proveedores2', PagosProveedores2Controller::class);

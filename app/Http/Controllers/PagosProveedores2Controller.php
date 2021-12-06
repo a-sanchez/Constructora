@@ -57,6 +57,13 @@ class PagosProveedores2Controller extends Controller
         return view('pagos_proveedores.add_pago2',compact("pagos","ordenes","formas"));
     }
 
+    public function pagar_pendiente($id){
+        $pagos = pagos_proveedores2::find($id);
+        $formas=create_forma_pago::all();
+        $ordenes = orden_pago::where("id_pago",$id)->get();
+        return view('pagos_proveedores.pendiente_pago2',compact("pagos","ordenes","formas"));
+    }
+
     public function detalles($id){
         $pagos=pagos_proveedores2::find($id);
         return view('pagos_proveedores.detalles_pago',compact("pagos"));

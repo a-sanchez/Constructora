@@ -23,11 +23,11 @@ class PagosProveedoresController extends Controller
             $views=[];
         }
         else{
-        $views=DB::select ("select pagos_proveedores2s.id,folio_factura,contratos.folio as contrato,
+        $views=DB::select ("select pagos_proveedores2s.id,folio_factura,contratos.folio as contrato,estatus_pago,
         proveedores.razon_social,fecha_emision,fecha_vencimiento,sub_total,impuestos,total,
         group_concat(orden_compras.id SEPARATOR ',') as folios,
         group_concat(orden_compras.folio_orden SEPARATOR '\n') as folio_orden, estatus_facturas.status,
-        comentarios
+        comentarios,comentarios_pagos,saldo_pendiente
         from pagos_proveedores2s
         join orden_pagos
         on pagos_proveedores2s.id = orden_pagos.id_pago
@@ -67,6 +67,12 @@ class PagosProveedoresController extends Controller
        
        // $formas=create_forma_pago::all();
         //return view('pagos_proveedores.add_pago',compact('formas'));    
+    }
+
+    public function pagar_pendiente($id){
+        $pagos=pagos_proveedores::find($id);
+        $forma=create_forma_pago::all();
+        return view('pagos_proveedores.pendiente_pago',compact("pagos"),["formas"=>$forma]);
     }
 
     public function pagar($id){

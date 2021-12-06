@@ -55,7 +55,7 @@
             </div>
             <div class="row mt-3" style="text-align:center">
                 <div class="col-md-12">
-                    <input type="text" disabled class="form-control input-sm" value="{{$pagos->comentarios}}" id="comentario" name='comentario' >
+                    <input type="text" disabled class="form-control input-sm" value="{{$pagos->comentarios_pagos}}" id="comentario" name='comentario' >
                 </div>
             </div>
             <div class="row mt-4">

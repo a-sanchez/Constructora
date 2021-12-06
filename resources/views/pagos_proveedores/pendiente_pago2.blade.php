@@ -1,15 +1,7 @@
 @extends('layouts.base_html')
 
 @section ('tittle')PAGOS PROVEEDORES @endsection
-@php
-        $grupales=[];
-            foreach ($ordenes as $orden) {
-                array_push($grupales,$orden->orden->id);
-            }
-            $grupales = implode(",",$grupales);
-            // var_dump($grupales);
-            // die;
-@endphp
+
 @section('body')
 <div class="container pt-1">
 
@@ -20,42 +12,46 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h4 style="color:gray;font-size:20px;">-Registrar los siguientes datos para el pago </h4>
+            <h4 style="color:gray;font-size:20px;">-Registrar los siguientes datos para el pago</h4>
             <hr style="color: orange;">
         </div>
     </div>
+
     <form id="form-pago" class="row g-3" onsubmit='pago_proveedor({{$pagos->id}});'>
         @csrf
             <div class="row mt-3">
                 <div class="col-md-4">
-                  <label for="fecha_pago" >Fecha de pago</label>
-                  <input type="date"  class="form-control"  id="fecha_pago" name='fecha_pago'>
-                </div>
+                    <label for="fecha_pago" >Fecha de pago</label>
+                    <input type="date" disabled class="form-control" value="{{$pagos->fecha_pago}}" id="fecha_pago" name='fecha_pago'>
+                  </div>
                 <div class="col-md-4">
                     <label for="id_forma" name="id_forma">Forma de Pago</label>
-                    <select class="form-control" id="id_forma" name="id_forma">
-                      <option selected disabled value="0" >Seleccione forma de pago:</option>
-                      @foreach($formas as $forma)
-                      <option value="{{$forma->id}}">{{$forma->forma}}</option>
-                      @endforeach
+                    <select disabled class="form-control" id="id_forma" name="id_forma">
+                      <option selected value="{{$pagos->forma_pago->id}}">{{$pagos->forma_pago->forma}}</option>
                     </select>
                 </div>
+                
                 <div class="col-md-4">
                     <label for="id_forma" name="id_forma">Estatus del pago</label>
                     <select class="form-control" id="estatus_pago" name="estatus_pago">
-                      <option selected  value="PAGADO" >PAGADO</option> 
-                      <option  value="PENDIENTE" >PENDIENTE</option> 
+                      <option  value="PAGADO" >PAGADO</option> 
+                      <option  selected value="PENDIENTE" >PENDIENTE</option> 
                     </select>
                 </div>
+                
             </div>
             <div class="row mt-3">
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <label for="referencia" >Referencia(caracter)</label>
-                  <input type="text"  class="form-control"  id="referencia" name='referencia'>
+                  <input type="text" disabled class="form-control"  id="referencia" name='referencia'>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="importe" >Importe del pago</label>
-                    <input type="text"  class="form-control"  id="importe" name='importe'>
+                    <input type="text"  disabled  class="form-control"  id="importe" name='importe' value="{{$pagos->importe}}">
+                </div>
+                <div class="col-md-4">
+                    <label for="importe" >Saldo Pendiente</label>
+                    <input type="text"  class="form-control"  id="saldo_pendiente" name='saldo_pendiente' value="{{$pagos->saldo_pendiente}}">
                 </div>
             </div>
             <div class="row">
@@ -65,7 +61,7 @@
             </div>
             <div class="row mt-3" style="text-align:center">
                 <div class="col-md-12">
-                    <input type="text"  class="form-control input-sm"  id="comentarios_pagos" name='comentarios_pagos' >
+                    <input type="text"  alue="{{$pagos->comentarios}}" class="form-control input-sm"  id="comentarios_pagos" name='comentarios_pagos' >
                 </div>
             </div>
             <div class="row mt-4">
@@ -73,8 +69,7 @@
                     <button type="submit" class="btn" id="btnGuardar" style="background:rgb(13, 194, 13);color:white;">Guardar</button>
                 </div>
                 <div class="col-md-6">
-                    
-                <a type="button" class="btn" id="btnCancelar" onclick="Update_status('{{$grupales}}');"  style="background:red;color:white;" >Cancelar</a>
+                    <a type="button" class="btn" id="btnCancelar" onclick="Update_status({{$pagos->id_orden}});" href="" style="background:red;color:white;" >Cancelar</a>
                 </div>
             </div>
         {{-- al actualizar datos se actualizara el estatus de pagado a pagado  --}}

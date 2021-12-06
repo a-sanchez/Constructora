@@ -38,8 +38,11 @@
         <th >SubTotal</th>
         <th >Impuestos</th>
         <th >Total</th>
-        <th>Estatus</th>
-        <th >Observaciones y comentarios</th>
+        <th>Saldo Pendiente</th>
+        <th>Estatus de la orden</th>
+        <th>Estatus del pago</th>
+        <th >Observaciones y comentarios orden</th>
+        <th >Observaciones y comentarios del pago</th>
         <th></th>
     </thead>
     <tbody style="text-align:center">
@@ -54,14 +57,35 @@
             <td>{{number_format($operar->sub_total,2)}}</td>
             <td>{{number_format($operar->impuestos,2)}}</td>
             <td>{{number_format($operar->total,2)}}</td>
-            <td>{{$operar->status}}</td>
+            <td>${{number_format($operar->saldo_pendiente,2)}}</td>
+            <td>@if($operar->estatus_pago=="PENDIENTE" && $operar->id_status==3)
+                {{$operar->status}}-PENDIENTE
+                @else
+                {{$operar->status}}
+                @endif
+            </td>
+            <td>@if($operar->estatus_pago==null)
+                Aún no se ha seleccionado
+                @else
+                {{$operar->estatus_pago}}
+                @endif
+            </td>
             <td>{{$operar->comentarios}}</td>
+            <td>{{$operar->comentarios_pagos}}</td>
             <td style="text-align:center">
-                @if($operar->id_status ==2)
+                @if($operar->estatus_pago=="PAGADO" && $operar->id_status==2)
                 <a  type="button" style="color: green; " class="btn" onclick="update_pago_orden({{$operar->id_orden}},{{$operar->id}});" href=""><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
                 <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='borrar_pago({{$operar->id}}),back_status({{$operar->id_orden}});'  class="fas fa-trash-alt"></i></a>
-                @endif
-                @if($operar->id_status==3)
+                @elseif($operar->estatus_pago=="PENDIENTE")
+                <a  type="button" style="color: green; " class="btn" onclick="update_pago_pendiente({{$operar->id_orden}},{{$operar->id}});" href=""><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
+                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='borrar_pago({{$operar->id}}),back_status({{$operar->id_orden}});'  class="fas fa-trash-alt"></i></a>
+                @elseif($operar->estatus_pago==null)
+                <a  type="button" style="color: green; " class="btn" onclick="update_pago_orden({{$operar->id_orden}},{{$operar->id}});" href=""><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
+                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='borrar_pago({{$operar->id}}),back_status({{$operar->id_orden}});'  class="fas fa-trash-alt"></i></a>
+                @elseif($operar->estatus_pago=="PENDIENTE" && $operar->id_estatus==3)
+                <a  type="button" style="color: green; " class="btn" onclick="update_pago_pendiente({{$operar->id_orden}},{{$operar->id}});" href=""><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
+                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='borrar_pago({{$operar->id}}),back_status({{$operar->id_orden}});'  class="fas fa-trash-alt"></i></a>
+                @else
                 <a  style="color: blue;" href="{{url("pagos_proveedores/detalles/{$operar->id}")}}" class="btn" ><i style="font-size:1.5rem" id="info-circle"  class="fas fa-info-circle"></i></a>
                 <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='update_pago({{$operar->id}})' class="fas fa-trash-alt"></i></a>
                 @endif
@@ -83,8 +107,11 @@
         <th >SubTotal</th>
         <th >Impuestos</th>
         <th >Total</th>
-        <th>Estatus</th>
-        <th >Observaciones y comentarios</th>
+        <th>Saldo Pendiente</th>
+        <th>Estatus de la orden</th>
+        <th>Estatus del pago</th>
+        <th >Observaciones y comentarios de la orden</th>
+        <th>Observaciones y comentarios del pago</th>
         <th></th>
     </thead>
     <tbody style="text-align:center">
@@ -101,16 +128,35 @@
             <td>{{number_format($view->sub_total,2)}}</td>
             <td>{{number_format($view->impuestos,2)}}</td>
             <td>{{number_format($view->total,2)}}</td>
-            <td>{{$view->status}}</td>
+            <td>$ {{number_format($view->saldo_pendiente,2)}}</td>
+            <td>
+                @if($view->estatus_pago=="PENDIENTE" && $view->status="Pagada")
+                {{$view->status}}-PENDIENTE
+                @else
+                {{$view->status}}
+                @endif
+            </td>
+            <td>@if($view->estatus_pago==null)
+                Aún no se selecciona
+                @endif
+                {{$view->estatus_pago}}</td>
             <td>{{$view->comentarios}}</td>
+            <td>{{$view->comentarios_pagos}}</td>
             <td style="text-align:center">
                 @if($view->status =="Operada")
                 <a  type="button" style="color: green; " class="btn" onclick="Update_estatus_grupales('{{$view->folios}}',{{$view->id}});" ><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
-                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt"  onclick="borrar_pago2({{$view->id}});back_status2('{{$view->folios}}')" class="fas fa-trash-alt"></i></a>
+                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt"  onclick="borrar_pago2({{$view->id}});back_status2('{{$view->folios}}',{{$view->id}});" class="fas fa-trash-alt"></i></a>
                 @endif
                 @if($view->status=="Pagada")
-                <a  style="color: blue;" href="{{url("pagos_proveedores2/detalles/{$view->id}")}}" class="btn" ><i style="font-size:1.5rem" id="info-circle"  class="fas fa-info-circle"></i></a>
-                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='update_pago2({{$view->id}})' class="fas fa-trash-alt"></i></a>
+                    @if($view->estatus_pago=="PENDIENTE")
+                        <a  type="button" style="color: green; " class="btn" onclick="Update_estatus_grupales_pendiente('{{$view->folios}}',{{$view->id}});" ><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
+                        <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='update_pago2({{$view->id}});back_status3("{{$view->folios}}",{{$view->id}});' class="fas fa-trash-alt"></i></a>
+                    @endif
+                    @if($view->estatus_pago=="PAGADO" )
+                        <a  style="color: blue;" href="{{url("pagos_proveedores2/detalles/{$view->id}")}}" class="btn" ><i style="font-size:1.5rem" id="info-circle"  class="fas fa-info-circle"></i></a>
+                        <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='update_pago2({{$view->id}});back_status3("{{$view->folios}}",{{$view->id}});' class="fas fa-trash-alt"></i></a>
+                    @endif
+
                 @endif
             </td>
         </tr>
@@ -127,6 +173,84 @@ $(document).ready(function(){
     });
 });
 
+async function update_pago_pendiente(id,id2){
+    event.preventDefault();
+    let url="{{url('/compras/{id}')}}".replace("{id}",id);
+    console.log(url);
+    let init={
+        method:"PUT",
+        headers:{
+            'X-CSRF-Token' : "{{ csrf_token() }}",
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({'id_status':3})        
+    };
+    let req = await fetch(url,init);
+    if (req.ok) {
+       window.location.href="{{url('pagos_proveedores/pagar_pendiente/{id}')}}".replace("{id}",id2);
+    }
+    else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'ERROR AL ACTUALIZAR ESTATUS DE ORDEN'
+        });
+    }    
+}
+async function back_status3(id,id2) {
+    let grupales = id.split(",");
+    grupales.forEach(async element => {
+    let url = "{{url('/compras/{id}')}}".replace("{id}",element);
+    let init = {
+        method:"PUT",
+        headers:{
+            'X-CSRF-Token' : "{{ csrf_token() }}",
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({'id_status':1})
+    };
+    let req =await fetch (url,init);
+    if(req.ok){
+        alert("La orden ha regresado a estatus operada");
+        window.location.reload();
+    }
+    else{
+        Swal.fire({
+           icon: 'error',
+           title: 'Error',
+           text: "Error al actualizar estatus"
+         });
+    }
+    });
+
+}
+async function back_status2(id,id2) {
+    let grupales = id.split(",");
+    grupales.forEach(async element => {
+    let url = "{{url('/compras/{id}')}}".replace("{id}",element);
+    let init = {
+        method:"PUT",
+        headers:{
+            'X-CSRF-Token' : "{{ csrf_token() }}",
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({'id_status':1})
+    };
+    let req =await fetch (url,init);
+    if(req.ok){
+        alert("Ha eliminado el proceso de operar");
+        window.location.href="{{url('/compras')}}";
+    }
+    else{
+        Swal.fire({
+           icon: 'error',
+           title: 'Error',
+           text: "Error al actualizar estatus"
+         });
+    }
+    });
+
+}
 let flag=0;
 async function Update_estatus_grupales(id,id2) {
     let grupales = id.split(",");
@@ -157,6 +281,37 @@ async function Update_estatus_grupales(id,id2) {
     });
 
 }
+
+async function Update_estatus_grupales_pendiente(id,id2) {
+    let grupales = id.split(",");
+    grupales.forEach(async element => {
+    let url = "{{url('/compras/{id}')}}".replace("{id}",element);
+    let init = {
+        method:"PUT",
+        headers:{
+            'X-CSRF-Token' : "{{ csrf_token() }}",
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({'id_status':3})
+    };
+    let req =await fetch (url,init);
+    if(req.ok){
+        if(flag==0){
+            window.location.href="{{url('pagos_proveedores2/pagar_pendiente/{id}')}}".replace("{id}",id2);
+            flag++;
+        }
+    }
+    else{
+        Swal.fire({
+           icon: 'error',
+           title: 'Error',
+           text: "Error al actualizar estatus"
+         });
+    }
+    });
+
+}
+
 async function borrar_pago(id){
     event.preventDefault();
     let url='{{url("/pagos_proveedores/{id}")}}'.replace('{id}',id);
@@ -164,22 +319,22 @@ async function borrar_pago(id){
         method:"DELETE",
         headers: {  'X-CSRF-TOKEN': "{{csrf_token()}}"
                 }
-}
+        }
 
 
 
-let req = await fetch(url,init);
-if (req.ok){
-    location.reload();
-}
-else{
-    
-    Swal.fire({
-        icon:"error",
-        title:"Error",
-        text:"Error al eliminar"
-    });
-}
+        let req = await fetch(url,init);
+        if (req.ok){
+            location.reload();
+        }
+        else{
+
+            Swal.fire({
+                icon:"error",
+                title:"Error",
+                text:"Error al eliminar"
+            });
+        }
 }
 async function back_status(id) {
         event.preventDefault();
@@ -247,7 +402,7 @@ async function update_pago(id){
             };
 let req = await fetch(url,init);
 if (req.ok){
-    location.reload();
+    //location.reload();
 }
 else{
     
@@ -267,7 +422,7 @@ async function update_pago2(id){
                     'X-CSRF-Token' : "{{ csrf_token() }}",
                     'Content-Type':'application/json'
                 },
-                body:JSON.stringify({'id_status':2})
+                body:JSON.stringify({'id_status':2,'saldo_pendiente':null,'estatus_pago':null,'comentarios_pagos':null})
             };
     let req = await fetch(url,init);
     if (req.ok){
