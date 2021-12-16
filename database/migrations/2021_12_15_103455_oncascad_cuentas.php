@@ -13,15 +13,15 @@ class OncascadCuentas extends Migration
      */
     public function up()
     {
-        Schema::table('credito_cuentas',function(Blueprint $table){
-            DB::statement("ALTER TABLE `constructora`.`credito_cuentas` 
-            DROP FOREIGN KEY `credito_cuentas_id_proveedor_foreign`;");
-            DB::statement("ALTER TABLE `constructora`.`credito_cuentas` 
-            ADD CONSTRAINT `credito_cuentas_id_proveedor_foreign`
-              FOREIGN KEY (`id_proveedor`)
-              REFERENCES `constructora`.`proveedores` (`id`)
-              ON DELETE CASCADE;");
-        });
+        // Schema::table('credito_cuentas',function(Blueprint $table){
+        //     DB::statement("ALTER TABLE `constructora`.`credito_cuentas` 
+        //     DROP FOREIGN KEY `credito_cuentas_id_proveedor_foreign`;");
+        //     DB::statement("ALTER TABLE `constructora`.`credito_cuentas` 
+        //     ADD CONSTRAINT `credito_cuentas_id_proveedor_foreign`
+        //       FOREIGN KEY (`id_proveedor`)
+        //       REFERENCES `constructora`.`proveedores` (`id`)
+        //       ON DELETE CASCADE;");
+        // });
     }
 
     /**
