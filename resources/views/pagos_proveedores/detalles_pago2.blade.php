@@ -61,38 +61,40 @@
             <div class="row mt-4">
                 <div class="col-md-12" style="text-align:center">
                     <button type="submit" class="btn" id="guardar" style="background:blue;color:white;" >Guardar Cambios</button>
+
                     <a type="button" class="btn" id="btnCancelar" href="{{url("/pagos_proveedores")}}" style="background:red;color:white;" >Regresar</a>
                 </div>
             </div>
     </form>
 </div>
-
 @endsection
 @section('scripts')
 <script>
-     async function pago_proveedor(id){
-     event.preventDefault();
-     let form = new FormData(document.getElementById("form-pago"));
-     let url = "{{url('/pagos_proveedores/{id}')}}".replace("{id}",id);
-     let init={
-         method:"PUT",
-         headers:{
-             'X-CSRF-Token': document.getElementsByName("_token")[0].value
-             , "Content-Type": "application/json"
-         }
-         ,body:JSON.stringify(Object.fromEntries(form))
-     }
-     let req = await fetch (url,init);
-     if(req.ok){
-         window.location.href="{{url('/pagos_proveedores')}}";
-     }
-     else{
-         Swal.fire({
-                 icon: 'error'
-                 , title: 'Error'
-                 , text: 'Error al generar pago'
-             });
-     }
-}
+    async function pago_proveedor(id)
+    {
+        event.preventDefault();
+        let form = new FormData(document.getElementById("form-pago"));
+        let url = "{{url('/pagos_proveedores2/{id}')}}".replace("{id}",id);
+        let init={
+            method:"PUT",
+            headers:{
+                'X-CSRF-Token': document.getElementsByName("_token")[0].value
+                , "Content-Type": "application/json"
+            }
+            ,body:JSON.stringify(Object.fromEntries(form))
+        }
+        let req = await fetch (url,init);
+        if(req.ok){
+            alert("Pago Realizado");
+            window.location.href="{{url('/pagos_proveedores')}}";
+        }
+        else{
+            Swal.fire({
+                    icon: 'error'
+                    , title: 'Error'
+                    , text: 'Error al generar pago'
+                , });
+        }
+    }
 </script>
 @endsection

@@ -81,9 +81,7 @@ class PagosProveedoresController extends Controller
         return view('pagos_proveedores.add_pago',compact("pagos"),["formas"=>$forma]);
     }
 
-    public function update(Request $request,$id)
-    {
-       
+    public function update(Request $request,$id){
         $pagos=pagos_proveedores::find($id);
         $update=$pagos->update($request->all());
         return $update;

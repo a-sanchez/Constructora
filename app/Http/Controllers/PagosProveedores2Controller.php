@@ -66,7 +66,7 @@ class PagosProveedores2Controller extends Controller
 
     public function detalles($id){
         $pagos=pagos_proveedores2::find($id);
-        return view('pagos_proveedores.detalles_pago',compact("pagos"));
+        return view('pagos_proveedores.detalles_pago2',compact("pagos"));
     }
     /**
      * Show the form for editing the specified resource.

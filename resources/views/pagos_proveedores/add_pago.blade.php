@@ -96,7 +96,7 @@
                  icon: 'error'
                  , title: 'Error'
                  , text: 'Error al generar pago'
-             , });
+             });
      }
 }
 
