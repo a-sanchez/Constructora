@@ -90,7 +90,6 @@ async function reportes(){
     let init = {
         method:"GET"
     }
-    console.log(form);
     let req = await fetch(url5,init);
         if(req.ok){
          //let res = await req.json();

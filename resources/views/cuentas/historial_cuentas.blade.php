@@ -84,6 +84,7 @@
     <th>Gasto de operación actual</th>
     <th>Banco</th>
     <th>Opciones</th>
+    <th>CREADA</th>
     </thead>
     <tbody>
         @foreach($cuentas as $cuenta)
@@ -172,9 +173,11 @@
                         $dia = "DOMINGO";
                         break;
                 }
+
+                $fecha = ($dia." ".date("j",strtotime($date))." ".$mes1." ".date("Y",strtotime($date)));
+
                 ?>
-                
-                {{$dia}} {{date("j",strtotime($date))}} {{$mes1}} {{date("Y",strtotime($date))}}
+                {{$fecha}}
             </td>
             <td>{{$cuenta->total}}</td>
             <td>{{$cuenta->banco}}</td>
@@ -184,6 +187,7 @@
                 <a  style="color: blue;" href="{{url("cuentas/{$cuenta->id}")}}" class="btn" ><i style="font-size:1.5rem" id="info-circle"  class="fas fa-info-circle"></i></a>
                 <a  target="_blank" style="color: red;" href="{{url("flujo_diarioPDF/{$cuenta->id}")}}" class="btn" ><i style="font-size:1.5rem" id="file-pdf"  class="fas fa-file-pdf"></i></a>
             </td>
+            <td>{{$cuenta->created_at}}</td>
             @endforeach
         </tr>
     </tbody>
@@ -191,10 +195,18 @@
 </table>
 @endsection
 @section('scripts')
+<script src="//cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js" type="text/javascript"></script>
 <script>
     let table = $("#cuentas_table").dataTable({
-        responsive:true
+        responsive:true,
+        order: [[ 4, "desc" ]],
+        "columnDefs":[
+            {
+                "visible":false,"targets":4
+            }
+        ]
     });
+
 
     document.addEventListener("DOMContentLoaded", function() {
         var btn = document.getElementById("myBtn");

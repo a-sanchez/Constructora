@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PDF_CUENTAS;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\add_new_cuenta;
+use App\Models\credito_cuentas;
+use App\Models\proveedor;
+use App\Models\relacion_cuentas;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +21,37 @@ class AddNewCuentaController extends Controller
      */
     public function index()
     {
+        $id = credito_cuentas::max('id')+1;
+        $vistas=credito_cuentas::all();
+        return view('cuentas_pagar.cuentas_totales',compact("id","vistas"));
     }
+
+
+    public function generate_cuentas($fecha1,$fecha2){
+
+        $id = credito_cuentas::max('id');
+        $from = date($fecha1);
+        $to = date($fecha2);
+        $cuentas = DB::select("select proveedores.razon_social, 
+        estatus_facturas.status, pagos_proveedores.estatus_pago, proveedores.pagos, orden_compras.fecha_orden,orden_compras.id_status,
+        sum(pagos_proveedores.total) as monto from orden_compras 
+        inner join pagos_proveedores 
+        on pagos_proveedores.id_orden = orden_compras.id 
+        inner join proveedores on proveedores.id = orden_compras.id_proveedor
+         inner join estatus_facturas on estatus_facturas.id = orden_compras.id_status 
+         where (pagos_proveedores.estatus_pago = 'PENDIENTE' or pagos_proveedores.estatus_pago is null)
+         and proveedores.pagos = 'CRÉDITO'
+         and orden_compras.status !=0
+        and orden_compras.fecha_orden between '$fecha1' and '$fecha2'
+         group by proveedores.razon_social");
+        return view('cuentas_pagar.cuentas_search',compact('cuentas','id','from','to'));
+    }
+
+    public function PDF_CUENTAS($fecha1,$fecha2){
+        return PDF_CUENTAS::create($fecha1,$fecha2);
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

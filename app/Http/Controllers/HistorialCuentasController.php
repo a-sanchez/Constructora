@@ -128,4 +128,6 @@ class HistorialCuentasController extends Controller
 
         return flujo_diarioPDF::create($id);
     }
+
+    
 }

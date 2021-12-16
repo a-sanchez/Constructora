@@ -26,9 +26,11 @@ use App\Http\Controllers\OrdenProductoController;
 use App\Http\Controllers\HistorialCuentasController;
 use App\Http\Controllers\PagosProveedoresController;
 use App\Http\Controllers\ContactoClienteClientesController;
+use App\Http\Controllers\CreditoCuentasController;
 use App\Http\Controllers\OrdenPagoController;
 use App\Http\Controllers\PagosProveedores2Controller;
 use App\Http\Controllers\ProveedorContactoVentasController;
+use App\Http\Controllers\RelacionCuentasController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -125,19 +127,35 @@ Route::get('configuracion/listado',[ConfiguracionController::class,"listado"]);
 Route::resource('configuracion',ConfiguracionController::class);
 
 });
-#-----------------PERMISOS----------------------------
+#-----------------PERMISOS--------------------------------------#
 
 Route::post('permisos/remove', [PermisosController::class,"removePermisos"]);
 Route::resource('permisos',PermisosController::class);
 
-#----------------CUENTAS POR PAGAR----------------------------#
+
+#------////MODULO DE ALBA CUENTAS POR PAGAR Y FLUJO DIARIO
+#----------------FLUJO DIARIO-----------------------------------#
 Route::post('cuentas/agregar',[HistorialCuentasController::class,"agregar"]);
 Route::get('cuentas/costo/{id}',[HistorialCuentasController::class,"nuevacuenta"]);
 Route::get('cuentas/update_vista',[HistorialCuentasController::class,"update_vista"]);
 Route::get('cuentas/detalles',[HistorialCuentasController::class,"detalles"]);
 Route::resource('cuentas', HistorialCuentasController::class);
 Route::get("flujo_diarioPDF/{id}",[HistorialCuentasController::class,'flujo_diarioPDF']);
+Route::get('fecha/{fecha1}/fecha/{fecha2}/{id}/Cuentas_Pagar',[AddNewCuentaController::class,'generate_cuentas']);
+Route::get("pdf_cuentas/{fecha1}/{fecha2}",[AddNewCuentaController::class,'PDF_CUENTAS']);
 Route::resource('nuevas_cuentas', AddNewCuentaController::class);
+
+/*---------------*CUENTAS POR PROVEEDOR = CREDITO ----------------*/
+
+Route::post('credito_cuentas/agregar',[CreditoCuentasController::class,"agregar_id"]);
+Route::resource('credito_cuentas', CreditoCuentasController::class);
+
+Route::post('relacion_cuentas/agregar',[RelacionCuentasController::class,"agregar"]);
+Route::get('relacion_cuentas/detalles/{id}',[RelacionCuentasController::class,"detalles"]);
+Route::get("pdf_cuentas_nuevas/{id}",[RelacionCuentasController::class,"PDF_CUENTAS_NUEVAS"]);
+Route::get("relacion_cuentas/proveedores",[RelacionCuentasController::class,"vista_cuentas"]);
+Route::get("proveedor/{id}/ciclo/{ciclo}/historial",[RelacionCuentasController::class,"historial"]);
+Route::resource('relacion_cuentas', RelacionCuentasController::class);
 
 #----------------ORDEN_PAGO---------------------------------------#
 
