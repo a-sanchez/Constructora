@@ -54,10 +54,10 @@
     <div class="col-md-4">
         <div class="row">
             <div class="col-md-5" >
-                <a type="btn" target="_blank" class="form-control btn" href = "{{url("pdf_cuentas_nuevas/{$id}")}}" style="background-color:red;font-size:11px;text-align:center;color:white">Descargar PDF</a>
+                <a type="btn" target="_blank" class="form-control btn" href = "{{url("pdf_cuentas_nuevas/{$id}")}}" style="background-color:red;font-size:13px;text-align:center;color:white">Descargar PDF</a>
             </div>
             <div class="col-md-5" >
-                <a type="btn" class="form-control btn" onclick="cambios();"style="background-color:green;font-size:11px;text-align:center;color:white">Guardar Cambios</a>
+                <a type="btn" class="form-control btn" onclick="cambios();"style="background-color:green;font-size:13px;text-align:center;color:white">Guardar Cambios</a>
             </div>
         </div>
     </div>
@@ -133,7 +133,6 @@
                 ]
             },
             onSuccess:function(data){
-               console.log(data);
                 document.getElementById("total_monto1").innerHTML = data.suma_programado;
                 document.getElementById("total_monto2").innerHTML = data.suma_total;
                 cuentas_proveedor.ajax.reload();

@@ -236,7 +236,6 @@
                         <td>
                             <a  type="button" style="color: green; " class="btn" href="{{url("relacion_cuentas/{$vista->id}/edit")}}" ><i style="font-size:1.5rem;" id="pencil-alt"  class="fas fa-pencil-alt"></i></a> 
                             <a  style="color: black;" href="" class="btn" onclick="borrarRegistro({{$vista->id}})" ><i style="font-size:1.5rem" id="trash-alt"  class="fas fa-trash-alt"></i></a>
-                            <a  style="color: blue;"  class="btn" href="{{url("relacion_cuentas/detalles/{$vista->id}")}}" ><i style="font-size:1.5rem" id="info-circle"  class="fas fa-info-circle"></i></a>
                             <a  target="_blank" style="color: red;" href = "{{url("pdf_cuentas_nuevas/{$vista->id}")}}" class="btn" ><i style="font-size:1.5rem" id="file-pdf"  class="fas fa-file-pdf"></i></a>
             
                         </td>
@@ -252,13 +251,9 @@
 @section("scripts")
 <script>
 
-// let table = $("#cuenta_pagar").DataTable({
-//     responsive:true,
-//     searching:false,
-//     ordering:false,
-//     info:false,
-//     paging:false
-// });
+ let table = $("#table_cuentas").DataTable({
+     responsive:true
+ });
 
 
 

@@ -38,12 +38,26 @@ class AddNewCuentaController extends Controller
         inner join pagos_proveedores 
         on pagos_proveedores.id_orden = orden_compras.id 
         inner join proveedores on proveedores.id = orden_compras.id_proveedor
-         inner join estatus_facturas on estatus_facturas.id = orden_compras.id_status 
-         where (pagos_proveedores.estatus_pago = 'PENDIENTE' or pagos_proveedores.estatus_pago is null)
-         and proveedores.pagos = 'CRÉDITO'
-         and orden_compras.status !=0
+        inner join estatus_facturas on estatus_facturas.id = orden_compras.id_status 
+        where (pagos_proveedores.estatus_pago = 'PENDIENTE' or pagos_proveedores.estatus_pago is null)
+        and proveedores.pagos = 'CRÉDITO'
+        and orden_compras.status !=0
         and orden_compras.fecha_orden between '$fecha1' and '$fecha2'
-         group by proveedores.razon_social");
+        group by proveedores.razon_social
+        UNION
+        
+        Select proveedores.razon_social,estatus_facturas.status,estatus_pago,proveedores.pagos,orden_compras.fecha_orden,orden_compras.id_status,
+        sum(pagos_proveedores2s.total) as monto
+        from pagos_proveedores2s
+        inner join orden_pagos on orden_pagos.id_pago = pagos_proveedores2s.id
+        inner join orden_compras on orden_compras.id = orden_pagos.id_orden
+        inner join proveedores on proveedores.id = orden_compras.id_proveedor
+        inner join estatus_facturas on estatus_facturas.id = orden_compras.id_status
+        where (pagos_proveedores2s.estatus_pago = 'PENDIENTE' or pagos_proveedores2s.estatus_pago is null)
+        and proveedores.pagos = 'CRÉDITO'
+        and orden_compras.status !=0
+        and orden_compras.fecha_orden between '$fecha1' and '$fecha2'
+        group by proveedores.razon_social;");
         return view('cuentas_pagar.cuentas_search',compact('cuentas','id','from','to'));
     }
 

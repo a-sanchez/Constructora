@@ -38,6 +38,23 @@ class RelacionCuentasController extends Controller
     }
 
     public function historial($id,$ciclo){
+        // $uniones = DB::select("select contratos.descripcion,proveedores.razon_social,
+        // orden_productos.concepto,
+        // orden_productos.cantidad,
+        // pagos_proveedores.folio_factura,
+        // pagos_proveedores.fecha_emision,
+        // pagos_proveedores.fecha_vencimiento,
+        // pagos_proveedores.total,
+        // pagos_proveedores.comentarios_pagos,
+        // date_format(pagos_proveedores.fecha_emision,'%Y') as ciclo,
+        // date_format(pagos_proveedores.fecha_pago,'TRANSFER %d/%M/%Y') as transfer
+        //  FROM constructora.orden_compras
+        //  join contratos on contratos.id = orden_compras.id_contrato
+        //  join orden_productos on orden_productos.orden_id = orden_compras.id
+        //  join pagos_proveedores 
+        //  join proveedores on proveedores.id = orden_compras.id_proveedor
+        //  where id_proveedor = '$id' and date_format(pagos_proveedores.fecha_emision,'%Y') = '$ciclo'");
+
         $historiales = DB::select("select contratos.descripcion,proveedores.razon_social,
         orden_productos.concepto,
         orden_productos.cantidad,
@@ -48,12 +65,23 @@ class RelacionCuentasController extends Controller
         pagos_proveedores.comentarios_pagos,
         date_format(pagos_proveedores.fecha_emision,'%Y') as ciclo,
         date_format(pagos_proveedores.fecha_pago,'TRANSFER %d/%M/%Y') as transfer
-         FROM constructora.orden_compras
-         join contratos on contratos.id = orden_compras.id_contrato
-         join orden_productos on orden_productos.orden_id = orden_compras.id
-         join pagos_proveedores 
-         join proveedores on proveedores.id = orden_compras.id_proveedor
-         where id_proveedor = '$id' and date_format(pagos_proveedores.fecha_emision,'%Y') = '$ciclo'");
+        FROM constructora.orden_compras
+        join contratos on contratos.id = orden_compras.id_contrato
+        join orden_productos on orden_productos.orden_id = orden_compras.id
+        join pagos_proveedores 
+        join proveedores on proveedores.id = orden_compras.id_proveedor
+        where id_proveedor = '$id' and date_format(pagos_proveedores.fecha_emision,'%Y') = '$ciclo'
+        UNION
+        SELECT contratos.descripcion,proveedores.razon_social,orden_productos.concepto,orden_productos.cantidad,folio_factura,fecha_emision,fecha_vencimiento,total,comentarios_pagos,
+		date_format(pagos_proveedores2s.fecha_emision,'%Y') as ciclo,
+		date_format(pagos_proveedores2s.fecha_pago,'TRANSFER %d/%M/%Y') as transfer
+		from pagos_proveedores2s
+		inner join orden_pagos on orden_pagos.id_pago = pagos_proveedores2s.id
+		inner join orden_compras on orden_compras.id = orden_pagos.id_orden
+		inner join contratos on contratos.id = pagos_proveedores2s.id_contrato
+		inner join orden_productos on orden_productos.orden_id = orden_pagos.id_orden
+		inner join proveedores on proveedores.id = orden_compras.id_proveedor
+        where id_proveedor = '$id' and date_format(pagos_proveedores2s.fecha_emision,'%Y') = '$ciclo'");
         return view('cuentas_pagar.vista_historial',compact("historiales"));
         
     }

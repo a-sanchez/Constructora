@@ -72,7 +72,7 @@
                                                 <div class="row">
                                                     <div class="col-md-4"></div>
                                                     <div class="col-md-4">
-                                                        <input type="text" style="text-align:center"  class="form-control" required  id="ciclo">
+                                                        <input type="text" style="text-align:center"  class="form-control" required  id="ciclo-{{$proveedor->id}}">
                                                     </div>
                                                     <div class="col-md-4"></div>
                                                 </div>
@@ -104,10 +104,11 @@
 
 async function buscar(id){
     event.preventDefault();
-    let ciclo = document.getElementById("ciclo").value;
+    let ciclo = document.getElementById(`ciclo-${id}`).value;
+    console.log(ciclo);
     let form = new FormData();
     form.append("id",id);
-    form.append("ciclo",document.getElementById("ciclo").value);
+    form.append("ciclo",ciclo);
     let url = "{{url('proveedor/{id}/ciclo/{ciclo}/historial')}}";
     let url1= url.replace("{id}",id);
     let url2 = url1.replace("{ciclo}",ciclo);
