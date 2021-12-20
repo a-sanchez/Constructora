@@ -105,7 +105,6 @@
 async function buscar(id){
     event.preventDefault();
     let ciclo = document.getElementById(`ciclo-${id}`).value;
-    console.log(ciclo);
     let form = new FormData();
     form.append("id",id);
     form.append("ciclo",ciclo);
