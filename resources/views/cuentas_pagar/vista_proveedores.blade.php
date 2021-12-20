@@ -38,7 +38,7 @@
 @endsection
 
 @section('body')
-<div class="row">
+<div class="row mt-4">
     <div class="col-md-12">
         <h1 class="animate-box fadeInLeft animated mt-2" data-animate-effect="fadeInLeft">
             HISTORIAL DE CUENTAS POR PAGAR (POR PROVEEDORES)
@@ -56,11 +56,11 @@
             <tr style="text-align:center">
                 <td class="align-middle">{{$proveedor->razon_social}}</td>
                 <td>                            
-                    <div class="row">
+                    <div class="">
                         <div class="col-md-12">
                             <button  type="button" id = "myBtn" style="color: #000000;" class="btn"  onclick ="modal({{$proveedor->id}})"><i style="font-size:1.5rem;" id="box-tissue"  class="fas fa-box-tissue"></i></button> 
                             <form id="form-cuentas">
-                                <div id="myModal-{{$proveedor->id}}" class="modal fade" tabindex="-50">
+                                <div id="myModal-{{$proveedor->id}}" class="modal fade mt-5" tabindex="-50">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
