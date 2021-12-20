@@ -65,7 +65,7 @@ class RelacionCuentasController extends Controller
         pagos_proveedores.comentarios_pagos,
         date_format(pagos_proveedores.fecha_emision,'%Y') as ciclo,
         date_format(pagos_proveedores.fecha_pago,'TRANSFER %d/%M/%Y') as transfer
-        FROM constructora.orden_compras
+        FROM orden_compras
         join contratos on contratos.id = orden_compras.id_contrato
         join orden_productos on orden_productos.orden_id = orden_compras.id
         join pagos_proveedores 
