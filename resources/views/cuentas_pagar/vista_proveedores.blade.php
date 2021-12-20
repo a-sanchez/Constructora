@@ -96,7 +96,9 @@
 
 @section('scripts')
 <script>
-
+let table = $("#proveedor_table").DataTable({
+    responsive:true
+});
     function modal(id){
         var myModal = new bootstrap.Modal(document.getElementById(`myModal-${id}`));
             myModal.show();
