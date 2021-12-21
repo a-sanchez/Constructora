@@ -43,11 +43,15 @@
                 
             </div>
             <div class="row mt-3">
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <label for="referencia" >Referencia(caracter)</label>
                   <input type="text"  class="form-control"  id="referencia" name='referencia'>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <label for="total" >Total a pagar</label>
+                    <input type="text" disabled class="form-control" id="total" name="total" value="{{$pagos->total}}">
+                </div>
+                <div class="col-md-4">
                     <label for="importe" >Importe del pago</label>
                     <input type="text"  class="form-control"  id="importe" name='importe'>
                 </div>
@@ -77,7 +81,10 @@
  async function pago_proveedor(id){
      event.preventDefault();
      let form = new FormData(document.getElementById("form-pago"));
+     let res= (document.getElementById("total").value)-(document.getElementById("importe").value);
+     console.log(res);
      form.append("id_status",3);
+     form.append("saldo_pendiente",res);
      let url = "{{url('/pagos_proveedores/{id}')}}".replace("{id}",id);
      let init={
          method:"PUT",
@@ -89,7 +96,7 @@
      }
      let req = await fetch (url,init);
      if(req.ok){
-         window.location.href="{{url('/pagos_proveedores')}}";
+        window.location.href="{{url('/pagos_proveedores')}}";
      }
      else{
          Swal.fire({

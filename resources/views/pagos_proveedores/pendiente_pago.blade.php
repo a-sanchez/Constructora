@@ -41,17 +41,35 @@
                 
             </div>
             <div class="row mt-3">
+                <div class="col-md-4"></div>
                 <div class="col-md-4">
                   <label for="referencia" >Referencia(caracter)</label>
-                  <input type="text" disabled class="form-control"  id="referencia" name='referencia'>
+                  <input type="text" disabled class="form-control"  id="referencia" name='referencia' value="{{$pagos->referencia}}">
                 </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
-                    <label for="importe" >Importe del pago</label>
+                    <label for="importe" >Total</label>
                     <input type="text"  disabled  class="form-control"  id="importe" name='importe' value="{{$pagos->total}}">
                 </div>
                 <div class="col-md-4">
-                    <label for="importe" >Saldo Pendiente</label>
-                    <input type="text"  class="form-control"  id="saldo_pendiente" name='saldo_pendiente' value="{{number_format($pagos->saldo_pendiente,2)}}">
+                    <label for="importe_dado">Saldo Pendiente </label>
+                    <input type="text" class="form-control" disabled id="saldo_anterior" value="{{$pagos->saldo_pendiente}}" oninput="cal()">
+                </div>
+                <div class="col-md-4">
+                    <label for="importe" >Nuevo importe</label>
+                    <input type="text"  class="form-control" id="nuevo_importe" oninput="cal()">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <label for="importe" >Nuevo Saldo Pendiente</label>
+                    <input type="text"  class="form-control"  id="saldo_pendiente" name='saldo_pendiente'>
+                </div>
+                <div class="col-md-4">
                 </div>
             </div>
             <div class="row">
@@ -76,32 +94,49 @@
         @endsection
  @section('scripts')
  <script>
- async function pago_proveedor(id){
-     event.preventDefault();
-     let form = new FormData(document.getElementById("form-pago"));
-     form.append("id_status",3);
-     let url = "{{url('/pagos_proveedores/{id}')}}".replace("{id}",id);
-     let init={
-         method:"PUT",
-         headers:{
-             'X-CSRF-Token': document.getElementsByName("_token")[0].value
-             , "Content-Type": "application/json"
-         }
-         ,body:JSON.stringify(Object.fromEntries(form))
-     }
-     let req = await fetch (url,init);
-     if(req.ok){
-         window.location.href="{{url('/pagos_proveedores')}}";
-     }
-     else{
-         Swal.fire({
-                 icon: 'error'
-                 , title: 'Error'
-                 , text: 'Error al generar pago'
-             , });
-     }
-}
 
+    function cal(){
+        try{
+            var a = parseFloat(document.getElementById("saldo_anterior").value)||0.00,
+                b = parseFloat(document.getElementById("nuevo_importe").value)||0.00
+            
+            var resultado = (a-b).toFixed(2);
+            document.getElementById("saldo_pendiente").value = resultado;
+        }
+        catch(e){}
+    }
+
+        async function pago_proveedor(id){
+             event.preventDefault();
+             if (document.getElementById("saldo_pendiente").value!=0.00 && document.getElementById("estatus_pago").value=='PAGADO') {
+                 alert("No se puede cambiar el estatus, contiene un saldo pendiente");
+            }
+            else{
+            let form = new FormData(document.getElementById("form-pago"));
+             form.append("id_status",3);
+             form.append("saldo_pendiente",document.getElementById("saldo_pendiente").value);
+             let url = "{{url('/pagos_proveedores/{id}')}}".replace("{id}",id);
+             let init={
+                 method:"PUT",
+                 headers:{
+                     'X-CSRF-Token': document.getElementsByName("_token")[0].value
+                     , "Content-Type": "application/json"
+                 }
+                 ,body:JSON.stringify(Object.fromEntries(form))
+             }
+             let req = await fetch (url,init);
+             if(req.ok){
+                 window.location.href="{{url('/pagos_proveedores')}}";
+             }
+             else{
+                 Swal.fire({
+                         icon: 'error'
+                         , title: 'Error'
+                         , text: 'Error al generar pago'
+                     , });
+             }
+            }
+        }
 async function cancelar(id){
     event.preventDefault();
     let url="{{url('/compras/{id}')}}".replace("{id}",id);

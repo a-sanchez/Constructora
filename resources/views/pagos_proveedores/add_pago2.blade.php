@@ -49,14 +49,18 @@
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col-md-6">
-                  <label for="referencia" >Referencia(caracter)</label>
-                  <input type="text"  class="form-control"  id="referencia" name='referencia'>
-                </div>
-                <div class="col-md-6">
-                    <label for="importe" >Importe del pago</label>
-                    <input type="text"  class="form-control"  id="importe" name='importe'>
-                </div>
+                <div class="col-md-4">
+                    <label for="referencia" >Referencia(caracter)</label>
+                    <input type="text"  class="form-control"  id="referencia" name='referencia'>
+                  </div>
+                  <div class="col-md-4">
+                      <label for="total" >Total a pagar</label>
+                      <input type="text" disabled class="form-control" id="total" name="total" value="{{$pagos->total}}">
+                  </div>
+                  <div class="col-md-4">
+                      <label for="importe" >Importe del pago</label>
+                      <input type="text"  class="form-control"  id="importe" name='importe'>
+                  </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -83,8 +87,10 @@
         <script>
         async function pago_proveedor(id){
         event.preventDefault();
+        let res = (document.getElementById("total").value)-(document.getElementById("importe").value);
         let form = new FormData(document.getElementById("form-pago"));
         form.append("id_status",3);
+        form.append("saldo_pendiente",res);
         let url = "{{url('/pagos_proveedores2/{id}')}}".replace("{id}",id);
         let init={
             method:"PUT",

@@ -44,8 +44,8 @@
                   <input type="text" disabled class="form-control" value="{{$pagos->referencia}}" id="referencia" name='referencia'>
                 </div>
                 <div class="col-md-6">
-                    <label for="importe" >Importe del pago</label>
-                    <input type="text" disabled class="form-control" value="{{$pagos->importe}}" id="importe" name='importe'>
+                    <label for="importe" >Total del pago</label>
+                    <input type="text" disabled class="form-control" value="{{$pagos->total}}" id="importe" name='importe'>
                 </div>
             </div>
             <div class="row">

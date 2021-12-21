@@ -20,8 +20,8 @@
                         <li><a href={{url('/compras')}}>Orden de Compra</a></li>
                         <li><a href={{url('/facturas')}}>Operar pre-factura</a></li>
                         <li><a href={{url('/pagos_proveedores')}}>Pagos proveedores</a></li>
-                        <li><a href={{url('/nuevas_cuentas')}}>Cuentas por pagar a crédito</a></li>
-                        <li><a href={{url('relacion_cuentas/proveedores')}}>Cuentas por pagar por proveedores</a></li>
+                        <li><a href={{url('/nuevas_cuentas')}}>Cuentas por pagar</a></li>
+                        <li><a href={{url('relacion_cuentas/proveedores')}}>Historial de cuentas por proveedor</a></li>
                         <li><a href={{url('/cuentas')}}>Flujo Diario</a></li>
                         <li><a href={{url('/proveedores')}}>Proveedores</a></li>
                         <li><a href={{url('/configuracion')}}>PERMISOS</a></li>
