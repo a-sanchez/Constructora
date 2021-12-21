@@ -15,7 +15,7 @@ class relacion_cuentas extends Model
 
     public function setTotalTotalAttributes()
     {
-        $this->attributes['total_total'] = floatval($this->attributes['monto']) + floatval($this->attributes['programado']);
+        $this->attributes['total_total'] = floatval($this->attributes['monto']) - floatval($this->attributes['programado']);
         $this->save();
     }
 

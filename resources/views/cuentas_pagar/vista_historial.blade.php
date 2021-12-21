@@ -51,7 +51,7 @@
                 <td>{{$historial->total}}</td>
                 <td>{{$historial->descripcion}}</td>
                 <td>{{$historial->cantidad}} {{$historial->concepto}}</td>
-                <td>{{$historial->transfer}}</td>
+                <td>{{Carbon\Carbon::parse($historial->date)->formatLocalized('TRANSFER %d/%B/%Y')}}</td>
             </tr>
         @endforeach
     </tbody>
