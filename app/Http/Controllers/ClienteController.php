@@ -34,7 +34,7 @@ class ClienteController extends Controller
     }
 
     public function edit($id)
-    {
+    {   
         $cliente=cliente::find($id);
         return view("clientes.edit_clientes",compact("cliente"));
     }
@@ -47,15 +47,26 @@ class ClienteController extends Controller
     }
 
     public function destroy($id)
-    {   
-        if(contrato::where ("id_cliente",$id)){
-            return response()->json("Error al eliminar cliente, contiene un contrato",409);
-        }
-        else{
-        $cliente = cliente::find($id);
-        cliente::destroy($id);
-        return $cliente;
-    }
+    {
+    $contratos = [contrato::where ("id_cliente",$id)->get()];
+
+            if(sizeof($contratos[0])==0){
+                $cliente = cliente::find($id);
+                 cliente::destroy($id);
+                 return $cliente;
+            }
+            else{
+                return response()->json("Error al eliminar cliente, contiene un contrato",409);
+            }
+
+    //     if(contrato::where ("id_cliente",$id)){
+    //         return response()->json("Error al eliminar cliente, contiene un contrato",409);
+    //     }
+    //     else{
+    //     $cliente = cliente::find($id);
+    //     cliente::destroy($id);
+    //     return $cliente;
+    // }
     }
 
 
