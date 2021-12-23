@@ -40,7 +40,7 @@
 <div class="row">
     <div class="col-md-12">
         <h1 class="animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
-            Historial de cuentas por pagar
+            Flujo Diario
         </h1>
     </div>
     <hr style="color:orange" class="mt-3">
