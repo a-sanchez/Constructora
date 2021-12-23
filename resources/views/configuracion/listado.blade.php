@@ -50,7 +50,7 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td width="15%">
-                        <a  type="button" style="color: #f7dd0b; " class="btn"  href="{{url("/configuracion/{$user->id}/edit")}}"><i style="font-size:1.5rem;" id="pen"  class="fas fa-pen"></i></a>
+                        {{-- <a  type="button" style="color: #f7dd0b; " class="btn"  href="{{url("/configuracion/{$user->id}/edit")}}"><i style="font-size:1.5rem;" id="pen"  class="fas fa-pen"></i></a> --}}
                         <a  style="color: #7f7f7f;" href="#" class="btn" onclick='borrarUsuario({{$user->id}});'><i style="font-size:1.5rem" id="trash-alt"  class="fas fa-trash-alt"></i></a>
                         </td>                 
                 </tr>
