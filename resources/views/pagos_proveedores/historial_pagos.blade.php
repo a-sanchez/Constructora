@@ -81,7 +81,7 @@
                 <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='update_pago({{$operar->id}}),back_status({{$operar->id_orden}});'  class="fas fa-trash-alt"></i></a>
                 @elseif($operar->estatus_pago==null)
                 <a  type="button" style="color: green; " class="btn" onclick="update_pago_orden({{$operar->id_orden}},{{$operar->id}});" href=""><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
-                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='update_pago({{$operar->id}}),back_status({{$operar->id_orden}});'  class="fas fa-trash-alt"></i></a>
+                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='borrar_pago({{$operar->id}}),back_status({{$operar->id_orden}});'  class="fas fa-trash-alt"></i></a>
                 @elseif($operar->estatus_pago=="PENDIENTE" && $operar->id_estatus==3)
                 <a  type="button" style="color: green; " class="btn" onclick="update_pago_pendiente({{$operar->id_orden}},{{$operar->id}});" href=""><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
                 <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='update_pago({{$operar->id}}),back_status({{$operar->id_orden}});'  class="fas fa-trash-alt"></i></a>
@@ -89,9 +89,9 @@
                 <a  style="color: blue;" href="{{url("pagos_proveedores/detalles/{$operar->id}")}}" class="btn" ><i style="font-size:1.5rem" id="info-circle"  class="fas fa-info-circle"></i></a>
                 <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='update_pago({{$operar->id}}),back_status({{$operar->id_orden}});'  class="fas fa-trash-alt"></i></a>
                 {{-- CREADO INICIALMENTE --}}
-                @elseif($operar->estatus_pago==null && $operar->id_status==2)
+                {{-- @elseif($operar->estatus_pago==null && $operar->id_status==2)
                 <a  type="button" style="color: green; " class="btn" onclick="update_pago_pendiente({{$operar->id_orden}},{{$operar->id}});" href=""><i style="font-size:1.5rem;" id="dollar-sign"  class="fas fa-dollar-sign"></i></a> 
-                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='borrar_pago({{$operar->id}}),back_status({{$operar->id_orden}});'  class="fas fa-trash-alt"></i></a>
+                <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='borrar_pago({{$operar->id}}),back_status({{$operar->id_orden}});'  class="fas fa-trash-alt"></i></a> --}}
                 @else
                 <a  style="color: blue;" href="{{url("pagos_proveedores/detalles/{$operar->id}")}}" class="btn" ><i style="font-size:1.5rem" id="info-circle"  class="fas fa-info-circle"></i></a>
                 <a  style="color: red;" href="" class="btn" ><i style="font-size:1.5rem" id="trash-alt" onclick='update_pago({{$operar->id}})' class="fas fa-trash-alt"></i></a>
@@ -246,7 +246,7 @@ async function back_status2(id,id2) {
     let req =await fetch (url,init);
     if(req.ok){
         alert("Ha eliminado el proceso de operar");
-        window.location.href="{{url('/compras')}}";
+        // window.location.href="{{url('/compras')}}";
     }
     else{
         Swal.fire({
@@ -453,6 +453,7 @@ async function borrar_pago2(id){
         }
 let req = await fetch(url,init);
 if (req.ok){
+    alert("se ha eliminado la orden operada")
     location.reload();
 }
 else{
