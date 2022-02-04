@@ -279,7 +279,7 @@
             let id =   {{ $contrato->id }}
             let url='{{url("/contratos/eliminar3/{id}/{file3}")}}'.replace("{file3}",file3);
             url = url.replace("{id}",id);
-            console.log(url);
+            // console.log(url);
             let init={
                 method:"DELETE",
                 headers: {

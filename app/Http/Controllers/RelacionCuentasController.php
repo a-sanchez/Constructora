@@ -71,6 +71,7 @@ class RelacionCuentasController extends Controller
 		inner join proveedores on proveedores.id = orden_compras.id_proveedor
         where id_proveedor = '$id' and date_format(pagos_proveedores2s.fecha_emision,'%Y') = '$ciclo'
         group by folio_factura");
+        // dd(DB::getQueryLog());
         return view('cuentas_pagar.vista_historial',compact("historiales"));
         
     }
