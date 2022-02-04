@@ -54,7 +54,7 @@ class RelacionCuentasController extends Controller
         FROM orden_compras
         join contratos on contratos.id = orden_compras.id_contrato
         join orden_productos on orden_productos.orden_id = orden_compras.id
-        join pagos_proveedores 
+        join pagos_proveedores on pagos_proveedores.id_orden = orden_compras.id
         join proveedores on proveedores.id = orden_compras.id_proveedor
         where id_proveedor = '$id' and date_format(pagos_proveedores.fecha_emision,'%Y') = '$ciclo'
         group by pagos_proveedores.folio_factura

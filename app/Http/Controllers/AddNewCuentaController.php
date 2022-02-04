@@ -45,7 +45,6 @@ class AddNewCuentaController extends Controller
         and orden_compras.fecha_orden between '$fecha1' and '$fecha2'
         group by proveedores.razon_social
         UNION
-        
         Select proveedores.razon_social,estatus_facturas.status,estatus_pago,proveedores.pagos,orden_compras.fecha_orden,orden_compras.id_status,
         sum(pagos_proveedores2s.total) as monto
         from pagos_proveedores2s
