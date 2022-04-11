@@ -70,6 +70,13 @@ class ContratoController extends Controller
 
     public function update(Request $request, $id)
     {
+        //$contrato=contrato::find($id);
+        //$update=$contrato->update($request->all());
+        //return $update;
+    }
+    
+    public function actualizar_contrato(Request $request, $id)
+    {
         $contrato=contrato::find($id);
         $update=$contrato->update($request->all());
         return $update;

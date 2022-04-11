@@ -13,10 +13,10 @@ class PagosChange extends Migration
      */
     public function up()
     {
-        Schema::table('orden_pagos', function (Blueprint $table) {
-            $table->unsignedBigInteger("id_pago")->onDelete('cascade')->change();
+        // Schema::table('orden_pagos', function (Blueprint $table) {
+        //     $table->unsignedBigInteger("id_pago")->onDelete('cascade')->change();
 
-        });
+        // });
     }
 
     /**

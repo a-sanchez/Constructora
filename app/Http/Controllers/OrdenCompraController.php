@@ -81,7 +81,23 @@ class OrdenCompraController extends Controller
         //     return response()->json('Error, esta orden ya tiene registros en pagos proveedores',409);
         // }
         // else{
+        dump($id);die;
+        //$orden_compra = orden_compra::find($id);
+        //dump($orden_compra);die;
+        //$update = $orden_compra->update($request->all());
+        //return $update;
+        // }
+    }
+     public function actualizar(Request $request, $id)
+    {   
+        //var_dump($id);die;
+        // $operada = pagos_proveedores::where('id_orden',$id)->get();
+        // if($operada->first()!=NULL){
+        //     return response()->json('Error, esta orden ya tiene registros en pagos proveedores',409);
+        // }
+        // else{
         $orden_compra = orden_compra::find($id);
+        //var_dump($orden_compra);die;
         $update = $orden_compra->update($request->all());
         return $update;
         // }
@@ -97,9 +113,9 @@ class OrdenCompraController extends Controller
     {
         return OrdenPdf::create($id);
     }
-
-
+    
     public function reporte(){
+        
         $contratos = DB::select("select `folio`,`contratos`.`id` ,descripcion
         from 		`contratos` 
         left join 	`orden_compras` on `orden_compras`.`id_contrato` = `contratos`.`id` 

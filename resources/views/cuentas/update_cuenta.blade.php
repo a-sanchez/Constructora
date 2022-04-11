@@ -301,11 +301,11 @@
 
         async function update_total(id){
             event.preventDefault();
-            let url = `{{url('/cuentas/{id}')}}`.replace('{id}',id);
+            let url = `{{url('/cuentas/editar_cuenta/{id}')}}`.replace('{id}',id);
             let form = new FormData(document.getElementById("form-total"));
             form.append("total",document.getElementById("total").value);
             let init={
-                method:"PUT",
+                method:"POST",
                 headers:{
                     'X-CSRF-Token': document.getElementsByName("_token")[0].value,
                     "Content-Type":"application/json"

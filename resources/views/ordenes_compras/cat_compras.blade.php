@@ -40,7 +40,7 @@
             </h1>
         </div>
         <div class="col-md-2 mt-2" style="text-align:center">
-            <a type="button" href="{{url('compras/reporte')}}" class="btn" style="background-color: #1b1b97;color:white">Generar Reporte</a>
+            <a type="button" href="{{url('/compras/reporte')}}" class="btn" style="background-color: #1b1b97;color:white">Generar Reporte</a>
         </div>
         <hr class="mt-4" style="color: orange;">
     </div>
@@ -157,9 +157,9 @@
             let check=getCheckedBox();
             check.forEach(async (element) => {
                 event.preventDefault();
-                let url = "{{url('/compras/{id}')}}".replace("{id}",element);
+                let url = "{{url('/compras/actualizar/{id}')}}".replace("{id}",element);
                 let init = {
-                    method:"PUT",
+                    method:"POST",
                     headers:{
                         'X-CSRF-Token' : "{{ csrf_token() }}",
                         'Content-Type':'application/json'
@@ -254,11 +254,12 @@
             return checked;
         }
         
+        
         async function orden_estatus(id) {
             event.preventDefault();
-            let url = "{{url('/compras/{id}')}}".replace("{id}",id);
+            let url = "{{url('/compras/actualizar/{id}')}}".replace("{id}",id);
             let init = {
-                method:"PUT",
+                method:"POST",
                 headers:{
                     'X-CSRF-Token' : "{{ csrf_token() }}",
                     'Content-Type':'application/json'
@@ -281,9 +282,9 @@
         }
         async function update_status(id) {
             event.preventDefault();
-            let url = "{{url('/compras/{id}')}}".replace("{id}",id);
+            let url = "{{url('/compras/actualizar/{id}')}}".replace("{id}",id);
             let init = {
-                method:"PUT",
+                method:"POSTT",
                 headers:{
                     'X-CSRF-Token' : "{{ csrf_token() }}",
                     'Content-Type':'application/json'

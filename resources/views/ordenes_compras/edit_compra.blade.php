@@ -252,12 +252,13 @@ async function agregarProducto() {
 async function edit_orden(id) {
     event.preventDefault();
     let form = new FormData(document.getElementById("form-orden"));
-    let url = "{{url('/compras/{id}')}}".replace("{id}",id);
+    let url = "{{url('/compras/actualizar/{id}')}}".replace("{id}",id);
     let init = {
-        method:"PUT",
+        method:"POST",
         headers:{
             'X-CSRF-Token' : document.getElementsByName("_token")[0].value,
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
+            "accept":"application/json",
         },
         body:JSON.stringify(Object.fromEntries(form))
     }
@@ -270,7 +271,7 @@ async function edit_orden(id) {
             icon: 'error',
             title: 'Error',
             text: 'ERROR AL ACTUALIZAR LA ORDEN',
-        })
+        });
     }
 }
 </script>

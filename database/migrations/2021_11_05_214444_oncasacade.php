@@ -14,15 +14,15 @@ class Oncasacade extends Migration
      */
     public function up()
     {
-        Schema::table('orden_pagos',function(Blueprint $table){
-            DB::statement("ALTER TABLE orden_pagos
-            DROP FOREIGN KEY orden_pagos_id_pago_foreign;");
-            DB::statement("ALTER TABLE orden_pagos
-            ADD CONSTRAINT orden_pagos_id_pago_foreign
-              FOREIGN KEY (id_pago)
-              REFERENCES pagos_proveedores2s (id)
-              ON DELETE CASCADE");
-        });
+        // Schema::table('orden_pagos',function(Blueprint $table){
+        //     DB::statement("ALTER TABLE orden_pagos
+        //     DROP FOREIGN KEY orden_pagos_id_pago_foreign;");
+        //     DB::statement("ALTER TABLE orden_pagos
+        //     ADD CONSTRAINT orden_pagos_id_pago_foreign
+        //       FOREIGN KEY (id_pago)
+        //       REFERENCES pagos_proveedores2s (id)
+        //       ON DELETE CASCADE");
+        // });
     }
 
     /**

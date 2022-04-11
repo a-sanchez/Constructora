@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::insert([
-            "name"=>"ADMINISTRADOR",
-            "email" => "ADMIN",
-            "password" => Hash::make("123")
-        ]);
+         User::insert([
+             "name"=>"ADMINISTRADOR",
+             "email" => "ADMIN",
+             "password" => Hash::make("123")
+         ]);
     }
 }

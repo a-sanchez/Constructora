@@ -242,9 +242,10 @@ PRE-FACTURAS
         form.append("total_retenciones",document.getElementById("total_retenciones").value);
         form.append("neto",document.getElementById("neto").value);
          let id = "{{$prefactura->id}}";
-         let url="{{url('/facturas/{id}')}}".replace("{id}",id);
+         let url="{{url('facturas/actualizar_factura/{id}')}}".replace('{id}',id);
+         //let url="{{url('/facturas/actualizar_factura/{id}')}}".replace("{id}",id);
          let init = {
-             method:"PUT",
+             method:"POST",
              headers:{
                 'X-CSRF-Token' : document.getElementsByName("_token")[0].value,
                  "Content-Type":"application/json"
@@ -253,15 +254,15 @@ PRE-FACTURAS
          }
          let req = await fetch(url,init);
          if(req.ok){
-             console.log(await req.json());
+            // console.log(await req.json());
              window.location.href = "{{url('/facturas')}}";
          }
          else{
              Swal.fire({
-                 icon: 'error',
+                icon: 'error',
                  title: 'Error',
                  text: 'No fue posible la prefactura',
-             });
+            });
          }
     }
 

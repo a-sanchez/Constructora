@@ -82,6 +82,12 @@ class PagosProveedoresController extends Controller
     }
 
     public function update(Request $request,$id){
+        //$pagos=pagos_proveedores::find($id);
+        //$update=$pagos->update($request->all());
+        //return $update;
+    }
+    
+    public function editar_pago(Request $request,$id){
         $pagos=pagos_proveedores::find($id);
         $update=$pagos->update($request->all());
         return $update;

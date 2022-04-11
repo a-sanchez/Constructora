@@ -86,9 +86,9 @@
 
     async function back_status(id) {
         event.preventDefault();
-            let url = "{{url('/compras/{id}')}}".replace("{id}",id);
+            let url = "{{url('/compras/actualizar/{id}')}}".replace("{id}",id);
             let init = {
-                method:"PUT",
+                method:"POST",
                 headers:{
                     'X-CSRF-Token' : "{{ csrf_token() }}",
                     'Content-Type':'application/json'

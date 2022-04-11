@@ -61,6 +61,13 @@ class FacturaController extends Controller
 
     public function update(Request $request, $id)
     {
+        //$prefactura=factura::find($id);
+        //$update=$prefactura->update($request->all());
+        //return $update;
+    }
+    public function actualizar_factura(Request $request, $id)
+    { 
+        var_dump($id);die;
         $prefactura=factura::find($id);
         $update=$prefactura->update($request->all());
         return $update;

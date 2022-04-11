@@ -41,6 +41,13 @@ class ClienteController extends Controller
 
     public function update(Request $request, $id)
     {
+       // $cliente = cliente::find($id);
+        //$update = $cliente->update($request->all());
+        //return $update;
+    }
+    
+    public function actualizar(Request $request, $id)
+    {
         $cliente = cliente::find($id);
         $update = $cliente->update($request->all());
         return $update;

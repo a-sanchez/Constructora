@@ -189,9 +189,9 @@
         async function update_cliente(id) {
             event.preventDefault();
             let form = new FormData(document.getElementById("form-cliente"));
-            let url = "{{url('/clientes/{id}')}}".replace("{id}", id);
+            let url = "{{url('/clientes/actualizar/{id}')}}".replace("{id}", id);
             let init = {
-                method: "PUT"
+                method: "POST"
                 , headers: {
                     'X-CSRF-Token': document.getElementsByName("_token")[0].value
                     , "Content-Type": "application/json"

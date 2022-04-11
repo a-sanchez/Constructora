@@ -244,12 +244,13 @@
         async function update_proveedor(id) {
             event.preventDefault();
             let form = new FormData(document.getElementById("form-proveedor"));
-            let url = "{{url('/proveedores/{id}')}}".replace("{id}", id);
+            let url = "{{url('/proveedores/editar_proveedor/{id}')}}".replace("{id}", id);
             let init = {
-                method: "PUT"
+                method: "POST"
                 , headers: {
                     'X-CSRF-Token': document.getElementsByName("_token")[0].value
-                    , "Content-Type": "application/json"
+                    , "Content-Type": "application/json",
+                    Accept: "application/json"
                 }
                 , body: JSON.stringify(Object.fromEntries(form))
             }

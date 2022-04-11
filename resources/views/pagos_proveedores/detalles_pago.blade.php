@@ -73,9 +73,9 @@
      async function pago_proveedor(id){
      event.preventDefault();
      let form = new FormData(document.getElementById("form-pago"));
-     let url = "{{url('/pagos_proveedores/{id}')}}".replace("{id}",id);
+     let url = "{{url('/pagos_proveedores/editar_pago/{id}')}}".replace("{id}",id);
      let init={
-         method:"PUT",
+         method:"POST",
          headers:{
              'X-CSRF-Token': document.getElementsByName("_token")[0].value
              , "Content-Type": "application/json"

@@ -61,9 +61,9 @@
         event.preventDefault();
         let form = new FormData(document.getElementById("form-pago"));
         form.append("id_status",3);
-        let url = "{{url('/facturas/{id}')}}".replace("{id}",id);
+        let url = "{{url('facturas/actualizar_factura/{id}')}}".replace("{id}",id);
         let init={
-            method:"PUT",
+            method:"POST",
             headers:{
                 'X-CSRF-Token': document.getElementsByName("_token")[0].value
                 , "Content-Type": "application/json"

@@ -200,9 +200,9 @@
         async function edit_contrato(id) {
             event.preventDefault();
             let form = new FormData(document.getElementById("form-contrato"));
-            let url = "{{url('/contratos/{id}')}}".replace("{id}", id);
+            let url = "{{url('/contratos/update/{id}')}}".replace("{id}", id);
             let init = {
-                method: "PUT"
+                method: "POST"
                 , headers: {
                     'X-CSRF-Token': document.getElementsByName("_token")[0].value
                     , "Content-Type": "application/json"

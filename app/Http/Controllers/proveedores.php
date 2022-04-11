@@ -80,6 +80,13 @@ class proveedores extends Controller
      */
     public function update(Request $request, $id)
     {
+        //$proveedor=proveedor::find($id);
+        //$update=$proveedor->update($request->all());
+        //return $update;
+    }
+    
+    public function editar_proveedor(Request $request, $id)
+    {
         $proveedor=proveedor::find($id);
         $update=$proveedor->update($request->all());
         return $update;

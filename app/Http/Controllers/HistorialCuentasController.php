@@ -105,7 +105,12 @@ class HistorialCuentasController extends Controller
         $update=$historial->update($request->all());
         return $update;
     }
-
+    public function editar_cuenta(Request $request,$id)
+    {
+        $historial=historial_cuentas::find($id);
+        $update=$historial->update($request->all());
+        return $update;
+    }
     /**
      * Remove the specified resource from storage.
      *

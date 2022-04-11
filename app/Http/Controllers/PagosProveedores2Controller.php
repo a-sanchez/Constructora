@@ -91,6 +91,13 @@ class PagosProveedores2Controller extends Controller
      */
     public function update(Request $request,$id)
     {
+        //$operar=pagos_proveedores2::find($id);
+        //$update=$operar->update($request->all());
+        //return $update;
+    }
+    
+    public function editar_pago(Request $request,$id)
+    {
         $operar=pagos_proveedores2::find($id);
         $update=$operar->update($request->all());
         return $update;
