@@ -44,15 +44,17 @@
         <div class="row mt-2">
             <div class="col-md-4">
                 <label for="sub_total">SubTotal</label>
-                <input type="text" class="form-control" id="sub_total" oninput="resta();" name="sub_total">
+                <input type="text" disabled class="form-control" id="sub_total"  name="sub_total" value="{{str_replace(',','.',$views[0]->importe_total)}}">
+                
             </div>
+        
             <div class="col-md-4">
                 <label for="impuestos">Impuestos</label>
-                <input type="text"  class="form-control" id="impuestos" oninput="resta();" name="impuestos">
+                <input type="text" disabled class="form-control" id="impuestos"  name="impuestos" value="{{str_replace(',','.',$impuesto)}}">
             </div>
             <div class="col-md-4">
                 <label for="total">Total</label>
-                <input type="text" disabled  class="form-control" id="total" name="total">
+                <input type="text" disabled  class="form-control" id="total" name="total" value="{{str_replace(',','.',$total)}}">
             </div>
         </div>
         <div class="row">
@@ -112,12 +114,10 @@
     }
 
 function resta(){
-
-        var subtotal = parseFloat(document.getElementById("sub_total").value),
-        impuestos = parseFloat(document.getElementById("impuestos").value)||0.00;
-
-        document.getElementById("total").value = parseFloat(subtotal+impuestos).toFixed(2);
-        }
+    var subtotal = parseFloat(document.getElementById("sub_total").value),
+    impuestos = parseFloat(document.getElementById("impuestos").value)||0.00;
+    document.getElementById("total").value = parseFloat(subtotal+impuestos).toFixed(2);
+}
 
 
 async function insert_operar(id){

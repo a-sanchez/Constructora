@@ -27,16 +27,20 @@ class OrdenCompraController extends Controller
         $pagos=pagos_proveedores2::max('id')+1;
         $views = DB::table('orden_compras')
                 ->select('orden_compras.id','folio_orden','solicitado','iva','fecha_orden','contratos.costo','fecha_entrega','descripcion_orden',
-                'contratos.folio','proveedores.razon_social','estatus_facturas.status','orden_compras.id_status',DB::raw('(SUM(orden_productos.importe)*(iva/100))+(SUM(orden_productos.importe)) as importe_total'))
+                'contratos.folio','proveedores.razon_social','estatus_facturas.status as status','orden_compras.id_status','orden_compras.status as cancelada',DB::raw('(SUM(orden_productos.importe)) as importe_total'))
                 ->leftJoin('orden_productos','orden_productos.orden_id','=','orden_compras.id')
                 ->leftJoin('estatus_facturas','estatus_facturas.id',"=","orden_compras.id_status")
                 ->leftJoin('contratos','contratos.id','=','orden_compras.id_contrato')
                 ->leftJoin('proveedores','proveedores.id','=','orden_compras.id_proveedor')
-                ->where('orden_compras.status','!=','0')
                 ->groupBy('orden_compras.id')
                 ->get();
-          //$views->dump();
+                
+                // 'contratos.folio','proveedores.razon_social','estatus_facturas.status as status','orden_compras.id_status','orden_compras.status as cancelada',DB::raw('(SUM(orden_productos.importe)) as importe_total'),DB::raw('(SUM(orden_productos.importe)*(iva/100))+(SUM(orden_productos.importe)) as importe_iva'))
+
+                // ->where('orden_compras.status','!=','0')
+                //$views->dump();
           //die;
+        // var_dump($views);die;
         //  dump($pagos);
         //  die;
         return view('ordenes_compras.cat_compras',compact("orden","contratos","proveedores","views","pagos"));
@@ -136,7 +140,16 @@ class OrdenCompraController extends Controller
                     ->where( 'orden_compras.status','!=','0')
                     ->whereBetween('orden_compras.fecha_orden',[$fecha1,$fecha2])
                     ->get();
-            REPORTEPDF::create($id_contrato,$id_status,$views,$fecha1,$fecha2);
+                    $totales= DB::table('orden_compras')
+                    ->select(DB::raw('SUM(orden_productos.importe) as total1,SUM((select round(((iva/100)*orden_productos.importe),2))) as total2,SUM((select round(((iva/100)*orden_productos.importe)+orden_productos.importe,2))) as total3'))
+                    ->join('orden_productos','orden_productos.orden_id','=','orden_compras.id')
+                    ->join('proveedores','proveedores.id', '=', 'orden_compras.id_proveedor')
+                    ->join('contratos','contratos.id','=','orden_compras.id_contrato')
+                    ->where('id_contrato',$id_contrato)
+                    ->where( 'orden_compras.status','!=','0')
+                    ->whereBetween('orden_compras.fecha_orden',[$fecha1,$fecha2])
+                    ->get();
+            REPORTEPDF::create($id_contrato,$id_status,$views,$totales,$fecha1,$fecha2);
         }
         elseif ($id_status==1) {
             $views = DB::table('orden_compras')
@@ -150,7 +163,18 @@ class OrdenCompraController extends Controller
                     ->where('id_status',$id_status)
                     ->whereBetween('orden_compras.fecha_orden',[$fecha1,$fecha2])
                     ->get();
-            REPORTEPDF::create($id_contrato,$id_status,$views,$fecha1,$fecha2);
+                // dump($id_contrato,$id_status,$fecha1,$fecha2);die;
+                    $totales = DB::table('orden_compras')
+                    ->select(DB::raw('SUM(orden_productos.importe) as total1,SUM((select round(((iva/100)*orden_productos.importe),2))) as total2,SUM((select round(((iva/100)*orden_productos.importe)+orden_productos.importe,2))) as total3'))
+                    ->join('orden_productos','orden_productos.orden_id','=','orden_compras.id')
+                    ->join('proveedores','proveedores.id', '=', 'orden_compras.id_proveedor')
+                    ->join('contratos','contratos.id','=','orden_compras.id_contrato')
+                    ->where('id_contrato',$id_contrato)
+                    ->where( 'orden_compras.status','!=','0')
+                    ->where('id_status',$id_status)
+                    ->whereBetween('orden_compras.fecha_orden',[$fecha1,$fecha2])
+                    ->get();
+             REPORTEPDF::create($id_contrato,$id_status,$views,$totales,$fecha1,$fecha2);
         }
         elseif ($id_status==2) {
             $views = DB::table('orden_compras')
@@ -164,7 +188,17 @@ class OrdenCompraController extends Controller
                     ->where('id_status',$id_status)
                     ->whereBetween('orden_compras.fecha_orden',[$fecha1,$fecha2])
                     ->get();
-            REPORTEPDF::create($id_contrato,$id_status,$views,$fecha1,$fecha2);
+                    $totales = DB::table('orden_compras')
+                    ->select(DB::raw('SUM(orden_productos.importe) as total1,SUM((select round(((iva/100)*orden_productos.importe),2))) as total2,SUM((select round(((iva/100)*orden_productos.importe)+orden_productos.importe,2))) as total3'))
+                    ->join('orden_productos','orden_productos.orden_id','=','orden_compras.id')
+                    ->join('proveedores','proveedores.id', '=', 'orden_compras.id_proveedor')
+                    ->join('contratos','contratos.id','=','orden_compras.id_contrato')
+                    ->where('id_contrato',$id_contrato)
+                    ->where( 'orden_compras.status','!=','0')
+                    ->where('id_status',$id_status)
+                    ->whereBetween('orden_compras.fecha_orden',[$fecha1,$fecha2])
+                    ->get();
+             REPORTEPDF::create($id_contrato,$id_status,$views,$totales,$fecha1,$fecha2);
         }
         else {
             $views = DB::table('orden_compras')
@@ -178,7 +212,18 @@ class OrdenCompraController extends Controller
                     ->where('id_status',$id_status)
                     ->whereBetween('orden_compras.fecha_orden',[$fecha1,$fecha2])
                     ->get();
-            REPORTEPDF::create($id_contrato,$id_status,$views,$fecha1,$fecha2);
+                    // dump($views);die;
+                    $totales = DB::table('orden_compras')
+                    ->select(DB::raw('SUM(orden_productos.importe) as total1,SUM((select round(((iva/100)*orden_productos.importe),2))) as total2,SUM((select round(((iva/100)*orden_productos.importe)+orden_productos.importe,2))) as total3'))
+                    ->join('orden_productos','orden_productos.orden_id','=','orden_compras.id')
+                    ->join('proveedores','proveedores.id', '=', 'orden_compras.id_proveedor')
+                    ->join('contratos','contratos.id','=','orden_compras.id_contrato')
+                    ->where('id_contrato',$id_contrato)
+                    ->where( 'orden_compras.status','!=','0')
+                    ->where('id_status',$id_status)
+                    ->whereBetween('orden_compras.fecha_orden',[$fecha1,$fecha2])
+                    ->get();
+             REPORTEPDF::create($id_contrato,$id_status,$views,$totales,$fecha1,$fecha2);
         }
     }
 //         SELECT oc.id,folio_orden,fecha_orden,op.importe,op.orden_id,oc.id_contrato,(select round(((iva/100)*importe),2))as IVA,(select round(((iva/100)*importe)+importe,2)) as total

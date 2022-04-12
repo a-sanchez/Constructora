@@ -48,7 +48,22 @@ class PagosProveedoresController extends Controller
     public function orden($id)
     {
         $orden_compra = orden_compra::find($id);
-        return view("pagos_proveedores.operar",compact("orden_compra"));
+        $views = DB::table('orden_compras')
+        ->select(DB::raw('((SUM(orden_productos.importe))*(orden_compras.iva/100)) as iva,(SUM(orden_productos.importe)) as importe_total'))
+                ->join('orden_productos','orden_productos.orden_id','=','orden_compras.id')
+                ->where('orden_compras.status','!=','0')
+                ->where('orden_compras.id','=',$id)
+                ->get();
+                $impuestos = DB::table('orden_compras')
+                ->select(DB::raw('(orden_compras.retencion_iva + orden_compras.retencion_isr) as impuesto'))
+                        ->join('orden_productos','orden_productos.orden_id','=','orden_compras.id')
+                        ->where('orden_compras.status','!=','0')
+                        ->where('orden_compras.id','=',$id)
+                        ->groupBy('orden_compras.id')
+                        ->get();
+        $impuesto = $views[0]->iva - $impuestos[0]->impuesto;
+        $total = $views[0]->importe_total + $impuesto;
+        return view("pagos_proveedores.operar",compact("orden_compra",'views','impuesto','total'));
     }
 
     public function operar_grupal(){

@@ -89,6 +89,14 @@
     <label for="iva">I.V.A. %</label>
     <input type="text" name="iva" id="iva" class="form-control"  pattern="[0-9\.]+"  oninput="setCustomValidity('')" value="{{$orden_compra->iva}}" oninvalid="this.setCustomValidity('Solo valores numericos')">
   </div>
+  <div class="form-group col-md-4">
+    <label for="isr">Retención ISR</label>
+    <input type="text" name="retencion_isr" id="retencion_isr" class="form-control"  pattern="[0-9\.]+" value="{{$orden_compra->retencion_isr}}">
+  </div>
+  <div class="form-group col-md-4">
+    <label for="retencion_iva">Retención IVA</label>
+    <input type="text" name="retencion_iva" id="retencion_iva" class="form-control"  pattern="[0-9\.]+" value="{{$orden_compra->retencion_iva}}">
+  </div>
 </div>
 </form>
 <form id="form_productos" onsubmit="agregarProducto();">

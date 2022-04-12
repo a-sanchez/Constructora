@@ -57,6 +57,7 @@
             <th>Factura Grupal</th>
             <th>Estatus</th>
             <th></th>
+            <th></th>
         </thead>
         <tbody>
             @foreach($views as $view)
@@ -78,21 +79,26 @@
                         </form>
                     </td>
                     <td>{{$view->status}}</td>
+                    <td style="text-align:center">
+                        @if($view->cancelada==0)
+                        CANCELADA
+                        @endif
+                    </td>
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" style="background-color: black;
                             border-color: black;" aria-expanded="false">Opciones
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                @if($view->id_status==1)
+                                @if($view->id_status==1 && $view->cancelada!=0)
                                 <li><a class="dropdown-item" target ="_blank" href="{{url("compras_pdf/{$view->id}")}}">PDF ORDEN</a></li>
                                 <li><a class="dropdown-item" href="{{url("compras/{$view->id}/edit")}}">Editar</a></li>
                                 <li><a class="dropdown-item" onclick='orden_estatus({{$view->id}})' href="">Operar Orden</a></li>
-                                <li><a  class="dropdown-item" href="" onclick='update_status({{$view->id}})'>Eliminar</a></li>
+                                <li><a  class="dropdown-item" href="" onclick='update_status({{$view->id}})'>CANCELAR</a></li>
                                 @elseif($view->id_status==2)
                                 <li><a class="dropdown-item" target ="_blank" href="{{url("compras_pdf/{$view->id}")}}">PDF ORDEN</a></li>
                                 <li><a class="dropdown-item" href="{{url("compras/{$view->id}/edit")}}">Editar</a></li>
-                                <li><a  class="dropdown-item" href="" onclick='update_status({{$view->id}})'>Eliminar</a></li>
+                                <li><a  class="dropdown-item" href="" onclick='update_status({{$view->id}})'>CANCELAR</a></li>
                                 @else
                                 <li><a class="dropdown-item" target ="_blank" href="{{url("compras_pdf/{$view->id}")}}">PDF ORDEN</a></li>
                                 @endif
@@ -284,7 +290,7 @@
             event.preventDefault();
             let url = "{{url('/compras/actualizar/{id}')}}".replace("{id}",id);
             let init = {
-                method:"POSTT",
+                method:"POST",
                 headers:{
                     'X-CSRF-Token' : "{{ csrf_token() }}",
                     'Content-Type':'application/json'

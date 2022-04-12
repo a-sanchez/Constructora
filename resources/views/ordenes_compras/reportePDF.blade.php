@@ -84,12 +84,12 @@
         <td>
             <table>
                 <tr style="text-align:center;vertical-align:middle;background-color:#fab84e;font-weight:bold;">
-                    <td width="17%" height="20" border=".5">NO.REQUISICIÓN</td>
-                    <td width="12%" border=".5">FECHA</td>
-                    <td width="25%" border=".5">PROVEEDOR</td>
+                    <td width="16%" height="20" border=".5">NO.REQUISICIÓN</td>
+                    <td width="11%" border=".5">FECHA</td>
+                    <td width="36%" border=".5">PROVEEDOR</td>
                     <td width="15%" border=".5">SUBTOTAL</td>
                     <td width="11%" border=".5">IVA</td>
-                    <td width="20%" border=".5">TOTAL</td>
+                    <td width="11%" border=".5">TOTAL</td>
                 </tr>
                     @foreach($ordenes as $orden)
                         <tr style="text-align:center;">
@@ -101,6 +101,20 @@
                             <td border=".5">{{number_format($orden->total,2)}}</td>
                         </tr>
                     @endforeach
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table>
+                <tr style="text-align:center;">
+                    <td width="16%" border=".5"></td>
+                    <td width="11%" border=".5"></td>
+                    <td width="36%" border=".5">TOTALES</td>
+                    <td width="15%" border=".5">{{number_format($total[0]->total1,2)}}</td>
+                    <td width="11%" border=".5">{{number_format($total[0]->total2,2)}}</td>
+                    <td width="11%" border=".5">{{number_format($total[0]->total3,2)}}</td>
+                </tr>
             </table>
         </td>
     </tr>

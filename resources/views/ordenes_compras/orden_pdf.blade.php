@@ -85,8 +85,22 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td border=".5">RETENCIÓN ISR</td>
+                    <td border=".5">$ {{number_format($orden->retencion_isr,2)}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td border=".5">RETENCIÓN IVA</td>
+                    <td border=".5">$ {{number_format($orden->retencion_iva,2)}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td border=".5">TOTAL</td>
-                    <td border=".5">$ {{number_format($subtotal + $iva,2)}}</td>
+                    <td border=".5">$ {{number_format($subtotal + $iva - $orden->retencion_isr - $orden->retencion_iva  ,2)}}</td>
                 </tr>
             </table>
         </td>
