@@ -16,7 +16,18 @@ class PagosProveedoresController extends Controller
 {
     public function index()
     {
-        $operadas=pagos_proveedores::all();
+        $operadas2=pagos_proveedores::all();
+        // dump($operadas2);die;
+        $operadas = DB::select('select pagos_proveedores.*,estatus_facturas.status,orden_compras.folio_orden,orden_compras.id_contrato,proveedores.razon_social,contratos.folio
+                                from pagos_proveedores
+                                join orden_compras
+                                on pagos_proveedores.id_orden = orden_compras.id
+                                join contratos
+                                on orden_compras.id_contrato = contratos.id
+                                join proveedores
+                                on proveedores.id = orden_compras.id_proveedor
+                                join estatus_facturas
+                                on pagos_proveedores.id_status = estatus_facturas.id ');
         $proveedores = pagos_proveedores2::all();
     
         if($proveedores->isEmpty()){

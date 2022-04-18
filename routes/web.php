@@ -99,8 +99,7 @@ Route::get('compras/reporte',[OrdenCompraController::class,'reporte']);
 
 //Route::get('compras/generar',function(){
 //    dd("hola");
-//});
-Route::resource('/compras',OrdenCompraController::class);
+
 
 Route::get('contrato/{id_contrato}/estatus/{id_status}/fecha/{fecha1}/fecha/{fecha2}/REPORTE',[OrdenCompraController::class,'generar_reporte']);
 //Route::resource('compras',OrdenCompraController::class);
@@ -134,7 +133,7 @@ Route::get("pagos_proveedores/orden/{id}",[PagosProveedoresController::class,'or
 Route::post("pagos_proveedores/orden/",[PagosProveedoresController::class,'new_orden']);
 Route::get("pagos_proveedores/detalles/{id}",[PagosProveedoresController::class,'detalles']);
 Route::post("pagos_proveedores/editar_pago/{id}",[PagosProveedoresController::class,'editar_pago']);
-Route::resource('pagos_proveedores',PagosProveedoresController::class);
+
 #-----------------CONFIGURACION-----------------------#
 
 Route::get('configuracion/listado',[ConfiguracionController::class,"listado"]);
@@ -181,4 +180,7 @@ Route::get("pagos_proveedores2/detalles/{id}",[PagosProveedores2Controller::clas
 Route::get("pagos_proveedores2/pagar/{id}",[PagosProveedores2Controller::class,'pagar']);
 Route::get('pagos_proveedores2/pagar_pendiente/{id}',[PagosProveedores2Controller::class,'pagar_pendiente']);
 Route::post('pagos_proveedores2/editar_pago/{id}', [PagosProveedores2Controller::class,'editar_pago']);
+//});
+Route::resource('/compras',OrdenCompraController::class);
 Route::resource('pagos_proveedores2', PagosProveedores2Controller::class);
+Route::resource('pagos_proveedores',PagosProveedoresController::class);

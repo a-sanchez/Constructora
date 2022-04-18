@@ -82,12 +82,11 @@
      event.preventDefault();
      let form = new FormData(document.getElementById("form-pago"));
      let res= (document.getElementById("total").value)-(document.getElementById("importe").value);
-     console.log(res);
      form.append("id_status",3);
      form.append("saldo_pendiente",res);
-     let url = "{{url('/pagos_proveedores/{id}')}}".replace("{id}",id);
+     let url = "{{url('/pagos_proveedores/editar_pago/{id}')}}".replace("{id}",id);
      let init={
-         method:"PUT",
+         method:"POST",
          headers:{
              'X-CSRF-Token': document.getElementsByName("_token")[0].value
              , "Content-Type": "application/json"
@@ -96,7 +95,7 @@
      }
      let req = await fetch (url,init);
      if(req.ok){
-        window.location.href="{{url('/pagos_proveedores')}}";
+        //window.location.href="{{url('/pagos_proveedores')}}";
      }
      else{
          Swal.fire({
@@ -109,10 +108,10 @@
 
 async function cancelar(id){
     event.preventDefault();
-    let url="{{url('/compras/{id}')}}".replace("{id}",id);
+    let url="{{url('/compras/actualizar/{id}')}}".replace("{id}",id);
     console.log(url);
     let init={
-        method:"PUT",
+        method:"POST",
         headers:{
             'X-CSRF-Token' : "{{ csrf_token() }}",
             'Content-Type':'application/json'

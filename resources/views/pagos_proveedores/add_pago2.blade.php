@@ -91,7 +91,7 @@
         let form = new FormData(document.getElementById("form-pago"));
         form.append("id_status",3);
         form.append("saldo_pendiente",res);
-        let url = "{{url('/pagos_proveedores2/{id}')}}".replace("{id}",id);
+        let url = "{{url('pagos_proveedores2/editar_pago/{id}')}}".replace("{id}",id);
         let init={
             method:"PUT",
             headers:{
@@ -117,7 +117,7 @@
     async function Update_status(id){
         let ordenes = id.split(",");
         ordenes.forEach( async element => {
-            let url = "{{url('/compras/{id}')}}".replace("{id}",element);
+            let url = "{{url('compras/actualizar/{id}')}}".replace("{id}",element);
             console.log(url);
             let init = {
             method:"PUT",

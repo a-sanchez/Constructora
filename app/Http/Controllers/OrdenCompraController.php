@@ -22,12 +22,12 @@ class OrdenCompraController extends Controller
     public function index()
     {
         $orden=orden_compra::all();
-        $contratos=contrato::all();
-        $proveedores=contrato::all();
+        $contratos=contrato::all()->where('estatus_eliminado',1);
+        // $proveedores=contrato::all();
         $pagos=pagos_proveedores2::max('id')+1;
         $views = DB::table('orden_compras')
                 ->select('orden_compras.id','folio_orden','solicitado','iva','fecha_orden','contratos.costo','fecha_entrega','descripcion_orden',
-                'contratos.folio','proveedores.razon_social','estatus_facturas.status as status','orden_compras.id_status','orden_compras.status as cancelada',DB::raw('(SUM(orden_productos.importe)) as importe_total'))
+                'contratos.folio','proveedores.razon_social','id_contrato','estatus_facturas.status as status','orden_compras.id_status','orden_compras.status as cancelada',DB::raw('(SUM(orden_productos.importe)) as importe_total'))
                 ->leftJoin('orden_productos','orden_productos.orden_id','=','orden_compras.id')
                 ->leftJoin('estatus_facturas','estatus_facturas.id',"=","orden_compras.id_status")
                 ->leftJoin('contratos','contratos.id','=','orden_compras.id_contrato')
@@ -43,7 +43,7 @@ class OrdenCompraController extends Controller
         // var_dump($views);die;
         //  dump($pagos);
         //  die;
-        return view('ordenes_compras.cat_compras',compact("orden","contratos","proveedores","views","pagos"));
+        return view('ordenes_compras.cat_compras',compact("orden","contratos","views","pagos"));
     }
 
     public function create()
@@ -67,7 +67,7 @@ class OrdenCompraController extends Controller
             "proveedores"=>$provedores,
             "folio_orden"=>str_pad($orden."/".date("Y"),10,"0",STR_PAD_LEFT) 
         ];
-
+        
         return view('ordenes_compras.add_compra',$ctx);
     }
 

@@ -54,6 +54,7 @@
             <th>Contrato</th>
             <th>Proveedor</th>
             <th>Importe Total(Sin IVA)</th>
+            <th>Unir</th>
             <th>Factura Grupal</th>
             <th>Estatus</th>
             <th></th>
@@ -70,6 +71,12 @@
                     <td>{{$view->folio}}</td>                    
                     <td>{{$view->razon_social}}</td>
                     <td> $ {{number_format($view->importe_total,2)}}</td>
+                    <td>
+                        <form id="grupal2" name="grupal2">
+                            @csrf
+                            <input type="checkbox" name="grupal2[]" style="text-align:center" id="{{$view->id_contrato}}" value="{{$view->id}}">
+                        </form>
+                    </td>
                     <td>
                         <form id="grupal" name="grupal">
                             @csrf
@@ -126,7 +133,54 @@
             </div>
         </tbody>
     </table>
+    <div class="row" style="text-align:end">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success" id="btn_grupal2" name="btn_grupal2" style="margin-top: 2.1rem;" >Cambiar Contrato</button>
+        </div>
+    </div>
+
+
     <h6>Si va operar varias ordenes seleccionar al mismo proveedor y el mismo contrato</h6>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Seleccione el contrato</h5>
+              <button type="butt
+              on" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="form-contrato">
+                        @csrf
+                        <div class="col-md-12">
+                            <label for="folio" >Folio de Contrato</label>
+                            {{-- <input class="form-control" list="datalistOptions" name="id_contrato" id="id_contrato">
+                            <datalist id="datalistOptions">
+                              <option disabled value="0" selected>Seleccione</option>
+                              @foreach($contratos as $contrato)
+                                <option value="{{$contrato->folio}}" >{{$contrato->folio}}</option>
+                              @endforeach
+                            </datalist> --}}
+                            <select class="form-control" name="id_contrato" id="id_contrato">
+                                <option disabled value="0" selected>Seleccione</option>
+                                @foreach($contratos as $contrato)
+                                <option value="{{$contrato->id}}" >{{$contrato->folio}}</option>
+                              @endforeach
+                              </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="eliminar_contratos();Updates_Contrato();">Save changes</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
     @endsection
 
     @section('scripts')
@@ -135,6 +189,8 @@
             responsive:true,
             columnDefs:[{responsivePriority:1,targets:8}]
         });
+
+
         var checkbox = document.querySelectorAll("input[type=checkbox]");
         checkbox.forEach(check => {
             check.addEventListener('change', function() {
@@ -157,6 +213,92 @@
                 }
             });
         });
+
+        function getCheckedBox2() {
+            let checked = [];
+            checks = table.$("input:checkbox:checked");
+            checks.each(function( index ) {
+                checked.push(checks[index].value);
+            });
+            return checked;
+        }
+        function getCheckedBox3() {
+            let checked = [];
+            checks = table.$("input:checkbox:checked");
+            checks.each(function( index ) {
+                checked.push(checks[index].id);
+            });
+            return checked;
+        }
+        let flag2 = 0;
+        async function eliminar_contratos(){
+            let check = getCheckedBox3();
+            check.forEach(async (element) => {
+                event.preventDefault();
+                let url = "{{url('contratos/update/{id}')}}".replace("{id}",element);
+                console.log(url);
+                let init = {
+                       method:"POST",
+                       headers:{
+                           'X-CSRF-Token' : "{{ csrf_token() }}",
+                           'Content-Type':'application/json'
+                       },
+                       body:JSON.stringify({'estatus_eliminado':0})
+                   }
+                   let req =await fetch (url,init);
+                    if(req.ok){
+                        if(flag2==0){
+                       console.log('ok');
+                       flag2++;
+                       }
+                    }
+                    else{
+                        Swal.fire({
+                          icon: 'error',
+                          title: 'Error',
+                          text: "Error al eliminar el contrato"
+                        });
+                      }
+            }); 
+        }
+
+        
+
+        let flag1 = 0;
+        async function Updates_Contrato(){
+            let form = new FormData();
+            let contrato = document.getElementById("id_contrato").value;
+            let check=getCheckedBox2();
+            check.forEach(async (element)=>{
+                 event.preventDefault();
+                let url = "{{url('/compras/actualizar/{id}')}}".replace("{id}",element);
+                   let init = {
+                       method:"POST",
+                       headers:{
+                           'X-CSRF-Token' : "{{ csrf_token() }}",
+                           'Content-Type':'application/json'
+                       },
+                       body:JSON.stringify({'id_contrato':contrato})
+                   }
+                   let req =await fetch (url,init);
+                    if(req.ok){
+                        if(flag1==0){
+                       alert("Se ha modificado el contrato");
+                       $('#exampleModal').modal('hide');
+                       location.reload(true);
+                       flag++;
+                       }
+                    }
+                    else{
+                        Swal.fire({
+                          icon: 'error',
+                          title: 'Error',
+                          text: "Error al actualizar el contrato"
+                        });
+                      }
+                  
+             });
+        }
 
         let flag = 0;
         async function Updates_Grupal() {

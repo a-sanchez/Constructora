@@ -49,9 +49,9 @@
         @foreach($operadas as $operar)
         <tr style="text-align:center">
             <td>{{$operar->folio_factura}}</td>
-            <td>{{$operar->contrato->folio}}</td>
-            <td> {{$operar->orden->proveedor->razon_social}} </td>
-            <td>{{$operar->orden->folio_orden}}</td>
+            <td>{{$operar->folio}}</td>
+            <td> {{$operar->razon_social}} </td>
+            <td>{{$operar->folio_orden}}</td>
             <td>{{date("d-m-Y",strtotime($operar->fecha_emision))}}</td>
             <td>{{date("d-m-Y",strtotime($operar->fecha_vencimiento))}}</td>
             <td>{{number_format($operar->sub_total,2)}}</td>
@@ -61,7 +61,7 @@
             <td>@if($operar->estatus_pago=="PENDIENTE" && $operar->id_status==3)
                 {{$operar->status}}-PENDIENTE
                 @else
-                {{$operar->status}}
+                {{$operar->status}} 
                 @endif
             </td>
             <td>@if($operar->estatus_pago==null)
@@ -182,10 +182,10 @@ $(document).ready(function(){
 
 async function update_pago_pendiente(id,id2){
     event.preventDefault();
-    let url="{{url('/compras/{id}')}}".replace("{id}",id);
-    console.log(url);
+    let url="{{url('/compras/actualizar/{id}')}}".replace("{id}",id);
+    // console.log(url);
     let init={
-        method:"PUT",
+        method:"POST",
         headers:{
             'X-CSRF-Token' : "{{ csrf_token() }}",
             'Content-Type':'application/json'
@@ -207,9 +207,9 @@ async function update_pago_pendiente(id,id2){
 async function back_status3(id,id2) {
     let grupales = id.split(",");
     grupales.forEach(async element => {
-    let url = "{{url('/compras/{id}')}}".replace("{id}",element);
+    let url = "{{url('/compras/actualizar/{id}')}}".replace("{id}",element);
     let init = {
-        method:"PUT",
+        method:"POST",
         headers:{
             'X-CSRF-Token' : "{{ csrf_token() }}",
             'Content-Type':'application/json'
@@ -234,9 +234,9 @@ async function back_status3(id,id2) {
 async function back_status2(id,id2) {
     let grupales = id.split(",");
     grupales.forEach(async element => {
-    let url = "{{url('/compras/{id}')}}".replace("{id}",element);
+    let url = "{{url('/compras/actualizar/{id}')}}".replace("{id}",element);
     let init = {
-        method:"PUT",
+        method:"POST",
         headers:{
             'X-CSRF-Token' : "{{ csrf_token() }}",
             'Content-Type':'application/json'
@@ -262,9 +262,9 @@ let flag=0;
 async function Update_estatus_grupales(id,id2) {
     let grupales = id.split(",");
     grupales.forEach(async element => {
-    let url = "{{url('/compras/{id}')}}".replace("{id}",element);
+    let url = "{{url('/compras/actualizar/{id}')}}".replace("{id}",element);
     let init = {
-        method:"PUT",
+        method:"POST",
         headers:{
             'X-CSRF-Token' : "{{ csrf_token() }}",
             'Content-Type':'application/json'
@@ -292,9 +292,9 @@ async function Update_estatus_grupales(id,id2) {
 async function Update_estatus_grupales_pendiente(id,id2) {
     let grupales = id.split(",");
     grupales.forEach(async element => {
-    let url = "{{url('/compras/{id}')}}".replace("{id}",element);
+    let url = "{{url('/compras/actualizar/{id}')}}".replace("{id}",element);
     let init = {
-        method:"PUT",
+        method:"POST",
         headers:{
             'X-CSRF-Token' : "{{ csrf_token() }}",
             'Content-Type':'application/json'
@@ -342,9 +342,9 @@ async function borrar_pago(id){
 }
 async function back_status(id) {
         event.preventDefault();
-            let url = "{{url('/compras/{id}')}}".replace("{id}",id);
+            let url = "{{url('/compras/actualizar/{id}')}}".replace("{id}",id);
             let init = {
-                method:"PUT",
+                method:"POST",
                 headers:{
                     'X-CSRF-Token' : "{{ csrf_token() }}",
                     'Content-Type':'application/json'
@@ -369,10 +369,10 @@ async function back_status(id) {
 
 async function update_pago_orden(id,id2){
     event.preventDefault();
-    let url="{{url('/compras/{id}')}}".replace("{id}",id);
+    let url="{{url('/compras/actualizar/{id}')}}".replace("{id}",id);
     console.log(url);
     let init={
-        method:"PUT",
+        method:"POST",
         headers:{
             'X-CSRF-Token' : "{{ csrf_token() }}",
             'Content-Type':'application/json'
@@ -395,9 +395,9 @@ async function update_pago_orden(id,id2){
 
 async function update_pago(id){
     event.preventDefault();
-    let url='{{url("/pagos_proveedores/{id}")}}'.replace('{id}',id);
+    let url='{{url("pagos_proveedores/editar_pago/{id}")}}'.replace('{id}',id);
     let init = {
-                method:"PUT",
+                method:"POST",
                 headers:{
                     'X-CSRF-Token' : "{{ csrf_token() }}",
                     'Content-Type':'application/json'
@@ -419,9 +419,9 @@ else{
 }
 async function update_pago2(id){
     event.preventDefault();
-    let url='{{url("/pagos_proveedores2/{id}")}}'.replace('{id}',id);
+    let url='{{url("pagos_proveedores2/editar_pago/{id}")}}'.replace('{id}',id);
     let init = {
-                method:"PUT",
+                method:"POST",
                 headers:{
                     'X-CSRF-Token' : "{{ csrf_token() }}",
                     'Content-Type':'application/json'

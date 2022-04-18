@@ -13,7 +13,7 @@ class ContratoController extends Controller
 {
     public function index()
     {
-        $contratos=contrato::all();
+        $contratos=contrato::all()->where('estatus_eliminado',1);
         return view('contrato.cat_contratos',compact('contratos'));
 
     }
