@@ -65,7 +65,7 @@
             <td class="align-middle">{{$cliente->alias}}</td>
             <td class="align-middle">
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" 
+                    <button class="btn btn-secondary dropdown-" type="button" id="dropdownMenuButton1" data-bs-="dropdown" 
                     aria-expanded="false" style="background-color: black;
                     border-color: black;">
                     Seleccione
